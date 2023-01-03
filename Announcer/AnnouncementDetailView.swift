@@ -12,19 +12,18 @@ struct AnnouncementDetailView: View {
     var post: Post
 
     var body: some View {
-        ScrollView {
+        List {
             VStack(alignment: .leading) {
                 title
                 categories
                 timeAndReminder
-
-                Divider().padding(.vertical, 5)
-
-                bodyText
             }
-            .padding(15)
+
+            bodyText
         }
-        .navigationTitle("")
+        .navigationTitle("Post")
+        .navigationBarTitleDisplayMode(.inline)
+        .listStyle(.inset)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -64,7 +63,7 @@ struct AnnouncementDetailView: View {
             }
         }
         .font(.title2)
-        .padding(.bottom, 0)
+        .padding(.bottom, -5)
     }
 
     var categories: some View {
@@ -97,6 +96,7 @@ struct AnnouncementDetailView: View {
             Text("8h")
         }
         .font(.subheadline)
+        .padding(.bottom, 5)
     }
 
     var bodyText: some View {
@@ -106,6 +106,7 @@ struct AnnouncementDetailView: View {
             Text(post.content)
             Spacer()
         }
+        .padding(.top, 10)
     }
 }
 
