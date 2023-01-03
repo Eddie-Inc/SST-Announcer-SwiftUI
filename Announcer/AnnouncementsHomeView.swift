@@ -44,6 +44,9 @@ struct AnnouncementsHomeView: View {
              categories: ["Random Category"])
     ]
 
+    @State
+    var showFilterView: Bool = false
+
     var body: some View {
         List {
             ForEach($prototypePosts, id: \.title) { $post in
@@ -83,7 +86,9 @@ struct AnnouncementsHomeView: View {
                 }
                 .swipeActions(edge: .leading, allowsFullSwipe: true) {
                     Button {
-                        post.read.toggle()
+                        withAnimation {
+                            post.read.toggle()
+                        }
                     } label: {
                         Label(post.read ? "Unread" : "Read",
                               systemImage: post.read ? "book.closed" : "book.fill")
@@ -91,7 +96,9 @@ struct AnnouncementsHomeView: View {
                     .tint(.accentColor)
 
                     Button {
-                        post.pinned.toggle()
+                        withAnimation {
+                            post.pinned.toggle()
+                        }
                     } label: {
                         Label(post.pinned ? "Unpin" : "Pin",
                               systemImage: post.pinned ? "pin.slash.fill" : "pin.fill")
@@ -103,6 +110,20 @@ struct AnnouncementsHomeView: View {
         .listStyle(.inset)
         .searchable(text: .constant(""))
         .navigationTitle("Announcements")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    showFilterView.toggle()
+                } label: {
+                    Image(systemName: "line.3.horizontal.decrease.circle")
+                }
+            }
+        }
+        .sheet(isPresented: $showFilterView) {
+            List {
+                Text("Stuff")
+            }
+        }
     }
 }
 
