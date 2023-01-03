@@ -10,7 +10,8 @@ import Foundation
 /**
  Contains attributes for each post such as date, content and title
 
- This struct is used to store Posts. The posts stored here will be used in the ReadAnnouncements and the PinnedAnnouncements for persistency. It is also used to present each post in the AnnouncementsViewController.
+ This struct is used to store Posts. The posts stored here will be used in the ReadAnnouncements and the
+ PinnedAnnouncements for persistency. It is also used to present each post in the AnnouncementsViewController.
  */
 struct Post: Codable, Equatable {
     var title: String

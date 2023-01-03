@@ -17,6 +17,9 @@ struct ContentView: View {
                 Label("Test", image: "circle")
             }
         }
+        .onAppear {
+            Log.info("TEST")
+        }
     }
 }
 
