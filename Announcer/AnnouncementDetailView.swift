@@ -34,9 +34,9 @@ struct AnnouncementDetailView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-
+                    post.pinned.toggle()
                 } label: {
-                    Image(systemName: "pin")
+                    Image(systemName: post.pinned ? "pin.fill" : "pin")
                 }
             }
         }
@@ -46,21 +46,11 @@ struct AnnouncementDetailView: View {
     }
 
     var title: some View {
-        // title and safari icon
+        // title
         HStack {
             Text(post.title)
                 .bold()
                 .multilineTextAlignment(.leading)
-            Spacer()
-            VStack {
-                Button {
-                    // open in safari
-                } label: {
-                    Image(systemName: "safari")
-                        .opacity(0.6)
-                }
-                Spacer()
-            }
         }
         .font(.title2)
         .padding(.bottom, -5)
@@ -94,6 +84,15 @@ struct AnnouncementDetailView: View {
                 .padding(.trailing, 10)
             Image(systemName: "alarm")
             Text("8h")
+
+            Spacer()
+
+            Button {
+                // open in safari
+            } label: {
+                Image(systemName: "arrow.up.forward.circle")
+                    .opacity(0.6)
+            }
         }
         .font(.subheadline)
         .padding(.bottom, 5)
