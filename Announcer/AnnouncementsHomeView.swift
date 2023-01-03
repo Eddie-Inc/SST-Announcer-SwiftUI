@@ -46,22 +46,26 @@ struct AnnouncementsHomeView: View {
 
     var body: some View {
         List {
-            ForEach(prototypePosts, id: \.title) { post in
-                VStack(alignment: .leading) {
-                    HStack {
-                        if post.pinned {
-                            Image(systemName: "pin.fill")
-                                .foregroundColor(.accentColor)
-                                .font(.footnote)
-                                .padding(.trailing, -4)
+            ForEach($prototypePosts, id: \.title) { $post in
+                NavigationLink {
+                    AnnouncementDetailView(post: $post)
+                } label: {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            if post.pinned {
+                                Image(systemName: "pin.fill")
+                                    .foregroundColor(.accentColor)
+                                    .font(.footnote)
+                                    .padding(.trailing, -4)
+                            }
+                            Text(post.title)
+                                .lineLimit(2)
                         }
-                        Text(post.title)
-                            .lineLimit(2)
+                        .padding(.bottom, 0.5)
+                        Text(post.content)
+                            .opacity(post.read ? 0.3 : 0.6)
+                            .lineLimit(4)
                     }
-                    .padding(.bottom, 0.5)
-                    Text(post.content)
-                        .opacity(post.read ? 0.3 : 0.6)
-                        .lineLimit(4)
                 }
             }
         }
