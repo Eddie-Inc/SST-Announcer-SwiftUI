@@ -81,6 +81,23 @@ struct AnnouncementsHomeView: View {
                         .opacity(post.read ? 0.5 : 0.6)
                     }
                 }
+                .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                    Button {
+                        post.read.toggle()
+                    } label: {
+                        Label(post.read ? "Unread" : "Read",
+                              systemImage: post.read ? "book.closed" : "book.fill")
+                    }
+                    .tint(.accentColor)
+
+                    Button {
+                        post.pinned.toggle()
+                    } label: {
+                        Label(post.pinned ? "Unpin" : "Pin",
+                              systemImage: post.pinned ? "pin.slash.fill" : "pin.fill")
+                    }
+                    .tint(.gray)
+                }
             }
         }
         .listStyle(.inset)
