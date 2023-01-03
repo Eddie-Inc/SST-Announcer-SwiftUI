@@ -62,9 +62,23 @@ struct AnnouncementsHomeView: View {
                                 .lineLimit(2)
                         }
                         .padding(.bottom, 0.5)
-                        Text(post.content)
+
+                        // preview
+                        Text(post.content.replacingOccurrences(of: "\n\n", with: "\n"))
                             .opacity(post.read ? 0.3 : 0.6)
-                            .lineLimit(4)
+                            .lineLimit(3)
+                            .padding(.bottom, 0.5)
+
+                        // post and reminder
+                        HStack {
+                            Image(systemName: "alarm")
+                            Text("03 Jan 2023")
+                                .padding(.trailing, 10)
+                            Image(systemName: "timer")
+                            Text("8h")
+                        }
+                        .font(.footnote)
+                        .opacity(post.read ? 0.5 : 0.6)
                     }
                 }
             }
