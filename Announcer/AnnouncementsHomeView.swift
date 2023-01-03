@@ -71,10 +71,10 @@ struct AnnouncementsHomeView: View {
 
                         // post and reminder
                         HStack {
-                            Image(systemName: "alarm")
+                            Image(systemName: "timer")
                             Text("03 Jan 2023")
                                 .padding(.trailing, 10)
-                            Image(systemName: "timer")
+                            Image(systemName: "alarm")
                             Text("8h")
                         }
                         .font(.footnote)
