@@ -98,6 +98,19 @@ struct AnnouncementDetailView: View {
         .padding(.bottom, 5)
     }
 
+    var links: some View {
+        // if it has links
+        VStack(alignment: .leading) {
+            Text("Links")
+                .bold()
+            ForEach(["https://www.youtube.com", "https://www.google.com"], id: \.self) { url in
+                Text(url)
+                    .underline()
+                    .foregroundColor(.accentColor)
+            }
+        }
+    }
+
     var bodyText: some View {
         // body text
         // TODO: Make this compatable with html text
