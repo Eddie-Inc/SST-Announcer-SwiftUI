@@ -61,6 +61,20 @@ struct AnnouncementDetailView: View {
         HStack {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
+                    if let userCategories = post.userCategories {
+                        ForEach(userCategories, id: \.self) { category in
+                            Text(category)
+                                .font(.subheadline)
+                                .padding(.vertical, 2)
+                                .padding(.horizontal, 5)
+                                .background {
+                                    Rectangle()
+                                        .foregroundColor(.orange)
+                                        .opacity(0.5)
+                                        .cornerRadius(5)
+                                }
+                        }
+                    }
                     ForEach(post.categories, id: \.self) { category in
                         Text(category)
                             .font(.subheadline)
@@ -145,6 +159,9 @@ struct AnnouncementDetailView_Previews: PreviewProvider {
                        "short",
                        "secondary 3",
                        "you wanted more?"
+                     ],
+                     userCategories: [
+                       "placeholder"
                      ])))
         }
     }
