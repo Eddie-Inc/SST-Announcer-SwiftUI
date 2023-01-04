@@ -15,8 +15,12 @@ struct EditFilterView: View {
     @State
     var possibleTags: [(name: String, isActive: Bool)]
 
-    init(posts: [Post]) {
+    @Binding
+    var searchString: String
+
+    init(posts: [Post], searchString: Binding<String>) {
         self.posts = posts
+        self._searchString = searchString
 
         var tags: Set<String> = .init()
         for post in posts {
@@ -70,6 +74,6 @@ struct EditFilterView_Previews: PreviewProvider {
                  pinned: false,
                  read: false,
                  categories: ["Random Category 3"])
-        ])
+        ], searchString: .constant("no"))
     }
 }

@@ -28,6 +28,9 @@ struct AnnouncementsHomeView: View {
     @State
     var showFilterView: Bool = false
 
+    @State
+    var searchString: String = ""
+
     init() {
         PostManager.getPosts(range: 0..<10) { posts, error in
             if let error {
@@ -104,7 +107,7 @@ struct AnnouncementsHomeView: View {
             }
         }
         .listStyle(.inset)
-        .searchable(text: .constant(""))
+        .searchable(text: $searchString)
         .navigationTitle("Announcements")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -117,10 +120,10 @@ struct AnnouncementsHomeView: View {
         }
         .sheet(isPresented: $showFilterView) {
             if #available(iOS 16.0, *) {
-                EditFilterView(posts: posts)
+                EditFilterView(posts: posts, searchString: $searchString)
                     .presentationDetents(Set([.medium, .large]))
             } else {
-                EditFilterView(posts: posts)
+                EditFilterView(posts: posts, searchString: $searchString)
             }
         }
     }
