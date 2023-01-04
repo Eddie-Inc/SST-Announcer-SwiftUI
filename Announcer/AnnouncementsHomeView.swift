@@ -64,7 +64,7 @@ struct AnnouncementsHomeView: View {
 
                         // preview
                         Text(post.content.replacingOccurrences(of: "\n\n", with: "\n"))
-                            .opacity(post.read ? 0.3 : 0.6)
+                            .opacity(post.read ? 0.3 : 0.7)
                             .lineLimit(3)
                             .padding(.bottom, 0.5)
 
@@ -117,10 +117,10 @@ struct AnnouncementsHomeView: View {
         }
         .sheet(isPresented: $showFilterView) {
             if #available(iOS 16.0, *) {
-                EditFilterView()
+                EditFilterView(posts: posts)
                     .presentationDetents(Set([.medium, .large]))
             } else {
-                EditFilterView()
+                EditFilterView(posts: posts)
             }
         }
     }

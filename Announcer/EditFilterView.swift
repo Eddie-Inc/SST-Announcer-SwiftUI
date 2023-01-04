@@ -10,10 +10,25 @@ import SwiftUI
 struct EditFilterView: View {
 
     @State
-    var possibleTags: [(name: String, isActive: Bool)] = [
-        ("Test", false),
-        ("Another test", true)
-    ]
+    var posts: [Post]
+
+    @State
+    var possibleTags: [(name: String, isActive: Bool)]
+
+    init(posts: [Post]) {
+        self.posts = posts
+
+        var tags: Set<String> = .init()
+        for post in posts {
+            for category in post.categories {
+                tags.insert(category)
+            }
+        }
+
+        self.possibleTags = Array(tags).sorted(by: <).map { name in
+            (name, false)
+        }
+    }
 
     var body: some View {
         List {
@@ -36,6 +51,25 @@ struct EditFilterView: View {
 
 struct EditFilterView_Previews: PreviewProvider {
     static var previews: some View {
-        EditFilterView()
+        EditFilterView(posts: [
+            Post(title: "\(placeholderTextShort) 1",
+                 content: placeholderTextLong,
+                 date: .now,
+                 pinned: true,
+                 read: false,
+                 categories: ["Random Category"]),
+            Post(title: "\(placeholderTextShort) 2",
+                 content: placeholderTextLong,
+                 date: .now,
+                 pinned: false,
+                 read: true,
+                 categories: ["Random Category 2"]),
+            Post(title: "\(placeholderTextShort) 3",
+                 content: placeholderTextLong,
+                 date: .now,
+                 pinned: false,
+                 read: false,
+                 categories: ["Random Category 3"])
+        ])
     }
 }
