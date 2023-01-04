@@ -43,9 +43,6 @@ struct AnnouncementDetailView: View {
                 }
             }
         }
-        .onAppear {
-            post.read = true
-        }
     }
 
     var title: some View {

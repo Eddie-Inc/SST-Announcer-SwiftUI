@@ -54,6 +54,9 @@ struct PostPreviewView: View {
             Spacer()
             NavigationLink {
                 nextView
+                    .onAppear {
+                        post.read = true
+                    }
             } label: {
                 EmptyView()
             }
