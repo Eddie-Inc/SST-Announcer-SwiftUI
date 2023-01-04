@@ -11,6 +11,9 @@ struct AnnouncementDetailView: View {
     @Binding
     var post: Post
 
+    @State
+    var showAddCategoryView: Bool = false
+
     var body: some View {
         List {
             title
@@ -41,6 +44,15 @@ struct AnnouncementDetailView: View {
                 } label: {
                     Image(systemName: post.pinned ? "pin.fill" : "pin")
                 }
+            }
+        }
+        .sheet(isPresented: $showAddCategoryView) {
+            if #available(iOS 16.0, *) {
+                addNewCategory
+                    .presentationDetents(Set([.large, .medium]))
+            } else {
+                // Fallback on earlier versions
+                addNewCategory
             }
         }
     }
@@ -92,6 +104,7 @@ struct AnnouncementDetailView: View {
             .cornerRadius(5)
             Button {
                 // add category
+                showAddCategoryView.toggle()
             } label: {
                 Image(systemName: "plus")
                     .opacity(0.6)
@@ -143,6 +156,42 @@ struct AnnouncementDetailView: View {
             }
         }
         .padding(.top, 10)
+    }
+
+    @State var showCreateNewCategoryAlert: Bool = false
+    @State var newCategoryName: String = ""
+    var addNewCategory: some View {
+        NavigationView {
+            List {
+                Text("Some category")
+                Text("Some other category")
+            }
+            .searchable(text: .constant(""))
+            .navigationTitle("Select Category")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showCreateNewCategoryAlert.toggle()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+            .alert("Create New Category", isPresented: $showCreateNewCategoryAlert) {
+                TextField("Name of New Category", text: $newCategoryName)
+                Button("Cancel") {
+                    showAddCategoryView = false
+                }
+                Button("Create") {
+                    guard !newCategoryName.isEmpty else { return }
+                    var categories = post.userCategories ?? []
+                    categories.append(newCategoryName)
+                    post.userCategories = categories
+                    showAddCategoryView = false
+                }
+            }
+        }
     }
 }
 
