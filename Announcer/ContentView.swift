@@ -14,7 +14,7 @@ struct ContentView: View {
                 AnnouncementsHomeView()
             }
             .tabItem {
-                Label("Test", image: "circle")
+                Label("Test", systemImage: "circle")
             }
         }
         .onAppear {

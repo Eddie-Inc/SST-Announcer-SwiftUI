@@ -18,6 +18,7 @@
 		937860202964625E00FEA668 /* LogExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9378601C2964625E00FEA668 /* LogExtension.swift */; };
 		937860212964625E00FEA668 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9378601D2964625E00FEA668 /* Formatter.swift */; };
 		937860242964637800FEA668 /* AnnouncementDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937860232964637800FEA668 /* AnnouncementDetailView.swift */; };
+		937860262964ED5800FEA668 /* EditFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937860252964ED5800FEA668 /* EditFilterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		9378601C2964625E00FEA668 /* LogExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogExtension.swift; sourceTree = "<group>"; };
 		9378601D2964625E00FEA668 /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		937860232964637800FEA668 /* AnnouncementDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailView.swift; sourceTree = "<group>"; };
+		937860252964ED5800FEA668 /* EditFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFilterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				930EA43A29645AE1007081C8 /* AnnouncerApp.swift */,
 				930EA43C29645AE1007081C8 /* ContentView.swift */,
 				930EA44829645BF4007081C8 /* AnnouncementsHomeView.swift */,
+				937860252964ED5800FEA668 /* EditFilterView.swift */,
 				937860232964637800FEA668 /* AnnouncementDetailView.swift */,
 				930EA43E29645AE2007081C8 /* Assets.xcassets */,
 				930EA44029645AE2007081C8 /* Preview Content */,
@@ -214,6 +217,7 @@
 				9378601E2964625E00FEA668 /* Log.swift in Sources */,
 				930EA43B29645AE1007081C8 /* AnnouncerApp.swift in Sources */,
 				930EA44B29645CB5007081C8 /* Post.swift in Sources */,
+				937860262964ED5800FEA668 /* EditFilterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

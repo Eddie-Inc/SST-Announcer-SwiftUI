@@ -120,8 +120,11 @@ struct AnnouncementsHomeView: View {
             }
         }
         .sheet(isPresented: $showFilterView) {
-            List {
-                Text("Stuff")
+            if #available(iOS 16.0, *) {
+                EditFilterView()
+                    .presentationDetents(Set([.medium, .large]))
+            } else {
+                EditFilterView()
             }
         }
     }
