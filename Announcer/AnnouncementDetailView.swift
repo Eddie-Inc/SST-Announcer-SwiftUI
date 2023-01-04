@@ -13,11 +13,14 @@ struct AnnouncementDetailView: View {
 
     var body: some View {
         List {
-            VStack(alignment: .leading) {
-                title
-                categories
-                timeAndReminder
-            }
+            title
+
+            categories
+                .listRowSeparator(.hidden, edges: .top)
+
+            timeAndReminder
+                .offset(y: -3)
+                .listRowSeparator(.hidden, edges: .top)
 
             bodyText
         }
@@ -58,20 +61,29 @@ struct AnnouncementDetailView: View {
 
     var categories: some View {
         // categories
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                ForEach(post.categories, id: \.self) { category in
-                    Text(category)
-                        .font(.subheadline)
-                        .padding(.vertical, 2)
-                        .padding(.horizontal, 5)
-                        .background {
-                            Rectangle()
-                                .foregroundColor(.accentColor)
-                                .opacity(0.5)
-                                .cornerRadius(5)
-                        }
+        HStack {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(post.categories, id: \.self) { category in
+                        Text(category)
+                            .font(.subheadline)
+                            .padding(.vertical, 2)
+                            .padding(.horizontal, 5)
+                            .background {
+                                Rectangle()
+                                    .foregroundColor(.accentColor)
+                                    .opacity(0.5)
+                                    .cornerRadius(5)
+                            }
+                    }
                 }
+            }
+            .cornerRadius(5)
+            Button {
+                // add category
+            } label: {
+                Image(systemName: "plus")
+                    .opacity(0.6)
             }
         }
     }
@@ -86,16 +98,8 @@ struct AnnouncementDetailView: View {
             Text("8h")
 
             Spacer()
-
-            Button {
-                // open in safari
-            } label: {
-                Image(systemName: "arrow.up.forward.circle")
-                    .opacity(0.6)
-            }
         }
         .font(.subheadline)
-        .padding(.bottom, 5)
     }
 
     var links: some View {
@@ -117,6 +121,15 @@ struct AnnouncementDetailView: View {
         VStack {
             Text(post.content)
             Spacer()
+        }
+        .overlay(alignment: .topTrailing) {
+            Button {
+                // open in safari
+            } label: {
+                Image(systemName: "arrow.up.forward.circle")
+                    .opacity(0.6)
+                    .offset(x: 6, y: 3)
+            }
         }
         .padding(.top, 10)
     }
