@@ -29,7 +29,15 @@ struct AnnouncementsHomeView: View {
     var showFilterView: Bool = false
 
     init() {
-        _posts = State(initialValue: PostManager.getPosts(range: 0..<10))
+        PostManager.getPosts(range: 0..<10) { posts, error in
+            if let error {
+                Log.info("Error: \(error.localizedDescription)")
+                return
+            }
+            if let posts {
+                _posts = State(initialValue: posts)
+            }
+        }
     }
 
     var body: some View {

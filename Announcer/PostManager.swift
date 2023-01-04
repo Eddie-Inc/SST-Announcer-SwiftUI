@@ -29,10 +29,10 @@ private let tempPosts: [Post] = [
 ]
 
 enum PostManager {
-    static func getPosts(range: Range<Int>) -> [Post] {
+    static func getPosts(range: Range<Int>, completion: (([Post]?, Error?) -> Void)) {
         // pin the range
         let newRange = max(0, range.lowerBound)..<min(tempPosts.count, range.upperBound)
-        return Array(tempPosts[newRange])
+        completion(Array(tempPosts[newRange]), nil)
     }
 
     /// Saves a post to localstorage. Effectively a form of cache.
