@@ -23,35 +23,23 @@ at elementum eu. Nunc sed blandit libero volutpat.
 
 struct AnnouncementsHomeView: View {
     @State
-    var prototypePosts: [Post] = [
-        Post(title: "\(placeholderTextShort) 1",
-             content: placeholderTextLong,
-             date: .now,
-             pinned: true,
-             read: false,
-             categories: ["Random Category"]),
-        Post(title: "\(placeholderTextShort) 2",
-             content: placeholderTextLong,
-             date: .now,
-             pinned: false,
-             read: true,
-             categories: ["Random Category"]),
-        Post(title: "\(placeholderTextShort) 3",
-             content: placeholderTextLong,
-             date: .now,
-             pinned: false,
-             read: false,
-             categories: ["Random Category"])
-    ]
+    var posts: [Post] = []
 
     @State
     var showFilterView: Bool = false
 
+    init() {
+        _posts = State(initialValue: PostManager.getPosts(range: 0..<10))
+    }
+
     var body: some View {
         List {
-            ForEach($prototypePosts, id: \.title) { $post in
+            ForEach($posts, id: \.title) { $post in
                 NavigationLink {
                     AnnouncementDetailView(post: $post)
+                        .onChange(of: post) { changedPost in
+                            PostManager.savePost(post: changedPost)
+                        }
                 } label: {
                     VStack(alignment: .leading) {
                         HStack {

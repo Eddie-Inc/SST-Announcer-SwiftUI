@@ -13,6 +13,7 @@
 		930EA44229645AE2007081C8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930EA44129645AE2007081C8 /* Preview Assets.xcassets */; };
 		930EA44929645BF4007081C8 /* AnnouncementsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930EA44829645BF4007081C8 /* AnnouncementsHomeView.swift */; };
 		930EA44B29645CB5007081C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930EA44A29645CB5007081C8 /* Post.swift */; };
+		93436AC82965742B00AD3148 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93436AC72965742B00AD3148 /* PostManager.swift */; };
 		9378601E2964625E00FEA668 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9378601A2964625E00FEA668 /* Log.swift */; };
 		9378601F2964625E00FEA668 /* Using Logger.md in Resources */ = {isa = PBXBuildFile; fileRef = 9378601B2964625E00FEA668 /* Using Logger.md */; };
 		937860202964625E00FEA668 /* LogExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9378601C2964625E00FEA668 /* LogExtension.swift */; };
@@ -29,6 +30,7 @@
 		930EA44129645AE2007081C8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		930EA44829645BF4007081C8 /* AnnouncementsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsHomeView.swift; sourceTree = "<group>"; };
 		930EA44A29645CB5007081C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		93436AC72965742B00AD3148 /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		9378601A2964625E00FEA668 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		9378601B2964625E00FEA668 /* Using Logger.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Using Logger.md"; sourceTree = "<group>"; };
 		9378601C2964625E00FEA668 /* LogExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogExtension.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				930EA44C29645CD8007081C8 /* Data */,
 				930EA43A29645AE1007081C8 /* AnnouncerApp.swift */,
 				930EA43C29645AE1007081C8 /* ContentView.swift */,
+				93436AC72965742B00AD3148 /* PostManager.swift */,
 				930EA44829645BF4007081C8 /* AnnouncementsHomeView.swift */,
 				937860252964ED5800FEA668 /* EditFilterView.swift */,
 				937860232964637800FEA668 /* AnnouncementDetailView.swift */,
@@ -216,6 +219,7 @@
 				937860212964625E00FEA668 /* Formatter.swift in Sources */,
 				9378601E2964625E00FEA668 /* Log.swift in Sources */,
 				930EA43B29645AE1007081C8 /* AnnouncerApp.swift in Sources */,
+				93436AC82965742B00AD3148 /* PostManager.swift in Sources */,
 				930EA44B29645CB5007081C8 /* Post.swift in Sources */,
 				937860262964ED5800FEA668 /* EditFilterView.swift in Sources */,
 			);
