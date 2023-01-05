@@ -19,7 +19,7 @@ struct EditCategoriesView: View {
     @State var newCategoryName: String = ""
 
     @Binding
-    var showAddCategoryView: Bool
+    var showEditCategoryView: Bool
 
     var body: some View {
         List {
@@ -82,7 +82,7 @@ struct EditCategoriesView: View {
     var createCategoryAlert: some View {
         TextField("Name of New Category", text: $newCategoryName)
         Button("Cancel") {
-            showAddCategoryView = false
+            showEditCategoryView = false
         }
         Button("Create") {
             guard !newCategoryName.isEmpty else { return }
@@ -93,7 +93,7 @@ struct EditCategoriesView: View {
             if !PostManager.userCategories.contains(newCategoryName) {
                 PostManager.userCategories.append(newCategoryName)
             }
-            showAddCategoryView = false
+            showEditCategoryView = false
             PostManager.savePost(post: post)
         }
     }
@@ -116,6 +116,6 @@ struct EditCategoriesView_Previews: PreviewProvider {
                     "placeholder"
                  ])),
                            posts: .constant([]),
-                           showAddCategoryView: .constant(true))
+                           showEditCategoryView: .constant(true))
     }
 }

@@ -15,7 +15,7 @@ struct AnnouncementDetailView: View {
     var posts: [Post]
 
     @State
-    var showAddCategoryView: Bool = false
+    var showEditCategoryView: Bool = false
 
     var body: some View {
         List {
@@ -49,7 +49,7 @@ struct AnnouncementDetailView: View {
                 }
             }
         }
-        .sheet(isPresented: $showAddCategoryView) {
+        .sheet(isPresented: $showEditCategoryView) {
             if #available(iOS 16.0, *) {
                 addNewCategory
                     .presentationDetents(Set([.large, .medium]))
@@ -107,9 +107,9 @@ struct AnnouncementDetailView: View {
             .cornerRadius(5)
             Button {
                 // add category
-                showAddCategoryView.toggle()
+                showEditCategoryView.toggle()
             } label: {
-                Image(systemName: "plus")
+                Image(systemName: "slider.horizontal.3")
                     .opacity(0.6)
             }
         }
@@ -165,7 +165,7 @@ struct AnnouncementDetailView: View {
         NavigationView {
             EditCategoriesView(post: $post,
                                posts: $posts,
-                               showAddCategoryView: $showAddCategoryView)
+                               showEditCategoryView: $showEditCategoryView)
         }
     }
 }
