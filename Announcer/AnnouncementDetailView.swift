@@ -161,75 +161,11 @@ struct AnnouncementDetailView: View {
         .padding(.top, 10)
     }
 
-    @State var showCreateNewCategoryAlert: Bool = false
-    @State var newCategoryName: String = ""
     var addNewCategory: some View {
         NavigationView {
-            List {
-                // todo: use list of all user categories
-                ForEach(PostManager.userCategories, id: \.self) { name in
-                    Button {
-                        var categories = post.userCategories ?? []
-
-                        if categories.contains(name) {
-                            // remove the category if its already there
-                            categories.removeAll(where: { $0 == name })
-                        } else {
-                            // add the category if its not there yet
-                            categories.append(name)
-                        }
-
-                        post.userCategories = categories
-                        PostManager.savePost(post: post)
-                    } label: {
-                        HStack {
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.accentColor)
-                                .opacity((post.userCategories?.contains(name) ?? false) ? 1 : 0)
-                            Text(name)
-                        }
-                        .foregroundColor(.primary)
-                    }
-                }
-                .onDelete { indexSet in
-                    PostManager.userCategories.remove(atOffsets: indexSet)
-                    PostManager.trimDeadUserCategories(from: &posts)
-                }
-                .onMove { indexSet, moveTo in
-                    PostManager.userCategories.move(fromOffsets: indexSet,
-                                                    toOffset: moveTo)
-                }
-            }
-            .searchable(text: .constant(""))
-            .navigationTitle("Select Category")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showCreateNewCategoryAlert.toggle()
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                }
-            }
-            .alert("Create New Category", isPresented: $showCreateNewCategoryAlert) {
-                TextField("Name of New Category", text: $newCategoryName)
-                Button("Cancel") {
-                    showAddCategoryView = false
-                }
-                Button("Create") {
-                    guard !newCategoryName.isEmpty else { return }
-                    var categories = post.userCategories ?? []
-                    categories.append(newCategoryName)
-                    post.userCategories = categories
-
-                    if !PostManager.userCategories.contains(newCategoryName) {
-                        PostManager.userCategories.append(newCategoryName)
-                    }
-                    showAddCategoryView = false
-                    PostManager.savePost(post: post)
-                }
-            }
+            EditCategoriesView(post: $post,
+                               posts: $posts,
+                               showAddCategoryView: $showAddCategoryView)
         }
     }
 }
