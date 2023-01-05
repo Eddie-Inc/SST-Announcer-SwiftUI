@@ -34,7 +34,20 @@ enum PostManager {
     static func getPosts(range: Range<Int>, completion: (([Post]?, Error?) -> Void)) {
         // pin the range
         let newRange = max(0, range.lowerBound)..<min(tempPosts.count, range.upperBound)
-        completion(Array(tempPosts[newRange]), nil)
+
+        // iterate over the range and remove user categories if they don't exist
+        var posts = Array(tempPosts[newRange])
+        trimDeadUserCategories(from: &posts)
+
+        completion(posts, nil)
+    }
+
+    static func trimDeadUserCategories(from posts: inout [Post]) {
+        for index in 0..<posts.count {
+            posts[index].userCategories?.removeAll {
+                !userCategories.contains($0)
+            }
+        }
     }
 
     /// Saves a post to localstorage. Effectively a form of cache.
@@ -54,8 +67,9 @@ enum PostManager {
             return categories
         }
         set {
-            defaults.set(newValue, forKey: .userCategories)
+            _userCategories = newValue
             // save to userDefaults
+            defaults.set(newValue, forKey: .userCategories)
         }
     }
 

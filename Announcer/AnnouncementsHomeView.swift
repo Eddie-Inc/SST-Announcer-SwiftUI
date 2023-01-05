@@ -68,7 +68,7 @@ struct AnnouncementsHomeView: View {
     var content: some View {
         List {
             ForEach($posts, id: \.title) { $post in
-                PostPreviewView(post: $post)
+                PostPreviewView(post: $post, posts: $posts)
             }
         }
         .listStyle(.inset)

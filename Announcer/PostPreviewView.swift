@@ -11,6 +11,9 @@ struct PostPreviewView: View {
     @Binding
     var post: Post
 
+    @Binding
+    var posts: [Post]
+
     var body: some View {
         if #available(iOS 16.0, *) {
             VStack(alignment: .leading) {
@@ -110,7 +113,7 @@ struct PostPreviewView: View {
     }
 
     var nextView: some View {
-        AnnouncementDetailView(post: $post)
+        AnnouncementDetailView(post: $post, posts: $posts)
             .onChange(of: post) { changedPost in
                 PostManager.savePost(post: changedPost)
             }
@@ -131,7 +134,7 @@ struct PostPreviewView_Previews: PreviewProvider {
                             "short",
                             "secondary 3",
                             "you wanted more?"
-                         ])))
+                         ])), posts: .constant([]))
             }
             .navigationTitle("Preview")
             .listStyle(.inset)

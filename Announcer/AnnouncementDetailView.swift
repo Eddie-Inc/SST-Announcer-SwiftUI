@@ -11,6 +11,9 @@ struct AnnouncementDetailView: View {
     @Binding
     var post: Post
 
+    @Binding
+    var posts: [Post]
+
     @State
     var showAddCategoryView: Bool = false
 
@@ -74,7 +77,7 @@ struct AnnouncementDetailView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     if let userCategories = post.userCategories {
-                        ForEach(userCategories, id: \.self) { category in
+                        ForEach(userCategories.sorted(by: <), id: \.self) { category in
                             Text(category)
                                 .font(.subheadline)
                                 .padding(.vertical, 2)
@@ -87,7 +90,7 @@ struct AnnouncementDetailView: View {
                                 }
                         }
                     }
-                    ForEach(post.categories, id: \.self) { category in
+                    ForEach(post.categories.sorted(by: <), id: \.self) { category in
                         Text(category)
                             .font(.subheadline)
                             .padding(.vertical, 2)
@@ -164,30 +167,37 @@ struct AnnouncementDetailView: View {
         NavigationView {
             List {
                 // todo: use list of all user categories
-                if let categories = PostManager.userCategories {
-                    ForEach(categories, id: \.self) { name in
-                        Button {
-                            var categories = post.userCategories ?? []
+                ForEach(PostManager.userCategories, id: \.self) { name in
+                    Button {
+                        var categories = post.userCategories ?? []
 
-                            if categories.contains(name) {
-                                // remove the category if its already there
-                                categories.removeAll(where: { $0 == name })
-                            } else {
-                                // add the category if its not there yet
-                                categories.append(name)
-                            }
-
-                            post.userCategories = categories
-                        } label: {
-                            HStack {
-                                Image(systemName: "checkmark")
-                                    .foregroundColor(.accentColor)
-                                    .opacity((post.userCategories?.contains(name) ?? false) ? 1 : 0)
-                                Text(name)
-                            }
-                            .foregroundColor(.primary)
+                        if categories.contains(name) {
+                            // remove the category if its already there
+                            categories.removeAll(where: { $0 == name })
+                        } else {
+                            // add the category if its not there yet
+                            categories.append(name)
                         }
+
+                        post.userCategories = categories
+                        PostManager.savePost(post: post)
+                    } label: {
+                        HStack {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.accentColor)
+                                .opacity((post.userCategories?.contains(name) ?? false) ? 1 : 0)
+                            Text(name)
+                        }
+                        .foregroundColor(.primary)
                     }
+                }
+                .onDelete { indexSet in
+                    PostManager.userCategories.remove(atOffsets: indexSet)
+                    PostManager.trimDeadUserCategories(from: &posts)
+                }
+                .onMove { indexSet, moveTo in
+                    PostManager.userCategories.move(fromOffsets: indexSet,
+                                                    toOffset: moveTo)
                 }
             }
             .searchable(text: .constant(""))
@@ -217,6 +227,7 @@ struct AnnouncementDetailView: View {
                         PostManager.userCategories.append(newCategoryName)
                     }
                     showAddCategoryView = false
+                    PostManager.savePost(post: post)
                 }
             }
         }
@@ -239,7 +250,7 @@ struct AnnouncementDetailView_Previews: PreviewProvider {
                      ],
                      userCategories: [
                        "placeholder"
-                     ])))
+                     ])), posts: .constant([]))
         }
     }
 }
