@@ -74,37 +74,7 @@ struct AnnouncementDetailView: View {
     var categories: some View {
         // categories
         HStack {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    if let userCategories = post.userCategories {
-                        ForEach(userCategories.sorted(by: <), id: \.self) { category in
-                            Text(category)
-                                .font(.subheadline)
-                                .padding(.vertical, 2)
-                                .padding(.horizontal, 5)
-                                .background {
-                                    Rectangle()
-                                        .foregroundColor(.orange)
-                                        .opacity(0.5)
-                                        .cornerRadius(5)
-                                }
-                        }
-                    }
-                    ForEach(post.categories.sorted(by: <), id: \.self) { category in
-                        Text(category)
-                            .font(.subheadline)
-                            .padding(.vertical, 2)
-                            .padding(.horizontal, 5)
-                            .background {
-                                Rectangle()
-                                    .foregroundColor(.accentColor)
-                                    .opacity(0.5)
-                                    .cornerRadius(5)
-                            }
-                    }
-                }
-            }
-            .cornerRadius(5)
+            CategoryScrollView(post: $post)
             Button {
                 // add category
                 showEditCategoryView.toggle()

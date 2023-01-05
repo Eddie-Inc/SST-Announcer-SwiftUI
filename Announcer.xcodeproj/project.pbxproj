@@ -14,6 +14,7 @@
 		930EA44929645BF4007081C8 /* AnnouncementsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930EA44829645BF4007081C8 /* AnnouncementsHomeView.swift */; };
 		930EA44B29645CB5007081C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930EA44A29645CB5007081C8 /* Post.swift */; };
 		931B2C672966C46900BBF397 /* EditCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931B2C662966C46900BBF397 /* EditCategoriesView.swift */; };
+		931B2C692966C67700BBF397 /* CategoryScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931B2C682966C67700BBF397 /* CategoryScrollView.swift */; };
 		93436AC82965742B00AD3148 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93436AC72965742B00AD3148 /* PostManager.swift */; };
 		93436ACA2965B4D600AD3148 /* PostPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93436AC92965B4D600AD3148 /* PostPreviewView.swift */; };
 		9378601E2964625E00FEA668 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9378601A2964625E00FEA668 /* Log.swift */; };
@@ -33,6 +34,7 @@
 		930EA44829645BF4007081C8 /* AnnouncementsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsHomeView.swift; sourceTree = "<group>"; };
 		930EA44A29645CB5007081C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		931B2C662966C46900BBF397 /* EditCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoriesView.swift; sourceTree = "<group>"; };
+		931B2C682966C67700BBF397 /* CategoryScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryScrollView.swift; sourceTree = "<group>"; };
 		93436AC72965742B00AD3148 /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		93436AC92965B4D600AD3148 /* PostPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewView.swift; sourceTree = "<group>"; };
 		9378601A2964625E00FEA668 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				93436AC92965B4D600AD3148 /* PostPreviewView.swift */,
 				937860252964ED5800FEA668 /* EditFilterView.swift */,
 				937860232964637800FEA668 /* AnnouncementDetailView.swift */,
+				931B2C682966C67700BBF397 /* CategoryScrollView.swift */,
 				931B2C662966C46900BBF397 /* EditCategoriesView.swift */,
 				930EA43E29645AE2007081C8 /* Assets.xcassets */,
 				930EA44029645AE2007081C8 /* Preview Content */,
@@ -224,6 +227,7 @@
 				937860202964625E00FEA668 /* LogExtension.swift in Sources */,
 				937860212964625E00FEA668 /* Formatter.swift in Sources */,
 				9378601E2964625E00FEA668 /* Log.swift in Sources */,
+				931B2C692966C67700BBF397 /* CategoryScrollView.swift in Sources */,
 				930EA43B29645AE1007081C8 /* AnnouncerApp.swift in Sources */,
 				93436AC82965742B00AD3148 /* PostManager.swift in Sources */,
 				930EA44B29645CB5007081C8 /* Post.swift in Sources */,

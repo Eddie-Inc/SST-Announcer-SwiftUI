@@ -82,8 +82,12 @@ struct PostPreviewView: View {
             Image(systemName: "timer")
             Text("03 Jan 2023")
                 .padding(.trailing, 10)
+
             Image(systemName: "alarm")
             Text("8h")
+                .padding(.trailing, 10)
+
+            CategoryScrollView(post: $post)
         }
         .font(.footnote)
         .opacity(post.read ? 0.5 : 0.6)
