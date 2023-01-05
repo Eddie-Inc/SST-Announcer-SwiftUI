@@ -163,8 +163,32 @@ struct AnnouncementDetailView: View {
     var addNewCategory: some View {
         NavigationView {
             List {
-                Text("Some category")
-                Text("Some other category")
+                // todo: use list of all user categories
+                if let categories = PostManager.userCategories {
+                    ForEach(categories, id: \.self) { name in
+                        Button {
+                            var categories = post.userCategories ?? []
+
+                            if categories.contains(name) {
+                                // remove the category if its already there
+                                categories.removeAll(where: { $0 == name })
+                            } else {
+                                // add the category if its not there yet
+                                categories.append(name)
+                            }
+
+                            post.userCategories = categories
+                        } label: {
+                            HStack {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.accentColor)
+                                    .opacity((post.userCategories?.contains(name) ?? false) ? 1 : 0)
+                                Text(name)
+                            }
+                            .foregroundColor(.primary)
+                        }
+                    }
+                }
             }
             .searchable(text: .constant(""))
             .navigationTitle("Select Category")
@@ -188,6 +212,10 @@ struct AnnouncementDetailView: View {
                     var categories = post.userCategories ?? []
                     categories.append(newCategoryName)
                     post.userCategories = categories
+
+                    if !PostManager.userCategories.contains(newCategoryName) {
+                        PostManager.userCategories.append(newCategoryName)
+                    }
                     showAddCategoryView = false
                 }
             }

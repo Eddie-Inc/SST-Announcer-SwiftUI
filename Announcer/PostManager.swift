@@ -28,6 +28,8 @@ private let tempPosts: [Post] = [
          categories: ["Random Category"])
 ]
 
+var defaults = UserDefaults.standard
+
 enum PostManager {
     static func getPosts(range: Range<Int>, completion: (([Post]?, Error?) -> Void)) {
         // pin the range
@@ -39,4 +41,27 @@ enum PostManager {
     static func savePost(post: Post) {
 
     }
+
+    static var userCategories: [String] {
+        get {
+            // load from userDefaults or cache
+            if let userCategories = _userCategories {
+                return userCategories
+            }
+
+            let categories = defaults.stringArray(forKey: .userCategories) ?? []
+
+            return categories
+        }
+        set {
+            defaults.set(newValue, forKey: .userCategories)
+            // save to userDefaults
+        }
+    }
+
+    private static var _userCategories: [String]?
+}
+
+extension String {
+    static let userCategories = "userCategories"
 }
