@@ -24,8 +24,8 @@ struct EditCategoriesView: View {
     var body: some View {
         List {
             // todo: use list of all user categories
-            ForEach(PostManager.userCategories, id: \.self) { name in
-                categoryView(name: name)
+            ForEach(PostManager.userCategories, id: \.id) { category in
+                categoryView(category: category)
             }
             .onDelete { indexSet in
                 PostManager.userCategories.remove(atOffsets: indexSet)
@@ -53,16 +53,16 @@ struct EditCategoriesView: View {
         }
     }
 
-    func categoryView(name: String) -> some View {
+    func categoryView(category: UserCategory) -> some View {
         Button {
             var categories = post.userCategories ?? []
 
-            if categories.contains(name) {
+            if categories.contains(category) {
                 // remove the category if its already there
-                categories.removeAll(where: { $0 == name })
+                categories.removeAll(where: { $0 == category })
             } else {
                 // add the category if its not there yet
-                categories.append(name)
+                categories.append(category)
             }
 
             post.userCategories = categories
@@ -71,8 +71,8 @@ struct EditCategoriesView: View {
             HStack {
                 Image(systemName: "checkmark")
                     .foregroundColor(.accentColor)
-                    .opacity((post.userCategories?.contains(name) ?? false) ? 1 : 0)
-                Text(name)
+                    .opacity((post.userCategories?.contains(category) ?? false) ? 1 : 0)
+                Text(category.name)
             }
             .foregroundColor(.primary)
         }
@@ -87,11 +87,13 @@ struct EditCategoriesView: View {
         Button("Create") {
             guard !newCategoryName.isEmpty else { return }
             var categories = post.userCategories ?? []
-            categories.append(newCategoryName)
+            categories.append(.init(newCategoryName))
             post.userCategories = categories
 
-            if !PostManager.userCategories.contains(newCategoryName) {
-                PostManager.userCategories.append(newCategoryName)
+            if !PostManager.userCategories.contains(where: {
+                $0.name == newCategoryName
+            }) {
+                PostManager.userCategories.append(.init(newCategoryName))
             }
             showEditCategoryView = false
             PostManager.savePost(post: post)
@@ -113,7 +115,7 @@ struct EditCategoriesView_Previews: PreviewProvider {
                     "you wanted more?"
                  ],
                  userCategories: [
-                    "placeholder"
+                    .init(name: "placeholder")
                  ])),
                            posts: .constant([]),
                            showEditCategoryView: .constant(true))

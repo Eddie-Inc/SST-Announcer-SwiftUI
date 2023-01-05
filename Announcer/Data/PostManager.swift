@@ -44,8 +44,10 @@ enum PostManager {
 
     static func trimDeadUserCategories(from posts: inout [Post]) {
         for index in 0..<posts.count {
-            posts[index].userCategories?.removeAll {
-                !userCategories.contains($0)
+            posts[index].userCategories?.removeAll { userCategory in
+                !userCategories.contains { savedCategory in
+                    savedCategory.id == userCategory.id
+                }
             }
         }
     }
@@ -55,25 +57,36 @@ enum PostManager {
 
     }
 
-    static var userCategories: [String] {
+    static var userCategories: [UserCategory] {
         get {
             // load from userDefaults or cache
             if let userCategories = _userCategories {
                 return userCategories
             }
 
-            let categories = defaults.stringArray(forKey: .userCategories) ?? []
+            // Retrieve from UserDefaults
+            if let data = UserDefaults.standard.object(forKey: .userCategories) as? Data {
+                if let values = try? JSONDecoder().decode([UserCategory].self, from: data) {
+                    return values
+                }
+            } else {
+                // reset it
+                defaults.set(nil, forKey: .userCategories)
+            }
 
-            return categories
+            return []
         }
         set {
             _userCategories = newValue
             // save to userDefaults
-            defaults.set(newValue, forKey: .userCategories)
+            // To store in UserDefaults
+            if let encoded = try? JSONEncoder().encode(newValue) {
+                defaults.set(encoded, forKey: .userCategories)
+            }
         }
     }
 
-    private static var _userCategories: [String]?
+    private static var _userCategories: [UserCategory]?
 }
 
 extension String {

@@ -23,5 +23,5 @@ struct Post: Codable, Equatable {
     var reminderDate: Date?
 
     var categories: [String]
-    var userCategories: [String]? // optional so that it plays well with Codable
+    var userCategories: [UserCategory]? // optional so that it plays well with Codable
 }

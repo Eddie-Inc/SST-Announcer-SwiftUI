@@ -150,12 +150,12 @@ struct AnnouncementDetailView_Previews: PreviewProvider {
                      pinned: true,
                      read: false,
                      categories: [
-                       "short",
-                       "secondary 3",
-                       "you wanted more?"
+                        "short",
+                        "secondary 3",
+                        "you wanted more?"
                      ],
                      userCategories: [
-                       "placeholder"
+                        .init("placeholder")
                      ])), posts: .constant([]))
         }
     }

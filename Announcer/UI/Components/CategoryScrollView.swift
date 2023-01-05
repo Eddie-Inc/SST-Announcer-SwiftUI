@@ -15,8 +15,8 @@ struct CategoryScrollView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 if let userCategories = post.userCategories {
-                    ForEach(userCategories.sorted(by: <), id: \.self) { category in
-                        Text(category)
+                    ForEach(userCategories.sorted(by: { $0.name < $1.name }), id: \.id) { category in
+                        Text(category.name)
                             .font(.subheadline)
                             .padding(.vertical, 2)
                             .padding(.horizontal, 5)
@@ -60,7 +60,7 @@ struct CategoryScrollView_Previews: PreviewProvider {
                      "you wanted more?"
                  ],
                  userCategories: [
-                     "placeholder"
+                    .init("placeholder")
                  ])))
     }
 }
