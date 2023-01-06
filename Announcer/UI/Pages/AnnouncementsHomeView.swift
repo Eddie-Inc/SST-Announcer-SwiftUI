@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+let loadQueue = DispatchQueue.init(label: "sg.edu.sst.panziyue.Announcer.getPosts")
+
 struct AnnouncementsHomeView: View {
     @State
     var posts: [Post] = []
@@ -19,6 +21,9 @@ struct AnnouncementsHomeView: View {
 
     @State
     var searchScope: String = ""
+
+    @State
+    var isLoading: Bool = false
 
     var body: some View {
         if #available(iOS 16.0, *) {
@@ -44,7 +49,20 @@ struct AnnouncementsHomeView: View {
             }), id: \.wrappedValue.title) { $post in
                 PostPreviewView(post: $post, posts: $posts)
             }
+            if searchString.isEmpty {
+                GeometryReader { proxy in
+                    HStack(alignment: .center) {
+                        Spacer()
+                        Text("Loading...")
+                        Spacer()
+                    }
+                    .onChange(of: proxy.frame(in: .named("scroll"))) { _ in
+                        loadNextPosts()
+                    }
+                }
+            }
         }
+        .coordinateSpace(name: "scroll")
         .listStyle(.inset)
         .searchable(text: $searchString)
         .navigationTitle("Announcements")
@@ -70,10 +88,7 @@ struct AnnouncementsHomeView: View {
             }
         }
         .onAppear {
-            DispatchQueue.init(label: "sg.edu.sst.panziyue.Announcer.getPosts").async {
-                let posts = PostManager.getPosts(range: 0..<10)
-                self.posts = posts
-            }
+            loadNextPosts()
         }
     }
 
@@ -99,6 +114,21 @@ struct AnnouncementsHomeView: View {
         }
 
         return rawCount
+    }
+
+    func loadNextPosts(count: Int = 10) {
+        loadQueue.async {
+            guard !isLoading else { return }
+
+            isLoading = true
+            let range = self.posts.count..<self.posts.count + count
+            self.posts.append(contentsOf: PostManager.getPosts(range: range))
+
+            // implement some debounce to prevent too many loads
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                isLoading = false
+            }
+        }
     }
 }
 
