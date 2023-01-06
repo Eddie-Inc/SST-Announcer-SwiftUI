@@ -18,6 +18,8 @@
 		931B2C702966DF2300BBF397 /* UserCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931B2C6F2966DF2300BBF397 /* UserCategory.swift */; };
 		93436AC82965742B00AD3148 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93436AC72965742B00AD3148 /* PostManager.swift */; };
 		93436ACA2965B4D600AD3148 /* PostPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93436AC92965B4D600AD3148 /* PostPreviewView.swift */; };
+		935EAB2929685918005D2F52 /* RSS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EAB2829685917005D2F52 /* RSS.swift */; };
+		935EAB2C29685987005D2F52 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 935EAB2B29685987005D2F52 /* FeedKit */; };
 		9378601E2964625E00FEA668 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9378601A2964625E00FEA668 /* Log.swift */; };
 		9378601F2964625E00FEA668 /* Using Logger.md in Resources */ = {isa = PBXBuildFile; fileRef = 9378601B2964625E00FEA668 /* Using Logger.md */; };
 		937860202964625E00FEA668 /* LogExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9378601C2964625E00FEA668 /* LogExtension.swift */; };
@@ -39,6 +41,7 @@
 		931B2C6F2966DF2300BBF397 /* UserCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCategory.swift; sourceTree = "<group>"; };
 		93436AC72965742B00AD3148 /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		93436AC92965B4D600AD3148 /* PostPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewView.swift; sourceTree = "<group>"; };
+		935EAB2829685917005D2F52 /* RSS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSS.swift; sourceTree = "<group>"; };
 		9378601A2964625E00FEA668 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		9378601B2964625E00FEA668 /* Using Logger.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Using Logger.md"; sourceTree = "<group>"; };
 		9378601C2964625E00FEA668 /* LogExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogExtension.swift; sourceTree = "<group>"; };
@@ -52,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				935EAB2C29685987005D2F52 /* FeedKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +105,7 @@
 				93436AC72965742B00AD3148 /* PostManager.swift */,
 				930EA44A29645CB5007081C8 /* Post.swift */,
 				931B2C6F2966DF2300BBF397 /* UserCategory.swift */,
+				935EAB2829685917005D2F52 /* RSS.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -187,6 +192,9 @@
 			dependencies = (
 			);
 			name = Announcer;
+			packageProductDependencies = (
+				935EAB2B29685987005D2F52 /* FeedKit */,
+			);
 			productName = Announcer;
 			productReference = 930EA43729645AE1007081C8 /* Announcer.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +223,9 @@
 				Base,
 			);
 			mainGroup = 930EA42E29645AE1007081C8;
+			packageReferences = (
+				935EAB2A29685987005D2F52 /* XCRemoteSwiftPackageReference "FeedKit" */,
+			);
 			productRefGroup = 930EA43829645AE1007081C8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -278,6 +289,7 @@
 				93436ACA2965B4D600AD3148 /* PostPreviewView.swift in Sources */,
 				931B2C672966C46900BBF397 /* EditCategoriesView.swift in Sources */,
 				937860262964ED5800FEA668 /* EditFilterView.swift in Sources */,
+				935EAB2929685918005D2F52 /* RSS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,6 +490,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		935EAB2A29685987005D2F52 /* XCRemoteSwiftPackageReference "FeedKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nmdias/FeedKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		935EAB2B29685987005D2F52 /* FeedKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 935EAB2A29685987005D2F52 /* XCRemoteSwiftPackageReference "FeedKit" */;
+			productName = FeedKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 930EA42F29645AE1007081C8 /* Project object */;
 }
