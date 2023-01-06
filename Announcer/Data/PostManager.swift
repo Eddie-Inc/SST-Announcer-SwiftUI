@@ -44,10 +44,21 @@ enum PostManager {
 
     static func trimDeadUserCategories(from posts: inout [Post]) {
         for index in 0..<posts.count {
+            // iterate over user categories in each post
             posts[index].userCategories?.removeAll { userCategory in
-                !userCategories.contains { savedCategory in
-                    savedCategory.id == userCategory.id
+                // if the userCategories does not contain a category with the same ID,
+                // then remove the item. If it does, make sure the name is updated.
+                for index in 0..<userCategories.count {
+                    let savedCategory = userCategories[index]
+
+                    if savedCategory.id == userCategory.id {
+                        Log.info("Names category: \(savedCategory.name), \(userCategory.name)")
+//                        userCategories[index].name = userCategory.name
+                        return false
+                    }
                 }
+
+                return true
             }
         }
     }

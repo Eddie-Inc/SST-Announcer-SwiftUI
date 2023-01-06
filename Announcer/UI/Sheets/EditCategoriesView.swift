@@ -15,11 +15,17 @@ struct EditCategoriesView: View {
     @Binding
     var posts: [Post]
 
+    @Binding
+    var showEditCategoryView: Bool
+
     @State var showCreateNewCategoryAlert: Bool = false
     @State var newCategoryName: String = ""
 
-    @Binding
-    var showEditCategoryView: Bool
+    @State
+    var showEditSingleCategory: Bool = false
+
+    @State var originalName: String = ""
+    @State var categoryName: String = ""
 
     var body: some View {
         List {
@@ -51,6 +57,20 @@ struct EditCategoriesView: View {
         .alert("Create New Category", isPresented: $showCreateNewCategoryAlert) {
             createCategoryAlert
         }
+        .alert("Edit Name", isPresented: $showEditSingleCategory) {
+            TextField("Name", text: $categoryName)
+            Button("Cancel") {}
+            Button("Confirm") {
+                guard let index = PostManager.userCategories.firstIndex(where: {
+                    $0.name == originalName
+                }) else { return }
+
+                Log.info("Original name!")
+
+                PostManager.userCategories[index].name = categoryName
+                PostManager.trimDeadUserCategories(from: &posts)
+            }
+        }
     }
 
     func categoryView(category: UserCategory) -> some View {
@@ -71,10 +91,19 @@ struct EditCategoriesView: View {
             HStack {
                 Image(systemName: "checkmark")
                     .foregroundColor(.accentColor)
-                    .opacity((post.userCategories?.contains(category) ?? false) ? 1 : 0)
+                    .opacity((post.userCategories?.contains(where: {
+                        $0.id == category.id
+                    }) ?? false) ? 1 : 0)
                 Text(category.name)
             }
             .foregroundColor(.primary)
+        }
+        .contextMenu {
+            Button("Edit Category Name") {
+                originalName = category.name
+                categoryName = category.name
+                showEditSingleCategory.toggle()
+            }
         }
     }
 
