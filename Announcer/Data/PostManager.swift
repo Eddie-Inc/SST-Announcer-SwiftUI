@@ -7,37 +7,16 @@
 
 import Foundation
 
-private let tempPosts: [Post] = [
-    Post(title: "\(placeholderTextShort) 1",
-         content: placeholderTextLong,
-         date: .now,
-         pinned: true,
-         read: false,
-         categories: ["Random Category"]),
-    Post(title: "\(placeholderTextShort) 2",
-         content: placeholderTextLong,
-         date: .now,
-         pinned: false,
-         read: true,
-         categories: ["Random Category"]),
-    Post(title: "\(placeholderTextShort) 3",
-         content: placeholderTextLong,
-         date: .now,
-         pinned: false,
-         read: false,
-         categories: ["Random Category"])
-]
-
 var defaults = UserDefaults.standard
 
 enum PostManager {
-    static func getPosts(range: Range<Int>, completion: (([Post]?, Error?) -> Void)) {
-        var posts = fetchValues() // Array(tempPosts[newRange])
+    static func getPosts(range: Range<Int>) -> [Post] {
+        var posts = fetchValues()
         let newRange = max(0, range.lowerBound)..<min(posts.count, range.upperBound)
         posts = Array(posts[newRange])
         trimDeadUserCategories(from: &posts)
 
-        completion(posts, nil)
+        return posts
     }
 
     static func trimDeadUserCategories(from posts: inout [Post]) {

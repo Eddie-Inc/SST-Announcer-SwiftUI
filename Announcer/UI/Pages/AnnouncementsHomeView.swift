@@ -34,18 +34,6 @@ struct AnnouncementsHomeView: View {
     @State
     var searchScope: String = ""
 
-    init() {
-        PostManager.getPosts(range: 0..<10) { posts, error in
-            if let error {
-                Log.info("Error: \(error.localizedDescription)")
-                return
-            }
-            if let posts {
-                _posts = State(initialValue: posts)
-            }
-        }
-    }
-
     var body: some View {
         if #available(iOS 16.0, *) {
             content
@@ -89,6 +77,12 @@ struct AnnouncementsHomeView: View {
                         }
                     }
                 }
+            }
+        }
+        .onAppear {
+            DispatchQueue.init(label: "sg.edu.sst.panziyue.Announcer.getPosts").async {
+                let posts = PostManager.getPosts(range: 0..<10)
+                self.posts = posts
             }
         }
     }
