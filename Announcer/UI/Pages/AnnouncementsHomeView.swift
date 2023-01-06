@@ -7,20 +7,6 @@
 
 import SwiftUI
 
-let placeholderTextShort = "Lorem ipsum dolor sit amet"
-let placeholderTextLong = """
-Dear Students,
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt \
-ut labore et dolore magna aliqua. Turpis egestas pretium aenean pharetra. Orci eu lobortis.
-
-elementum nibh tellus molestie. Vulputate dignissim suspendisse in est. Vel pharetra vel \
-turpis nunc. Malesuada nunc vel risus commodo. Nisi vitae suscipit tellus mauris.
-
-Posuere orbi leo urna molestie at elementum eu. Urna duis convallis convallis tellus. Urna molestie \
-at elementum eu. Nunc sed blandit libero volutpat.
-"""
-
 struct AnnouncementsHomeView: View {
     @State
     var posts: [Post] = []
@@ -51,7 +37,11 @@ struct AnnouncementsHomeView: View {
 
     var content: some View {
         List {
-            ForEach($posts, id: \.title) { $post in
+            ForEach($posts.filter({
+                searchString.isEmpty ||
+                $0.wrappedValue.title.lowercased().contains(formattedSearchString()) ||
+                $0.wrappedValue.content.lowercased().contains(formattedSearchString())
+            }), id: \.wrappedValue.title) { $post in
                 PostPreviewView(post: $post, posts: $posts)
             }
         }
@@ -85,6 +75,11 @@ struct AnnouncementsHomeView: View {
                 self.posts = posts
             }
         }
+    }
+
+    func formattedSearchString() -> String {
+        // get rid of filters in the search bar
+        searchString.lowercased()
     }
 
     func numberOfFilters(pinnedTo range: Range<Int>? = nil) -> Int {
