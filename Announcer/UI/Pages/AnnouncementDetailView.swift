@@ -76,6 +76,7 @@ struct AnnouncementDetailView: View {
         // categories
         HStack {
             CategoryScrollView(post: $post)
+                .font(.subheadline)
             Button {
                 // add category
                 showEditCategoryView.toggle()

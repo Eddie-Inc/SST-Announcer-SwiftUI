@@ -16,7 +16,6 @@ struct CategoryScrollView: View {
             post.categories.isEmpty {
             HStack {
                 Text("No Categories")
-                    .font(.subheadline)
                 Spacer()
             }
         } else {

@@ -21,8 +21,6 @@ struct TimeAndReminder: View {
                 Image(systemName: "alarm")
                 Text(formattedReminderTime())
             }
-
-            Spacer()
         }
     }
 

@@ -84,6 +84,7 @@ struct PostPreviewView: View {
                 .opacity(post.read ? 0.5 : 0.6)
 
             CategoryScrollView(post: $post)
+                .font(.footnote)
         }
         .font(.footnote)
     }
