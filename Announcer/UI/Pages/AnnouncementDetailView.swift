@@ -24,7 +24,8 @@ struct AnnouncementDetailView: View {
             categories
                 .listRowSeparator(.hidden, edges: .top)
 
-            timeAndReminder
+            TimeAndReminder(post: post)
+                .font(.subheadline)
                 .offset(y: -3)
                 .listRowSeparator(.hidden, edges: .top)
 
@@ -83,20 +84,6 @@ struct AnnouncementDetailView: View {
                     .opacity(0.6)
             }
         }
-    }
-
-    var timeAndReminder: some View {
-        // post and reminder
-        HStack {
-            Image(systemName: "timer")
-            Text("03 Jan 2023")
-                .padding(.trailing, 10)
-            Image(systemName: "alarm")
-            Text("8h")
-
-            Spacer()
-        }
-        .font(.subheadline)
     }
 
     var links: some View {
