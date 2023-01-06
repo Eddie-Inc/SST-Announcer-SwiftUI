@@ -11,9 +11,7 @@ var defaults = UserDefaults.standard
 
 enum PostManager {
     static func getPosts(range: Range<Int>) -> [Post] {
-        var posts = fetchValues()
-        let newRange = max(0, range.lowerBound)..<min(posts.count, range.upperBound)
-        posts = Array(posts[newRange])
+        var posts = fetchValues(range: range)
         trimDeadUserCategories(from: &posts)
 
         return posts
