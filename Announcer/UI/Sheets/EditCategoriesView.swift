@@ -27,22 +27,34 @@ struct EditCategoriesView: View {
     @State var originalName: String = ""
     @State var categoryName: String = ""
 
+    @State var searchString: String = ""
+
     var body: some View {
         List {
-            // todo: use list of all user categories
-            ForEach(PostManager.userCategories, id: \.id) { category in
-                categoryView(category: category)
+            if !searchString.isEmpty {
+                Section {
+                    Button("Create Category \"\(searchString)\"") {
+                        createCategory(named: searchString)
+                    }
+                    .foregroundColor(.accentColor)
+                }
             }
-            .onDelete { indexSet in
-                PostManager.userCategories.remove(atOffsets: indexSet)
-                PostManager.trimDeadUserCategories(from: &posts)
-            }
-            .onMove { indexSet, moveTo in
-                PostManager.userCategories.move(fromOffsets: indexSet,
-                                                toOffset: moveTo)
+
+            Section {
+                ForEach(PostManager.userCategories, id: \.id) { category in
+                    categoryView(category: category)
+                }
+                .onDelete { indexSet in
+                    PostManager.userCategories.remove(atOffsets: indexSet)
+                    PostManager.trimDeadUserCategories(from: &posts)
+                }
+                .onMove { indexSet, moveTo in
+                    PostManager.userCategories.move(fromOffsets: indexSet,
+                                                    toOffset: moveTo)
+                }
             }
         }
-        .searchable(text: .constant(""))
+        .searchable(text: $searchString)
         .navigationTitle("Select Category")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -114,39 +126,45 @@ struct EditCategoriesView: View {
             showEditCategoryView = false
         }
         Button("Create") {
-            guard !newCategoryName.isEmpty else { return }
-            var categories = post.userCategories ?? []
-            categories.append(.init(newCategoryName))
-            post.userCategories = categories
-
-            if !PostManager.userCategories.contains(where: {
-                $0.name == newCategoryName
-            }) {
-                PostManager.userCategories.append(.init(newCategoryName))
-            }
-            showEditCategoryView = false
-            PostManager.savePost(post: post)
+            createCategory(named: newCategoryName)
         }
+    }
+
+    func createCategory(named: String) {
+        guard !named.isEmpty else { return }
+        var categories = post.userCategories ?? []
+        categories.append(.init(named))
+        post.userCategories = categories
+
+        if !PostManager.userCategories.contains(where: {
+            $0.name == named
+        }) {
+            PostManager.userCategories.append(.init(named))
+        }
+        showEditCategoryView = false
+        PostManager.savePost(post: post)
     }
 }
 
 struct EditCategoriesView_Previews: PreviewProvider {
     static var previews: some View {
-        EditCategoriesView(post: .constant(
-            Post(title: "\(placeholderTextShort) abcdefg \(placeholderTextShort) 1",
-                 content: placeholderTextLong,
-                 date: .now,
-                 pinned: true,
-                 read: false,
-                 categories: [
-                    "short",
-                    "secondary 3",
-                    "you wanted more?"
-                 ],
-                 userCategories: [
-                    .init(name: "placeholder")
-                 ])),
-                           posts: .constant([]),
-                           showEditCategoryView: .constant(true))
+        NavigationView {
+            EditCategoriesView(post: .constant(
+                Post(title: "\(placeholderTextShort) abcdefg \(placeholderTextShort) 1",
+                     content: placeholderTextLong,
+                     date: .now,
+                     pinned: true,
+                     read: false,
+                     categories: [
+                        "short",
+                        "secondary 3",
+                        "you wanted more?"
+                     ],
+                     userCategories: [
+                        .init(name: "placeholder")
+                     ])),
+                               posts: .constant([]),
+                               showEditCategoryView: .constant(true))
+        }
     }
 }
