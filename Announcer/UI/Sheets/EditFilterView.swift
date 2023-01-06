@@ -22,14 +22,13 @@ struct EditFilterView: View {
         self.posts = posts
         self._searchString = searchString
 
-        var tags: Set<String> = .init()
+        var tags: [String] = []
         for post in posts {
-            for category in post.categories {
-                tags.insert(category)
-            }
+            tags.append(contentsOf: post.categories)
+            tags.append(contentsOf: post.userCategories?.map({ $0.name }) ?? [])
         }
 
-        self.possibleTags = Array(tags).sorted(by: <)
+        self.possibleTags = Array(Set(tags)).sorted(by: <)
     }
 
     var body: some View {

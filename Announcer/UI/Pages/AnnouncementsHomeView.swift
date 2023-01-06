@@ -49,10 +49,6 @@ struct AnnouncementsHomeView: View {
     var body: some View {
         if #available(iOS 16.0, *) {
             content
-                .searchScopes($searchScope) {
-                    Text("All Posts")
-                    Text("Saved Posts")
-                }
                 .sheet(isPresented: $showFilterView) {
                     EditFilterView(posts: posts, searchString: $searchString)
                         .presentationDetents(Set([.medium, .large]))
@@ -79,10 +75,41 @@ struct AnnouncementsHomeView: View {
                 Button {
                     showFilterView.toggle()
                 } label: {
-                    Image(systemName: "line.3.horizontal.decrease.circle")
+                    ZStack {
+                        Image(systemName: "line.3.horizontal.decrease.circle")
+                        if let number = numberOfFilters(pinnedTo: 0..<51), number != 0 {
+                            Image(systemName: "\(number).circle.fill")
+                                .scaleEffect(.init(0.5))
+                                .background {
+                                    Circle()
+                                        .foregroundColor(.white)
+                                        .scaleEffect(.init(0.55))
+                                }
+                                .offset(x: 7, y: 7)
+                        }
+                    }
                 }
             }
         }
+    }
+
+    func numberOfFilters(pinnedTo range: Range<Int>? = nil) -> Int {
+        var tags: [String] = []
+        for post in posts {
+            tags.append(contentsOf: post.categories)
+            tags.append(contentsOf: post.userCategories?.map({ $0.name }) ?? [])
+        }
+
+        let rawCount = Array(Set(tags)).filter({ tag in
+            searchString.contains("[\(tag)]")
+        }).count
+
+        if let range {
+            // pin the number to a specified lowerbound and upperbound
+            return max(range.lowerBound, min(range.upperBound, rawCount))
+        }
+
+        return rawCount
     }
 }
 
