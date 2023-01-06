@@ -12,37 +12,51 @@ struct CategoryScrollView: View {
     var post: Post
 
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
+        if (post.userCategories?.isEmpty ?? true) &&
+            post.categories.isEmpty {
             HStack {
-                if let userCategories = post.userCategories {
-                    ForEach(userCategories.sorted(by: { $0.name < $1.name }), id: \.id) { category in
-                        Text(category.name)
-                            .font(.subheadline)
-                            .padding(.vertical, 2)
-                            .padding(.horizontal, 5)
-                            .background {
-                                Rectangle()
-                                    .foregroundColor(.orange)
-                                    .opacity(0.5)
-                                    .cornerRadius(5)
-                            }
-                    }
-                }
-                ForEach(post.categories.sorted(by: <), id: \.self) { category in
-                    Text(category)
+                Text("No Categories")
+                    .font(.subheadline)
+                Spacer()
+            }
+        } else {
+            ScrollView(.horizontal, showsIndicators: false) {
+                scrollContent
+            }
+            .cornerRadius(5)
+        }
+    }
+
+    var scrollContent: some View {
+        HStack {
+            if let userCategories = post.userCategories {
+                ForEach(userCategories.sorted(by: { $0.name < $1.name }), id: \.id) { category in
+                    Text(category.name)
                         .font(.subheadline)
                         .padding(.vertical, 2)
                         .padding(.horizontal, 5)
                         .background {
                             Rectangle()
-                                .foregroundColor(.accentColor)
+                                .foregroundColor(.orange)
                                 .opacity(0.5)
                                 .cornerRadius(5)
                         }
                 }
             }
+            ForEach(post.categories.sorted(by: <), id: \.self) { category in
+                Text(category)
+                    .font(.subheadline)
+                    .padding(.vertical, 2)
+                    .padding(.horizontal, 5)
+                    .background {
+                        Rectangle()
+                            .foregroundColor(.accentColor)
+                            .opacity(0.5)
+                            .cornerRadius(5)
+                    }
+            }
         }
-        .cornerRadius(5)
+
     }
 }
 
