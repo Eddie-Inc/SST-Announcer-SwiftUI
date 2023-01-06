@@ -42,6 +42,7 @@
 		93436AC72965742B00AD3148 /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		93436AC92965B4D600AD3148 /* PostPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewView.swift; sourceTree = "<group>"; };
 		935EAB2829685917005D2F52 /* RSS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSS.swift; sourceTree = "<group>"; };
+		935EAB3129685EBD005D2F52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9378601A2964625E00FEA668 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		9378601B2964625E00FEA668 /* Using Logger.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Using Logger.md"; sourceTree = "<group>"; };
 		9378601C2964625E00FEA668 /* LogExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogExtension.swift; sourceTree = "<group>"; };
@@ -81,6 +82,7 @@
 		930EA43929645AE1007081C8 /* Announcer */ = {
 			isa = PBXGroup;
 			children = (
+				935EAB3129685EBD005D2F52 /* Info.plist */,
 				937860222964626D00FEA668 /* Utils */,
 				930EA44C29645CD8007081C8 /* Data */,
 				931B2C6A2966C89700BBF397 /* Application */,
@@ -420,6 +422,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Announcer/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Announcer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -449,6 +452,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Announcer/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Announcer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

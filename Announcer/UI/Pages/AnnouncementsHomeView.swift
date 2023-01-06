@@ -100,7 +100,7 @@ struct AnnouncementsHomeView: View {
             tags.append(contentsOf: post.userCategories?.map({ $0.name }) ?? [])
         }
 
-        let rawCount = Array(Set(tags)).filter({ tag in
+        let rawCount = tags.removingDuplicates().filter({ tag in
             searchString.contains("[\(tag)]")
         }).count
 

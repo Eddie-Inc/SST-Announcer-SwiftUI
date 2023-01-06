@@ -28,7 +28,7 @@ struct EditFilterView: View {
             tags.append(contentsOf: post.userCategories?.map({ $0.name }) ?? [])
         }
 
-        self.possibleTags = Array(Set(tags)).sorted(by: <)
+        self.possibleTags = tags.removingDuplicates().sorted(by: <)
     }
 
     var body: some View {

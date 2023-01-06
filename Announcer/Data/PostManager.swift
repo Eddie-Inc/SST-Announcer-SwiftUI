@@ -32,11 +32,9 @@ var defaults = UserDefaults.standard
 
 enum PostManager {
     static func getPosts(range: Range<Int>, completion: (([Post]?, Error?) -> Void)) {
-        // pin the range
-        let newRange = max(0, range.lowerBound)..<min(tempPosts.count, range.upperBound)
-
-        // iterate over the range and remove user categories if they don't exist
-        var posts = Array(tempPosts[newRange])
+        var posts = fetchValues() // Array(tempPosts[newRange])
+        let newRange = max(0, range.lowerBound)..<min(posts.count, range.upperBound)
+        posts = Array(posts[newRange])
         trimDeadUserCategories(from: &posts)
 
         completion(posts, nil)

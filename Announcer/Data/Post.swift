@@ -24,4 +24,48 @@ struct Post: Codable, Equatable {
 
     var categories: [String]
     var userCategories: [UserCategory]? // optional so that it plays well with Codable
+
+    func getLinks() -> [URL] {
+        let items = content.components(separatedBy: "href=\"")
+
+        var links: [URL] = []
+
+        for item in items {
+            var newItem = ""
+
+            for character in item {
+                if character != "\"" {
+                    newItem += String(character)
+                } else {
+                    break
+                }
+            }
+
+            if let url = URL(string: newItem) {
+                links.append(url)
+            }
+        }
+
+        links.removeDuplicates()
+
+        links = links.filter { (link) -> Bool in
+            !link.absoluteString.contains("bp.blogspot.com/")
+        }
+
+        return links
+    }
+}
+
+extension Array where Element: Hashable {
+    func removingDuplicates() -> [Element] {
+        var addedDict = [Element: Bool]()
+
+        return filter {
+            addedDict.updateValue(true, forKey: $0) == nil
+        }
+    }
+
+    mutating func removeDuplicates() {
+        self = self.removingDuplicates()
+    }
 }
