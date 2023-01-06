@@ -62,59 +62,62 @@ let blogURL = "http://studentsblog.sst.edu.sg"
  */
 let rssURL = URL(string: "\(blogURL)/feeds/posts/default")!
 
-/**
- Fetches the blog posts from the blogURL
+extension PostManager {
 
- - returns: An array of `Post` from the blog
- - important: This method will handle errors it receives by returning an empty array
+    /**
+     Fetches the blog posts from the blogURL
 
- This method will fetch the posts from the blog and return it as [Post]
- */
-func fetchValues() -> [Post] {
-    let parser = FeedParser(URL: rssURL)
-    let result = parser.parse()
+     - returns: An array of `Post` from the blog
+     - important: This method will handle errors it receives by returning an empty array
 
-    switch result {
-    case .success(let feed):
-        let feed = feed.atomFeed
+     This method will fetch the posts from the blog and return it as [Post]
+     */
+    static func fetchValues() -> [Post] {
+        let parser = FeedParser(URL: rssURL)
+        let result = parser.parse()
 
-        return convertFromEntries(feed: (feed?.entries)!)
-    default:
-        break
+        switch result {
+        case .success(let feed):
+            let feed = feed.atomFeed
+
+            return convertFromEntries(feed: (feed?.entries)!)
+        default:
+            break
+        }
+
+        return []
     }
 
-    return []
-}
+    /**
+     Converts an array of `AtomFeedEntry` to an array of `Post`
 
-/**
- Converts an array of `AtomFeedEntry` to an array of `Post`
+     - returns: An array of `Post`
 
- - returns: An array of `Post`
+     - parameters:
+     - feed: An array of `AtomFeedEntry`
 
- - parameters:
- - feed: An array of `AtomFeedEntry`
+     This method will convert the array of `AtomFeedEntry` from `FeedKit` to an array of `Post`.
+     */
+    static func convertFromEntries(feed: [AtomFeedEntry]) -> [Post] {
+        var posts = [Post]()
+        for entry in feed {
+            let cat = entry.categories ?? []
 
- This method will convert the array of `AtomFeedEntry` from `FeedKit` to an array of `Post`.
- */
-func convertFromEntries(feed: [AtomFeedEntry]) -> [Post] {
-    var posts = [Post]()
-    for entry in feed {
-        let cat = entry.categories ?? []
+            posts.append(Post(title: entry.title ?? "",
+                              content: (entry.content?.value) ?? "",
+                              date: entry.published ?? Date(),
+                              pinned: false,
+                              read: false,
+                              reminderDate: nil,
+                              categories: {
+                var categories: [String] = []
+                for entry in cat {
+                    categories.append((entry.attributes?.term!)!)
+                }
+                return categories
+            }()))
 
-        posts.append(Post(title: entry.title ?? "",
-                          content: (entry.content?.value) ?? "",
-                          date: entry.published ?? Date(),
-                          pinned: false,
-                          read: false,
-                          reminderDate: nil,
-                          categories: {
-            var categories: [String] = []
-            for entry in cat {
-                categories.append((entry.attributes?.term!)!)
-            }
-            return categories
-        }()))
-
+        }
+        return posts
     }
-    return posts
 }
