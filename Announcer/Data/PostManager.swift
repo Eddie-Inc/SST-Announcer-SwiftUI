@@ -43,23 +43,28 @@ enum PostManager {
     }
 
     static func trimDeadUserCategories(from posts: inout [Post]) {
-        for index in 0..<posts.count {
+        for postIndex in 0..<posts.count {
+            // get the categories, if there are none (is nil or []) then continue
+            guard var newCategories: [UserCategory?] = posts[postIndex].userCategories,
+                  !newCategories.isEmpty
+            else { continue }
+
             // iterate over user categories in each post
-            posts[index].userCategories?.removeAll { userCategory in
-                // if the userCategories does not contain a category with the same ID,
-                // then remove the item. If it does, make sure the name is updated.
-                for index in 0..<userCategories.count {
-                    let savedCategory = userCategories[index]
+            for categoryIndex in 0..<newCategories.count {
+                guard let category = newCategories[categoryIndex] else { return }
 
-                    if savedCategory.id == userCategory.id {
-                        Log.info("Names category: \(savedCategory.name), \(userCategory.name)")
-//                        userCategories[index].name = userCategory.name
-                        return false
-                    }
+                if let userCategory = userCategories.first(where: { $0.id == category.id }) {
+                    // if user categories contains an item with the same ID, then that
+                    // means that the category is valid. Keep the name updated.
+                    newCategories[categoryIndex]?.name = userCategory.name
+                } else {
+                    // if the userCategories does not contain a category with the same ID,
+                    // then remove the item
+                    newCategories[categoryIndex] = nil
                 }
-
-                return true
             }
+
+            posts[postIndex].userCategories = newCategories.compactMap({ $0 })
         }
     }
 
