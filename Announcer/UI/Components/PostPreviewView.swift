@@ -52,6 +52,7 @@ struct PostPreviewView: View {
                     .font(.footnote)
             }
             Text(post.title)
+                .fontWeight(.semibold)
                 .lineLimit(2)
 
             Spacer()
