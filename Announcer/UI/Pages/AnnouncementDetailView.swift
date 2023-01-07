@@ -45,6 +45,10 @@ struct AnnouncementDetailView: View {
         .navigationTitle("Post")
         .navigationBarTitleDisplayMode(.inline)
         .listStyle(.inset)
+        .overlay(alignment: .bottom) {
+            sizeView
+                .opacity(resizePopupOpacity)
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -183,7 +187,7 @@ struct AnnouncementDetailView: View {
     @State var originalFontSize: Double = 0
     @State var isResizing: Bool = false
     // usually synced with isResizing, but lingers a while after isResizing turns false
-    @State var resizePopupOpacity: Float = 0
+    @State var resizePopupOpacity: Double = 0
 
     var sizeIncreaseGesture: some Gesture {
         MagnificationGesture()
@@ -202,10 +206,32 @@ struct AnnouncementDetailView: View {
             }
             .onEnded { _ in
                 isResizing = false
-                withAnimation {
-                    resizePopupOpacity = 0
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    guard !isResizing else { return } // make sure we're not resizing
+                    withAnimation {
+                        resizePopupOpacity = 0
+                    }
                 }
             }
+    }
+
+    var sizeView: some View {
+        HStack {
+            Text("\(((fontSize * 10).rounded())/10)".trimmingCharacters(in: .init(["0", "."])))
+                .font(.subheadline)
+            Button {
+                fontSize = UIFont.labelFontSize
+            } label: {
+                Image(systemName: "equal.circle")
+            }
+        }
+        .padding(.vertical, 2)
+        .padding(.horizontal, 5)
+        .background {
+            Rectangle()
+                .foregroundColor(.init(UIColor.systemGroupedBackground))
+                .cornerRadius(5)
+        }
     }
 }
 
