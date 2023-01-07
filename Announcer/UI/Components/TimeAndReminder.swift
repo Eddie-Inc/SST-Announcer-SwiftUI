@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimeAndReminder: View {
-    @State
+    @Binding
     var post: Post
 
     var body: some View {

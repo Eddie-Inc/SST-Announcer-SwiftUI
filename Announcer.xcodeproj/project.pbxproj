@@ -31,6 +31,7 @@
 		937860262964ED5800FEA668 /* EditFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937860252964ED5800FEA668 /* EditFilterView.swift */; };
 		93AF704629698B1400BF18F8 /* HTMLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704529698B1400BF18F8 /* HTMLString.swift */; };
 		93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */; };
+		93AF704C2969B10B00BF18F8 /* EditReminderDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		937860252964ED5800FEA668 /* EditFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFilterView.swift; sourceTree = "<group>"; };
 		93AF704529698B1400BF18F8 /* HTMLString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLString.swift; sourceTree = "<group>"; };
 		93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewPlaceholderView.swift; sourceTree = "<group>"; };
+		93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReminderDateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 			children = (
 				937860252964ED5800FEA668 /* EditFilterView.swift */,
 				931B2C662966C46900BBF397 /* EditCategoriesView.swift */,
+				93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */,
 			);
 			path = Sheets;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				930EA43B29645AE1007081C8 /* AnnouncerApp.swift in Sources */,
 				93436AC82965742B00AD3148 /* PostManager.swift in Sources */,
 				930EA44B29645CB5007081C8 /* Post.swift in Sources */,
+				93AF704C2969B10B00BF18F8 /* EditReminderDateView.swift in Sources */,
 				93436ACA2965B4D600AD3148 /* PostPreviewView.swift in Sources */,
 				931B2C672966C46900BBF397 /* EditCategoriesView.swift in Sources */,
 				937860262964ED5800FEA668 /* EditFilterView.swift in Sources */,

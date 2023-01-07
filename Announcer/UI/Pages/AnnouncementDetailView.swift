@@ -79,11 +79,11 @@ struct AnnouncementDetailView: View {
         }
         .sheet(isPresented: $showEditReminderDateView) {
             if #available(iOS 16.0, *) {
-                postAndReminder
+                editReminderDate
                     .presentationDetents(Set([.large, .medium]))
             } else {
                 // Fallback on earlier versions
-                postAndReminder
+                editReminderDate
             }
         }
     }
@@ -116,7 +116,7 @@ struct AnnouncementDetailView: View {
 
     var postAndReminder: some View {
         HStack {
-            TimeAndReminder(post: post)
+            TimeAndReminder(post: $post)
                 .font(.subheadline)
             Spacer()
             Button {
@@ -125,7 +125,7 @@ struct AnnouncementDetailView: View {
                 if post.reminderDate == nil {
                     Image(systemName: "calendar.badge.plus")
                 } else {
-                    Image(systemName: "")
+                    Image(systemName: "slider.horizontal.3")
                 }
             }
             .opacity(0.6)
@@ -216,7 +216,8 @@ struct AnnouncementDetailView: View {
 
     var editReminderDate: some View {
         NavigationView {
-            Text("Nothing rn")
+            EditReminderDateView(post: $post,
+                                 showEditReminderDateView: $showEditReminderDateView)
         }
     }
 

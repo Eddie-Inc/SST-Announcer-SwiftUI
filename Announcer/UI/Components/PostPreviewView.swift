@@ -88,7 +88,7 @@ struct PostPreviewView: View {
     var postAndReminder: some View {
         // post and reminder
         HStack {
-            TimeAndReminder(post: post)
+            TimeAndReminder(post: $post)
                 .opacity(post.read ? 0.5 : 0.6)
 
             CategoryScrollView(post: $post)
