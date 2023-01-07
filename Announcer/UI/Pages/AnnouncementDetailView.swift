@@ -8,6 +8,10 @@
 import SwiftUI
 import RichText
 
+enum TextPresentationMode: String {
+    case rendered, raw, htmlStripped
+}
+
 struct AnnouncementDetailView: View {
     @Binding
     var post: Post
@@ -17,6 +21,9 @@ struct AnnouncementDetailView: View {
 
     @State
     var showEditCategoryView: Bool = false
+
+    @AppStorage("textPresentationMode")
+    var textPresentationMode: TextPresentationMode = .rendered
 
     var body: some View {
         List {
@@ -103,10 +110,23 @@ struct AnnouncementDetailView: View {
 
     var bodyText: some View {
         // body text
-        // TODO: Make this compatable with html text
         VStack {
-            RichText(html: post.content)
-            Spacer()
+            switch textPresentationMode {
+            case .rendered:
+                RichText(html: post.content)
+            case .raw:
+                Text(post.content)
+            case .htmlStripped:
+                Text(post.content.stripHTML().trimmingCharacters(in: .whitespacesAndNewlines))
+            }
+        }
+        .contextMenu {
+            Menu("Change Text Rendering Method") {
+                Button("Rendered (Recomended)") { textPresentationMode = .rendered }
+                Button("Raw") { textPresentationMode = .raw }
+                Button("HTML Stripped") { textPresentationMode = .htmlStripped }
+            }
+            Button("Open in Safari") {}
         }
         .overlay(alignment: .topTrailing) {
             Button {

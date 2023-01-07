@@ -7,12 +7,14 @@
 
 import Foundation
 
+private let htmlTagRegex = try? NSRegularExpression(pattern: "<[^>]+>", options: .caseInsensitive)
+
 extension String {
     func stripHTML() -> String {
         // Use a regular expression to strip out HTML tags
-        guard let regex = try? NSRegularExpression(pattern: "<[^>]+>", options: .caseInsensitive) else { return self }
+        guard let htmlTagRegex else { return self }
         let range = NSRange(location: 0, length: self.utf16.count)
-        let strippedHTML = regex.stringByReplacingMatches(in: self, range: range, withTemplate: "")
+        let strippedHTML = htmlTagRegex.stringByReplacingMatches(in: self, range: range, withTemplate: "")
 
         // Decode any remaining HTML entities
         let decodedHTML = strippedHTML.htmlDecoded
