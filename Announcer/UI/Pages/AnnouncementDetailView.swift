@@ -25,6 +25,9 @@ struct AnnouncementDetailView: View {
     @AppStorage("textPresentationMode")
     var textPresentationMode: TextPresentationMode = .rendered
 
+    @AppStorage("fontSize")
+    var fontSize: Int = 17
+
     var body: some View {
         List {
             title
@@ -117,19 +120,42 @@ struct AnnouncementDetailView: View {
                     .placeholder {
                         Text("loading")
                     }
-                    .customCSS("* { font-size: 40px; }")
+                    .customCSS("* { font-size: \(fontSize)px; }")
                     .padding(-10)
             case .raw:
                 Text(post.content)
+                    .font(.system(size: CGFloat(fontSize)))
             case .htmlStripped:
                 Text(post.content.stripHTML().trimmingCharacters(in: .whitespacesAndNewlines))
+                    .font(.system(size: CGFloat(fontSize)))
             }
         }
         .contextMenu {
             Menu("Change Text Rendering Method") {
-                Button("Rendered (Recomended)") { textPresentationMode = .rendered }
-                Button("Raw") { textPresentationMode = .raw }
-                Button("HTML Stripped") { textPresentationMode = .htmlStripped }
+                Button { textPresentationMode = .rendered } label: {
+                    HStack {
+                        if textPresentationMode == .rendered {
+                            Image(systemName: "checkmark")
+                        }
+                        Text("Rendered (Recomended)")
+                    }
+                }
+                Button { textPresentationMode = .raw } label: {
+                    HStack {
+                        if textPresentationMode == .raw {
+                            Image(systemName: "checkmark")
+                        }
+                        Text("Raw")
+                    }
+                }
+                Button { textPresentationMode = .htmlStripped } label: {
+                    HStack {
+                        if textPresentationMode == .htmlStripped {
+                            Image(systemName: "checkmark")
+                        }
+                        Text("HTML Stripped")
+                    }
+                }
             }
             Button("Open in Safari") {}
         }
@@ -159,7 +185,7 @@ struct AnnouncementDetailView_Previews: PreviewProvider {
         NavigationView {
             AnnouncementDetailView(post: .constant(
                 Post(title: "\(placeholderTextShort) abcdefg \(placeholderTextShort) 1",
-                     content: placeholderTextLong,
+                     content: "<p>\(placeholderTextLong)<p>",
                      date: .now,
                      pinned: true,
                      read: false,
