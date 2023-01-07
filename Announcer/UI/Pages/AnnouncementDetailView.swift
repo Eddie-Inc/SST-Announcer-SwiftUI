@@ -113,7 +113,11 @@ struct AnnouncementDetailView: View {
         VStack {
             switch textPresentationMode {
             case .rendered:
-                RichText(html: post.content)
+                RichText(html: post.content.stripHtmlFont())
+                    .placeholder {
+                        Text("loading")
+                    }
+                    .customCSS("* { font-size: 40px; }")
                     .padding(-10)
             case .raw:
                 Text(post.content)

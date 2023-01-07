@@ -8,17 +8,32 @@
 import Foundation
 
 private let htmlTagRegex = try? NSRegularExpression(pattern: "<[^>]+>", options: .caseInsensitive)
+private let fontSizeRegex = try? NSRegularExpression(pattern: "font-size: ?[^;]+;", options: .caseInsensitive)
 
 extension String {
     func stripHTML() -> String {
         // Use a regular expression to strip out HTML tags
         guard let htmlTagRegex else { return self }
         let range = NSRange(location: 0, length: self.utf16.count)
-        let strippedHTML = htmlTagRegex.stringByReplacingMatches(in: self, range: range, withTemplate: "")
+        let htmlStripped = htmlTagRegex.stringByReplacingMatches(in: self,
+                                                                 range: range,
+                                                                 withTemplate: "")
 
         // Decode any remaining HTML entities
-        let decodedHTML = strippedHTML.htmlDecoded
+        let decodedHTML = htmlStripped.htmlDecoded
         return decodedHTML
+    }
+
+    func stripHtmlFont() -> String {
+        // Use a regular expression to strip out HTML tags
+        guard let fontSizeRegex else { return self }
+
+        let range = NSRange(location: 0, length: self.utf16.count)
+        let fontStripped = fontSizeRegex.stringByReplacingMatches(in: self,
+                                                                  range: range,
+                                                                  withTemplate: "")
+
+        return fontStripped
     }
 
     var htmlDecoded: String {
