@@ -42,6 +42,12 @@ struct PostPreviewView: View {
             .swipeActions(edge: .leading, allowsFullSwipe: true) {
                 swipeActions
             }
+            .contextMenu {
+                Button("Pin") {
+                }
+                Button("Mark as Read") {
+                }
+            }
         }
     }
 

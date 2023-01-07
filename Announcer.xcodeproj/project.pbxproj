@@ -30,6 +30,7 @@
 		937860242964637800FEA668 /* AnnouncementDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937860232964637800FEA668 /* AnnouncementDetailView.swift */; };
 		937860262964ED5800FEA668 /* EditFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937860252964ED5800FEA668 /* EditFilterView.swift */; };
 		93AF704629698B1400BF18F8 /* HTMLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704529698B1400BF18F8 /* HTMLString.swift */; };
+		93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		937860232964637800FEA668 /* AnnouncementDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailView.swift; sourceTree = "<group>"; };
 		937860252964ED5800FEA668 /* EditFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFilterView.swift; sourceTree = "<group>"; };
 		93AF704529698B1400BF18F8 /* HTMLString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLString.swift; sourceTree = "<group>"; };
+		93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewPlaceholderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				93436AC92965B4D600AD3148 /* PostPreviewView.swift */,
+				93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */,
 				931B2C682966C67700BBF397 /* CategoryScrollView.swift */,
 				935EAB3229686B5B005D2F52 /* TimeAndReminder.swift */,
 			);
@@ -307,6 +310,7 @@
 				93436ACA2965B4D600AD3148 /* PostPreviewView.swift in Sources */,
 				931B2C672966C46900BBF397 /* EditCategoriesView.swift in Sources */,
 				937860262964ED5800FEA668 /* EditFilterView.swift in Sources */,
+				93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */,
 				935EAB2929685918005D2F52 /* RSS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
