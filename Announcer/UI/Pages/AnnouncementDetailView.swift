@@ -114,6 +114,7 @@ struct AnnouncementDetailView: View {
             switch textPresentationMode {
             case .rendered:
                 RichText(html: post.content)
+                    .padding(-10)
             case .raw:
                 Text(post.content)
             case .htmlStripped:
@@ -137,7 +138,7 @@ struct AnnouncementDetailView: View {
                     .offset(x: 6, y: 3)
             }
         }
-        .padding(.top, 10)
+        .padding(.top, textPresentationMode != .rendered ? 10 : 0)
     }
 
     var addNewCategory: some View {
