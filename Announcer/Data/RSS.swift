@@ -9,36 +9,6 @@ import Foundation
 import FeedKit
 import MarkdownUI
 
-func fetchFeed() {
-//
-//    let feedURL = URL(string: "http://studentsblog.sst.edu.sg/feeds/posts/default")!
-//
-//    let parser = FeedParser(URL: feedURL)
-//
-//    let result = parser.parse()
-//
-//      // Use this func to Async load feed
-//
-//      // Parse asynchronously so as not to block Kai's magic UI
-//    parser.parseAsync(queue: DispatchQueue.global(qos: .userInitiated)) { (result) in
-//        // Let it do its thing, then back to the Main thread
-//        DispatchQueue.main.async {
-//            // ..and update the magical UI
-//        }
-//    }
-
-//    switch result {
-//    case .success(let feed):
-//        // Grab the parsed feed directly as an optional rss, atom or json feed object
-//        let feed = feed.rssFeed // Allows me to use the variable feed
-//        let posts = convertFromEntries(feed: (feed?.entries!)!)
-//
-//    case .failure(let error):
-//        Log.info("error! \(error)")
-//        Log.info("result! \(result)")
-//    }
-}
-
 /**
  Source URL for the Blog
 
@@ -61,7 +31,7 @@ let blogURL = "http://studentsblog.sst.edu.sg"
 
  This URL is the blogURL but with the path of the RSS feed added to the back.
  */
-let rssURL = URL(string: "\(blogURL)/feeds/posts/default")!
+let rssURL = "\(blogURL)/feeds/posts/default"
 
 extension PostManager {
 
@@ -73,10 +43,17 @@ extension PostManager {
 
      This method will fetch the posts from the blog and return it as [Post]
      */
-    static func fetchValues() -> [Post] {
-        let parser = FeedParser(URL: rssURL)
+    static func fetchValues(range: Range<Int>) -> [Post] {
+        // since its 1 indexed, use the lowerbound+1 as the start index
+        let query = "\(rssURL)/?start-index=\(range.lowerBound+1)&max-results=\(range.count)"
+        Log.info("Query: \(query)")
+
+        // turn it into a URL and parse it
+        let url = URL(string: query)!
+        let parser = FeedParser(URL: url)
         let result = parser.parse()
 
+        // if it was successful, then return the conversion.
         switch result {
         case .success(let feed):
             let feed = feed.atomFeed

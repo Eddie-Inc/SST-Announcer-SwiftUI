@@ -7,37 +7,14 @@
 
 import Foundation
 
-private let tempPosts: [Post] = [
-    Post(title: "\(placeholderTextShort) 1",
-         content: placeholderTextLong,
-         date: .now,
-         pinned: true,
-         read: false,
-         categories: ["Random Category"]),
-    Post(title: "\(placeholderTextShort) 2",
-         content: placeholderTextLong,
-         date: .now,
-         pinned: false,
-         read: true,
-         categories: ["Random Category"]),
-    Post(title: "\(placeholderTextShort) 3",
-         content: placeholderTextLong,
-         date: .now,
-         pinned: false,
-         read: false,
-         categories: ["Random Category"])
-]
-
 var defaults = UserDefaults.standard
 
 enum PostManager {
-    static func getPosts(range: Range<Int>, completion: (([Post]?, Error?) -> Void)) {
-        var posts = fetchValues() // Array(tempPosts[newRange])
-        let newRange = max(0, range.lowerBound)..<min(posts.count, range.upperBound)
-        posts = Array(posts[newRange])
+    static func getPosts(range: Range<Int>) -> [Post] {
+        var posts = fetchValues(range: range)
         trimDeadUserCategories(from: &posts)
 
-        completion(posts, nil)
+        return posts
     }
 
     static func trimDeadUserCategories(from posts: inout [Post]) {
@@ -106,3 +83,17 @@ enum PostManager {
 extension String {
     static let userCategories = "userCategories"
 }
+
+let placeholderTextShort = "Lorem ipsum dolor sit amet"
+let placeholderTextLong = """
+Dear Students,
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt \
+ut labore et dolore magna aliqua. Turpis egestas pretium aenean pharetra. Orci eu lobortis.
+
+elementum nibh tellus molestie. Vulputate dignissim suspendisse in est. Vel pharetra vel \
+turpis nunc. Malesuada nunc vel risus commodo. Nisi vitae suscipit tellus mauris.
+
+Posuere orbi leo urna molestie at elementum eu. Urna duis convallis convallis tellus. Urna molestie \
+at elementum eu. Nunc sed blandit libero volutpat.
+"""

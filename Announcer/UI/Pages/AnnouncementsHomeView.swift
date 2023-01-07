@@ -8,19 +8,7 @@
 import SwiftUI
 import MarkdownUI
 
-let placeholderTextShort = "Lorem ipsum dolor sit amet"
-let placeholderTextLong = """
-Dear Students,
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt \
-ut labore et dolore magna aliqua. Turpis egestas pretium aenean pharetra. Orci eu lobortis.
-
-elementum nibh tellus molestie. Vulputate dignissim suspendisse in est. Vel pharetra vel \
-turpis nunc. Malesuada nunc vel risus commodo. Nisi vitae suscipit tellus mauris.
-
-Posuere orbi leo urna molestie at elementum eu. Urna duis convallis convallis tellus. Urna molestie \
-at elementum eu. Nunc sed blandit libero volutpat.
-"""
+let loadQueue = DispatchQueue.init(label: "sg.edu.sst.panziyue.Announcer.getPosts")
 
 struct AnnouncementsHomeView: View {
     @State
@@ -35,17 +23,8 @@ struct AnnouncementsHomeView: View {
     @State
     var searchScope: String = ""
 
-    init() {
-        PostManager.getPosts(range: 0..<10) { posts, error in
-            if let error {
-                Log.info("Error: \(error.localizedDescription)")
-                return
-            }
-            if let posts {
-                _posts = State(initialValue: posts)
-            }
-        }
-    }
+    @State
+    var isLoading: Bool = false
 
     var body: some View {
         if #available(iOS 16.0, *) {
@@ -64,10 +43,27 @@ struct AnnouncementsHomeView: View {
 
     var content: some View {
         List {
-            ForEach($posts, id: \.title) { $post in
+            ForEach($posts.filter({
+                searchString.isEmpty ||
+                $0.wrappedValue.title.lowercased().contains(formattedSearchString()) ||
+                $0.wrappedValue.content.lowercased().contains(formattedSearchString())
+            }), id: \.wrappedValue.title) { $post in
                 PostPreviewView(post: $post, posts: $posts)
             }
+            if searchString.isEmpty {
+                GeometryReader { proxy in
+                    HStack(alignment: .center) {
+                        Spacer()
+                        Text("Loading...")
+                        Spacer()
+                    }
+                    .onChange(of: proxy.frame(in: .named("scroll"))) { _ in
+                        loadNextPosts()
+                    }
+                }
+            }
         }
+        .coordinateSpace(name: "scroll")
         .listStyle(.inset)
         .searchable(text: $searchString)
         .navigationTitle("Announcements")
@@ -92,6 +88,14 @@ struct AnnouncementsHomeView: View {
                 }
             }
         }
+        .onAppear {
+            loadNextPosts()
+        }
+    }
+
+    func formattedSearchString() -> String {
+        // get rid of filters in the search bar
+        searchString.lowercased()
     }
 
     func numberOfFilters(pinnedTo range: Range<Int>? = nil) -> Int {
@@ -111,6 +115,21 @@ struct AnnouncementsHomeView: View {
         }
 
         return rawCount
+    }
+
+    func loadNextPosts(count: Int = 10) {
+        loadQueue.async {
+            guard !isLoading else { return }
+
+            isLoading = true
+            let range = self.posts.count..<self.posts.count + count
+            self.posts.append(contentsOf: PostManager.getPosts(range: range))
+
+            // implement some debounce to prevent too many loads
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                isLoading = false
+            }
+        }
     }
 }
 

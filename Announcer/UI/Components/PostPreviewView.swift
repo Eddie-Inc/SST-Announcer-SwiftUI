@@ -53,6 +53,7 @@ struct PostPreviewView: View {
                     .font(.footnote)
             }
             Text(post.title)
+                .fontWeight(.semibold)
                 .lineLimit(2)
 
             Spacer()
@@ -83,18 +84,11 @@ struct PostPreviewView: View {
     var postAndReminder: some View {
         // post and reminder
         HStack {
-            HStack {
-                Image(systemName: "timer")
-                Text("03 Jan 2023")
-                    .padding(.trailing, 10)
-
-                Image(systemName: "alarm")
-                Text("8h")
-                    .padding(.trailing, 10)
-            }
-            .opacity(post.read ? 0.5 : 0.6)
+            TimeAndReminder(post: post)
+                .opacity(post.read ? 0.5 : 0.6)
 
             CategoryScrollView(post: $post)
+                .font(.footnote)
         }
         .font(.footnote)
     }
