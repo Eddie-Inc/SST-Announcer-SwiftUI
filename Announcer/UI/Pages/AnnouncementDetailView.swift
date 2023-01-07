@@ -26,7 +26,7 @@ struct AnnouncementDetailView: View {
     var textPresentationMode: TextPresentationMode = .rendered
 
     @AppStorage("fontSize")
-    var fontSize: Int = 17
+    var fontSize: Double = 17
 
     var body: some View {
         List {
@@ -130,6 +130,7 @@ struct AnnouncementDetailView: View {
                     .font(.system(size: CGFloat(fontSize)))
             }
         }
+        .gesture(sizeIncreaseGesture)
         .contextMenu {
             Menu("Change Text Rendering Method") {
                 Button { textPresentationMode = .rendered } label: {
@@ -177,6 +178,34 @@ struct AnnouncementDetailView: View {
                                posts: $posts,
                                showEditCategoryView: $showEditCategoryView)
         }
+    }
+
+    @State var originalFontSize: Double = 0
+    @State var isResizing: Bool = false
+    // usually synced with isResizing, but lingers a while after isResizing turns false
+    @State var resizePopupOpacity: Float = 0
+
+    var sizeIncreaseGesture: some Gesture {
+        MagnificationGesture()
+            .onChanged { value in
+                if !isResizing {
+                    // if it is the start of the gesture, set the original font size
+                    originalFontSize = fontSize
+                    isResizing = true
+                    resizePopupOpacity = 1
+                    return
+                }
+
+                // if not, then update the font size according to the translation
+                Log.info("Value: \(value)")
+                fontSize = originalFontSize * value
+            }
+            .onEnded { _ in
+                isResizing = false
+                withAnimation {
+                    resizePopupOpacity = 0
+                }
+            }
     }
 }
 
