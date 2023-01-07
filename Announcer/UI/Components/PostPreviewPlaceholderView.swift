@@ -7,7 +7,15 @@
 
 import SwiftUI
 
+private var textLengths: [Int] = [21, 10, 29]
+
 struct PostPreviewPlaceholderView: View {
+    @State
+    var numberOfCategories: Int = .random(in: 0..<3)
+
+    @State
+    var numberOfUserCategories: Int = .random(in: 0..<2)
+
     var body: some View {
         VStack(alignment: .leading) {
             title
@@ -45,14 +53,16 @@ struct PostPreviewPlaceholderView: View {
                 .redacted(reason: .placeholder)
                 .padding(.trailing, 5)
 
-            Text(verbatim: .init(repeating: " ", count: 20))
-                .font(.subheadline)
-                .background {
-                    Rectangle()
-                        .foregroundColor(.accentColor)
-                        .opacity(0.5)
-                        .cornerRadius(5)
-                }
+            ForEach(0..<(numberOfUserCategories + numberOfCategories), id: \.self) { index in
+                Text(verbatim: .init(repeating: " ", count: textLengths[index]))
+                    .font(.subheadline)
+                    .background {
+                        Rectangle()
+                            .foregroundColor(index < numberOfUserCategories ? .orange : .accentColor)
+                            .opacity(0.5)
+                            .cornerRadius(5)
+                    }
+            }
         }
         .font(.footnote)
     }

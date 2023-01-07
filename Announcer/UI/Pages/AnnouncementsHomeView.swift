@@ -51,15 +51,16 @@ struct AnnouncementsHomeView: View {
                 PostPreviewView(post: $post, posts: $posts)
             }
             if searchString.isEmpty {
-                GeometryReader { proxy in
-                    HStack(alignment: .center) {
-                        Spacer()
-                        Text("Loading...")
-                        Spacer()
-                    }
-                    .onChange(of: proxy.frame(in: .named("scroll"))) { _ in
-                        loadNextPosts()
-                    }
+                ForEach(0..<3) { index in
+                    PostPreviewPlaceholderView()
+                        .overlay { GeometryReader { proxy in
+                            Color.white.opacity(0.001)
+                                .onChange(of: proxy.frame(in: .named("scroll"))) { _ in
+                                    if index == 0 {
+                                        loadNextPosts()
+                                    }
+                                }
+                        }}
                 }
             }
         }
