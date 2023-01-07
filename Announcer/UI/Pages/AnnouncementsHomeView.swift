@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MarkdownUI
 
 let placeholderTextShort = "Lorem ipsum dolor sit amet"
 let placeholderTextLong = """

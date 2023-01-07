@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		881544B529686C72001BAFA4 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 881544B429686C72001BAFA4 /* MarkdownUI */; };
+		881544BB29691ABF001BAFA4 /* RichText in Frameworks */ = {isa = PBXBuildFile; productRef = 881544BA29691ABF001BAFA4 /* RichText */; };
 		930EA43B29645AE1007081C8 /* AnnouncerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930EA43A29645AE1007081C8 /* AnnouncerApp.swift */; };
 		930EA43D29645AE1007081C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930EA43C29645AE1007081C8 /* ContentView.swift */; };
 		930EA43F29645AE2007081C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930EA43E29645AE2007081C8 /* Assets.xcassets */; };
@@ -57,6 +59,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				935EAB2C29685987005D2F52 /* FeedKit in Frameworks */,
+				881544BB29691ABF001BAFA4 /* RichText in Frameworks */,
+				881544B529686C72001BAFA4 /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +200,8 @@
 			name = Announcer;
 			packageProductDependencies = (
 				935EAB2B29685987005D2F52 /* FeedKit */,
+				881544B429686C72001BAFA4 /* MarkdownUI */,
+				881544BA29691ABF001BAFA4 /* RichText */,
 			);
 			productName = Announcer;
 			productReference = 930EA43729645AE1007081C8 /* Announcer.app */;
@@ -227,6 +233,8 @@
 			mainGroup = 930EA42E29645AE1007081C8;
 			packageReferences = (
 				935EAB2A29685987005D2F52 /* XCRemoteSwiftPackageReference "FeedKit" */,
+				881544B329686C72001BAFA4 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
+				881544B929691ABF001BAFA4 /* XCRemoteSwiftPackageReference "RichText" */,
 			);
 			productRefGroup = 930EA43829645AE1007081C8 /* Products */;
 			projectDirPath = "";
@@ -496,6 +504,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		881544B329686C72001BAFA4 /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/MarkdownUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		881544B929691ABF001BAFA4 /* XCRemoteSwiftPackageReference "RichText" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/NuPlay/RichText.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		935EAB2A29685987005D2F52 /* XCRemoteSwiftPackageReference "FeedKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nmdias/FeedKit.git";
@@ -507,6 +531,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		881544B429686C72001BAFA4 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 881544B329686C72001BAFA4 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
+			productName = MarkdownUI;
+		};
+		881544BA29691ABF001BAFA4 /* RichText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 881544B929691ABF001BAFA4 /* XCRemoteSwiftPackageReference "RichText" */;
+			productName = RichText;
+		};
 		935EAB2B29685987005D2F52 /* FeedKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 935EAB2A29685987005D2F52 /* XCRemoteSwiftPackageReference "FeedKit" */;

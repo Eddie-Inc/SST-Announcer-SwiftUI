@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MarkdownUI
 
 /**
  Contains attributes for each post such as date, content and title

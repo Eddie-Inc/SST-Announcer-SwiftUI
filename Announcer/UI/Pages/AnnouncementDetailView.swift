@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RichText
 
 struct AnnouncementDetailView: View {
     @Binding
@@ -116,7 +117,7 @@ struct AnnouncementDetailView: View {
         // body text
         // TODO: Make this compatable with html text
         VStack {
-            Text(post.content)
+            RichText(html: post.content)
             Spacer()
         }
         .overlay(alignment: .topTrailing) {
