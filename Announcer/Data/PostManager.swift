@@ -97,3 +97,34 @@ turpis nunc. Malesuada nunc vel risus commodo. Nisi vitae suscipit tellus mauris
 Posuere orbi leo urna molestie at elementum eu. Urna duis convallis convallis tellus. Urna molestie \
 at elementum eu. Nunc sed blandit libero volutpat.
 """
+
+func getLinksFromPost(post: Post) -> [URL] {
+    // separate each link
+    let items = post.content.components(separatedBy: "href=\"")
+    // empty array for each link
+    var links: [URL] = []
+    // get list of links
+    for item in items {
+        var newItem = ""
+
+        for character in item {
+            if character != "\"" {
+                newItem += String(character)
+            } else {
+                break
+            }
+        }
+
+        if let url = URL(string: newItem) {
+            links.append(url)
+        }
+    }
+    // remove duplicate links from the array
+    links.removeDuplicates()
+
+    links = links.filter { (link) -> Bool in
+        !link.absoluteString.contains("bp.blogspot.com/")
+    }
+
+    return links
+}

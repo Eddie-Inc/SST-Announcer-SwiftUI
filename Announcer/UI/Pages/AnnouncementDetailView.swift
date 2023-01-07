@@ -134,8 +134,9 @@ struct AnnouncementDetailView: View {
 
     var links: some View {
         // if it has links
+        getLinksFromPost(post: post)
         VStack(alignment: .leading) {
-            Text("Links")
+            Link(links, destination: links as URL)
                 .bold()
             ForEach(["https://www.youtube.com", "https://www.google.com"], id: \.self) { url in
                 Text(url)
@@ -143,6 +144,7 @@ struct AnnouncementDetailView: View {
                     .foregroundColor(.accentColor)
             }
         }
+
     }
 
     var bodyText: some View {
