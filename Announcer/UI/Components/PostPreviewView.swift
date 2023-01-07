@@ -72,13 +72,11 @@ struct PostPreviewView: View {
 
     var textPreview: some View {
         ZStack {
-            // preview
-            Text(post.content.replacingOccurrences(of: "\n\n", with: "\n"))
+            Text(post.content.stripHTML().trimmingCharacters(in: .whitespacesAndNewlines))
                 .opacity(post.read ? 0.3 : 0.7)
                 .lineLimit(3)
                 .padding(.bottom, 0.5)
         }
-//        .frame(height: 10)
     }
 
     var postAndReminder: some View {

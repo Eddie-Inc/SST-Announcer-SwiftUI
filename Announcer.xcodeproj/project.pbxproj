@@ -29,6 +29,7 @@
 		937860212964625E00FEA668 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9378601D2964625E00FEA668 /* Formatter.swift */; };
 		937860242964637800FEA668 /* AnnouncementDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937860232964637800FEA668 /* AnnouncementDetailView.swift */; };
 		937860262964ED5800FEA668 /* EditFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937860252964ED5800FEA668 /* EditFilterView.swift */; };
+		93AF704629698B1400BF18F8 /* HTMLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704529698B1400BF18F8 /* HTMLString.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		9378601D2964625E00FEA668 /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		937860232964637800FEA668 /* AnnouncementDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailView.swift; sourceTree = "<group>"; };
 		937860252964ED5800FEA668 /* EditFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFilterView.swift; sourceTree = "<group>"; };
+		93AF704529698B1400BF18F8 /* HTMLString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLString.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				937860192964625E00FEA668 /* Log */,
+				93AF704529698B1400BF18F8 /* HTMLString.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				937860212964625E00FEA668 /* Formatter.swift in Sources */,
 				9378601E2964625E00FEA668 /* Log.swift in Sources */,
 				931B2C692966C67700BBF397 /* CategoryScrollView.swift in Sources */,
+				93AF704629698B1400BF18F8 /* HTMLString.swift in Sources */,
 				935EAB3329686B5B005D2F52 /* TimeAndReminder.swift in Sources */,
 				930EA43B29645AE1007081C8 /* AnnouncerApp.swift in Sources */,
 				93436AC82965742B00AD3148 /* PostManager.swift in Sources */,
