@@ -201,7 +201,6 @@ struct AnnouncementDetailView: View {
                 }
 
                 // if not, then update the font size according to the translation
-                Log.info("Value: \(value)")
                 fontSize = originalFontSize * value
             }
             .onEnded { _ in
@@ -220,7 +219,9 @@ struct AnnouncementDetailView: View {
             Text("\(((fontSize * 10).rounded())/10)".trimmingCharacters(in: .init(["0", "."])))
                 .font(.subheadline)
             Button {
-                fontSize = UIFont.labelFontSize
+                withAnimation {
+                    fontSize = UIFont.labelFontSize
+                }
             } label: {
                 Image(systemName: "equal.circle")
             }
@@ -232,6 +233,7 @@ struct AnnouncementDetailView: View {
                 .foregroundColor(.init(UIColor.systemGroupedBackground))
                 .cornerRadius(5)
         }
+        .padding(.bottom, 10)
     }
 }
 
