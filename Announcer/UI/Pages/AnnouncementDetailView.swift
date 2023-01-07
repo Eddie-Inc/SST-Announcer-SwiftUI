@@ -12,6 +12,8 @@ enum TextPresentationMode: String {
     case rendered, raw, htmlStripped
 }
 
+let noZeroAndPoint: CharacterSet = .init(["0", "."])
+
 struct AnnouncementDetailView: View {
     @Binding
     var post: Post
@@ -21,6 +23,9 @@ struct AnnouncementDetailView: View {
 
     @State
     var showEditCategoryView: Bool = false
+
+    @State
+    var showEditReminderDateView: Bool = false
 
     @AppStorage("textPresentationMode")
     var textPresentationMode: TextPresentationMode = .rendered
@@ -35,9 +40,7 @@ struct AnnouncementDetailView: View {
             categories
                 .listRowSeparator(.hidden, edges: .top)
 
-            TimeAndReminder(post: post)
-                .font(.subheadline)
-                .offset(y: -3)
+            postAndReminder
                 .listRowSeparator(.hidden, edges: .top)
 
             bodyText
@@ -74,6 +77,15 @@ struct AnnouncementDetailView: View {
                 addNewCategory
             }
         }
+        .sheet(isPresented: $showEditReminderDateView) {
+            if #available(iOS 16.0, *) {
+                postAndReminder
+                    .presentationDetents(Set([.large, .medium]))
+            } else {
+                // Fallback on earlier versions
+                postAndReminder
+            }
+        }
     }
 
     var title: some View {
@@ -99,6 +111,24 @@ struct AnnouncementDetailView: View {
                 Image(systemName: "slider.horizontal.3")
                     .opacity(0.6)
             }
+        }
+    }
+
+    var postAndReminder: some View {
+        HStack {
+            TimeAndReminder(post: post)
+                .font(.subheadline)
+            Spacer()
+            Button {
+                showEditReminderDateView.toggle()
+            } label: {
+                if post.reminderDate == nil {
+                    Image(systemName: "calendar.badge.plus")
+                } else {
+                    Image(systemName: "")
+                }
+            }
+            .opacity(0.6)
         }
     }
 
@@ -184,6 +214,12 @@ struct AnnouncementDetailView: View {
         }
     }
 
+    var editReminderDate: some View {
+        NavigationView {
+            Text("Nothing rn")
+        }
+    }
+
     @State var originalFontSize: Double = 0
     @State var isResizing: Bool = false
     // usually synced with isResizing, but lingers a while after isResizing turns false
@@ -216,8 +252,9 @@ struct AnnouncementDetailView: View {
 
     var sizeView: some View {
         HStack {
-            Text("\(((fontSize * 10).rounded())/10)".trimmingCharacters(in: .init(["0", "."])))
+            Text(cleanFontSize())
                 .font(.subheadline)
+
             Button {
                 withAnimation {
                     fontSize = UIFont.labelFontSize
@@ -234,6 +271,11 @@ struct AnnouncementDetailView: View {
                 .cornerRadius(5)
         }
         .padding(.bottom, 10)
+    }
+
+    func cleanFontSize() -> String {
+        let rounded = ((fontSize * 10).rounded())/10
+        return "\(rounded)".trimmingCharacters(in: noZeroAndPoint)
     }
 }
 
