@@ -14,9 +14,25 @@ extension AnnouncementDetailView {
             Text(post.title)
                 .bold()
                 .multilineTextAlignment(.leading)
+            Spacer()
         }
         .font(.title2)
         .padding(.bottom, 8)
+        .overlay(alignment: .bottomTrailing) {
+            Button {
+                // open in safari
+                isLoadingSafariView = true
+                loadQueue.async {
+                    safariViewURL = post.getBlogURL()
+                    isLoadingSafariView = false
+                    showSafariView = true
+                }
+            } label: {
+                Image(systemName: "arrow.up.forward.circle")
+                    .opacity(0.6)
+                    .offset(x: 0, y: -10)
+            }
+        }
     }
 
     var categories: some View {

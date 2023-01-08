@@ -62,21 +62,6 @@ extension AnnouncementDetailView {
             }
             Button("Open in Safari") {}
         }
-        .overlay(alignment: .topTrailing) {
-            Button {
-                // open in safari
-                isLoadingSafariView = true
-                loadQueue.async {
-                    safariViewURL = post.getBlogURL()
-                    isLoadingSafariView = false
-                    showSafariView = true
-                }
-            } label: {
-                Image(systemName: "arrow.up.forward.circle")
-                    .opacity(0.6)
-                    .offset(x: 6, y: 3)
-            }
-        }
         .padding(.top, textPresentationMode != .rendered ? 10 : 0)
     }
 }
