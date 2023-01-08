@@ -75,6 +75,9 @@ extension AnnouncementDetailView {
 
     var links: some View {
         VStack(alignment: .leading) {
+            Text("Links")
+                .bold()
+                .padding(.bottom, 5)
             ForEach(post.getLinks(), id: \.absoluteString) { url in
                 Text(url.description)
                     .underline()

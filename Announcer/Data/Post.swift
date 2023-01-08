@@ -57,6 +57,16 @@ struct Post: Codable, Equatable {
         return links
     }
 
+    // Examples:
+    // - Title:    "Release of 2022 GCE O-Level Examination Results"
+    // - Expected: "2023/01/release-of-2022-gce-o-level-examination.html"
+    //
+    // - Title:    "[S2/S3/S4] SLS Account - LOG-IN & Profile Update EXERCISE"
+    // - Expected: "2023/01/s2s3s4-sls-account-log-in-profile.html"
+    //
+    // - Title:    "[S1] SLS Account - Log-in Exercise"
+    // - Expected: "2023/01/s1-sls-account-log-in-exercise.html"
+    //
     func getBlogURL() -> URL {
         // we need to get the date to fetch the exact blog post
         let dateFormatter = DateFormatter()
@@ -67,18 +77,19 @@ struct Post: Codable, Equatable {
 
         // gets and formats the title of the post as we need that to get the link
         let formatted = title.filter { (char) -> Bool in
-            char.isLetter || char.isNumber || char.isWhitespace
+            char.isLetter || char.isNumber || char.isWhitespace || char == "-"
         }.lowercased()
         let split = formatted.split(separator: " ")
 
         for item in split {
-            if returnLink.count + item.count < 40 {
+            guard !item.isEmpty && item != "-" else { continue } // reject single dashes
+            if returnLink.count + item.count < 40 { // limit number of characters
                 returnLink += item + "-"
             } else {
                 break
             }
         }
-        returnLink.removeLast()
+        returnLink.removeLast() // remove the last dash
 
         // generates the link of the blogpost
         returnLink = blogURL + dateFormatter.string(from: date) + returnLink + ".html"
@@ -96,9 +107,11 @@ struct Post: Codable, Equatable {
         }()
 
         if isURLValid {
+            Log.info("URL is valid: \(returnURL.description)")
             return returnURL
         }
 
+        Log.info("URL is invalid: \(returnURL.description). Defaulting to \(blogURL)")
         return URL(string: blogURL)!
     }
 }
