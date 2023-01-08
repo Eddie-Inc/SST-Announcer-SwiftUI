@@ -66,14 +66,14 @@ struct Post: Codable, Equatable {
         var returnLink = ""
 
         // gets and formats the title of the post as we need that to get the link
-        let formatted = title.filter { (a) -> Bool in
-            a.isLetter || a.isNumber || a.isWhitespace
+        let formatted = title.filter { (char) -> Bool in
+            char.isLetter || char.isNumber || char.isWhitespace
         }.lowercased()
         let split = formatted.split(separator: " ")
 
-        for i in split {
-            if returnLink.count + i.count < 40 {
-                returnLink += i + "-"
+        for item in split {
+            if returnLink.count + item.count < 40 {
+                returnLink += item + "-"
             } else {
                 break
             }

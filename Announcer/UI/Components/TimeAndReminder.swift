@@ -17,7 +17,7 @@ struct TimeAndReminder: View {
             Text(formattedDate())
                 .padding(.trailing, 10)
 
-            if let reminderDate = post.reminderDate {
+            if post.reminderDate != nil {
                 Image(systemName: "alarm")
                 Text(formattedReminderTime())
             }

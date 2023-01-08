@@ -14,6 +14,7 @@ enum TextPresentationMode: String {
 
 let noZeroAndPoint: CharacterSet = .init(["0", "."])
 
+// swiftlint:disable:next type_body_length
 struct AnnouncementDetailView: View {
 
     @Binding
@@ -39,6 +40,9 @@ struct AnnouncementDetailView: View {
 
     @State
     var showSafariView: Bool = false
+
+    @State
+    var isLoadingSafariView: Bool = false
 
     var body: some View {
         List {
@@ -153,10 +157,14 @@ struct AnnouncementDetailView: View {
     var links: some View {
         VStack(alignment: .leading) {
             ForEach(post.getLinks(), id: \.absoluteString) { url in
-                Button(url.description) {
-                    safariViewURL = url
-                    showSafariView = true
-                }
+                Text(url.description)
+                    .underline()
+                    .foregroundColor(.accentColor)
+                    .lineLimit(1)
+                    .onTapGesture {
+                        safariViewURL = url
+                        showSafariView = true
+                    }
             }
         }
     }
@@ -213,8 +221,12 @@ struct AnnouncementDetailView: View {
         .overlay(alignment: .topTrailing) {
             Button {
                 // open in safari
-                safariViewURL = post.getBlogURL()
-                showSafariView = true
+                isLoadingSafariView = true
+                loadQueue.async {
+                    safariViewURL = post.getBlogURL()
+                    isLoadingSafariView = false
+                    showSafariView = true
+                }
             } label: {
                 Image(systemName: "arrow.up.forward.circle")
                     .opacity(0.6)
