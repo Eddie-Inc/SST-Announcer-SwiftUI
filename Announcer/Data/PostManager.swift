@@ -10,6 +10,28 @@ import Foundation
 var defaults = UserDefaults.standard
 
 enum PostManager {
+    static var readPosts: Set<String> {
+        get {
+            if let posts = _readPosts {
+                return posts
+            } else if let defaultsPosts = defaults.stringArray(forKey: .readPosts) {
+                _readPosts = .init(defaultsPosts)
+                return .init(defaultsPosts)
+            }
+
+            return .init()
+        }
+        set {
+            _readPosts = newValue
+            loadQueue.async {
+                // TODO: Reduce the frequency of this.
+                // As the set gets larger, this will become a more and more expensive task to do.
+                defaults.set(Array(readPosts), forKey: .readPosts)
+            }
+        }
+    }
+    private static var _readPosts: Set<String>?
+
     static func getPosts(range: Range<Int>) -> [Post] {
         var posts = fetchValues(range: range)
         trimDeadUserCategories(from: &posts)
@@ -81,6 +103,7 @@ enum PostManager {
 
 extension String {
     static let userCategories = "userCategories"
+    static let readPosts = "readPosts"
 }
 
 let placeholderTextShort = "Lorem ipsum dolor sit amet"

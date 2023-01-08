@@ -20,7 +20,15 @@ struct Post: Codable, Equatable {
     var date: Date
 
     var pinned: Bool
-    var read: Bool
+    var read: Bool {
+        didSet {
+            if read {
+                PostManager.readPosts.insert(title)
+            } else {
+                PostManager.readPosts.remove(title)
+            }
+        }
+    }
     var reminderDate: Date?
 
     var categories: [String]

@@ -79,21 +79,23 @@ extension PostManager {
     static func convertFromEntries(feed: [AtomFeedEntry]) -> [Post] {
         var posts = [Post]()
         for entry in feed {
-            let cat = entry.categories ?? []
 
-            posts.append(Post(title: entry.title ?? "",
-                              content: (entry.content?.value) ?? "",
-                              date: entry.published ?? Date(),
+            let title = entry.title ?? ""
+            let content = (entry.content?.value) ?? ""
+            let date = entry.published ?? .now
+            let read = PostManager.readPosts.contains(title)
+
+            let categories = entry.categories?.compactMap({ entry in
+                entry.attributes?.term
+            }) ?? []
+
+            posts.append(Post(title: title,
+                              content: content,
+                              date: date,
                               pinned: false,
-                              read: false,
+                              read: read,
                               reminderDate: nil,
-                              categories: {
-                var categories: [String] = []
-                for entry in cat {
-                    categories.append((entry.attributes?.term!)!)
-                }
-                return categories
-            }()))
+                              categories: categories))
         }
         return posts
     }
