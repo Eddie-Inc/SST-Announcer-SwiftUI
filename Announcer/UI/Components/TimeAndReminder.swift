@@ -64,7 +64,7 @@ extension Date {
 
 extension TimeInterval {
     func idealUnit() -> DateUnit {
-        if 0 <= self, self < DateUnit.hour.value { // 0s to 1 hour is specified in minutes
+        if self > 0, self < DateUnit.hour.value { // 0s to 1 hour is specified in minutes
             return .min
         } else if DateUnit.hour.value <= self, self < DateUnit.day.value { // 1 hour to 1 day is specified in hours
             return .hour

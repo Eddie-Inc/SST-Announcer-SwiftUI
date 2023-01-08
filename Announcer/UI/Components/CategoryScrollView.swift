@@ -55,7 +55,6 @@ struct CategoryScrollView: View {
                     }
             }
         }
-
     }
 }
 

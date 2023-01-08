@@ -8,7 +8,7 @@
 import SwiftUI
 import MarkdownUI
 
-let loadQueue = DispatchQueue.init(label: "sg.edu.sst.panziyue.Announcer.getPosts")
+let loadQueue: DispatchQueue = .init(label: "sg.edu.sst.panziyue.Announcer.getPosts")
 
 struct AnnouncementsHomeView: View {
     @State

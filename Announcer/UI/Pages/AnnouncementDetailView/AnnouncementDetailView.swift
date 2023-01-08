@@ -62,7 +62,6 @@ struct AnnouncementDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-
                 } label: {
                     Image(systemName: "square.and.arrow.up")
                 }

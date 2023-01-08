@@ -94,7 +94,6 @@ extension PostManager {
                 }
                 return categories
             }()))
-
         }
         return posts
     }

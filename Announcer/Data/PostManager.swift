@@ -45,7 +45,6 @@ enum PostManager {
 
     /// Saves a post to localstorage. Effectively a form of cache.
     static func savePost(post: Post) {
-
     }
 
     static var userCategories: [UserCategory] {
