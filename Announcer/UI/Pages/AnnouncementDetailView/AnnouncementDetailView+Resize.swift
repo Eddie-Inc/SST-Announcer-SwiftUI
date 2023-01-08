@@ -61,3 +61,24 @@ extension AnnouncementDetailView {
         return "\(rounded)".trimmingCharacters(in: noZeroAndPoint)
     }
 }
+
+struct AnnouncementDetailViewResize_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            AnnouncementDetailView(post: .constant(
+                Post(title: "\(placeholderTextShort) abcdefg \(placeholderTextShort) 1",
+                     content: "<p>\(placeholderTextLong)<p>",
+                     date: .now,
+                     pinned: true,
+                     read: false,
+                     categories: [
+                        "short",
+                        "secondary 3",
+                        "you wanted more?"
+                     ],
+                     userCategories: [
+                        .init("placeholder")
+                     ])), posts: .constant([]))
+        }
+    }
+}

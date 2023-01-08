@@ -40,13 +40,11 @@ struct AnnouncementDetailView: View {
 
     var body: some View {
         List {
-            title
-
-            categories
-                .listRowSeparator(.hidden, edges: .top)
-
-            postAndReminder
-                .listRowSeparator(.hidden, edges: .top)
+            VStack(alignment: .leading) {
+                title
+                categories
+                postAndReminder
+            }
 
             if !post.getLinks().isEmpty {
                 links

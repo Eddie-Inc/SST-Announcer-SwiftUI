@@ -16,7 +16,7 @@ extension AnnouncementDetailView {
                 .multilineTextAlignment(.leading)
         }
         .font(.title2)
-        .padding(.bottom, -5)
+        .padding(.bottom, 8)
     }
 
     var categories: some View {
@@ -31,7 +31,9 @@ extension AnnouncementDetailView {
                 Image(systemName: "slider.horizontal.3")
                     .opacity(0.6)
             }
+            .buttonStyle(.plain)
         }
+        .padding(.bottom, 4)
     }
 
     var postAndReminder: some View {
@@ -48,6 +50,7 @@ extension AnnouncementDetailView {
                     Image(systemName: "slider.horizontal.3")
                 }
             }
+            .buttonStyle(.plain)
             .opacity(0.6)
         }
     }
@@ -79,6 +82,27 @@ extension AnnouncementDetailView {
         NavigationView {
             EditReminderDateView(post: $post,
                                  showEditReminderDateView: $showEditReminderDateView)
+        }
+    }
+}
+
+struct AnnouncementDetailViewComponents_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            AnnouncementDetailView(post: .constant(
+                Post(title: "\(placeholderTextShort) abcdefg \(placeholderTextShort) 1",
+                     content: "<p>\(placeholderTextLong)<p>",
+                     date: .now,
+                     pinned: true,
+                     read: false,
+                     categories: [
+                        "short",
+                        "secondary 3",
+                        "you wanted more?"
+                     ],
+                     userCategories: [
+                        .init("placeholder")
+                     ])), posts: .constant([]))
         }
     }
 }
