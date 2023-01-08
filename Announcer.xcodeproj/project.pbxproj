@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		881544B529686C72001BAFA4 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 881544B429686C72001BAFA4 /* MarkdownUI */; };
 		881544BB29691ABF001BAFA4 /* RichText in Frameworks */ = {isa = PBXBuildFile; productRef = 881544BA29691ABF001BAFA4 /* RichText */; };
+		8829F5AA296AE65E00BA63A8 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5A9296AE65E00BA63A8 /* WidgetKit.framework */; };
+		8829F5AC296AE65E00BA63A8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5AB296AE65E00BA63A8 /* SwiftUI.framework */; };
+		8829F5AF296AE65E00BA63A8 /* Announcements_NumberBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829F5AE296AE65E00BA63A8 /* Announcements_NumberBundle.swift */; };
+		8829F5B1296AE65E00BA63A8 /* Announcements_NumberLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829F5B0296AE65E00BA63A8 /* Announcements_NumberLiveActivity.swift */; };
+		8829F5B3296AE65E00BA63A8 /* Announcements_Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829F5B2296AE65E00BA63A8 /* Announcements_Number.swift */; };
+		8829F5B6296AE66100BA63A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8829F5B5296AE66100BA63A8 /* Assets.xcassets */; };
+		8829F5B8296AE66100BA63A8 /* Announcements_Number.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8829F5B4296AE65E00BA63A8 /* Announcements_Number.intentdefinition */; };
+		8829F5B9296AE66100BA63A8 /* Announcements_Number.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8829F5B4296AE65E00BA63A8 /* Announcements_Number.intentdefinition */; };
+		8829F5BC296AE66100BA63A8 /* Announcements_NumberExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8829F5A7296AE65D00BA63A8 /* Announcements_NumberExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		930EA43B29645AE1007081C8 /* AnnouncerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930EA43A29645AE1007081C8 /* AnnouncerApp.swift */; };
 		930EA43D29645AE1007081C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930EA43C29645AE1007081C8 /* ContentView.swift */; };
 		930EA43F29645AE2007081C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930EA43E29645AE2007081C8 /* Assets.xcassets */; };
@@ -39,7 +48,40 @@
 		93AF704C2969B10B00BF18F8 /* EditReminderDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8829F5BA296AE66100BA63A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 930EA42F29645AE1007081C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8829F5A6296AE65D00BA63A8;
+			remoteInfo = Announcements_NumberExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8829F5BD296AE66100BA63A8 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8829F5BC296AE66100BA63A8 /* Announcements_NumberExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		8829F5A7296AE65D00BA63A8 /* Announcements_NumberExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Announcements_NumberExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8829F5A9296AE65E00BA63A8 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		8829F5AB296AE65E00BA63A8 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		8829F5AE296AE65E00BA63A8 /* Announcements_NumberBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcements_NumberBundle.swift; sourceTree = "<group>"; };
+		8829F5B0296AE65E00BA63A8 /* Announcements_NumberLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcements_NumberLiveActivity.swift; sourceTree = "<group>"; };
+		8829F5B2296AE65E00BA63A8 /* Announcements_Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcements_Number.swift; sourceTree = "<group>"; };
+		8829F5B4296AE65E00BA63A8 /* Announcements_Number.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Announcements_Number.intentdefinition; sourceTree = "<group>"; };
+		8829F5B5296AE66100BA63A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8829F5B7296AE66100BA63A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		930EA43729645AE1007081C8 /* Announcer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Announcer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		930EA43A29645AE1007081C8 /* AnnouncerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncerApp.swift; sourceTree = "<group>"; };
 		930EA43C29645AE1007081C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +114,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8829F5A4296AE65D00BA63A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8829F5AC296AE65E00BA63A8 /* SwiftUI.framework in Frameworks */,
+				8829F5AA296AE65E00BA63A8 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		930EA43429645AE1007081C8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -85,11 +136,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8829F5A8296AE65E00BA63A8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8829F5A9296AE65E00BA63A8 /* WidgetKit.framework */,
+				8829F5AB296AE65E00BA63A8 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8829F5AD296AE65E00BA63A8 /* Announcements_Number */ = {
+			isa = PBXGroup;
+			children = (
+				8829F5AE296AE65E00BA63A8 /* Announcements_NumberBundle.swift */,
+				8829F5B0296AE65E00BA63A8 /* Announcements_NumberLiveActivity.swift */,
+				8829F5B2296AE65E00BA63A8 /* Announcements_Number.swift */,
+				8829F5B4296AE65E00BA63A8 /* Announcements_Number.intentdefinition */,
+				8829F5B5296AE66100BA63A8 /* Assets.xcassets */,
+				8829F5B7296AE66100BA63A8 /* Info.plist */,
+			);
+			path = Announcements_Number;
+			sourceTree = "<group>";
+		};
 		930EA42E29645AE1007081C8 = {
 			isa = PBXGroup;
 			children = (
 				9376933E296AC7C000D94EC3 /* README.md */,
 				930EA43929645AE1007081C8 /* Announcer */,
+				8829F5AD296AE65E00BA63A8 /* Announcements_Number */,
+				8829F5A8296AE65E00BA63A8 /* Frameworks */,
 				930EA43829645AE1007081C8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				930EA43729645AE1007081C8 /* Announcer.app */,
+				8829F5A7296AE65D00BA63A8 /* Announcements_NumberExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -219,6 +295,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8829F5A6296AE65D00BA63A8 /* Announcements_NumberExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8829F5C0296AE66100BA63A8 /* Build configuration list for PBXNativeTarget "Announcements_NumberExtension" */;
+			buildPhases = (
+				8829F5A3296AE65D00BA63A8 /* Sources */,
+				8829F5A4296AE65D00BA63A8 /* Frameworks */,
+				8829F5A5296AE65D00BA63A8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Announcements_NumberExtension;
+			productName = Announcements_NumberExtension;
+			productReference = 8829F5A7296AE65D00BA63A8 /* Announcements_NumberExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		930EA43629645AE1007081C8 /* Announcer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 930EA44529645AE2007081C8 /* Build configuration list for PBXNativeTarget "Announcer" */;
@@ -227,10 +320,12 @@
 				930EA43329645AE1007081C8 /* Sources */,
 				930EA43429645AE1007081C8 /* Frameworks */,
 				930EA43529645AE1007081C8 /* Resources */,
+				8829F5BD296AE66100BA63A8 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8829F5BB296AE66100BA63A8 /* PBXTargetDependency */,
 			);
 			name = Announcer;
 			packageProductDependencies = (
@@ -249,9 +344,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1410;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
+					8829F5A6296AE65D00BA63A8 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					930EA43629645AE1007081C8 = {
 						CreatedOnToolsVersion = 14.1;
 					};
@@ -276,11 +374,20 @@
 			projectRoot = "";
 			targets = (
 				930EA43629645AE1007081C8 /* Announcer */,
+				8829F5A6296AE65D00BA63A8 /* Announcements_NumberExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8829F5A5296AE65D00BA63A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8829F5B6296AE66100BA63A8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		930EA43529645AE1007081C8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -312,11 +419,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "#export PATH=\"$PATH:/opt/homebrew/bin\"\n#if which swiftlint >/dev/null; then\n#  swiftlint --strict\n#else\n#  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8829F5A3296AE65D00BA63A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8829F5B8296AE66100BA63A8 /* Announcements_Number.intentdefinition in Sources */,
+				8829F5B1296AE65E00BA63A8 /* Announcements_NumberLiveActivity.swift in Sources */,
+				8829F5B3296AE65E00BA63A8 /* Announcements_Number.swift in Sources */,
+				8829F5AF296AE65E00BA63A8 /* Announcements_NumberBundle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		930EA43329645AE1007081C8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -325,6 +443,7 @@
 				930EA44929645BF4007081C8 /* AnnouncementsHomeView.swift in Sources */,
 				931B2C702966DF2300BBF397 /* UserCategory.swift in Sources */,
 				930EA43D29645AE1007081C8 /* ContentView.swift in Sources */,
+				8829F5B9296AE66100BA63A8 /* Announcements_Number.intentdefinition in Sources */,
 				93769336296A842900D94EC3 /* SafariView.swift in Sources */,
 				937860202964625E00FEA668 /* LogExtension.swift in Sources */,
 				937860212964625E00FEA668 /* Formatter.swift in Sources */,
@@ -349,7 +468,69 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8829F5BB296AE66100BA63A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8829F5A6296AE65D00BA63A8 /* Announcements_NumberExtension */;
+			targetProxy = 8829F5BA296AE66100BA63A8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		8829F5BE296AE66100BA63A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Announcements_Number/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Announcements_Number;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "sg.edu.sst.panziyue.Announcer.Announcements-Number";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8829F5BF296AE66100BA63A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Announcements_Number/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Announcements_Number;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "sg.edu.sst.panziyue.Announcer.Announcements-Number";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		930EA44329645AE2007081C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -467,6 +648,7 @@
 		930EA44629645AE2007081C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -497,6 +679,7 @@
 		930EA44729645AE2007081C8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -527,6 +710,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8829F5C0296AE66100BA63A8 /* Build configuration list for PBXNativeTarget "Announcements_NumberExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8829F5BE296AE66100BA63A8 /* Debug */,
+				8829F5BF296AE66100BA63A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		930EA43229645AE1007081C8 /* Build configuration list for PBXProject "Announcer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

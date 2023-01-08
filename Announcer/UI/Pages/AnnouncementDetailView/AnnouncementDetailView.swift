@@ -10,6 +10,8 @@ import SwiftUI
 let noZeroAndPoint: CharacterSet = .init(["0", "."])
 
 struct AnnouncementDetailView: View {
+    
+    
 
     @Binding
     var post: Post
@@ -38,6 +40,7 @@ struct AnnouncementDetailView: View {
     @State
     var isLoadingSafariView: Bool = false
 
+    
     var body: some View {
         List {
             VStack(alignment: .leading) {
@@ -70,21 +73,24 @@ struct AnnouncementDetailView: View {
                     }
             }
         }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
-                }
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    post.pinned.toggle()
-                } label: {
-                    Image(systemName: post.pinned ? "pin.fill" : "pin")
-                }
-            }
-        }
+
+            
+//        .toolbar {
+//            ToolbarItem(placement: .navigationBar) {
+//                Button {
+//                    ShareLink(item: post.getBlogURL())
+//                } label: {
+//                    Image(systemName: "square.and.arrow.up")
+//                }
+//            }
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                Button {
+//                    post.pinned.toggle()
+//                } label: {
+//                    Image(systemName: post.pinned ? "pin.fill" : "pin")
+//                }
+//            }
+//        }
         .sheet(isPresented: $showEditCategoryView) {
             if #available(iOS 16.0, *) {
                 addNewCategory
