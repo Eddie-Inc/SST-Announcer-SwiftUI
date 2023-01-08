@@ -10,35 +10,32 @@ import Foundation
 var defaults = UserDefaults.standard
 
 enum PostManager {
-    static var readPosts: Set<String> {
-        get {
-            if let posts = _readPosts {
-                return posts
-            } else if let defaultsPosts = defaults.stringArray(forKey: .readPosts) {
-                _readPosts = .init(defaultsPosts)
-                return .init(defaultsPosts)
-            }
 
-            return .init()
-        }
-        set {
-            _readPosts = newValue
-            loadQueue.async {
-                // TODO: Reduce the frequency of this.
-                // As the set gets larger, this will become a more and more expensive task to do.
-                defaults.set(Array(readPosts), forKey: .readPosts)
-            }
-        }
-    }
-    private static var _readPosts: Set<String>?
-
+    // MARK: Getting posts
     static func getPosts(range: Range<Int>) -> [Post] {
-        var posts = fetchValues(range: range)
+        // account for the pinned posts
+        let pinnedPosts = pinnedPosts
+
+        var posts: [Post] = []
+
+        // if range.lowerBound is < pinnedPosts.count, then
+        // add the pinned posts and fetch the remainder
+        if range.lowerBound < pinnedPosts.count {
+            let upperBound = min(pinnedPosts.count, range.upperBound)
+            posts = Array(pinnedPosts[range.lowerBound..<upperBound])
+        }
+
+        // if there are still posts that need to be fetched, fetch them
+        if posts.count < range.count {
+            posts = fetchValues(range: posts.count..<range.upperBound)
+        }
         trimDeadUserCategories(from: &posts)
 
         return posts
     }
 
+    // MARK: Post processing
+    // pun intended
     static func trimDeadUserCategories(from posts: inout [Post]) {
         for postIndex in 0..<posts.count {
             // get the categories, if there are none (is nil or []) then continue
@@ -69,6 +66,49 @@ enum PostManager {
     static func savePost(post: Post) {
     }
 
+    // MARK: Persistence
+    static var readPosts: Set<String> {
+        get {
+            if let posts = _readPosts {
+                return posts
+            } else if let defaultsPosts = defaults.stringArray(forKey: .readPosts) {
+                _readPosts = .init(defaultsPosts)
+                return .init(defaultsPosts)
+            }
+
+            return .init()
+        }
+        set {
+            _readPosts = newValue
+            loadQueue.async {
+                // TODO: Reduce the frequency of this.
+                // As the set gets larger, this will become a more and more expensive task to do.
+                defaults.set(Array(newValue), forKey: .readPosts)
+            }
+        }
+    }
+    private static var _readPosts: Set<String>?
+
+    static var pinnedPosts: [Post] {
+        get {
+            if let posts = _pinnedPosts {
+                return posts
+            } else if let defaultPosts = defaults.array(forKey: .pinnedPosts) as? [Post] {
+                _pinnedPosts = defaultPosts
+                return defaultPosts
+            }
+
+            return []
+        }
+        set {
+            _pinnedPosts = newValue
+            loadQueue.async {
+                defaults.set(newValue, forKey: .pinnedPosts)
+            }
+        }
+    }
+    private static var _pinnedPosts: [Post]?
+
     static var userCategories: [UserCategory] {
         get {
             // load from userDefaults or cache
@@ -97,13 +137,13 @@ enum PostManager {
             }
         }
     }
-
     private static var _userCategories: [UserCategory]?
 }
 
 extension String {
     static let userCategories = "userCategories"
     static let readPosts = "readPosts"
+    static let pinnedPosts = "pinnedPosts"
 }
 
 let placeholderTextShort = "Lorem ipsum dolor sit amet"
