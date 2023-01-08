@@ -27,10 +27,11 @@ struct Post: Codable, Equatable {
     var userCategories: [UserCategory]? // optional so that it plays well with Codable
 
     func getLinks() -> [URL] {
+        // separate each link
         let items = content.components(separatedBy: "href=\"")
-
+        // empty array for each link
         var links: [URL] = []
-
+        // get list of links
         for item in items {
             var newItem = ""
 
@@ -46,7 +47,7 @@ struct Post: Codable, Equatable {
                 links.append(url)
             }
         }
-
+        // remove duplicate links from the array
         links.removeDuplicates()
 
         links = links.filter { (link) -> Bool in
@@ -54,6 +55,51 @@ struct Post: Codable, Equatable {
         }
 
         return links
+    }
+
+    func getBlogURL() -> URL {
+        // we need to get the date to fetch the exact blog post
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "/yyyy/MM/"
+
+        // to store the link
+        var returnLink = ""
+
+        // gets and formats the title of the post as we need that to get the link
+        let formatted = title.filter { (a) -> Bool in
+            a.isLetter || a.isNumber || a.isWhitespace
+        }.lowercased()
+        let split = formatted.split(separator: " ")
+
+        for i in split {
+            if returnLink.count + i.count < 40 {
+                returnLink += i + "-"
+            } else {
+                break
+            }
+        }
+        returnLink.removeLast()
+
+        // generates the link of the blogpost
+        returnLink = blogURL + dateFormatter.string(from: date) + returnLink + ".html"
+
+        let returnURL = URL(string: returnLink) ?? URL(string: blogURL)!
+
+        // Checks if the URL is invalid
+        let isURLValid: Bool = {
+            let str = try? String(contentsOf: returnURL)
+            if let str = str {
+                return !str.contains("Sorry, the page you were looking for in this blog does not exist.")
+            } else {
+                return false
+            }
+        }()
+
+        if isURLValid {
+            return returnURL
+        }
+
+        return URL(string: blogURL)!
     }
 }
 

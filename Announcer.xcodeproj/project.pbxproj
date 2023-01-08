@@ -23,6 +23,7 @@
 		935EAB2929685918005D2F52 /* RSS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EAB2829685917005D2F52 /* RSS.swift */; };
 		935EAB2C29685987005D2F52 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 935EAB2B29685987005D2F52 /* FeedKit */; };
 		935EAB3329686B5B005D2F52 /* TimeAndReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EAB3229686B5B005D2F52 /* TimeAndReminder.swift */; };
+		93769336296A842900D94EC3 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93769335296A842900D94EC3 /* SafariView.swift */; };
 		9378601E2964625E00FEA668 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9378601A2964625E00FEA668 /* Log.swift */; };
 		9378601F2964625E00FEA668 /* Using Logger.md in Resources */ = {isa = PBXBuildFile; fileRef = 9378601B2964625E00FEA668 /* Using Logger.md */; };
 		937860202964625E00FEA668 /* LogExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9378601C2964625E00FEA668 /* LogExtension.swift */; };
@@ -50,6 +51,7 @@
 		935EAB2829685917005D2F52 /* RSS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSS.swift; sourceTree = "<group>"; };
 		935EAB3129685EBD005D2F52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		935EAB3229686B5B005D2F52 /* TimeAndReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAndReminder.swift; sourceTree = "<group>"; };
+		93769335296A842900D94EC3 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		9378601A2964625E00FEA668 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		9378601B2964625E00FEA668 /* Using Logger.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Using Logger.md"; sourceTree = "<group>"; };
 		9378601C2964625E00FEA668 /* LogExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogExtension.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			children = (
 				930EA44829645BF4007081C8 /* AnnouncementsHomeView.swift */,
 				937860232964637800FEA668 /* AnnouncementDetailView.swift */,
+				93769335296A842900D94EC3 /* SafariView.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -288,7 +291,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#export PATH=\"$PATH:/opt/homebrew/bin\"\n#if which swiftlint >/dev/null; then\n#  swiftlint --strict\n#else\n#  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n";
+			shellScript = "#export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -301,6 +304,7 @@
 				930EA44929645BF4007081C8 /* AnnouncementsHomeView.swift in Sources */,
 				931B2C702966DF2300BBF397 /* UserCategory.swift in Sources */,
 				930EA43D29645AE1007081C8 /* ContentView.swift in Sources */,
+				93769336296A842900D94EC3 /* SafariView.swift in Sources */,
 				937860202964625E00FEA668 /* LogExtension.swift in Sources */,
 				937860212964625E00FEA668 /* Formatter.swift in Sources */,
 				9378601E2964625E00FEA668 /* Log.swift in Sources */,

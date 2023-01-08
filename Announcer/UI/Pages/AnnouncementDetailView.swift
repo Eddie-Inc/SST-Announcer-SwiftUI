@@ -5,14 +5,8 @@
 //  Created by Kai Quan Tay on 3/1/23.
 //
 
-
-
 import SwiftUI
 import RichText
-
-
-
-
 
 enum TextPresentationMode: String {
     case rendered, raw, htmlStripped
@@ -21,9 +15,7 @@ enum TextPresentationMode: String {
 let noZeroAndPoint: CharacterSet = .init(["0", "."])
 
 struct AnnouncementDetailView: View {
-    
-    
-    
+
     @Binding
     var post: Post
 
@@ -42,6 +34,12 @@ struct AnnouncementDetailView: View {
     @AppStorage("fontSize")
     var fontSize: Double = 17
 
+    @State
+    var safariViewURL: URL?
+
+    @State
+    var showSafariView: Bool = false
+
     var body: some View {
         List {
             title
@@ -51,6 +49,10 @@ struct AnnouncementDetailView: View {
 
             postAndReminder
                 .listRowSeparator(.hidden, edges: .top)
+
+            if !post.getLinks().isEmpty {
+                links
+            }
 
             bodyText
         }
@@ -95,6 +97,13 @@ struct AnnouncementDetailView: View {
                 editReminderDate
             }
         }
+        .sheet(isPresented: $showSafariView) {
+            if let safariViewURL {
+                SafariView(url: safariViewURL)
+            } else {
+                Text("URL not found")
+            }
+        }
     }
 
     var title: some View {
@@ -122,29 +131,6 @@ struct AnnouncementDetailView: View {
             }
         }
     }
-    
-    
-    var returnLink: some View {
-        let returnLink = getPostURL(with: post)
-        print(returnLink)
-
-        // categories
-        return HStack {
-            CategoryScrollView(post: $post)
-                .font(.subheadline)
-            Button {
-                Link(returnLink.debugDescription, destination: returnLink )
-                
-                // Add the link here
-            } label: {
-                Image(systemName: "slider.horizontal.3")
-                    .opacity(0.6)
-            }
-        }
-        
-
-    }
-
 
     var postAndReminder: some View {
         HStack {
@@ -164,21 +150,16 @@ struct AnnouncementDetailView: View {
         }
     }
 
-//    var links: some View {
-//        // if it has links
-//        let links = getLinksFromPost(post: post)
-//        let link_str = String(links)
-//        VStack(alignment: .leading) {
-//            Link(link_str, destination: links as! URL)
-//                .bold()
-//            ForEach(["https://www.youtube.com", "https://www.google.com"], id: \.self) { url in
-//                Text(url)
-//                    .underline()
-//                    .foregroundColor(.accentColor)
-//            }
-//        }
-//
-//    }
+    var links: some View {
+        VStack(alignment: .leading) {
+            ForEach(post.getLinks(), id: \.absoluteString) { url in
+                Button(url.description) {
+                    safariViewURL = url
+                    showSafariView = true
+                }
+            }
+        }
+    }
 
     var bodyText: some View {
         // body text
@@ -232,6 +213,8 @@ struct AnnouncementDetailView: View {
         .overlay(alignment: .topTrailing) {
             Button {
                 // open in safari
+                safariViewURL = post.getBlogURL()
+                showSafariView = true
             } label: {
                 Image(systemName: "arrow.up.forward.circle")
                     .opacity(0.6)
