@@ -199,8 +199,8 @@
 		937860192964625E00FEA668 /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				9378601A2964625E00FEA668 /* Log.swift */,
 				9378601B2964625E00FEA668 /* Using Logger.md */,
+				9378601A2964625E00FEA668 /* Log.swift */,
 				9378601C2964625E00FEA668 /* LogExtension.swift */,
 				9378601D2964625E00FEA668 /* Formatter.swift */,
 			);

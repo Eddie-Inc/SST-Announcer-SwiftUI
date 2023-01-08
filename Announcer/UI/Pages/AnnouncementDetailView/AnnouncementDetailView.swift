@@ -59,6 +59,17 @@ struct AnnouncementDetailView: View {
             sizeView
                 .opacity(resizePopupOpacity)
         }
+        .overlay(alignment: .center) {
+            if isLoadingSafariView {
+                Text("Loading...")
+                    .padding(10)
+                    .background {
+                        Rectangle()
+                            .foregroundColor(.init(UIColor.systemGroupedBackground))
+                            .cornerRadius(5)
+                    }
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {

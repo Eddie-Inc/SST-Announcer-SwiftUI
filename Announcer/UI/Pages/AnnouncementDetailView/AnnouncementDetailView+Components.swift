@@ -21,7 +21,9 @@ extension AnnouncementDetailView {
         .overlay(alignment: .bottomTrailing) {
             Button {
                 // open in safari
-                isLoadingSafariView = true
+                withAnimation(.easeIn(duration: 0.08)) {
+                    isLoadingSafariView = true
+                }
                 loadQueue.async {
                     safariViewURL = post.getBlogURL()
                     isLoadingSafariView = false
