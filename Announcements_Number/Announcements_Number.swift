@@ -36,7 +36,6 @@ struct Provider: IntentTimelineProvider {
 }
 
 struct SimpleEntry: TimelineEntry {
-    _readPosts
     let date: Date
     let configuration: ConfigurationIntent
 }

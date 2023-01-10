@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 var defaults = UserDefaults.standard
 
@@ -31,6 +32,8 @@ enum PostManager {
         }
     }
     private static var _readPosts: Set<String>?
+    
+    
 
     static func getPosts(range: Range<Int>) -> [Post] {
         var posts = fetchValues(range: range)
@@ -119,3 +122,16 @@ turpis nunc. Malesuada nunc vel risus commodo. Nisi vitae suscipit tellus mauris
 Posuere orbi leo urna molestie at elementum eu. Urna duis convallis convallis tellus. Urna molestie \
 at elementum eu. Nunc sed blandit libero volutpat.
 """
+
+
+var unRead = 0
+
+let myRange: Range = 1..<11
+
+func unReadPosts() -> Int{
+    var Postes = PostManager.getPosts(range: myRange)
+    if Postes.firstIndex(where: { $0.read == true }) != nil {
+            unRead += 1
+        }
+    return(unRead)
+}
