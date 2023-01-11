@@ -75,7 +75,7 @@ struct Post: Codable, Equatable {
     // - Title:    "[S1] SLS Account - Log-in Exercise"
     // - Expected: "2023/01/s1-sls-account-log-in-exercise.html"
     //
-    func getBlogURL() -> URL {
+    func getBlogURL(limit: Int = 40) -> URL {
         // we need to get the date to fetch the exact blog post
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "/yyyy/MM/"
@@ -91,7 +91,7 @@ struct Post: Codable, Equatable {
 
         for item in split {
             guard !item.isEmpty && item != "-" else { continue } // reject single dashes
-            if returnLink.count + item.count < 40 { // limit number of characters
+            if returnLink.count + item.count < limit { // limit number of characters
                 returnLink += item + "-"
             } else {
                 break
@@ -120,7 +120,13 @@ struct Post: Codable, Equatable {
         }
 
         Log.info("URL is invalid: \(returnURL.description). Defaulting to \(blogURL)")
-        return URL(string: blogURL)!
+        // try again but with a limit of 41
+        if limit == 40 {
+            return getBlogURL(limit: 41)
+        } else {
+            // avoid infinite recursion
+            return URL(string: blogURL)!
+        }
     }
 }
 
