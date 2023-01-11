@@ -104,4 +104,52 @@ extension PostManager {
         }
         return posts
     }
+
+    static func addPostsToStorage(newItems: [Post]) {
+        let storage = PostManager.postStorage
+
+        var combinedArray: [Post] = []
+        var storageIndex = 0
+        var newItemsIndex = 0
+
+        // do a "zipper merge" of storage and the new items array
+        while storageIndex < storage.count && newItemsIndex < newItems.count {
+            let storageItem = storage.elements[storageIndex].value
+            let newItem = newItems[newItemsIndex]
+
+            if storageItem < newItem {
+                combinedArray.append(storageItem)
+                storageIndex += 1
+            } else if newItem < storageItem {
+                combinedArray.append(newItem)
+                newItemsIndex += 1
+            } else {
+                combinedArray.append(storageItem)
+                storageIndex += 1
+                newItemsIndex += 1
+            }
+        }
+
+        // of the following two while loops, only one will run. As the while loop above
+        // is an AND statement, when one index hits the maximum, it will break. These
+        // while loops are just the "cleaners" that append any remaining items.
+
+        // clear any remaining storage items
+        while storageIndex < storage.count {
+            combinedArray.append(storage.elements[storageIndex].value)
+            storageIndex += 1
+        }
+
+        // clear any remaining new items
+        while newItemsIndex < newItems.count {
+            combinedArray.append(newItems[newItemsIndex])
+            newItemsIndex += 1
+        }
+        PostManager.postStorage = .init(uniqueKeys: combinedArray.map { $0.postTitle },
+                                        values: combinedArray)
+    }
+}
+
+private func < (lhs: Post, rhs: Post) -> Bool {
+    lhs.date.timeIntervalSince1970 < rhs.date.timeIntervalSince1970
 }
