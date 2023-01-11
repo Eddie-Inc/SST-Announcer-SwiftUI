@@ -38,3 +38,8 @@ func write<T: Encodable>(_ value: T, to file: String, error onError: @escaping (
         onError(error)
     }
 }
+
+func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}

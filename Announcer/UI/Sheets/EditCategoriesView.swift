@@ -41,15 +41,15 @@ struct EditCategoriesView: View {
             }
 
             Section {
-                ForEach(PostManager.userCategoriesForPosts[post.getBlogID()] ?? [], id: \.id) { category in
+                ForEach(PostManager.userCategoriesForPosts[post.postTitle] ?? [], id: \.id) { category in
                     categoryView(category: category)
                 }
                 .onDelete { indexSet in
-                    PostManager.userCategoriesForPosts[post.getBlogID()]?
+                    PostManager.userCategoriesForPosts[post.postTitle]?
                         .remove(atOffsets: indexSet)
                 }
                 .onMove { indexSet, moveTo in
-                    PostManager.userCategoriesForPosts[post.getBlogID()]?
+                    PostManager.userCategoriesForPosts[post.postTitle]?
                         .move(fromOffsets: indexSet, toOffset: moveTo)
                 }
             }
@@ -140,10 +140,10 @@ struct EditCategoriesView: View {
             $0.name == named
         }) {
             var categories = PostManager
-                .userCategoriesForPosts[post.getBlogID()] ?? []
+                .userCategoriesForPosts[post.postTitle] ?? []
             categories.append(.init(named))
 
-            PostManager.userCategoriesForPosts[post.getBlogID()] = categories
+            PostManager.userCategoriesForPosts[post.postTitle] = categories
         }
         showEditCategoryView = false
         PostManager.savePost(post: post)

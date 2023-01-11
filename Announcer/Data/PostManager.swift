@@ -11,6 +11,18 @@ import SwiftUI
 var defaults = UserDefaults.standard
 
 enum PostManager {
+    // MARK: Getting/saving posts
+    static func getPosts(range: Range<Int>) -> [Post] {
+        let posts = fetchValues(range: range)
+
+        return posts
+    }
+
+    /// Saves a post to localstorage. Effectively a form of cache.
+    static func savePost(post: Post) {
+    }
+
+    // MARK: Read posts
     static var readPosts: Set<PostTitle> {
         get {
             if let posts = _readPosts {
@@ -37,23 +49,16 @@ enum PostManager {
     }
     private static var _readPosts: Set<PostTitle>?
 
-    static func getPosts(range: Range<Int>) -> [Post] {
-        let posts = fetchValues(range: range)
+    // TODO: Reminder Dates
 
-        return posts
-    }
-
-    /// Saves a post to localstorage. Effectively a form of cache.
-    static func savePost(post: Post) {
-    }
-
+    // MARK: User categories
     static var userCategories: [UserCategory] {
         // flatten user categories for posts
         let categories = userCategoriesForPosts
         return categories.flatMap({ $1 })
     }
 
-    static var userCategoriesForPosts: [String: [UserCategory]] {
+    static var userCategoriesForPosts: [PostTitle: [UserCategory]] {
         get {
             // load from userDefaults or cache
             if let userCategories = _userCategories {
@@ -61,7 +66,7 @@ enum PostManager {
             }
 
             // Retrieve from file
-            if let categories = read([String: [UserCategory]].self, from: "userCategories.json") {
+            if let categories = read([PostTitle: [UserCategory]].self, from: "userCategories.json") {
                 _userCategories = categories
                 return categories
             }
@@ -75,14 +80,10 @@ enum PostManager {
         }
     }
 
-    private static var _userCategories: [String: [UserCategory]]?
+    private static var _userCategories: [PostTitle: [UserCategory]]?
 }
 
-func getDocumentsDirectory() -> URL {
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return paths[0]
-}
-
+// MARK: Placeholder text
 let placeholderTextShort = "Lorem ipsum dolor sit amet"
 let placeholderTextLong = """
 Dear Students,

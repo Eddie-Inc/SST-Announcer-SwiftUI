@@ -96,7 +96,7 @@ extension PostManager {
                             categories: categories)
 
             post.read = PostManager.readPosts.contains(post.postTitle)
-            post.userCategories = PostManager.userCategoriesForPosts[post.getBlogID()]
+            post.userCategories = PostManager.userCategoriesForPosts[post.postTitle]
 
             posts.append(post)
         }
