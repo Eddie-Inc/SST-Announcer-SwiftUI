@@ -105,6 +105,17 @@ extension PostManager {
         return posts
     }
 
+    /// Performs a "zipper merge" between `newItems` and ``PostManager.postStorage``
+    /// - Parameter newItems: The items to zipper merge into post storage
+    ///
+    /// The exact process that occurs goes somewhat like this:
+    /// In this implementation, we use two pointers, one for `storage` and one for `newItems`, to iterate through both arrays simultaneously.
+    /// We compare the current item from each array and append the smaller item to the `combinedArray`. If the items are equal, we
+    /// append one from storage and move both pointers forward. Once we've processed all items from one array, we append any
+    /// remaining items from the other array to the `combinedArray`.
+    ///
+    /// This solution has a time complexity of O(n) as we process each element in the input arrays once, and is more efficent than
+    /// an append-sort method as it saves the time and space of sorting the array at the end.
     static func addPostsToStorage(newItems: [Post]) {
         let storage = PostManager.postStorage
 
