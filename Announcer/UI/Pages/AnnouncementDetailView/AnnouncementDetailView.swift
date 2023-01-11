@@ -29,8 +29,12 @@ struct AnnouncementDetailView: View {
     @AppStorage("fontSize")
     var fontSize: Double = 17
 
+    // this is used for both the Safari view loading and share sheet
     @State
     var safariViewURL: URL?
+
+    @State
+    var showShareLink: Bool = false
 
     @State
     var showSafariView: Bool = false
@@ -70,23 +74,27 @@ struct AnnouncementDetailView: View {
                     }
             }
         }
-
-//        .toolbar {
-//            ToolbarItem(placement: .navigationBar) {
-//                Button {
-//                    ShareLink(item: post.getBlogURL())
-//                } label: {
-//                    Image(systemName: "square.and.arrow.up")
-//                }
-//            }
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                Button {
-//                    post.pinned.toggle()
-//                } label: {
-//                    Image(systemName: post.pinned ? "pin.fill" : "pin")
-//                }
-//            }
-//        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    isLoadingSafariView = true
+                    loadQueue.async {
+                        safariViewURL = post.getBlogURL()
+                        isLoadingSafariView = false
+                        showShareLink = true
+                    }
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    post.pinned.toggle()
+                } label: {
+                    Image(systemName: post.pinned ? "pin.fill" : "pin")
+                }
+            }
+        }
         .sheet(isPresented: $showEditCategoryView) {
             if #available(iOS 16.0, *) {
                 addNewCategory
@@ -108,6 +116,13 @@ struct AnnouncementDetailView: View {
         .sheet(isPresented: $showSafariView) {
             if let safariViewURL {
                 SafariView(url: safariViewURL)
+            } else {
+                Text("URL not found")
+            }
+        }
+        .sheet(isPresented: $showShareLink) {
+            if let safariViewURL {
+                ActivityView(text: safariViewURL.description)
             } else {
                 Text("URL not found")
             }
