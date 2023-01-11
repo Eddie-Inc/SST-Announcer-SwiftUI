@@ -62,7 +62,6 @@ enum PostManager {
 
             // Retrieve from file
             if let categories = read([String: [UserCategory]].self, from: "userCategories.json") {
-                Log.info("Values found!")
                 _userCategories = categories
                 return categories
             }

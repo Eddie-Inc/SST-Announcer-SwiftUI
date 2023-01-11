@@ -46,7 +46,6 @@ extension PostManager {
     static func fetchValues(range: Range<Int>) -> [Post] {
         // since its 1 indexed, use the lowerbound+1 as the start index
         let query = "\(rssURL)/?start-index=\(range.lowerBound+1)&max-results=\(range.count)"
-        Log.info("Query: \(query)")
 
         // turn it into a URL and parse it
         let url = URL(string: query)!
