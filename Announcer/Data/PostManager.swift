@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import OrderedCollections
 
 var defaults = UserDefaults.standard
 
@@ -102,6 +103,27 @@ enum PostManager {
     }
 
     private static var _userCategories: [PostTitle: [UserCategory]]?
+
+    static var postStorage: OrderedDictionary<PostTitle, Post> {
+        get {
+            if let posts = _postStorage {
+                return posts
+            }
+
+            if let posts = read(OrderedDictionary<PostTitle, Post>.self, from: "postStorage.json") {
+                _postStorage = posts
+                return posts
+            }
+
+            return .init()
+        }
+        set {
+            _postStorage = newValue
+            // save to file system
+            write(newValue, to: "postStorage.json")
+        }
+    }
+    private static var _postStorage: OrderedDictionary<PostTitle, Post>?
 }
 
 // MARK: Placeholder text
