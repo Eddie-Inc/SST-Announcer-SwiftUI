@@ -45,6 +45,7 @@
 		937860262964ED5800FEA668 /* EditFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937860252964ED5800FEA668 /* EditFilterView.swift */; };
 		937EBBF5296EA72000722285 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 937EBBF4296EA72000722285 /* OrderedCollections */; };
 		937EBBF7296EAFC700722285 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937EBBF6296EAFC700722285 /* ShareSheet.swift */; };
+		937EBBF9296EC47A00722285 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937EBBF8296EC47A00722285 /* FileManager.swift */; };
 		93AF704629698B1400BF18F8 /* HTMLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704529698B1400BF18F8 /* HTMLString.swift */; };
 		93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */; };
 		93AF704C2969B10B00BF18F8 /* EditReminderDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */; };
@@ -111,6 +112,7 @@
 		937860232964637800FEA668 /* AnnouncementDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailView.swift; sourceTree = "<group>"; };
 		937860252964ED5800FEA668 /* EditFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFilterView.swift; sourceTree = "<group>"; };
 		937EBBF6296EAFC700722285 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		937EBBF8296EC47A00722285 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		93AF704529698B1400BF18F8 /* HTMLString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLString.swift; sourceTree = "<group>"; };
 		93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewPlaceholderView.swift; sourceTree = "<group>"; };
 		93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReminderDateView.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 			children = (
 				937860192964625E00FEA668 /* Log */,
 				93AF704529698B1400BF18F8 /* HTMLString.swift */,
+				937EBBF8296EC47A00722285 /* FileManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				9376933D296A8B9700D94EC3 /* AnnouncementDetailView+Components.swift in Sources */,
 				93436ACA2965B4D600AD3148 /* PostPreviewView.swift in Sources */,
 				931B2C672966C46900BBF397 /* EditCategoriesView.swift in Sources */,
+				937EBBF9296EC47A00722285 /* FileManager.swift in Sources */,
 				937860262964ED5800FEA668 /* EditFilterView.swift in Sources */,
 				93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */,
 				9376933B296A8B5B00D94EC3 /* AnnouncementDetailView+Render.swift in Sources */,

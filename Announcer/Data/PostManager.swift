@@ -18,16 +18,9 @@ enum PostManager {
             }
 
             // Retrieve from file
-            let filename = getDocumentsDirectory().appendingPathComponent("readPosts.json")
-            if let data = try? Data(contentsOf: filename) {
-                if let values = try? JSONDecoder().decode([PostTitle].self, from: data) {
-                    Log.info("Read posts data found! \(values)")
-                    _readPosts = Set(values)
-                    return Set(values)
-                }
-            } else {
-                // reset it
-                Log.info("Values not found :(")
+            if let posts = read([PostTitle].self, from: "readPosts.json") {
+                _readPosts = Set(posts)
+                return Set(posts)
             }
 
             return .init()
@@ -38,17 +31,7 @@ enum PostManager {
                 // TODO: Reduce the frequency of this.
                 // As the set gets larger, this will become a more and more expensive task to do.
                 // save to file system
-                if let encoded = try? JSONEncoder().encode(Array(newValue)) {
-                    let filename = getDocumentsDirectory().appendingPathComponent("readPosts.json")
-                    do {
-                        try encoded.write(to: filename)
-                        Log.info("Successfully wrote \(encoded) (from \(newValue)) to \(filename.description)")
-                    } catch {
-                        // failed to write file – bad permissions, bad filename,
-                        // missing permissions, or more likely it can't be converted to the encoding
-                        Log.info("Failed to write to file!")
-                    }
-                }
+                write(Array(newValue), to: "readPosts.json")
             }
         }
     }
@@ -78,16 +61,10 @@ enum PostManager {
             }
 
             // Retrieve from file
-            let filename = getDocumentsDirectory().appendingPathComponent("userCategories.json")
-            if let data = try? Data(contentsOf: filename) {
-                if let values = try? JSONDecoder().decode([String: [UserCategory]].self, from: data) {
-                    Log.info("Values found!")
-                    _userCategories = values
-                    return values
-                }
-            } else {
-                // reset it
-                Log.info("Values not found :(")
+            if let categories = read([String: [UserCategory]].self, from: "userCategories.json") {
+                Log.info("Values found!")
+                _userCategories = categories
+                return categories
             }
 
             return [:]
@@ -95,17 +72,7 @@ enum PostManager {
         set {
             _userCategories = newValue
             // save to file system
-            if let encoded = try? JSONEncoder().encode(newValue) {
-                let filename = getDocumentsDirectory().appendingPathComponent("userCategories.json")
-                do {
-                    try encoded.write(to: filename)
-                    Log.info("Successfully wrote \(encoded) (from \(newValue)) to \(filename.description)")
-                } catch {
-                    // failed to write file – bad permissions, bad filename,
-                    // missing permissions, or more likely it can't be converted to the encoding
-                    Log.info("Failed to write to file!")
-                }
-            }
+            write(newValue, to: "userCategories.json")
         }
     }
 
