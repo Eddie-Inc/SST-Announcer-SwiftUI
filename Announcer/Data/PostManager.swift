@@ -14,7 +14,28 @@ var defaults = UserDefaults.standard
 enum PostManager {
     // MARK: Getting/saving posts
     static func getPosts(range: Range<Int>) -> [Post] {
-        let posts = fetchValues(range: range)
+        var posts: [Post] = []
+        do {
+            posts = try fetchValues(range: range)
+            loadQueue.sync { // avoid running a add post while another one is happening
+                addPostsToStorage(newItems: posts)
+            }
+        } catch {
+            Log.info("could not get values. Attempting to use cache.")
+            let storage = postStorage
+
+            guard !storage.isEmpty else {
+                Log.info("No items in cache")
+                return []
+            }
+
+            let values = storage.values
+
+            if range.lowerBound >= 0 && range.upperBound > range.lowerBound {
+                let newUpper = min(range.upperBound, values.count)
+                return Array(values[range.lowerBound..<newUpper])
+            }
+        }
 
         return posts
     }

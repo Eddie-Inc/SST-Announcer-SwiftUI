@@ -43,7 +43,7 @@ extension PostManager {
 
      This method will fetch the posts from the blog and return it as [Post]
      */
-    static func fetchValues(range: Range<Int>) -> [Post] {
+    static func fetchValues(range: Range<Int>) throws -> [Post] {
         // since its 1 indexed, use the lowerbound+1 as the start index
         let query = "\(rssURL)/?start-index=\(range.lowerBound+1)&max-results=\(range.count)"
 
@@ -58,11 +58,9 @@ extension PostManager {
             let feed = feed.atomFeed
 
             return convertFromEntries(feed: (feed?.entries)!)
-        default:
-            break
+        case .failure(let error):
+            throw error
         }
-
-        return []
     }
 
     /**
@@ -109,13 +107,14 @@ extension PostManager {
     /// - Parameter newItems: The items to zipper merge into post storage
     ///
     /// The exact process that occurs goes somewhat like this:
-    /// In this implementation, we use two pointers, one for `storage` and one for `newItems`, to iterate through both arrays simultaneously.
-    /// We compare the current item from each array and append the smaller item to the `combinedArray`. If the items are equal, we
-    /// append one from storage and move both pointers forward. Once we've processed all items from one array, we append any
-    /// remaining items from the other array to the `combinedArray`.
+    /// In this implementation, we use two pointers, one for `storage` and one for `newItems`, to iterate
+    /// through both arrays simultaneously. We compare the current item from each array and append the
+    /// smaller item to the `combinedArray`. If the items are equal, we append one from storage and move
+    /// both pointers forward. Once we've processed all items from one array, we append any remaining items
+    /// from the other array to the `combinedArray`.
     ///
-    /// This solution has a time complexity of O(n) as we process each element in the input arrays once, and is more efficent than
-    /// an append-sort method as it saves the time and space of sorting the array at the end.
+    /// This solution has a time complexity of O(n) as we process each element in the input arrays once, and
+    /// is more efficent than an append-sort method as it saves the time and space of sorting the array at the end.
     static func addPostsToStorage(newItems: [Post]) {
         let storage = PostManager.postStorage
 
@@ -156,8 +155,11 @@ extension PostManager {
             combinedArray.append(newItems[newItemsIndex])
             newItemsIndex += 1
         }
-        PostManager.postStorage = .init(uniqueKeys: combinedArray.map { $0.postTitle },
+        let keys = combinedArray.map { $0.postTitle }
+        PostManager.postStorage = .init(uniqueKeys: keys,
                                         values: combinedArray)
+
+        Log.info("Post manager things: \(keys.map({ $0.description }))")
     }
 }
 
