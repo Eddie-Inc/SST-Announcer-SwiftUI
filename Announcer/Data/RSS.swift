@@ -83,7 +83,6 @@ extension PostManager {
             let title = entry.title ?? ""
             let content = (entry.content?.value) ?? ""
             let date = entry.published ?? .now
-            let read = PostManager.readPosts.contains(title)
 
             let categories = entry.categories?.compactMap({ entry in
                 entry.attributes?.term
@@ -93,10 +92,11 @@ extension PostManager {
                             content: content,
                             date: date,
                             pinned: false,
-                            read: read,
+                            read: false,
                             reminderDate: nil,
                             categories: categories)
 
+            post.read = PostManager.readPosts.contains(post.postTitle)
             post.userCategories = PostManager.userCategoriesForPosts[post.getBlogID()]
 
             posts.append(post)

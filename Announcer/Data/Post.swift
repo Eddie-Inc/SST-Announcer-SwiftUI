@@ -14,7 +14,7 @@ import MarkdownUI
  This struct is used to store Posts. The posts stored here will be used in the ReadAnnouncements and the
  PinnedAnnouncements for persistency. It is also used to present each post in the AnnouncementsViewController.
  */
-struct Post: Codable, Equatable {
+struct Post: Codable, Equatable, Identifiable {
     var title: String
     var content: String // This content will be a HTML as a String
     var date: Date
@@ -22,14 +22,26 @@ struct Post: Codable, Equatable {
     var pinned: Bool
     var read: Bool {
         didSet {
+            var posts = PostManager.readPosts
+
             if read {
-                PostManager.readPosts.insert(title)
+                posts.insert(postTitle)
+                PostManager.readPosts = posts
             } else {
-                PostManager.readPosts.remove(title)
+                posts.remove(postTitle)
+                PostManager.readPosts.remove(postTitle)
             }
         }
     }
     var reminderDate: Date?
+
+    var id: String {
+        postTitle.description
+    }
+
+    var postTitle: PostTitle {
+        PostTitle(date: date, title: title)
+    }
 
     var categories: [String]
     var userCategories: [UserCategory]? // optional so that it plays well with Codable
@@ -134,7 +146,7 @@ struct Post: Codable, Equatable {
     }
 }
 
-struct PostTitle: CustomStringConvertible {
+struct PostTitle: CustomStringConvertible, Codable, Hashable {
     var description: String {
         // we need to get the date to fetch the exact blog post
         let dateFormatter = DateFormatter()

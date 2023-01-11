@@ -11,13 +11,23 @@ import SwiftUI
 var defaults = UserDefaults.standard
 
 enum PostManager {
-    static var readPosts: Set<String> {
+    static var readPosts: Set<PostTitle> {
         get {
             if let posts = _readPosts {
                 return posts
-            } else if let defaultsPosts = defaults.stringArray(forKey: .readPosts) {
-                _readPosts = .init(defaultsPosts)
-                return .init(defaultsPosts)
+            }
+
+            // Retrieve from file
+            let filename = getDocumentsDirectory().appendingPathComponent("readPosts.json")
+            if let data = try? Data(contentsOf: filename) {
+                if let values = try? JSONDecoder().decode([PostTitle].self, from: data) {
+                    Log.info("Read posts data found! \(values)")
+                    _readPosts = Set(values)
+                    return Set(values)
+                }
+            } else {
+                // reset it
+                Log.info("Values not found :(")
             }
 
             return .init()
@@ -27,14 +37,25 @@ enum PostManager {
             loadQueue.async {
                 // TODO: Reduce the frequency of this.
                 // As the set gets larger, this will become a more and more expensive task to do.
-                defaults.set(Array(newValue), forKey: .readPosts)
+                // save to file system
+                if let encoded = try? JSONEncoder().encode(Array(newValue)) {
+                    let filename = getDocumentsDirectory().appendingPathComponent("readPosts.json")
+                    do {
+                        try encoded.write(to: filename)
+                        Log.info("Successfully wrote \(encoded) (from \(newValue)) to \(filename.description)")
+                    } catch {
+                        // failed to write file – bad permissions, bad filename,
+                        // missing permissions, or more likely it can't be converted to the encoding
+                        Log.info("Failed to write to file!")
+                    }
+                }
             }
         }
     }
-    private static var _readPosts: Set<String>?
+    private static var _readPosts: Set<PostTitle>?
 
     static func getPosts(range: Range<Int>) -> [Post] {
-        var posts = fetchValues(range: range)
+        let posts = fetchValues(range: range)
 
         return posts
     }
@@ -89,11 +110,6 @@ enum PostManager {
     }
 
     private static var _userCategories: [String: [UserCategory]]?
-}
-
-extension String {
-    static let userCategories = "userCategories"
-    static let readPosts = "readPosts"
 }
 
 func getDocumentsDirectory() -> URL {

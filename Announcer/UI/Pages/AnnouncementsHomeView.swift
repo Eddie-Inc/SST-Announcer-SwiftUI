@@ -47,7 +47,7 @@ struct AnnouncementsHomeView: View {
                 searchString.isEmpty ||
                 $0.wrappedValue.title.lowercased().contains(formattedSearchString()) ||
                 $0.wrappedValue.content.lowercased().contains(formattedSearchString())
-            }), id: \.wrappedValue.title) { $post in
+            }), id: \.wrappedValue.id) { $post in
                 PostPreviewView(post: $post, posts: $posts)
             }
             if searchString.isEmpty {
