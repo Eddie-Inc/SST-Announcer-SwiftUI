@@ -9,9 +9,9 @@ import WidgetKit
 import SwiftUI
 
 @main
-struct Announcements_NumberBundle: WidgetBundle {
+struct AnnouncementsNumberBundle: WidgetBundle {
     var body: some Widget {
-        Announcements_Number()
-        Announcements_NumberLiveActivity()
+        AnnouncementsNumber()
+        AnnouncementsNumberLiveActivity()
     }
 }

@@ -11,9 +11,9 @@
 		881544BB29691ABF001BAFA4 /* RichText in Frameworks */ = {isa = PBXBuildFile; productRef = 881544BA29691ABF001BAFA4 /* RichText */; };
 		8829F5AA296AE65E00BA63A8 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5A9296AE65E00BA63A8 /* WidgetKit.framework */; };
 		8829F5AC296AE65E00BA63A8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5AB296AE65E00BA63A8 /* SwiftUI.framework */; };
-		8829F5AF296AE65E00BA63A8 /* Announcements_NumberBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829F5AE296AE65E00BA63A8 /* Announcements_NumberBundle.swift */; };
-		8829F5B1296AE65E00BA63A8 /* Announcements_NumberLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829F5B0296AE65E00BA63A8 /* Announcements_NumberLiveActivity.swift */; };
-		8829F5B3296AE65E00BA63A8 /* Announcements_Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829F5B2296AE65E00BA63A8 /* Announcements_Number.swift */; };
+		8829F5AF296AE65E00BA63A8 /* AnnouncementsNumberBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829F5AE296AE65E00BA63A8 /* AnnouncementsNumberBundle.swift */; };
+		8829F5B1296AE65E00BA63A8 /* AnnouncementsNumberLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829F5B0296AE65E00BA63A8 /* AnnouncementsNumberLiveActivity.swift */; };
+		8829F5B3296AE65E00BA63A8 /* AnnouncementsNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829F5B2296AE65E00BA63A8 /* AnnouncementsNumber.swift */; };
 		8829F5B6296AE66100BA63A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8829F5B5296AE66100BA63A8 /* Assets.xcassets */; };
 		8829F5B8296AE66100BA63A8 /* Announcements_Number.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8829F5B4296AE65E00BA63A8 /* Announcements_Number.intentdefinition */; };
 		8829F5B9296AE66100BA63A8 /* Announcements_Number.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8829F5B4296AE65E00BA63A8 /* Announcements_Number.intentdefinition */; };
@@ -43,6 +43,7 @@
 		937860212964625E00FEA668 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9378601D2964625E00FEA668 /* Formatter.swift */; };
 		937860242964637800FEA668 /* AnnouncementDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937860232964637800FEA668 /* AnnouncementDetailView.swift */; };
 		937860262964ED5800FEA668 /* EditFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937860252964ED5800FEA668 /* EditFilterView.swift */; };
+		937EBBF5296EA72000722285 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 937EBBF4296EA72000722285 /* OrderedCollections */; };
 		93AF704629698B1400BF18F8 /* HTMLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704529698B1400BF18F8 /* HTMLString.swift */; };
 		93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */; };
 		93AF704C2969B10B00BF18F8 /* EditReminderDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */; };
@@ -76,9 +77,9 @@
 		8829F5A7296AE65D00BA63A8 /* Announcements_NumberExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Announcements_NumberExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8829F5A9296AE65E00BA63A8 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		8829F5AB296AE65E00BA63A8 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		8829F5AE296AE65E00BA63A8 /* Announcements_NumberBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcements_NumberBundle.swift; sourceTree = "<group>"; };
-		8829F5B0296AE65E00BA63A8 /* Announcements_NumberLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcements_NumberLiveActivity.swift; sourceTree = "<group>"; };
-		8829F5B2296AE65E00BA63A8 /* Announcements_Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcements_Number.swift; sourceTree = "<group>"; };
+		8829F5AE296AE65E00BA63A8 /* AnnouncementsNumberBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsNumberBundle.swift; sourceTree = "<group>"; };
+		8829F5B0296AE65E00BA63A8 /* AnnouncementsNumberLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsNumberLiveActivity.swift; sourceTree = "<group>"; };
+		8829F5B2296AE65E00BA63A8 /* AnnouncementsNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsNumber.swift; sourceTree = "<group>"; };
 		8829F5B4296AE65E00BA63A8 /* Announcements_Number.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Announcements_Number.intentdefinition; sourceTree = "<group>"; };
 		8829F5B5296AE66100BA63A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8829F5B7296AE66100BA63A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -129,6 +130,7 @@
 			files = (
 				935EAB2C29685987005D2F52 /* FeedKit in Frameworks */,
 				881544BB29691ABF001BAFA4 /* RichText in Frameworks */,
+				937EBBF5296EA72000722285 /* OrderedCollections in Frameworks */,
 				881544B529686C72001BAFA4 /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,9 +150,9 @@
 		8829F5AD296AE65E00BA63A8 /* Announcements_Number */ = {
 			isa = PBXGroup;
 			children = (
-				8829F5AE296AE65E00BA63A8 /* Announcements_NumberBundle.swift */,
-				8829F5B0296AE65E00BA63A8 /* Announcements_NumberLiveActivity.swift */,
-				8829F5B2296AE65E00BA63A8 /* Announcements_Number.swift */,
+				8829F5AE296AE65E00BA63A8 /* AnnouncementsNumberBundle.swift */,
+				8829F5B0296AE65E00BA63A8 /* AnnouncementsNumberLiveActivity.swift */,
+				8829F5B2296AE65E00BA63A8 /* AnnouncementsNumber.swift */,
 				8829F5B4296AE65E00BA63A8 /* Announcements_Number.intentdefinition */,
 				8829F5B5296AE66100BA63A8 /* Assets.xcassets */,
 				8829F5B7296AE66100BA63A8 /* Info.plist */,
@@ -332,6 +334,7 @@
 				935EAB2B29685987005D2F52 /* FeedKit */,
 				881544B429686C72001BAFA4 /* MarkdownUI */,
 				881544BA29691ABF001BAFA4 /* RichText */,
+				937EBBF4296EA72000722285 /* OrderedCollections */,
 			);
 			productName = Announcer;
 			productReference = 930EA43729645AE1007081C8 /* Announcer.app */;
@@ -368,6 +371,7 @@
 				935EAB2A29685987005D2F52 /* XCRemoteSwiftPackageReference "FeedKit" */,
 				881544B329686C72001BAFA4 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 				881544B929691ABF001BAFA4 /* XCRemoteSwiftPackageReference "RichText" */,
+				937EBBF3296EA72000722285 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 930EA43829645AE1007081C8 /* Products */;
 			projectDirPath = "";
@@ -419,7 +423,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#export PATH=\"$PATH:/opt/homebrew/bin\"\n#if which swiftlint >/dev/null; then\n#  swiftlint --strict\n#else\n#  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -429,9 +433,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8829F5B8296AE66100BA63A8 /* Announcements_Number.intentdefinition in Sources */,
-				8829F5B1296AE65E00BA63A8 /* Announcements_NumberLiveActivity.swift in Sources */,
-				8829F5B3296AE65E00BA63A8 /* Announcements_Number.swift in Sources */,
-				8829F5AF296AE65E00BA63A8 /* Announcements_NumberBundle.swift in Sources */,
+				8829F5B1296AE65E00BA63A8 /* AnnouncementsNumberLiveActivity.swift in Sources */,
+				8829F5B3296AE65E00BA63A8 /* AnnouncementsNumber.swift in Sources */,
+				8829F5AF296AE65E00BA63A8 /* AnnouncementsNumberBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,6 +768,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		937EBBF3296EA72000722285 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -781,6 +793,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 935EAB2A29685987005D2F52 /* XCRemoteSwiftPackageReference "FeedKit" */;
 			productName = FeedKit;
+		};
+		937EBBF4296EA72000722285 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 937EBBF3296EA72000722285 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

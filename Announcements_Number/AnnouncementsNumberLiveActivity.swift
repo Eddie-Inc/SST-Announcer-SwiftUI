@@ -9,7 +9,7 @@ import ActivityKit
 import WidgetKit
 import SwiftUI
 
-struct Announcements_NumberAttributes: ActivityAttributes {
+struct AnnouncementsNumberAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!
         var value: Int
@@ -19,17 +19,16 @@ struct Announcements_NumberAttributes: ActivityAttributes {
     var name: String
 }
 
-struct Announcements_NumberLiveActivity: Widget {
+struct AnnouncementsNumberLiveActivity: Widget {
     var body: some WidgetConfiguration {
-        ActivityConfiguration(for: Announcements_NumberAttributes.self) { context in
+        ActivityConfiguration(for: AnnouncementsNumberAttributes.self) { _ in
             // Lock screen/banner UI goes here
             VStack {
                 Text("Hello")
             }
             .activityBackgroundTint(Color.cyan)
             .activitySystemActionForegroundColor(Color.black)
-
-        } dynamicIsland: { context in
+        } dynamicIsland: { _ in
             DynamicIsland {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
@@ -58,22 +57,24 @@ struct Announcements_NumberLiveActivity: Widget {
 
 // Kai: previewContext does not seem to work for me so I'm commenting this out for now.
 
-//struct Announcements_NumberLiveActivity_Previews: PreviewProvider {
-//    static let attributes = Announcements_NumberAttributes(name: "Me")
-//    static let contentState = Announcements_NumberAttributes.ContentState(value: 3)
-//
-//    static var previews: some View {
-//        attributes
-//            .previewContext(contentState, viewKind: .dynamicIsland(.compact))
-//            .previewDisplayName("Island Compact")
-//        attributes
-//            .previewContext(contentState, viewKind: .dynamicIsland(.expanded))
-//            .previewDisplayName("Island Expanded")
-//        attributes
-//            .previewContext(contentState, viewKind: .dynamicIsland(.minimal))
-//            .previewDisplayName("Minimal")
-//        attributes
-//            .previewContext(contentState, viewKind: .content)
-//            .previewDisplayName("Notification")
-//    }
-//}
+/*
+struct Announcements_NumberLiveActivity_Previews: PreviewProvider {
+    static let attributes = Announcements_NumberAttributes(name: "Me")
+    static let contentState = Announcements_NumberAttributes.ContentState(value: 3)
+
+    static var previews: some View {
+        attributes
+            .previewContext(contentState, viewKind: .dynamicIsland(.compact))
+            .previewDisplayName("Island Compact")
+        attributes
+            .previewContext(contentState, viewKind: .dynamicIsland(.expanded))
+            .previewDisplayName("Island Expanded")
+        attributes
+            .previewContext(contentState, viewKind: .dynamicIsland(.minimal))
+            .previewDisplayName("Minimal")
+        attributes
+            .previewContext(contentState, viewKind: .content)
+            .previewDisplayName("Notification")
+    }
+}
+*/

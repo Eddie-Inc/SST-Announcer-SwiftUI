@@ -10,8 +10,6 @@ import SwiftUI
 let noZeroAndPoint: CharacterSet = .init(["0", "."])
 
 struct AnnouncementDetailView: View {
-    
-    
 
     @Binding
     var post: Post
@@ -40,7 +38,6 @@ struct AnnouncementDetailView: View {
     @State
     var isLoadingSafariView: Bool = false
 
-    
     var body: some View {
         List {
             VStack(alignment: .leading) {
@@ -74,7 +71,6 @@ struct AnnouncementDetailView: View {
             }
         }
 
-            
 //        .toolbar {
 //            ToolbarItem(placement: .navigationBar) {
 //                Button {
