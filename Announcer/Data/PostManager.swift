@@ -50,6 +50,27 @@ enum PostManager {
     private static var _readPosts: Set<PostTitle>?
 
     // TODO: Reminder Dates
+    static var reminderDates: [PostTitle: Date] {
+        get {
+            // load from userDefaults or cache
+            if let dates = _reminderDates {
+                return dates
+            }
+
+            // Retrieve from file
+            if let dates = read([PostTitle: Date].self, from: "reminderDates.json") {
+                _reminderDates = dates
+                return dates
+            }
+
+            return [:]
+        }
+        set {
+            _reminderDates = newValue
+            write(newValue, to: "reminderDates.json")
+        }
+    }
+    private static var _reminderDates: [PostTitle: Date]?
 
     // MARK: User categories
     static var userCategories: [UserCategory] {

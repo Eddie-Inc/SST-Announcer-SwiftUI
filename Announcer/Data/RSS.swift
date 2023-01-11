@@ -95,8 +95,10 @@ extension PostManager {
                             reminderDate: nil,
                             categories: categories)
 
-            post.read = PostManager.readPosts.contains(post.postTitle)
-            post.userCategories = PostManager.userCategoriesForPosts[post.postTitle]
+            let pTitle = post.postTitle
+            post.read = PostManager.readPosts.contains(pTitle)
+            post.reminderDate = PostManager.reminderDates[pTitle]
+            post.userCategories = PostManager.userCategoriesForPosts[pTitle]
 
             posts.append(post)
         }

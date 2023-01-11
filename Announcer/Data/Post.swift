@@ -33,7 +33,17 @@ struct Post: Codable, Equatable, Identifiable {
             }
         }
     }
-    var reminderDate: Date?
+    var reminderDate: Date? {
+        didSet {
+            var reminderDates = PostManager.reminderDates
+            if let reminderDate {
+                reminderDates[postTitle] = reminderDate
+            } else {
+                reminderDates.removeValue(forKey: postTitle)
+            }
+            PostManager.reminderDates = reminderDates
+        }
+    }
 
     var id: String {
         postTitle.description
