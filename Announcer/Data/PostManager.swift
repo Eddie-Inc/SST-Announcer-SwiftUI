@@ -27,7 +27,7 @@ enum PostManager {
             loadQueue.async {
                 // TODO: Reduce the frequency of this.
                 // As the set gets larger, this will become a more and more expensive task to do.
-                defaults.set(Array(readPosts), forKey: .readPosts)
+                defaults.set(Array(newValue), forKey: .readPosts)
             }
         }
     }

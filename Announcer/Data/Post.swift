@@ -104,7 +104,7 @@ struct Post: Codable, Equatable {
         dateFormatter.dateFormat = "/yyyy/MM/"
 
         // generates the link of the blogpost
-        let returnLink = blogURL + dateFormatter.string(from: date) + getBlogID(limit: limit) + ".html"
+        let returnLink = blogURL + PostTitle(date: date, title: getBlogID(limit: limit)).description + ".html"
 
         let returnURL = URL(string: returnLink) ?? URL(string: blogURL)!
 
@@ -131,6 +131,23 @@ struct Post: Codable, Equatable {
             // avoid infinite recursion
             return URL(string: blogURL)!
         }
+    }
+}
+
+struct PostTitle: CustomStringConvertible {
+    var description: String {
+        // we need to get the date to fetch the exact blog post
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "/yyyy/MM/"
+
+        return dateFormatter.string(from: date) + title
+    }
+    var date: Date
+    var title: String
+
+    init(date: Date, title: String) {
+        self.date = date
+        self.title = title
     }
 }
 
