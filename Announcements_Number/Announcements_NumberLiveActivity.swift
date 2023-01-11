@@ -56,22 +56,24 @@ struct Announcements_NumberLiveActivity: Widget {
     }
 }
 
-struct Announcements_NumberLiveActivity_Previews: PreviewProvider {
-    static let attributes = Announcements_NumberAttributes(name: "Me")
-    static let contentState = Announcements_NumberAttributes.ContentState(value: 3)
+// Kai: previewContext does not seem to work for me so I'm commenting this out for now.
 
-    static var previews: some View {
-        attributes
-            .previewContext(contentState, viewKind: .dynamicIsland(.compact))
-            .previewDisplayName("Island Compact")
-        attributes
-            .previewContext(contentState, viewKind: .dynamicIsland(.expanded))
-            .previewDisplayName("Island Expanded")
-        attributes
-            .previewContext(contentState, viewKind: .dynamicIsland(.minimal))
-            .previewDisplayName("Minimal")
-        attributes
-            .previewContext(contentState, viewKind: .content)
-            .previewDisplayName("Notification")
-    }
-}
+//struct Announcements_NumberLiveActivity_Previews: PreviewProvider {
+//    static let attributes = Announcements_NumberAttributes(name: "Me")
+//    static let contentState = Announcements_NumberAttributes.ContentState(value: 3)
+//
+//    static var previews: some View {
+//        attributes
+//            .previewContext(contentState, viewKind: .dynamicIsland(.compact))
+//            .previewDisplayName("Island Compact")
+//        attributes
+//            .previewContext(contentState, viewKind: .dynamicIsland(.expanded))
+//            .previewDisplayName("Island Expanded")
+//        attributes
+//            .previewContext(contentState, viewKind: .dynamicIsland(.minimal))
+//            .previewDisplayName("Minimal")
+//        attributes
+//            .previewContext(contentState, viewKind: .content)
+//            .previewDisplayName("Notification")
+//    }
+//}
