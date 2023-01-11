@@ -35,35 +35,8 @@ enum PostManager {
 
     static func getPosts(range: Range<Int>) -> [Post] {
         var posts = fetchValues(range: range)
-        trimDeadUserCategories(from: &posts)
 
         return posts
-    }
-
-    static func trimDeadUserCategories(from posts: inout [Post]) {
-        for postIndex in 0..<posts.count {
-            // get the categories, if there are none (is nil or []) then continue
-            guard var newCategories: [UserCategory?] = posts[postIndex].userCategories,
-                  !newCategories.isEmpty
-            else { continue }
-
-            // iterate over user categories in each post
-            for categoryIndex in 0..<newCategories.count {
-                guard let category = newCategories[categoryIndex] else { return }
-
-                if let userCategory = userCategories.first(where: { $0.id == category.id }) {
-                    // if user categories contains an item with the same ID, then that
-                    // means that the category is valid. Keep the name updated.
-                    newCategories[categoryIndex]?.name = userCategory.name
-                } else {
-                    // if the userCategories does not contain a category with the same ID,
-                    // then remove the item
-                    newCategories[categoryIndex] = nil
-                }
-            }
-
-            posts[postIndex].userCategories = newCategories.compactMap({ $0 })
-        }
     }
 
     /// Saves a post to localstorage. Effectively a form of cache.
@@ -71,40 +44,61 @@ enum PostManager {
     }
 
     static var userCategories: [UserCategory] {
+        // flatten user categories for posts
+        let categories = userCategoriesForPosts
+        return categories.flatMap({ $1 })
+    }
+
+    static var userCategoriesForPosts: [String: [UserCategory]] {
         get {
             // load from userDefaults or cache
             if let userCategories = _userCategories {
                 return userCategories
             }
 
-            // Retrieve from UserDefaults
-            if let data = UserDefaults.standard.object(forKey: .userCategories) as? Data {
-                if let values = try? JSONDecoder().decode([UserCategory].self, from: data) {
+            // Retrieve from file
+            let filename = getDocumentsDirectory().appendingPathComponent("userCategories.json")
+            if let data = try? Data(contentsOf: filename) {
+                if let values = try? JSONDecoder().decode([String: [UserCategory]].self, from: data) {
+                    Log.info("Values found!")
+                    _userCategories = values
                     return values
                 }
             } else {
                 // reset it
-                defaults.set(nil, forKey: .userCategories)
+                Log.info("Values not found :(")
             }
 
-            return []
+            return [:]
         }
         set {
             _userCategories = newValue
-            // save to userDefaults
-            // To store in UserDefaults
+            // save to file system
             if let encoded = try? JSONEncoder().encode(newValue) {
-                defaults.set(encoded, forKey: .userCategories)
+                let filename = getDocumentsDirectory().appendingPathComponent("userCategories.json")
+                do {
+                    try encoded.write(to: filename)
+                    Log.info("Successfully wrote \(encoded) (from \(newValue)) to \(filename.description)")
+                } catch {
+                    // failed to write file – bad permissions, bad filename,
+                    // missing permissions, or more likely it can't be converted to the encoding
+                    Log.info("Failed to write to file!")
+                }
             }
         }
     }
 
-    private static var _userCategories: [UserCategory]?
+    private static var _userCategories: [String: [UserCategory]]?
 }
 
 extension String {
     static let userCategories = "userCategories"
     static let readPosts = "readPosts"
+}
+
+func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
 }
 
 let placeholderTextShort = "Lorem ipsum dolor sit amet"

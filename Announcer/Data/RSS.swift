@@ -89,13 +89,17 @@ extension PostManager {
                 entry.attributes?.term
             }) ?? []
 
-            posts.append(Post(title: title,
-                              content: content,
-                              date: date,
-                              pinned: false,
-                              read: read,
-                              reminderDate: nil,
-                              categories: categories))
+            var post = Post(title: title,
+                            content: content,
+                            date: date,
+                            pinned: false,
+                            read: read,
+                            reminderDate: nil,
+                            categories: categories)
+
+            post.userCategories = PostManager.userCategoriesForPosts[post.getBlogID()]
+
+            posts.append(post)
         }
         return posts
     }

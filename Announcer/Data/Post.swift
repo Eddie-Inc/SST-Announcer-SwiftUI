@@ -75,11 +75,7 @@ struct Post: Codable, Equatable {
     // - Title:    "[S1] SLS Account - Log-in Exercise"
     // - Expected: "2023/01/s1-sls-account-log-in-exercise.html"
     //
-    func getBlogURL(limit: Int = 40) -> URL {
-        // we need to get the date to fetch the exact blog post
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "/yyyy/MM/"
-
+    func getBlogID(limit: Int = 40) -> String {
         // to store the link
         var returnLink = ""
 
@@ -99,8 +95,16 @@ struct Post: Codable, Equatable {
         }
         returnLink.removeLast() // remove the last dash
 
+        return returnLink
+    }
+
+    func getBlogURL(limit: Int = 40) -> URL {
+        // we need to get the date to fetch the exact blog post
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "/yyyy/MM/"
+
         // generates the link of the blogpost
-        returnLink = blogURL + dateFormatter.string(from: date) + returnLink + ".html"
+        let returnLink = blogURL + dateFormatter.string(from: date) + getBlogID(limit: limit) + ".html"
 
         let returnURL = URL(string: returnLink) ?? URL(string: blogURL)!
 

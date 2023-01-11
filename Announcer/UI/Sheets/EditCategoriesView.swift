@@ -21,11 +21,11 @@ struct EditCategoriesView: View {
     @State var showCreateNewCategoryAlert: Bool = false
     @State var newCategoryName: String = ""
 
-    @State
-    var showEditSingleCategory: Bool = false
-
-    @State var originalName: String = ""
-    @State var categoryName: String = ""
+//    @State
+//    var showEditSingleCategory: Bool = false
+//
+//    @State var originalName: String = ""
+//    @State var categoryName: String = ""
 
     @State var searchString: String = ""
 
@@ -41,16 +41,16 @@ struct EditCategoriesView: View {
             }
 
             Section {
-                ForEach(PostManager.userCategories, id: \.id) { category in
+                ForEach(PostManager.userCategoriesForPosts[post.getBlogID()] ?? [], id: \.id) { category in
                     categoryView(category: category)
                 }
                 .onDelete { indexSet in
-                    PostManager.userCategories.remove(atOffsets: indexSet)
-                    PostManager.trimDeadUserCategories(from: &posts)
+                    PostManager.userCategoriesForPosts[post.getBlogID()]?
+                        .remove(atOffsets: indexSet)
                 }
                 .onMove { indexSet, moveTo in
-                    PostManager.userCategories.move(fromOffsets: indexSet,
-                                                    toOffset: moveTo)
+                    PostManager.userCategoriesForPosts[post.getBlogID()]?
+                        .move(fromOffsets: indexSet, toOffset: moveTo)
                 }
             }
         }
@@ -69,20 +69,20 @@ struct EditCategoriesView: View {
         .alert("Create New Category", isPresented: $showCreateNewCategoryAlert) {
             createCategoryAlert
         }
-        .alert("Edit Name", isPresented: $showEditSingleCategory) {
-            TextField("Name", text: $categoryName)
-            Button("Cancel") {}
-            Button("Confirm") {
-                guard let index = PostManager.userCategories.firstIndex(where: {
-                    $0.name == originalName
-                }) else { return }
-
-                Log.info("Original name!")
-
-                PostManager.userCategories[index].name = categoryName
-                PostManager.trimDeadUserCategories(from: &posts)
-            }
-        }
+//        .alert("Edit Name", isPresented: $showEditSingleCategory) {
+//            TextField("Name", text: $categoryName)
+//            Button("Cancel") {}
+//            Button("Confirm") {
+//                guard let index = PostManager.userCategories.firstIndex(where: {
+//                    $0.name == originalName
+//                }) else { return }
+//
+//                Log.info("Original name!")
+//
+//                [index].name = categoryName
+//                PostManager.trimDeadUserCategories(from: &posts)
+//            }
+//        }
     }
 
     func categoryView(category: UserCategory) -> some View {
@@ -110,13 +110,13 @@ struct EditCategoriesView: View {
             }
             .foregroundColor(.primary)
         }
-        .contextMenu {
-            Button("Edit Category Name") {
-                originalName = category.name
-                categoryName = category.name
-                showEditSingleCategory.toggle()
-            }
-        }
+//        .contextMenu {
+//            Button("Edit Category Name") {
+//                originalName = category.name
+//                categoryName = category.name
+//                showEditSingleCategory.toggle()
+//            }
+//        }
     }
 
     @ViewBuilder
@@ -139,7 +139,11 @@ struct EditCategoriesView: View {
         if !PostManager.userCategories.contains(where: {
             $0.name == named
         }) {
-            PostManager.userCategories.append(.init(named))
+            var categories = PostManager
+                .userCategoriesForPosts[post.getBlogID()] ?? []
+            categories.append(.init(named))
+
+            PostManager.userCategoriesForPosts[post.getBlogID()] = categories
         }
         showEditCategoryView = false
         PostManager.savePost(post: post)
