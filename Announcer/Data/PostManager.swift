@@ -17,7 +17,7 @@ enum PostManager {
         var posts: [Post] = []
         do {
             posts = try fetchValues(range: range)
-            loadQueue.sync { // avoid running a add post while another one is happening
+            loadQueue.async {
                 addPostsToStorage(newItems: posts)
             }
         } catch {

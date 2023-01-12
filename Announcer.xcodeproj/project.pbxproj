@@ -29,6 +29,8 @@
 		931B2C702966DF2300BBF397 /* UserCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931B2C6F2966DF2300BBF397 /* UserCategory.swift */; };
 		93436AC82965742B00AD3148 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93436AC72965742B00AD3148 /* PostManager.swift */; };
 		93436ACA2965B4D600AD3148 /* PostPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93436AC92965B4D600AD3148 /* PostPreviewView.swift */; };
+		93528DB3296FC23200651404 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93528DB2296FC23200651404 /* Settings.swift */; };
+		93528DB6296FC95B00651404 /* ClearStorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93528DB5296FC95B00651404 /* ClearStorageView.swift */; };
 		935EAB2929685918005D2F52 /* RSS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EAB2829685917005D2F52 /* RSS.swift */; };
 		935EAB2C29685987005D2F52 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 935EAB2B29685987005D2F52 /* FeedKit */; };
 		935EAB3329686B5B005D2F52 /* TimeAndReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EAB3229686B5B005D2F52 /* TimeAndReminder.swift */; };
@@ -97,6 +99,8 @@
 		931B2C6F2966DF2300BBF397 /* UserCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCategory.swift; sourceTree = "<group>"; };
 		93436AC72965742B00AD3148 /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		93436AC92965B4D600AD3148 /* PostPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewView.swift; sourceTree = "<group>"; };
+		93528DB2296FC23200651404 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		93528DB5296FC95B00651404 /* ClearStorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearStorageView.swift; sourceTree = "<group>"; };
 		935EAB2829685917005D2F52 /* RSS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSS.swift; sourceTree = "<group>"; };
 		935EAB3129685EBD005D2F52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		935EAB3229686B5B005D2F52 /* TimeAndReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAndReminder.swift; sourceTree = "<group>"; };
@@ -229,6 +233,7 @@
 		931B2C6B2966C8B100BBF397 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				93528DB4296FC94900651404 /* Settings */,
 				93769337296A8B0800D94EC3 /* AnnouncementDetailView */,
 				930EA44829645BF4007081C8 /* AnnouncementsHomeView.swift */,
 				93769335296A842900D94EC3 /* SafariView.swift */,
@@ -266,6 +271,15 @@
 				931B2C6C2966C8E800BBF397 /* Components */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		93528DB4296FC94900651404 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				93528DB2296FC23200651404 /* Settings.swift */,
+				93528DB5296FC95B00651404 /* ClearStorageView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		93769337296A8B0800D94EC3 /* AnnouncementDetailView */ = {
@@ -449,6 +463,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93528DB6296FC95B00651404 /* ClearStorageView.swift in Sources */,
 				937860242964637800FEA668 /* AnnouncementDetailView.swift in Sources */,
 				930EA44929645BF4007081C8 /* AnnouncementsHomeView.swift in Sources */,
 				931B2C702966DF2300BBF397 /* UserCategory.swift in Sources */,
@@ -473,6 +488,7 @@
 				937EBBF9296EC47A00722285 /* FileManager.swift in Sources */,
 				937860262964ED5800FEA668 /* EditFilterView.swift in Sources */,
 				93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */,
+				93528DB3296FC23200651404 /* Settings.swift in Sources */,
 				9376933B296A8B5B00D94EC3 /* AnnouncementDetailView+Render.swift in Sources */,
 				935EAB2929685918005D2F52 /* RSS.swift in Sources */,
 			);
