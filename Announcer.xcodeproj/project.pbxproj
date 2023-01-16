@@ -31,6 +31,7 @@
 		93436ACA2965B4D600AD3148 /* PostPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93436AC92965B4D600AD3148 /* PostPreviewView.swift */; };
 		93528DB3296FC23200651404 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93528DB2296FC23200651404 /* Settings.swift */; };
 		93528DB6296FC95B00651404 /* ClearStorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93528DB5296FC95B00651404 /* ClearStorageView.swift */; };
+		93528DB8296FDE2600651404 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93528DB7296FDE2600651404 /* SettingsManager.swift */; };
 		935EAB2929685918005D2F52 /* RSS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EAB2829685917005D2F52 /* RSS.swift */; };
 		935EAB2C29685987005D2F52 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 935EAB2B29685987005D2F52 /* FeedKit */; };
 		935EAB3329686B5B005D2F52 /* TimeAndReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EAB3229686B5B005D2F52 /* TimeAndReminder.swift */; };
@@ -101,6 +102,7 @@
 		93436AC92965B4D600AD3148 /* PostPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewView.swift; sourceTree = "<group>"; };
 		93528DB2296FC23200651404 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		93528DB5296FC95B00651404 /* ClearStorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearStorageView.swift; sourceTree = "<group>"; };
+		93528DB7296FDE2600651404 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		935EAB2829685917005D2F52 /* RSS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSS.swift; sourceTree = "<group>"; };
 		935EAB3129685EBD005D2F52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		935EAB3229686B5B005D2F52 /* TimeAndReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAndReminder.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				930EA44A29645CB5007081C8 /* Post.swift */,
 				931B2C6F2966DF2300BBF397 /* UserCategory.swift */,
 				935EAB2829685917005D2F52 /* RSS.swift */,
+				93528DB7296FDE2600651404 /* SettingsManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */,
 				93528DB3296FC23200651404 /* Settings.swift in Sources */,
 				9376933B296A8B5B00D94EC3 /* AnnouncementDetailView+Render.swift in Sources */,
+				93528DB8296FDE2600651404 /* SettingsManager.swift in Sources */,
 				935EAB2929685918005D2F52 /* RSS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

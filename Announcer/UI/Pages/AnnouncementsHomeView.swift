@@ -118,7 +118,7 @@ struct AnnouncementsHomeView: View {
         return rawCount
     }
 
-    func loadNextPosts(count: Int = 10) {
+    func loadNextPosts(count: Int = SettingsManager.shared.loadNumber) {
         loadQueue.async {
             guard !isLoading else { return }
 

@@ -18,13 +18,15 @@ let fakeStorage: OrderedDictionary<PostTitle, Post> =
                         categories: [])])
 
 struct Settings: View {
-    @State
-    var loadNumber: Int = 10
 
     var body: some View {
         List {
             Section {
-                Picker("Number of posts per load", selection: $loadNumber) {
+                Picker("Number of posts per load", selection: .init(get: {
+                    SettingsManager.shared.loadNumber
+                }, set: { newValue in
+                    SettingsManager.shared.loadNumber = newValue
+                })) {
                     ForEach(5...150, id: \.self) { number in
                         Text("\(number)")
                     }
@@ -35,12 +37,12 @@ struct Settings: View {
                 HStack {
                     Text("Number of cached posts:")
                     Spacer()
-//                    Text("\(PostManager.postStorage.count)")
-                    Text("\(fakeStorage.count)")
+                    Text("\(PostManager.postStorage.count)")
+//                    Text("\(fakeStorage.count)")
                         .foregroundColor(.secondary)
                 }
-//                if let last = PostManager.postStorage.elements.last {
-                if let last = fakeStorage.elements.last {
+                if let last = PostManager.postStorage.elements.last {
+//                if let last = fakeStorage.elements.last {
                     HStack {
                         Text("Earliest post:")
                         Spacer()

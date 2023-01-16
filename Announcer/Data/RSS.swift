@@ -127,10 +127,10 @@ extension PostManager {
             let storageItem = storage.elements[storageIndex].value
             let newItem = newItems[newItemsIndex]
 
-            if storageItem < newItem {
+            if storageItem > newItem {
                 combinedArray.append(storageItem)
                 storageIndex += 1
-            } else if newItem < storageItem {
+            } else if newItem > storageItem {
                 combinedArray.append(newItem)
                 newItemsIndex += 1
             } else {
@@ -155,7 +155,14 @@ extension PostManager {
             combinedArray.append(newItems[newItemsIndex])
             newItemsIndex += 1
         }
+
         let keys = combinedArray.map { $0.postTitle }
+        // swiftlint:disable:this disallow_print
+        print("Storage Things: \n\(storage.keys.map({ "\($0.date.timeIntervalSince1970)" }).joined(separator: "\n"))")
+        // swiftlint:disable:this disallow_print
+        print("New things: \n\(storage.keys.map({ "\($0.date.timeIntervalSince1970)" }).joined(separator: "\n"))")
+        // swiftlint:disable:this disallow_print
+        print("Things: \n\(keys.map({ "\($0.date.timeIntervalSince1970)" }).joined(separator: "\n"))")
         PostManager.postStorage = .init(uniqueKeys: keys,
                                         values: combinedArray)
 
@@ -163,6 +170,6 @@ extension PostManager {
     }
 }
 
-private func < (lhs: Post, rhs: Post) -> Bool {
-    lhs.date.timeIntervalSince1970 < rhs.date.timeIntervalSince1970
+private func > (lhs: Post, rhs: Post) -> Bool {
+    lhs.date.timeIntervalSince1970 > rhs.date.timeIntervalSince1970
 }

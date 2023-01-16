@@ -9,8 +9,6 @@ import Foundation
 import SwiftUI
 import OrderedCollections
 
-var defaults = UserDefaults.standard
-
 enum PostManager {
     // MARK: Getting/saving posts
     static func getPosts(range: Range<Int>) -> [Post] {
@@ -74,7 +72,7 @@ enum PostManager {
     // TODO: Reminder Dates
     static var reminderDates: [PostTitle: Date] {
         get {
-            // load from userDefaults or cache
+            // load from cache
             if let dates = _reminderDates {
                 return dates
             }
@@ -103,7 +101,7 @@ enum PostManager {
 
     static var userCategoriesForPosts: [PostTitle: [UserCategory]] {
         get {
-            // load from userDefaults or cache
+            // load from cache
             if let userCategories = _userCategories {
                 return userCategories
             }
