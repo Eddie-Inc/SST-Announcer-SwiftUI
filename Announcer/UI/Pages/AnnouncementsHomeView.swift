@@ -53,7 +53,7 @@ struct AnnouncementsHomeView: View {
                     id: \.wrappedValue.id) { $post in
                 PostPreviewView(post: $post, posts: $posts)
             }
-            if searchString.isEmpty {
+            if searchString.isEmpty && filterCategories.isEmpty {
                 ForEach(0..<3) { index in
                     PostPreviewPlaceholderView()
                         .overlay { GeometryReader { proxy in
