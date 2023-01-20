@@ -36,6 +36,15 @@ You may also lose the ability to view some of your pinned posts.
                 Toggle("Do not delete pinned posts", isOn: $excludePinnedPosts)
                 Button("Delete Post Storage\(excludePinnedPosts ? "\n(Excluding Pinned Posts)" : "")",
                        role: .destructive) {
+                    if excludePinnedPosts {
+                        var storage = PostManager.postStorage
+                        storage.removeAll { (key, value) in
+                            !value.pinned
+                        }
+                        PostManager.postStorage = storage
+                    } else {
+                        PostManager.postStorage = .init()
+                    }
                     presentationMode.wrappedValue.dismiss()
                 }
             }
