@@ -11,11 +11,15 @@ import MarkdownUI
 let loadQueue: DispatchQueue = .init(label: "sg.edu.sst.panziyue.Announcer.getPosts")
 
 struct AnnouncementsHomeView: View {
+
     @State
     var posts: [Post] = []
 
     @State
     var showFilterView: Bool = false
+
+    @State
+    var filterCategories: [String] = []
 
     @State
     var searchString: String = ""
@@ -30,24 +34,23 @@ struct AnnouncementsHomeView: View {
         if #available(iOS 16.0, *) {
             content
                 .sheet(isPresented: $showFilterView) {
-                    EditFilterView(posts: posts, searchString: $searchString)
+                    EditFilterView(posts: posts,
+                                   filterCategories: $filterCategories)
                         .presentationDetents(Set([.medium, .large]))
                 }
         } else {
             content
                 .sheet(isPresented: $showFilterView) {
-                    EditFilterView(posts: posts, searchString: $searchString)
+                    EditFilterView(posts: posts,
+                                   filterCategories: $filterCategories)
                 }
         }
     }
 
     var content: some View {
         List {
-            ForEach($posts.filter({
-                searchString.isEmpty ||
-                $0.wrappedValue.title.lowercased().contains(formattedSearchString()) ||
-                $0.wrappedValue.content.lowercased().contains(formattedSearchString())
-            }), id: \.wrappedValue.id) { $post in
+            ForEach($posts.filter({ shouldPostBeIncluded(post: $0.wrappedValue) }),
+                    id: \.wrappedValue.id) { $post in
                 PostPreviewView(post: $post, posts: $posts)
             }
             if searchString.isEmpty {
@@ -92,6 +95,22 @@ struct AnnouncementsHomeView: View {
         .onAppear {
             loadNextPosts()
         }
+    }
+
+    func shouldPostBeIncluded(post: Post) -> Bool {
+        let searchIsEmpty = searchString.isEmpty
+        let containsInTitle = post.title.lowercased().contains(formattedSearchString())
+        let containsInContent = post.content.lowercased().contains(formattedSearchString())
+
+        let tagsAreEmpty = filterCategories.isEmpty
+        let containsTag = filterCategories.contains(where: { tag in
+            (post.userCategories?.contains(where: { $0.name == tag }) ?? false ) ||
+            post.categories.contains(where: { $0 == tag })
+        })
+
+        let searchWorks = searchIsEmpty || containsInTitle || containsInContent
+        let tagWorks = tagsAreEmpty || containsTag
+        return searchWorks && tagWorks
     }
 
     func formattedSearchString() -> String {

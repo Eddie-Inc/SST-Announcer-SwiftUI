@@ -16,11 +16,11 @@ struct EditFilterView: View {
     var possibleTags: [String]
 
     @Binding
-    var searchString: String
+    var filterCategories: [String]
 
-    init(posts: [Post], searchString: Binding<String>) {
+    init(posts: [Post], filterCategories: Binding<[String]>) {
         self.posts = posts
-        self._searchString = searchString
+        self._filterCategories = filterCategories
 
         var tags: [String] = []
         for post in posts {
@@ -36,17 +36,18 @@ struct EditFilterView: View {
             ForEach($possibleTags, id: \.self) { $tag in
                 Button {
                     // add or remove the tag from the search term
-                    if searchString.contains("[\(tag)]") {
-                        searchString = searchString.replacingOccurrences(of: "[\(tag)]",
-                                                                         with: "")
+                    if filterCategories.contains(tag) {
+                        filterCategories.removeAll(where: {
+                            $0 == tag
+                        })
                     } else {
-                        searchString = "[\(tag)] \(searchString)"
+                        filterCategories.append(tag)
                     }
                 } label: {
                     HStack {
                         Image(systemName: "checkmark")
                             .foregroundColor(.accentColor)
-                            .opacity(searchString.contains("[\(tag)]") ? 1 : 0)
+                            .opacity(filterCategories.contains(tag) ? 1 : 0)
                         Text(tag)
                     }
                     .foregroundColor(.primary)
@@ -77,6 +78,6 @@ struct EditFilterView_Previews: PreviewProvider {
                  pinned: false,
                  read: false,
                  categories: ["Random Category 3"])
-        ], searchString: .constant("no"))
+        ], filterCategories: .constant([]))
     }
 }
