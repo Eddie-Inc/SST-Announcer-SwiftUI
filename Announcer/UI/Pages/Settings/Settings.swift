@@ -51,6 +51,10 @@ struct Settings: View {
                     }
                 }
 
+                NavigationLink("Cache more posts") {
+                    CachePostsView()
+                }
+
                 NavigationLink("Clear Storage") {
                     ClearStorageView()
                 }
