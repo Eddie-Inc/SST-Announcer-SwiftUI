@@ -19,23 +19,25 @@ enum PostManager {
                 addPostsToStorage(newItems: posts)
             }
         } catch {
-            Log.info("could not get values. Attempting to use cache.")
-            let storage = postStorage
-
-            guard !storage.isEmpty else {
-                Log.info("No items in cache")
-                return []
-            }
-
-            let values = storage.values
-
-            if range.lowerBound >= 0 && range.upperBound > range.lowerBound {
-                let newUpper = min(range.upperBound, values.count)
-                return Array(values[range.lowerBound..<newUpper])
-            }
+            posts = getCachePosts(range: range)
         }
 
         return posts
+    }
+
+    private static func getCachePosts(range: Range<Int>) -> [Post] {
+        Log.info("could not get values. Attempting to use cache.")
+        let storage = postStorage
+
+        guard !storage.isEmpty,
+                range.lowerBound >= 0 && range.upperBound > range.lowerBound else {
+            Log.info("No items in cache or invalid range")
+            return []
+        }
+
+        let values = storage.values
+        let newUpper = min(range.upperBound, values.count)
+        return Array(values[range.lowerBound..<newUpper])
     }
 
     /// Saves a post to localstorage. Effectively a form of cache.
