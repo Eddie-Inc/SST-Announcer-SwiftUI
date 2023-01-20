@@ -12,9 +12,12 @@ import OrderedCollections
 enum PostManager {
     // MARK: Getting/saving posts
     static func getPosts(range: Range<Int>) -> [Post] {
-        var posts: [Post] = []
+        var effectiveRange = range.lowerBound..<range.lowerBound
+        var posts: [Post] = getPinnedPosts(for: range, effectiveRange: &effectiveRange)
+
         do {
-            posts = try fetchValues(range: range)
+            let values = try fetchValues(range: effectiveRange.lowerBound..<range.upperBound)
+            posts.append(contentsOf: filterOutPinnedPosts(from: values))
             loadQueue.async {
                 addPostsToStorage(newItems: posts)
             }

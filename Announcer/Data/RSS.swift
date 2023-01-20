@@ -63,6 +63,37 @@ extension PostManager {
         }
     }
 
+    static func getPinnedPosts(for range: Range<Int>, effectiveRange: inout Range<Int>) -> [Post] {
+        // sort by newest first, since thats how pinned posts will appear
+        let pinnedPosts = Array(PostManager.pinnedPosts).sorted(by: {
+            $0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970
+        })
+
+        // make sure its within range, else just return
+        guard range.lowerBound < pinnedPosts.count else {
+            effectiveRange = range.lowerBound..<range.lowerBound
+            return []
+        }
+
+        // get the pinned post titles
+        let pinnedRange = range.lowerBound..<min(range.upperBound, pinnedPosts.count)
+        effectiveRange = pinnedRange
+        let pinnedPostTitles = Array(pinnedPosts[pinnedRange])
+
+        // get the posts for those titles
+        let storage = PostManager.postStorage
+        Log.info("Titles: \(pinnedPostTitles)")
+        return pinnedPostTitles.compactMap { title in
+            guard var post = storage[title] else { return nil }
+            updatePostProperties(post: &post)
+            return post
+        }
+    }
+
+    static func filterOutPinnedPosts(from posts: [Post]) -> [Post] {
+        return posts.filter({ !$0.pinned })
+    }
+
     /**
      Converts an array of `AtomFeedEntry` to an array of `Post`
 
@@ -93,15 +124,19 @@ extension PostManager {
                             reminderDate: nil,
                             categories: categories)
 
-            let pTitle = post.postTitle
-            post.pinned = PostManager.pinnedPosts.contains(pTitle)
-            post.read = PostManager.readPosts.contains(pTitle)
-            post.reminderDate = PostManager.reminderDates[pTitle]
-            post.userCategories = PostManager.userCategoriesForPosts[pTitle]
+            updatePostProperties(post: &post)
 
             posts.append(post)
         }
         return posts
+    }
+
+    static func updatePostProperties(post: inout Post) {
+        let pTitle = post.postTitle
+        post.pinned = PostManager.pinnedPosts.contains(pTitle)
+        post.read = PostManager.readPosts.contains(pTitle)
+        post.reminderDate = PostManager.reminderDates[pTitle]
+        post.userCategories = PostManager.userCategoriesForPosts[pTitle]
     }
 
     /// Performs a "zipper merge" between `newItems` and ``PostManager.postStorage``
