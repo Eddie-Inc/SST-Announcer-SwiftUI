@@ -22,7 +22,7 @@ struct Post: Codable, Equatable, Identifiable {
     var pinned: Bool {
         didSet {
             var posts = PostManager.pinnedPosts
-            if read {
+            if pinned {
                 posts.insert(postTitle)
             } else {
                 posts.remove(postTitle)

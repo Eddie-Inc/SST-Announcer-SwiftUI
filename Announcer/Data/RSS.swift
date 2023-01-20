@@ -158,14 +158,6 @@ extension PostManager {
         }
 
         let keys = combinedArray.map { $0.postTitle }
-        // swiftlint:disable:this disallow_print
-        print("Storage Things: \n\(storage.keys.map({ "\($0.date.timeIntervalSince1970)" }).joined(separator: "\n"))")
-        // swiftlint:disable:this disallow_print
-        print("New things: \n\(storage.keys.map({ "\($0.date.timeIntervalSince1970)" }).joined(separator: "\n"))")
-        // swiftlint:disable:this disallow_print
-        print("Things: \n\(keys.map({ "\($0.date.timeIntervalSince1970)" }).joined(separator: "\n"))")
-        PostManager.postStorage = .init(uniqueKeys: keys,
-                                        values: combinedArray)
 
         Log.info("Post manager things: \(keys.map({ $0.description }))")
     }
