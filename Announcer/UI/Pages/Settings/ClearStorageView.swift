@@ -38,7 +38,7 @@ You may also lose the ability to view some of your pinned posts.
                        role: .destructive) {
                     if excludePinnedPosts {
                         var storage = PostManager.postStorage
-                        storage.removeAll { (key, value) in
+                        storage.removeAll { (_, value) in
                             !value.pinned
                         }
                         PostManager.postStorage = storage
