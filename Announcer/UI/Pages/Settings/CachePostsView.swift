@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CachePostsView: View {
     @State var postsToCache: Double = 400
+    @State var numberOfCachedPosts = PostManager.postStorage.count
 
     var body: some View {
         List {
@@ -22,6 +23,9 @@ struct CachePostsView: View {
                     Text("""
 Cached posts are available offline because they are saved in your device's hard drive.
 If you cache too many posts, the app size will increase and you may feel lag while searching or filtering posts.
+
+Not all posts will be loaded and cached instantaneously.
+You may need to relaunch the app for the settings view to accurately reflect the new number of cached posts.
 """)
                     Spacer()
                 }
@@ -30,7 +34,7 @@ If you cache too many posts, the app size will increase and you may feel lag whi
                 HStack {
                     Text("Number of cached posts:")
                     Spacer()
-                    Text("\(PostManager.postStorage.count)")
+                    Text("\(numberOfCachedPosts)")
                         .foregroundColor(.secondary)
                 }
             }
@@ -38,11 +42,21 @@ If you cache too many posts, the app size will increase and you may feel lag whi
             Section {
                 VStack {
                     Text("Posts to cache: \(Int(postsToCache))")
-                    Slider(value: $postsToCache, in: 100...2000, step: 100)
+                    Slider(value: $postsToCache, in: 50...2000, step: 50)
                 }
                 HStack {
                     Spacer()
                     Button("Cache") {
+                        let count = PostManager.postStorage.count
+                        let upperBound = count + Int(postsToCache)
+                        loadQueue.async {
+                            do {
+                                try PostManager.loadCachePosts(range: count..<upperBound)
+                                numberOfCachedPosts = PostManager.postStorage.count
+                            } catch {
+                                Log.info("Something happened!")
+                            }
+                        }
                     }
                     Spacer()
                 }

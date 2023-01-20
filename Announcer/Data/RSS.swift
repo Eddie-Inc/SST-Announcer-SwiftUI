@@ -194,7 +194,7 @@ extension PostManager {
 
         let keys = combinedArray.map { $0.postTitle }
 
-        Log.info("Post manager things: \(keys.map({ $0.description }))")
+        PostManager.postStorage = .init(uniqueKeys: keys, values: combinedArray)
     }
 }
 

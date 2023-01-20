@@ -43,6 +43,29 @@ enum PostManager {
         return Array(values[range.lowerBound..<newUpper])
     }
 
+    static func loadCachePosts(range: Range<Int>) throws {
+        // Split it into groups of 150, as the RSS cannot load more than 150 posts at a time
+        var posts: [Post] = []
+        do {
+            for index in 0..<Int(ceil(Double(range.count)/Double(150))) {
+                let lowerbound = index * 150 + range.lowerBound
+                let upperbound = min((index+1) * 150 + range.lowerBound, range.upperBound)
+                let newPosts = try fetchValues(range: lowerbound..<upperbound)
+                posts.append(contentsOf: newPosts)
+            }
+        } catch {
+            // save the progress that was made
+            loadQueue.async {
+                addPostsToStorage(newItems: posts)
+            }
+            throw error
+        }
+        loadQueue.async {
+            Log.info("Adding \(posts.count) posts to storage")
+            addPostsToStorage(newItems: posts)
+        }
+    }
+
     /// Saves a post to localstorage. Effectively a form of cache.
     static func savePost(post: Post) {
     }
