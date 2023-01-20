@@ -26,6 +26,9 @@ struct ClearStorageView: View {
                     Text("""
 If you delete all stored posts, you will not be able to access them offline.
 You may also lose the ability to view some of your pinned posts.
+
+Not all posts will be deleted instantaneously.
+You may need to relaunch the app for the settings view to accurately reflect the new number of cached posts.
 """)
                     Spacer()
                 }
