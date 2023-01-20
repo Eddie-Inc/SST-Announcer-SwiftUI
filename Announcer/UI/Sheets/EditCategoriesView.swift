@@ -89,7 +89,7 @@ struct EditCategoriesView: View {
         Button {
             var categories = post.userCategories ?? []
 
-            if categories.contains(category) {
+            if categories.contains(where: { $0.name == category.name }) {
                 // remove the category if its already there
                 categories.removeAll(where: { $0 == category })
             } else {
@@ -104,7 +104,7 @@ struct EditCategoriesView: View {
                 Image(systemName: "checkmark")
                     .foregroundColor(.accentColor)
                     .opacity((post.userCategories?.contains(where: {
-                        $0.id == category.id
+                        $0.name == category.name
                     }) ?? false) ? 1 : 0)
                 Text(category.name)
             }
