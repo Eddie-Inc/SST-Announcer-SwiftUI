@@ -94,6 +94,7 @@ extension PostManager {
                             categories: categories)
 
             let pTitle = post.postTitle
+            post.pinned = PostManager.pinnedPosts.contains(pTitle)
             post.read = PostManager.readPosts.contains(pTitle)
             post.reminderDate = PostManager.reminderDates[pTitle]
             post.userCategories = PostManager.userCategoriesForPosts[pTitle]

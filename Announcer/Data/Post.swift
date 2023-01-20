@@ -19,18 +19,26 @@ struct Post: Codable, Equatable, Identifiable {
     var content: String // This content will be a HTML as a String
     var date: Date
 
-    var pinned: Bool
+    var pinned: Bool {
+        didSet {
+            var posts = PostManager.pinnedPosts
+            if read {
+                posts.insert(postTitle)
+            } else {
+                posts.remove(postTitle)
+            }
+            PostManager.pinnedPosts = posts
+        }
+    }
     var read: Bool {
         didSet {
             var posts = PostManager.readPosts
-
             if read {
                 posts.insert(postTitle)
-                PostManager.readPosts = posts
             } else {
                 posts.remove(postTitle)
-                PostManager.readPosts.remove(postTitle)
             }
+            PostManager.readPosts = posts
         }
     }
     var reminderDate: Date? {

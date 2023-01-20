@@ -42,6 +42,33 @@ enum PostManager {
     static func savePost(post: Post) {
     }
 
+    // MARK: Pinned posts
+    static var pinnedPosts: Set<PostTitle> {
+        get {
+            if let posts = _pinnedPosts {
+                return posts
+            }
+
+            // Retrieve from file
+            if let posts = read([PostTitle].self, from: "pinnedPosts.json") {
+                _readPosts = Set(posts)
+                return Set(posts)
+            }
+
+            return .init()
+        }
+        set {
+            _pinnedPosts = newValue
+            loadQueue.async {
+                // TODO: Reduce the frequency of this.
+                // As the set gets larger, this will become a more and more expensive task to do.
+                // save to file system
+                write(Array(newValue), to: "pinnedPosts.json")
+            }
+        }
+    }
+    private static var _pinnedPosts: Set<PostTitle>?
+
     // MARK: Read posts
     static var readPosts: Set<PostTitle> {
         get {
