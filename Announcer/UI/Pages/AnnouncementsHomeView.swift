@@ -30,6 +30,9 @@ struct AnnouncementsHomeView: View {
     @State
     var isLoading: Bool = false
 
+    @StateObject
+    var settings: SettingsManager = .shared
+
     var body: some View {
         if #available(iOS 16.0, *) {
             content
@@ -60,7 +63,7 @@ struct AnnouncementsHomeView: View {
                             Color.white.opacity(0.001)
                                 .onChange(of: proxy.frame(in: .named("scroll"))) { _ in
                                     if index == 0 {
-                                        loadNextPosts()
+                                        loadNextPosts(count: settings.loadNumber)
                                     }
                                 }
                         }}
@@ -69,8 +72,9 @@ struct AnnouncementsHomeView: View {
                 HStack {
                     Spacer()
                     Button("Search older posts") {
-                        loadNextPosts(count: 100)
+                        loadNextPosts(count: settings.searchLoadNumber)
                     }
+                    .foregroundColor(.accentColor)
                     Spacer()
                 }
             }
@@ -101,14 +105,15 @@ struct AnnouncementsHomeView: View {
             }
         }
         .onAppear {
-            loadNextPosts()
+            loadNextPosts(count: settings.loadNumber)
         }
     }
 
     func shouldPostBeIncluded(post: Post) -> Bool {
         let searchIsEmpty = searchString.isEmpty
         let containsInTitle = post.title.lowercased().contains(formattedSearchString())
-        let containsInContent = post.content.lowercased().contains(formattedSearchString())
+        let containsInContent = settings.searchPostContent &&
+            post.content.lowercased().contains(formattedSearchString())
 
         let tagsAreEmpty = filterCategories.isEmpty
         let containsTag = filterCategories.contains(where: { tag in
@@ -145,7 +150,7 @@ struct AnnouncementsHomeView: View {
         return rawCount
     }
 
-    func loadNextPosts(count: Int = SettingsManager.shared.loadNumber) {
+    func loadNextPosts(count: Int) {
         loadQueue.async {
             guard !isLoading else { return }
 
