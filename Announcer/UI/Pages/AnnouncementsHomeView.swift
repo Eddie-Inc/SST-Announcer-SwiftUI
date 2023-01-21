@@ -69,14 +69,19 @@ struct AnnouncementsHomeView: View {
                         }}
                 }
             } else {
-                HStack {
-                    Spacer()
-                    Button("Search older posts") {
-                        loadNextPosts(count: settings.searchLoadNumber)
+                Button {
+                    loadNextPosts(count: settings.searchLoadNumber)
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("Search older posts")
+                        if isLoading {
+                            Image(systemName: "ellipsis")
+                        }
+                        Spacer()
                     }
-                    .foregroundColor(.accentColor)
-                    Spacer()
                 }
+                .foregroundColor(.accentColor)
             }
         }
         .coordinateSpace(name: "scroll")
