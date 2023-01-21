@@ -35,13 +35,13 @@ struct Settings: View {
 
             Section("Search") {
                 Picker("Number of posts per load when searching",
-                       selection: .constant(50)) {
+                       selection: $settings.searchLoadNumber) {
                     ForEach(5...150, id: \.self) { number in
                         Text("\(number)")
                     }
                 }
                 Toggle("When searching for keyword, search post content",
-                       isOn: .constant(true))
+                       isOn: $settings.searchPostContent)
             }
 
             Section("Storage") {
