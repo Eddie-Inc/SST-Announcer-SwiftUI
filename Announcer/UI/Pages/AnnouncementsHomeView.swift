@@ -65,6 +65,14 @@ struct AnnouncementsHomeView: View {
                                 }
                         }}
                 }
+            } else {
+                HStack {
+                    Spacer()
+                    Button("Search older posts") {
+                        loadNextPosts(count: 100)
+                    }
+                    Spacer()
+                }
             }
         }
         .coordinateSpace(name: "scroll")
