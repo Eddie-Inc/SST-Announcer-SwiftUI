@@ -19,14 +19,14 @@ let fakeStorage: OrderedDictionary<PostTitle, Post> =
 
 struct Settings: View {
 
+    @StateObject
+    var settings: SettingsManager = .shared
+
     var body: some View {
         List {
             Section("Post Loading") {
-                Picker("Number of posts per load", selection: .init(get: {
-                    SettingsManager.shared.loadNumber
-                }, set: { newValue in
-                    SettingsManager.shared.loadNumber = newValue
-                })) {
+                Picker("Number of posts per load",
+                       selection: $settings.loadNumber) {
                     ForEach(5...150, id: \.self) { number in
                         Text("\(number)")
                     }

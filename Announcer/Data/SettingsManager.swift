@@ -9,15 +9,16 @@ import Foundation
 
 var defaults = UserDefaults.standard
 
-class SettingsManager {
+class SettingsManager: ObservableObject {
     static let shared: SettingsManager = .init()
     private init() {
-//        let loadNumber = defaults.integer(forKey: "loadNumber")
-//        if loadNumber > 0 {
-//            self.loadNumber = loadNumber
-//        }
+        let loadNumber = defaults.integer(forKey: "loadNumber")
+        if loadNumber > 0 {
+            self.loadNumber = loadNumber
+        }
     }
 
+    @Published
     var loadNumber: Int = 10 {
         didSet {
             defaults.set(loadNumber, forKey: "loadNumber")
