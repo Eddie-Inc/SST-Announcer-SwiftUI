@@ -31,6 +31,14 @@ struct Settings: View {
                         Text("\(number)")
                     }
                 }
+                Picker("Number of posts per load when searching",
+                       selection: .constant(50)) {
+                    ForEach(5...150, id: \.self) { number in
+                        Text("\(number)")
+                    }
+                }
+                Toggle("When searching for keyword, search post content",
+                       isOn: .constant(true))
             }
 
             Section("Storage") {
