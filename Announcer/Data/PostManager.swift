@@ -43,7 +43,7 @@ enum PostManager {
         return Array(values[range.lowerBound..<newUpper])
     }
 
-    static func loadCachePosts(range: Range<Int>) throws {
+    static func loadCachePosts(range: Range<Int>, onCompletion: @escaping () -> Void = {}) throws {
         // Split it into groups of 150, as the RSS cannot load more than 150 posts at a time
         var posts: [Post] = []
         do {
@@ -63,6 +63,7 @@ enum PostManager {
         loadQueue.async {
             Log.info("Adding \(posts.count) posts to storage")
             addPostsToStorage(newItems: posts)
+            onCompletion()
         }
     }
 

@@ -11,6 +11,8 @@ struct CachePostsView: View {
     @State var postsToCache: Double = 400
     @State var numberOfCachedPosts = PostManager.postStorage.count
 
+    @State var isLoading: Bool = false
+
     var body: some View {
         List {
             Section {
@@ -44,22 +46,31 @@ You may need to relaunch the app for the settings view to accurately reflect the
                     Text("Posts to cache: \(Int(postsToCache))")
                     Slider(value: $postsToCache, in: 50...2000, step: 50)
                 }
-                HStack {
-                    Spacer()
-                    Button("Cache") {
+                    Button {
                         let count = PostManager.postStorage.count
                         let upperBound = count + Int(postsToCache)
+                        isLoading = true
                         loadQueue.async {
                             do {
-                                try PostManager.loadCachePosts(range: count..<upperBound)
-                                numberOfCachedPosts = PostManager.postStorage.count
+                                try PostManager.loadCachePosts(range: count..<upperBound) {
+                                    numberOfCachedPosts = PostManager.postStorage.count
+                                }
+                                isLoading = false
                             } catch {
                                 Log.info("Something happened!")
+                                isLoading = false
                             }
                         }
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Text("Cache")
+                            if isLoading {
+                                Image(systemName: "ellipsis")
+                            }
+                            Spacer()
+                        }
                     }
-                    Spacer()
-                }
             }
         }
     }
