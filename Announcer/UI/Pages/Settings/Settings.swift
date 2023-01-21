@@ -21,7 +21,7 @@ struct Settings: View {
 
     var body: some View {
         List {
-            Section {
+            Section("Post Loading") {
                 Picker("Number of posts per load", selection: .init(get: {
                     SettingsManager.shared.loadNumber
                 }, set: { newValue in
@@ -31,6 +31,9 @@ struct Settings: View {
                         Text("\(number)")
                     }
                 }
+            }
+
+            Section("Search") {
                 Picker("Number of posts per load when searching",
                        selection: .constant(50)) {
                     ForEach(5...150, id: \.self) { number in
