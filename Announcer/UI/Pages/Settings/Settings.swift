@@ -49,9 +49,16 @@ struct Settings: View {
                     Text("Number of cached posts:")
                     Spacer()
                     Text("\(PostManager.postStorage.count)")
-//                    Text("\(fakeStorage.count)")
                         .foregroundColor(.secondary)
                 }
+
+                HStack {
+                    Text("Space used by cached posts:")
+                    Spacer()
+                    Text("\(getDocumentsDirectory().appendingPathComponent("postStorage.json").fileSizeString)")
+                        .foregroundColor(.secondary)
+                }
+
                 if let last = PostManager.postStorage.elements.last {
 //                if let last = fakeStorage.elements.last {
                     HStack {
