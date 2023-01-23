@@ -22,13 +22,13 @@ struct PostPreviewPlaceholderView: View {
             textPreview
             postAndReminder
         }
+        .redacted(reason: .placeholder)
     }
 
     var title: some View {
         HStack {
             Text(placeholderTextShort)
                 .fontWeight(.semibold)
-                .redacted(reason: .placeholder)
                 .lineLimit(2)
         }
         .padding(.bottom, 0.5)
@@ -37,7 +37,6 @@ struct PostPreviewPlaceholderView: View {
     var textPreview: some View {
         ZStack {
             Text(placeholderTextLong)
-                .redacted(reason: .placeholder)
                 .lineLimit(3)
                 .padding(.bottom, 6)
         }
@@ -50,11 +49,12 @@ struct PostPreviewPlaceholderView: View {
                 .opacity(0.5)
                 .frame(width: 14, height: 14)
             Text("June 9, 2420")
-                .redacted(reason: .placeholder)
+                .lineLimit(1)
                 .padding(.trailing, 5)
 
             ForEach(0..<(numberOfUserCategories + numberOfCategories), id: \.self) { index in
                 Text(verbatim: .init(repeating: " ", count: textLengths[index]))
+                    .unredacted()
                     .font(.subheadline)
                     .background {
                         Rectangle()
