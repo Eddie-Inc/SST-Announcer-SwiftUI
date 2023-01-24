@@ -53,6 +53,7 @@
 		93AF704629698B1400BF18F8 /* HTMLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704529698B1400BF18F8 /* HTMLString.swift */; };
 		93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */; };
 		93AF704C2969B10B00BF18F8 /* EditReminderDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */; };
+		93BFD7F2297FAB18008C2A21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFD7F1297FAB18008C2A21 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,8 @@
 		93AF704529698B1400BF18F8 /* HTMLString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLString.swift; sourceTree = "<group>"; };
 		93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewPlaceholderView.swift; sourceTree = "<group>"; };
 		93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReminderDateView.swift; sourceTree = "<group>"; };
+		93BFD7F0297FA8D3008C2A21 /* Announcer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Announcer.entitlements; sourceTree = "<group>"; };
+		93BFD7F1297FAB18008C2A21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +198,7 @@
 		930EA43929645AE1007081C8 /* Announcer */ = {
 			isa = PBXGroup;
 			children = (
+				93BFD7F0297FA8D3008C2A21 /* Announcer.entitlements */,
 				935EAB3129685EBD005D2F52 /* Info.plist */,
 				937860222964626D00FEA668 /* Utils */,
 				930EA44C29645CD8007081C8 /* Data */,
@@ -231,6 +235,7 @@
 			children = (
 				930EA43A29645AE1007081C8 /* AnnouncerApp.swift */,
 				930EA43C29645AE1007081C8 /* ContentView.swift */,
+				93BFD7F1297FAB18008C2A21 /* AppDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -491,6 +496,7 @@
 				9376933D296A8B9700D94EC3 /* AnnouncementDetailView+Components.swift in Sources */,
 				93436ACA2965B4D600AD3148 /* PostPreviewView.swift in Sources */,
 				931B2C672966C46900BBF397 /* EditCategoriesView.swift in Sources */,
+				93BFD7F2297FAB18008C2A21 /* AppDelegate.swift in Sources */,
 				937EBBF9296EC47A00722285 /* FileManager.swift in Sources */,
 				937860262964ED5800FEA668 /* EditFilterView.swift in Sources */,
 				93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */,
@@ -687,6 +693,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Announcer/Announcer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Announcer/Preview Content\"";
@@ -718,6 +725,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Announcer/Announcer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Announcer/Preview Content\"";
