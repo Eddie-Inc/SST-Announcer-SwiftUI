@@ -48,7 +48,10 @@ struct AnnouncementsNumberEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date, style: .time)
+        ZStack {
+            Image("IMG_3864")
+                .resizable()
+        }
     }
 }
 
