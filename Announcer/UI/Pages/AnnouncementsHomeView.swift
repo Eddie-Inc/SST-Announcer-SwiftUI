@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseCore
 import MarkdownUI
 
 let loadQueue: DispatchQueue = .init(label: "sg.edu.sst.panziyue.Announcer.getPosts")

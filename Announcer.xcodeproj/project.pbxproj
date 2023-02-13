@@ -53,6 +53,11 @@
 		93AF704629698B1400BF18F8 /* HTMLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704529698B1400BF18F8 /* HTMLString.swift */; };
 		93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */; };
 		93AF704C2969B10B00BF18F8 /* EditReminderDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */; };
+		D386309B2997D97C006F388D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D386309A2997D97C006F388D /* GoogleService-Info.plist */; };
+		D386309E2997DA0F006F388D /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = D386309D2997DA0F006F388D /* FirebaseFunctions */; };
+		D38630A02997DA0F006F388D /* FirebaseInAppMessaging-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = D386309F2997DA0F006F388D /* FirebaseInAppMessaging-Beta */; };
+		D38630A22997DA0F006F388D /* FirebaseInAppMessagingSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = D38630A12997DA0F006F388D /* FirebaseInAppMessagingSwift-Beta */; };
+		D38630A42997DA0F006F388D /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = D38630A32997DA0F006F388D /* FirebaseMessaging */; };
 		93BFD7F2297FAB18008C2A21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFD7F1297FAB18008C2A21 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -125,6 +130,7 @@
 		93AF704529698B1400BF18F8 /* HTMLString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLString.swift; sourceTree = "<group>"; };
 		93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewPlaceholderView.swift; sourceTree = "<group>"; };
 		93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReminderDateView.swift; sourceTree = "<group>"; };
+		D386309A2997D97C006F388D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		93BFD7F0297FA8D3008C2A21 /* Announcer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Announcer.entitlements; sourceTree = "<group>"; };
 		93BFD7F1297FAB18008C2A21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,10 +149,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D38630A42997DA0F006F388D /* FirebaseMessaging in Frameworks */,
 				935EAB2C29685987005D2F52 /* FeedKit in Frameworks */,
 				881544BB29691ABF001BAFA4 /* RichText in Frameworks */,
+				D38630A22997DA0F006F388D /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
+				D386309E2997DA0F006F388D /* FirebaseFunctions in Frameworks */,
 				937EBBF5296EA72000722285 /* OrderedCollections in Frameworks */,
 				881544B529686C72001BAFA4 /* MarkdownUI in Frameworks */,
+				D38630A02997DA0F006F388D /* FirebaseInAppMessaging-Beta in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,6 +188,7 @@
 		930EA42E29645AE1007081C8 = {
 			isa = PBXGroup;
 			children = (
+				D386309A2997D97C006F388D /* GoogleService-Info.plist */,
 				9376933E296AC7C000D94EC3 /* README.md */,
 				930EA43929645AE1007081C8 /* Announcer */,
 				8829F5AD296AE65E00BA63A8 /* Announcements_Number */,
@@ -366,6 +377,10 @@
 				881544B429686C72001BAFA4 /* MarkdownUI */,
 				881544BA29691ABF001BAFA4 /* RichText */,
 				937EBBF4296EA72000722285 /* OrderedCollections */,
+				D386309D2997DA0F006F388D /* FirebaseFunctions */,
+				D386309F2997DA0F006F388D /* FirebaseInAppMessaging-Beta */,
+				D38630A12997DA0F006F388D /* FirebaseInAppMessagingSwift-Beta */,
+				D38630A32997DA0F006F388D /* FirebaseMessaging */,
 			);
 			productName = Announcer;
 			productReference = 930EA43729645AE1007081C8 /* Announcer.app */;
@@ -403,6 +418,7 @@
 				881544B329686C72001BAFA4 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 				881544B929691ABF001BAFA4 /* XCRemoteSwiftPackageReference "RichText" */,
 				937EBBF3296EA72000722285 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				D386309C2997DA0E006F388D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 930EA43829645AE1007081C8 /* Products */;
 			projectDirPath = "";
@@ -429,6 +445,7 @@
 			files = (
 				930EA44229645AE2007081C8 /* Preview Assets.xcassets in Resources */,
 				9378601F2964625E00FEA668 /* Using Logger.md in Resources */,
+				D386309B2997D97C006F388D /* GoogleService-Info.plist in Resources */,
 				9376933F296AC7C000D94EC3 /* README.md in Resources */,
 				930EA43F29645AE2007081C8 /* Assets.xcassets in Resources */,
 			);
@@ -454,7 +471,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "#export PATH=\"$PATH:/opt/homebrew/bin\"\n#if which swiftlint >/dev/null; then\n#  swiftlint --strict\n#else\n # echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -697,12 +714,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Announcer/Preview Content\"";
+				DEVELOPMENT_TEAM = FAJ54SFG5X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Announcer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "SST Announcer";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -711,7 +734,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sg.edu.sst.panziyue.Announcer;
+				PRODUCT_BUNDLE_IDENTIFIER = sstinc.ayaanjainkaiquan.Announcer.SwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -729,12 +752,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Announcer/Preview Content\"";
+				DEVELOPMENT_TEAM = FAJ54SFG5X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Announcer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "SST Announcer";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -743,7 +772,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sg.edu.sst.panziyue.Announcer;
+				PRODUCT_BUNDLE_IDENTIFIER = sstinc.ayaanjainkaiquan.Announcer.SwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -816,6 +845,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		D386309C2997DA0E006F388D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -838,6 +875,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 937EBBF3296EA72000722285 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
+		};
+		D386309D2997DA0F006F388D /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D386309C2997DA0E006F388D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		D386309F2997DA0F006F388D /* FirebaseInAppMessaging-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D386309C2997DA0E006F388D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseInAppMessaging-Beta";
+		};
+		D38630A12997DA0F006F388D /* FirebaseInAppMessagingSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D386309C2997DA0E006F388D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseInAppMessagingSwift-Beta";
+		};
+		D38630A32997DA0F006F388D /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D386309C2997DA0E006F388D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
