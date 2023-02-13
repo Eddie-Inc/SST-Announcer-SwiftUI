@@ -32,6 +32,8 @@ struct EditReminderDateView: View {
                                                                        from: .now.addingTimeInterval(20))
 //                                                                       from: newValue)
 
+                        Log.info("Fire date: \(fireDate)")
+
                         let trigger = UNCalendarNotificationTrigger(dateMatching: fireDate, repeats: false)
 
                         let notification: UNNotificationRequest = .init(identifier: post.id,
@@ -43,23 +45,17 @@ struct EditReminderDateView: View {
                             if let error {
                                 Log.info("Notification for post \(post.title) had error: \(error)")
                             } else {
-                                Log.info("Notification completed!")
+                                Log.info("Notification added!")
                             }
 
-                            notificationCenter.getPendingNotificationRequests { requests in
-                                Log.info("Pending requests: \(requests.map({ $0.identifier }))")
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                notificationCenter.getPendingNotificationRequests { requests in
+                                    Log.info("Pending requests: \(requests.map({ $0.identifier }))")
+                                }
                             }
-                        }
-                        notificationCenter.getNotificationSettings { settings in
-                            Log.info("Settings: \(settings.debugDescription)")
-                            if settings.scheduledDeliverySetting != .enabled {
-                                Log.info("Scheduled delivery not supported")
-                                let options: UNAuthorizationOptions = [.alert, .provisional, .sound, .badge]
-                                notificationCenter.requestAuthorization(options: options) { success, error in
-                                    Log.info("Success? \(success)")
-                                    if let error {
-                                        Log.info("With error \(error)")
-                                    }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+                                notificationCenter.getPendingNotificationRequests { requests in
+                                    Log.info("Later pending requests: \(requests.map({ $0.identifier }))")
                                 }
                             }
                         }

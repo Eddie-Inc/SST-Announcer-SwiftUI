@@ -127,6 +127,7 @@
 		93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReminderDateView.swift; sourceTree = "<group>"; };
 		93BFD7F0297FA8D3008C2A21 /* Announcer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Announcer.entitlements; sourceTree = "<group>"; };
 		93BFD7F1297FAB18008C2A21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		93F5CD37299A2F17002C6FA4 /* PostManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PostManager; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +179,7 @@
 		930EA42E29645AE1007081C8 = {
 			isa = PBXGroup;
 			children = (
+				93F5CD37299A2F17002C6FA4 /* PostManager */,
 				9376933E296AC7C000D94EC3 /* README.md */,
 				930EA43929645AE1007081C8 /* Announcer */,
 				8829F5AD296AE65E00BA63A8 /* Announcements_Number */,
