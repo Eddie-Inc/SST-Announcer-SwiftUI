@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseCore
 import MarkdownUI
 import PostManager
 
