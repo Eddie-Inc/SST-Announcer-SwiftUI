@@ -7,7 +7,10 @@
 
 import SwiftUI
 import FirebaseCore
+import FirebaseMessaging
 import UserNotifications
+import PostManager
+
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     // MARK: Put in gcmMessageIDKey

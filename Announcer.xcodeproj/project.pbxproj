@@ -44,13 +44,12 @@
 		93AF704629698B1400BF18F8 /* HTMLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704529698B1400BF18F8 /* HTMLString.swift */; };
 		93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */; };
 		93AF704C2969B10B00BF18F8 /* EditReminderDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */; };
+		93F5CD39299A2FB4002C6FA4 /* PostManager in Frameworks */ = {isa = PBXBuildFile; productRef = 93F5CD38299A2FB4002C6FA4 /* PostManager */; };
 		D386309B2997D97C006F388D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D386309A2997D97C006F388D /* GoogleService-Info.plist */; };
 		D386309E2997DA0F006F388D /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = D386309D2997DA0F006F388D /* FirebaseFunctions */; };
 		D38630A02997DA0F006F388D /* FirebaseInAppMessaging-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = D386309F2997DA0F006F388D /* FirebaseInAppMessaging-Beta */; };
 		D38630A22997DA0F006F388D /* FirebaseInAppMessagingSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = D38630A12997DA0F006F388D /* FirebaseInAppMessagingSwift-Beta */; };
 		D38630A42997DA0F006F388D /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = D38630A32997DA0F006F388D /* FirebaseMessaging */; };
-		93BFD7F2297FAB18008C2A21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFD7F1297FAB18008C2A21 /* AppDelegate.swift */; };
-		93F5CD39299A2FB4002C6FA4 /* PostManager in Frameworks */ = {isa = PBXBuildFile; productRef = 93F5CD38299A2FB4002C6FA4 /* PostManager */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,10 +112,9 @@
 		93AF704529698B1400BF18F8 /* HTMLString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLString.swift; sourceTree = "<group>"; };
 		93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewPlaceholderView.swift; sourceTree = "<group>"; };
 		93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReminderDateView.swift; sourceTree = "<group>"; };
-		D386309A2997D97C006F388D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		93BFD7F0297FA8D3008C2A21 /* Announcer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Announcer.entitlements; sourceTree = "<group>"; };
-		93BFD7F1297FAB18008C2A21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93F5CD37299A2F17002C6FA4 /* PostManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PostManager; sourceTree = "<group>"; };
+		D386309A2997D97C006F388D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,7 +226,6 @@
 			children = (
 				930EA43A29645AE1007081C8 /* AnnouncerApp.swift */,
 				930EA43C29645AE1007081C8 /* ContentView.swift */,
-				93BFD7F1297FAB18008C2A21 /* AppDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -414,7 +411,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				930EA44229645AE2007081C8 /* Preview Assets.xcassets in Resources */,
-				9378601F2964625E00FEA668 /* Using Logger.md in Resources */,
 				D386309B2997D97C006F388D /* GoogleService-Info.plist in Resources */,
 				9376933F296AC7C000D94EC3 /* README.md in Resources */,
 				930EA43F29645AE2007081C8 /* Assets.xcassets in Resources */,
@@ -441,7 +437,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#export PATH=\"$PATH:/opt/homebrew/bin\"\n#if which swiftlint >/dev/null; then\n#  swiftlint --strict\n#else\n # echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -477,7 +473,6 @@
 				9376933D296A8B9700D94EC3 /* AnnouncementDetailView+Components.swift in Sources */,
 				93436ACA2965B4D600AD3148 /* PostPreviewView.swift in Sources */,
 				931B2C672966C46900BBF397 /* EditCategoriesView.swift in Sources */,
-				93BFD7F2297FAB18008C2A21 /* AppDelegate.swift in Sources */,
 				937860262964ED5800FEA668 /* EditFilterView.swift in Sources */,
 				93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */,
 				93528DB3296FC23200651404 /* Settings.swift in Sources */,
@@ -841,7 +836,7 @@
 		93F5CD38299A2FB4002C6FA4 /* PostManager */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PostManager;
-        };
+		};
 		D386309D2997DA0F006F388D /* FirebaseFunctions */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D386309C2997DA0E006F388D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
