@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostManager
 
 extension AnnouncementDetailView {
     var sizeIncreaseGesture: some Gesture {

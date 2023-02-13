@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostManager
 
 struct CachePostsView: View {
     @State var postsToCache: Double = 400

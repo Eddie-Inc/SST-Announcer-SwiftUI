@@ -39,12 +39,14 @@ func write<T: Encodable>(_ value: T, to file: String, error onError: @escaping (
     }
 }
 
-func getDocumentsDirectory() -> URL {
+/// Gets the documents directory
+public func getDocumentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     return paths[0]
 }
 
-extension URL {
+public extension URL {
+    /// The attributes of a url
     var attributes: [FileAttributeKey: Any]? {
         do {
             return try FileManager.default.attributesOfItem(atPath: path)
@@ -54,14 +56,17 @@ extension URL {
         return nil
     }
 
+    /// The file size of the url
     var fileSize: UInt64 {
         return attributes?[.size] as? UInt64 ?? UInt64(0)
     }
 
+    /// The file size of the url as a string
     var fileSizeString: String {
         return ByteCountFormatter.string(fromByteCount: Int64(fileSize), countStyle: .file)
     }
 
+    /// The date of creation of the file
     var creationDate: Date? {
         return attributes?[.creationDate] as? Date
     }

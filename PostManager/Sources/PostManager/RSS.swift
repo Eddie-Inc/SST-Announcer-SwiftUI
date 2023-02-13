@@ -7,7 +7,6 @@
 
 import Foundation
 import FeedKit
-import MarkdownUI
 
 /**
  Source URL for the Blog
@@ -22,7 +21,7 @@ import MarkdownUI
 
  This constant stores the URL for the blog linked to the RSS feed.
  */
-let blogURL = "http://studentsblog.sst.edu.sg"
+public let blogURL = "http://studentsblog.sst.edu.sg"
 
 /**
  URL for the blogURL's RSS feed
@@ -31,9 +30,9 @@ let blogURL = "http://studentsblog.sst.edu.sg"
 
  This URL is the blogURL but with the path of the RSS feed added to the back.
  */
-let rssURL = "\(blogURL)/feeds/posts/default"
+public let rssURL = "\(blogURL)/feeds/posts/default"
 
-extension PostManager {
+public extension PostManager {
 
     /**
      Fetches the blog posts from the blogURL
@@ -63,6 +62,11 @@ extension PostManager {
         }
     }
 
+    /// Gets the pinned posts from storage
+    /// - Parameters:
+    ///   - range: The range of posts to get
+    ///   - effectiveRange: An inout for the amount of the range that was returned
+    /// - Returns: The pinned posts in the range, `[]` if none exist.
     static func getPinnedPosts(for range: Range<Int>, effectiveRange: inout Range<Int>) -> [Post] {
         // sort by newest first, since thats how pinned posts will appear
         let pinnedPosts = Array(PostManager.pinnedPosts).sorted(by: {
@@ -90,6 +94,7 @@ extension PostManager {
         }
     }
 
+    /// FIlters out pinned posts from an array of posts
     static func filterOutPinnedPosts(from posts: [Post]) -> [Post] {
         return posts.filter({ !$0.pinned })
     }
@@ -131,6 +136,7 @@ extension PostManager {
         return posts
     }
 
+    /// Configures a ``Post`` to update its pinned, read, reminder and user categories to be accurate to storage.
     static func updatePostProperties(post: inout Post) {
         let pTitle = post.postTitle
         post.pinned = PostManager.pinnedPosts.contains(pTitle)

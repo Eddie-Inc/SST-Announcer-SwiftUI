@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostManager
 
 struct ClearStorageView: View {
     @State

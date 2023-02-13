@@ -7,6 +7,7 @@
 
 import UIKit
 import UserNotifications
+import PostManager
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,

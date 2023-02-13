@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RichText
+import PostManager
 
 enum TextPresentationMode: String {
     case rendered, raw, htmlStripped

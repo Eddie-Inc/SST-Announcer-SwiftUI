@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostManager
 
 struct TimeAndReminder: View {
     @Binding

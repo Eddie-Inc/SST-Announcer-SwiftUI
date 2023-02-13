@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostManager
 
 private var textLengths: [Int] = [21, 10, 29]
 

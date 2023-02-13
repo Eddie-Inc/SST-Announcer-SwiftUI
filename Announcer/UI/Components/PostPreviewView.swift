@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RichText
+import PostManager
 
 struct PostPreviewView: View {
     @Binding

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import OrderedCollections
+import PostManager
 
 let fakeStorage: OrderedDictionary<PostTitle, Post> =
     .init(uniqueKeys: [PostTitle(date: .now, title: "test")],

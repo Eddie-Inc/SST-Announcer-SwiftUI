@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostManager
 
 let noZeroAndPoint: CharacterSet = .init(["0", "."])
 
