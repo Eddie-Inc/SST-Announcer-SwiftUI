@@ -32,6 +32,7 @@
 		93528DB8296FDE2600651404 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93528DB7296FDE2600651404 /* SettingsManager.swift */; };
 		935EAB2C29685987005D2F52 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 935EAB2B29685987005D2F52 /* FeedKit */; };
 		935EAB3329686B5B005D2F52 /* TimeAndReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EAB3229686B5B005D2F52 /* TimeAndReminder.swift */; };
+		93767C8A29AB8798007B2EAD /* Chopper in Frameworks */ = {isa = PBXBuildFile; productRef = 93767C8929AB8798007B2EAD /* Chopper */; };
 		93769336296A842900D94EC3 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93769335296A842900D94EC3 /* SafariView.swift */; };
 		93769339296A8B1900D94EC3 /* AnnouncementDetailView+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93769338296A8B1900D94EC3 /* AnnouncementDetailView+Resize.swift */; };
 		9376933B296A8B5B00D94EC3 /* AnnouncementDetailView+Render.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9376933A296A8B5B00D94EC3 /* AnnouncementDetailView+Render.swift */; };
@@ -109,6 +110,7 @@
 		937860232964637800FEA668 /* AnnouncementDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailView.swift; sourceTree = "<group>"; };
 		937860252964ED5800FEA668 /* EditFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFilterView.swift; sourceTree = "<group>"; };
 		937EBBF6296EAFC700722285 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		939558AE29AB87670088B712 /* Chopper */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Chopper; sourceTree = "<group>"; };
 		93A6C534299A69950062FA57 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		93AF704529698B1400BF18F8 /* HTMLString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLString.swift; sourceTree = "<group>"; };
 		93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewPlaceholderView.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				D386309E2997DA0F006F388D /* FirebaseFunctions in Frameworks */,
 				937EBBF5296EA72000722285 /* OrderedCollections in Frameworks */,
 				881544B529686C72001BAFA4 /* MarkdownUI in Frameworks */,
+				93767C8A29AB8798007B2EAD /* Chopper in Frameworks */,
 				D38630A02997DA0F006F388D /* FirebaseInAppMessaging-Beta in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,6 +174,7 @@
 		930EA42E29645AE1007081C8 = {
 			isa = PBXGroup;
 			children = (
+				939558AE29AB87670088B712 /* Chopper */,
 				93F5CD37299A2F17002C6FA4 /* PostManager */,
 				9376933E296AC7C000D94EC3 /* README.md */,
 				93A6C534299A69950062FA57 /* GoogleService-Info.plist */,
@@ -348,6 +352,7 @@
 				D386309F2997DA0F006F388D /* FirebaseInAppMessaging-Beta */,
 				D38630A12997DA0F006F388D /* FirebaseInAppMessagingSwift-Beta */,
 				D38630A32997DA0F006F388D /* FirebaseMessaging */,
+				93767C8929AB8798007B2EAD /* Chopper */,
 			);
 			productName = Announcer;
 			productReference = 930EA43729645AE1007081C8 /* Announcer.app */;
@@ -827,6 +832,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 935EAB2A29685987005D2F52 /* XCRemoteSwiftPackageReference "FeedKit" */;
 			productName = FeedKit;
+		};
+		93767C8929AB8798007B2EAD /* Chopper */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Chopper;
 		};
 		937EBBF4296EA72000722285 /* OrderedCollections */ = {
 			isa = XCSwiftPackageProductDependency;
