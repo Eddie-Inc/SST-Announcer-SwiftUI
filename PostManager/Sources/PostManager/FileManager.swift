@@ -7,7 +7,8 @@
 
 import Foundation
 
-func read<T: Decodable>(_ type: T.Type, from file: String) -> T? {
+/// Reads a type from a file
+public func read<T: Decodable>(_ type: T.Type, from file: String) -> T? {
     let filename = getDocumentsDirectory().appendingPathComponent(file)
     if let data = try? Data(contentsOf: filename) {
         if let values = try? JSONDecoder().decode(T.self, from: data) {
@@ -18,7 +19,8 @@ func read<T: Decodable>(_ type: T.Type, from file: String) -> T? {
     return nil
 }
 
-func write<T: Encodable>(_ value: T, to file: String, error onError: @escaping (Error) -> Void = { _ in }) {
+/// Writes a type to a file
+public func write<T: Encodable>(_ value: T, to file: String, error onError: @escaping (Error) -> Void = { _ in }) {
     var encoded: Data
 
     do {
@@ -37,6 +39,12 @@ func write<T: Encodable>(_ value: T, to file: String, error onError: @escaping (
         // missing permissions, or more likely it can't be converted to the encoding
         onError(error)
     }
+}
+
+/// Checks if a file exists at a path
+public func exists(file: String) -> Bool {
+    let path = getDocumentsDirectory().appendingPathComponent(file)
+    return FileManager.default.fileExists(atPath: path.relativePath)
 }
 
 /// Gets the documents directory

@@ -1,0 +1,160 @@
+//
+//  WeekSubjectsView.swift
+//  scheduleChopper
+//
+//  Created by Kai Quan Tay on 25/2/23.
+//
+
+import SwiftUI
+import Updating
+import Chopper
+import PostManager
+
+struct WeekSubjectsView<Table: ScheduleProvider, Block: TimeBlock>: View where Block == Table.Block {
+    @Binding var scheduleSuggestion: Table
+    @Updating var week: Week
+
+    init(schedule: Binding<Table>, week: Week) {
+        self._scheduleSuggestion = schedule
+        self._week = <-week
+    }
+
+    var body: some View {
+        ForEach(DayOfWeek.allCases) { day in
+            DisclosureGroup {
+                ForEach($scheduleSuggestion.subjects) { $subject in
+                    if subject.day == .init(week: week, day: day) {
+                        NavigationLink {
+                            SubjectSuggestionEditView(suggestion: $subject,
+                                                      schedule: $scheduleSuggestion)
+                        } label: {
+                            viewForSubject(subject: subject)
+                        }
+                        .disabled(scheduleSuggestion.loadProgress != .loaded)
+                    }
+                }
+                .onDelete { indexSet in
+                    scheduleSuggestion.subjects.remove(atOffsets: indexSet)
+                    // remove all subject classes that no longer exist
+                    scheduleSuggestion.trimUnusedClasses()
+                }
+                HStack {
+                    Spacer()
+                    Button {
+                        newSubject(day: day)
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                    Spacer()
+                }
+            } label: {
+                HStack {
+                    Text(day.rawValue.firstLetterUppercase)
+                    Spacer()
+                    if scheduleSuggestion.loadProgress == .loaded &&
+                        scheduleSuggestion.subjects.filter({
+                            $0.day == .init(week: week, day: day)
+                        }).invalidSuggestions > 0 {
+                        Text(
+"\(scheduleSuggestion.subjects.filter({ $0.day == .init(week: week, day: day) }).invalidSuggestions)"
+                        )
+                        Image(systemName: "exclamationmark.triangle")
+                    }
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    // swiftlint:disable:next function_body_length
+    func viewForSubject(subject: Block) -> some View {
+        if let name = subject.displayName {
+            if name.isInvalid && subject.displaySubjectClass == nil {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Image(systemName: "exclamationmark.triangle")
+                        Text("Subject is unidentifiable! Please manually enter details.")
+                    }
+                    .foregroundColor(.red)
+                    Text(subject.timeRangeDescription())
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                }
+            } else {
+                VStack(alignment: .leading) {
+                    HStack {
+                        ZStack(alignment: .leading) {
+                            if let subClass = subject.displaySubjectClass {
+                                ColorPicker(selection: .init(get: {
+                                    subClass.color
+                                }, set: { newColor in
+                                    guard let index = scheduleSuggestion.subjects.firstIndex(of: subject)
+                                    else { return }
+                                    scheduleSuggestion.subjects[index].displaySubjectClass?.color = newColor
+                                    if let classToUpdate = scheduleSuggestion.subjects[index].displaySubjectClass {
+                                        scheduleSuggestion.updateClass(subClass: classToUpdate)
+                                    }
+                                })) { EmptyView() }
+                            } else {
+                                ColorPicker(selection: .constant(.background)) { EmptyView() }
+                                    .disabled(true)
+                            }
+                        }
+                        .frame(width: 25, height: 25)
+                        .offset(x: -5)
+                        if let subClass = subject.displaySubjectClass {
+                            Text(
+"\(subClass.name.description)\(subClass.teacher == nil ? "" : " - \(subClass.teacher ?? "")")"
+                            )
+                        } else {
+                            // "name" if only name, "name - teacher" if has teacher
+                            Text(
+"\(name.description)\(subject.displaySubtext == nil ? "" : " - \(subject.displaySubtext ?? "")")"
+)
+                        }
+                    }
+                    Text(subject.timeRangeDescription())
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                }
+            }
+        } else {
+            Text("Loading...")
+        }
+    }
+
+    func newSubject(day: DayOfWeek) {
+        let thisDaySubjects = scheduleSuggestion.subjects.filter({
+            $0.day == .init(week: week, day: day)
+        })
+        let timeLowerRange = thisDaySubjects.last?.timeBlocks.upperBound ?? 1
+        guard timeLowerRange < scheduleSuggestion.timeRange.upperBound else {
+            Log.info("cannot create a subject here")
+            return
+        }
+        let timeUpperRange = min(timeLowerRange+3, scheduleSuggestion.timeRange.upperBound-1)
+        let newTimeRange = timeLowerRange..<timeUpperRange
+
+        // create a blank subject
+        var newSubject: Block?
+        if Block.self == Subject.self {
+            newSubject = Subject(timeBlocks: newTimeRange,
+                                 day: .init(week: week, day: day),
+                                 subjectClass: .init(name: .some("Untitled"), color: .gray))
+            as? Block
+        } else if Block.self == SubjectSuggestion.self {
+            newSubject = SubjectSuggestion(image: .init(systemName: "questionmark.square")!,
+                                           timeBlocks: newTimeRange,
+                                           day: .init(week: week, day: day))
+            as? Block
+        }
+
+        guard let newSubject else {
+            Log.info("Failed to create new subject")
+            return
+        }
+
+        scheduleSuggestion.subjects.append(newSubject)
+        scheduleSuggestion.sortClasses()
+    }
+}

@@ -17,6 +17,11 @@ struct ContentView: View {
                 Label("Announcements", systemImage: "list.bullet")
             }
 
+            ScheduleView()
+                .tabItem {
+                    Label("Schedule", systemImage: "calendar.day.timeline.left")
+                }
+
             NavigationView {
                 Settings()
             }
