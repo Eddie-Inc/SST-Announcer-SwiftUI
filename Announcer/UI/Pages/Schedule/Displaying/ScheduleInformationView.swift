@@ -31,7 +31,7 @@ struct ScheduleInformationView: View {
                            selection: $editedSchedule.startDate,
                            displayedComponents: .date)
                 .onChange(of: editedSchedule.startDate) { _ in
-                    editedSchedule.setStartDateToMonday()
+                    editedSchedule.fixStartDate()
                 }
                 DatePicker("End Date",
                            selection: .init(get: { editedSchedule.endDate }, set: { _ in }),

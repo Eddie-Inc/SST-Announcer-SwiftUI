@@ -29,7 +29,7 @@ struct SaveScheduleView: View {
                            selection: $scheduleSuggestion.startDate,
                            displayedComponents: .date)
                 .onChange(of: scheduleSuggestion.startDate) { _ in
-                    scheduleSuggestion.setStartDateToMonday()
+                    scheduleSuggestion.fixStartDate()
                 }
                 Picker("Number of weeks", selection: $scheduleSuggestion.repetitions) {
                     ForEach(Array(1...10), id: \.self) { index in
