@@ -6,21 +6,26 @@
 //
 
 import SwiftUI
+import PostManager
 
 struct ContentView: View {
+    @AppStorage("tabSelection") var selection: Int = 0
+
     var body: some View {
-        TabView {
+        TabView(selection: $selection) {
             NavigationView {
                 AnnouncementsHomeView()
             }
             .tabItem {
                 Label("Announcements", systemImage: "list.bullet")
             }
+            .tag(0)
 
             ScheduleView()
                 .tabItem {
                     Label("Schedule", systemImage: "calendar.day.timeline.left")
                 }
+                .tag(1)
 
             NavigationView {
                 Settings()
@@ -28,6 +33,10 @@ struct ContentView: View {
             .tabItem {
                 Label("Settings", systemImage: "gear")
             }
+            .tag(2)
+        }
+        .onChange(of: selection) { newValue in
+            Log.info("Selection: \(newValue)")
         }
     }
 }
