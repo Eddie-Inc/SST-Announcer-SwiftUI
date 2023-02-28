@@ -7,17 +7,18 @@
 
 import SwiftUI
 import Chopper
-import PostManager
 
 struct ScheduleInformationView: View {
-    @Binding var schedule: Schedule
+    @ObservedObject var manager: ScheduleManager = .default
     @State var editedSchedule: Schedule
 
     @Environment(\.presentationMode) var presentationMode
 
-    init(schedule: Binding<Schedule>) {
-        self._schedule = schedule
-        self._editedSchedule = .init(wrappedValue: schedule.wrappedValue)
+    init() {
+        let manager = ScheduleManager.default
+        guard let schedule = manager.currentSchedule else { fatalError("Schedule not found") }
+        self._manager = .init(wrappedValue: manager)
+        self._editedSchedule = .init(wrappedValue: schedule)
     }
 
     var body: some View {
@@ -64,11 +65,10 @@ struct ScheduleInformationView: View {
 
             Section {
                 Button("Save") {
-                    schedule = editedSchedule
-                    write(schedule, to: "schedule")
+                    manager.writeSchedule(schedule: editedSchedule)
                     presentationMode.wrappedValue.dismiss()
                 }
-                .disabled(schedule == editedSchedule)
+                .disabled(manager.currentSchedule == editedSchedule)
             }
         }
     }

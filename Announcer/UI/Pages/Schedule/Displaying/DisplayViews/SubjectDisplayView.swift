@@ -7,10 +7,11 @@
 
 import SwiftUI
 import Chopper
+import Updating
 
 struct SubjectDisplayView: View {
     @State var today: Date
-    @State var subject: Subject
+    @Updating var subject: Subject
 
     @State var allowShowingAsCurrent: Bool = true
 

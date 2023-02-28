@@ -8,7 +8,6 @@
 import SwiftUI
 import Updating
 import Chopper
-import PostManager
 
 struct WeekSubjectsView<Table: ScheduleProvider, Block: TimeBlock>: View where Block == Table.Block {
     @Binding var scheduleSuggestion: Table
@@ -129,7 +128,7 @@ struct WeekSubjectsView<Table: ScheduleProvider, Block: TimeBlock>: View where B
         })
         let timeLowerRange = thisDaySubjects.last?.timeBlocks.upperBound ?? 1
         guard timeLowerRange < scheduleSuggestion.timeRange.upperBound else {
-            Log.info("cannot create a subject here")
+            // cannot create a subject here
             return
         }
         let timeUpperRange = min(timeLowerRange+3, scheduleSuggestion.timeRange.upperBound-1)
@@ -150,7 +149,7 @@ struct WeekSubjectsView<Table: ScheduleProvider, Block: TimeBlock>: View where B
         }
 
         guard let newSubject else {
-            Log.info("Failed to create new subject")
+            // Failed to create new subject
             return
         }
 

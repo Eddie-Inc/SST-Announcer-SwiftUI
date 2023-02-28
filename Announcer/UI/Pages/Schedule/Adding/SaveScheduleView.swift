@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import PostManager
 import Chopper
 
 struct SaveScheduleView: View {
@@ -41,10 +40,11 @@ struct SaveScheduleView: View {
 
             Section {
                 Button("Save") {
-                    if read(Schedule.self, from: "schedule") == nil {
-                        save()
-                    } else {
+                    let manager = ScheduleManager.default
+                    if manager.hasScheduleInStorage {
                         showConfirmAlert = true
+                    } else {
+                        save()
                     }
                 }
                 .alert("This will replace your current schedule. Do you want to proceed?",
@@ -60,7 +60,8 @@ struct SaveScheduleView: View {
 
     func save() {
         let schedule = Schedule(from: scheduleSuggestion)
-        write(schedule, to: "schedule")
+        let manager = ScheduleManager.default
+        manager.writeSchedule(schedule: schedule)
         showProvideSuggestion = false
     }
 }

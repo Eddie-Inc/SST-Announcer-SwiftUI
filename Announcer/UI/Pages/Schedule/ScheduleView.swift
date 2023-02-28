@@ -6,17 +6,25 @@
 //
 
 import SwiftUI
-import PostManager // for exists
+import Chopper
 
 struct ScheduleView: View {
+    @State var scheduleExists: Bool
+
     @State var showProvideSchedule: Bool = false
-    @State var scheduleExists: Bool = exists(file: "schedule")
     @State var refresherID: Int = 0 // used to refresh the schedule display view
 
+    @StateObject var manager: ScheduleManager
+
     init() {
+        let manager = ScheduleManager.default
+        let scheduleExists = manager.hasScheduleInStorage
         if !scheduleExists {
             self._showProvideSchedule = State(wrappedValue: true)
         }
+
+        self.scheduleExists = scheduleExists
+        self._manager = .init(wrappedValue: manager)
     }
 
     var body: some View {
@@ -38,7 +46,7 @@ struct ScheduleView: View {
             }
         }
         .onChange(of: showProvideSchedule) { _ in
-            scheduleExists = exists(file: "schedule")
+            manager.fetchSchedule()
             refresherID += 1
         }
     }

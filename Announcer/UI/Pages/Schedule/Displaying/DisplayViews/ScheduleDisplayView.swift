@@ -7,30 +7,28 @@
 
 import SwiftUI
 import Chopper
-import PostManager
 
 struct ScheduleDisplayView: View {
-    @State var schedule: Schedule
+    @ObservedObject var manager: ScheduleManager = .default
     @State var showInfo: Bool = false
 
     @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     @State var today: Date = .now
 
-    init() {
-        let value = read(Schedule.self, from: "schedule")!
-        self._schedule = State(wrappedValue: value)
-    }
-
     var body: some View {
         List {
-            if schedule.nowInRange {
+            if manager.schedule.nowInRange {
                 todayView
             } else {
                 Section {
-                    if schedule.startDate > .now {
-                        Text("Schedule starts on \(schedule.startDate.formatted(date: .abbreviated, time: .omitted))")
+                    if manager.schedule.startDate > .now {
+                        Text(
+"Schedule starts on \(manager.schedule.startDate.formatted(date: .abbreviated, time: .omitted))"
+)
                     } else {
-                        Text("Schedule ended on \(schedule.endDate.formatted(date: .abbreviated, time: .omitted))")
+                        Text(
+"Schedule ended on \(manager.schedule.endDate.formatted(date: .abbreviated, time: .omitted))"
+)
                     }
                     Button("Edit Schedule") {
                         showInfo = true
@@ -40,7 +38,7 @@ struct ScheduleDisplayView: View {
 
             Section {
                 NavigationLink("Classes") {
-                    ClassesDisplayView(schedule: schedule)
+                    ClassesDisplayView(schedule: manager.schedule)
                 }
             }
         }
@@ -50,10 +48,10 @@ struct ScheduleDisplayView: View {
         .navigationTitle("Schedule")
         .sheet(isPresented: $showInfo) {
             if #available(iOS 16.0, *) {
-                ScheduleInformationView(schedule: $schedule)
+                ScheduleInformationView()
                     .presentationDetents([.medium, .large])
             } else {
-                ScheduleInformationView(schedule: $schedule)
+                ScheduleInformationView()
             }
         }
     }
@@ -66,7 +64,9 @@ struct ScheduleDisplayView: View {
                 if indexOfCurrentSubject(day: day) > 3 && compactTop {
                     HStack {
                         ForEach(0..<min(3, indexOfCurrentSubject(day: day) - 3), id: \.self) { index in
-                            schedule.subjectsMatching(day: day, week: schedule.currentWeek)[index].displayColor
+                            manager.schedule.subjectsMatching(day: day,
+                                                              week: manager.schedule.currentWeek)[index]
+                                .displayColor
                                 .frame(width: 10, height: 25)
                                 .cornerRadius(5)
                         }
@@ -82,7 +82,8 @@ struct ScheduleDisplayView: View {
                         }
                     }
                 }
-                ForEach(Array(schedule.subjectsMatching(day: day, week: schedule.currentWeek).enumerated()),
+                ForEach(Array(manager.schedule.subjectsMatching(day: day,
+                                                                week: manager.schedule.currentWeek).enumerated()),
                         id: \.0) { (index, subject) in
                     if indexOfCurrentSubject(day: day) - index <= 3 || !compactTop {
                         viewForSubject(subject: subject)
@@ -93,16 +94,16 @@ struct ScheduleDisplayView: View {
 //                                       week: .init(weekNo: schedule.currentWeek))
 //                .frame(height: 80)
             } else {
-                ScheduleVisualiserView(scheduleSuggestion: schedule,
-                                       week: .init(weekNo: schedule.currentWeek+1))
+                ScheduleVisualiserView(scheduleSuggestion: manager.schedule,
+                                       week: .init(weekNo: manager.schedule.currentWeek+1))
                 .frame(height: 80)
             }
         } header: {
             HStack {
                 if today.weekday.dayOfWeek == nil {
-                    Text("Next week: W\(schedule.currentWeek+1)")
+                    Text("Next week: W\(manager.schedule.currentWeek+1)")
                 } else {
-                    Text("W\(schedule.currentWeek), \(today.weekday.rawValue.firstLetterUppercase)")
+                    Text("W\(manager.schedule.currentWeek), \(today.weekday.rawValue.firstLetterUppercase)")
                 }
                 Spacer()
                 if !compactTop {
@@ -133,10 +134,10 @@ struct ScheduleDisplayView: View {
                 .contextMenu {
                     Button("Copy Details") {}
                 } preview: {
-                    OtherSubjectInstancesView(schedule: schedule, subClass: subject.subjectClass)
+                    OtherSubjectInstancesView(schedule: manager.schedule, subClass: subject.subjectClass)
                 }
                 NavigationLink {
-                    OtherSubjectInstancesView(schedule: schedule,
+                    OtherSubjectInstancesView(schedule: manager.schedule,
                                               subClass: subject.subjectClass,
                                               showVisualiser: true)
                 } label: {}.opacity(0)
@@ -151,7 +152,7 @@ struct ScheduleDisplayView: View {
                     Button("Copy Details") {}
                 }
                 NavigationLink {
-                    OtherSubjectInstancesView(schedule: schedule,
+                    OtherSubjectInstancesView(schedule: manager.schedule,
                                               subClass: subject.subjectClass,
                                               showVisualiser: true)
                 } label: {}.opacity(0)
@@ -161,7 +162,7 @@ struct ScheduleDisplayView: View {
     }
 
     func indexOfCurrentSubject(day: DayOfWeek) -> Int {
-        let subjects = schedule.subjectsMatching(day: day, week: schedule.currentWeek)
+        let subjects = manager.schedule.subjectsMatching(day: day, week: manager.schedule.currentWeek)
         let todayTime = Date().formattedTime
 
         // during available subjects
