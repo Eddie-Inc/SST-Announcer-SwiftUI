@@ -134,14 +134,14 @@ struct SubjectDisplayView_Previews: PreviewProvider {
         List {
             SubjectDisplayView(today: .now,
                                subject: .init(timeBlocks: 1..<5,
-                                              day: .init(week: .one, day: .monday),
+                                              day: .init(week: .odd, day: .monday),
                                               subjectClass:
                                     .init(name: .some("Test"),
                                           color: .blue)))
             .overrideShowAsCurrent(show: false)
             SubjectDisplayView(today: .now,
                                subject: .init(timeBlocks: 1..<5,
-                                              day: .init(week: .one, day: .monday),
+                                              day: .init(week: .odd, day: .monday),
                                               subjectClass:
                                     .init(name: .some("ABCD"),
                                           teacher: "ababa",
@@ -149,14 +149,14 @@ struct SubjectDisplayView_Previews: PreviewProvider {
             .overrideShowAsCurrent(show: false)
             SubjectDisplayView(today: .now,
                                subject: .init(timeBlocks: 1..<5,
-                                              day: .init(week: .one, day: .monday),
+                                              day: .init(week: .odd, day: .monday),
                                               subjectClass:
                                     .init(name: .some("IDK man"),
                                           color: .brown)))
             .overrideShowAsCurrent(show: true)
             SubjectDisplayView(today: .now,
                                subject: .init(timeBlocks: 1..<5,
-                                              day: .init(week: .one, day: .monday),
+                                              day: .init(week: .odd, day: .monday),
                                               subjectClass:
                                     .init(name: .some("Quite light"),
                                           teacher: "barayrs",

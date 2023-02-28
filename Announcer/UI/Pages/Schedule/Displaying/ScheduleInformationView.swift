@@ -47,17 +47,17 @@ struct ScheduleInformationView: View {
             }
 
             Section("Subjects and Classes") {
-                NavigationSheet("Week One") {
+                NavigationSheet("Odd Week") {
                     NavigationView {
                         List {
-                            WeekSubjectsView(schedule: $editedSchedule, week: .one)
+                            WeekSubjectsView(schedule: $editedSchedule, week: .odd)
                         }
                     }
                 }
-                NavigationSheet("Week Two") {
+                NavigationSheet("Even Week") {
                     NavigationView {
                         List {
-                            WeekSubjectsView(schedule: $editedSchedule, week: .two)
+                            WeekSubjectsView(schedule: $editedSchedule, week: .even)
                         }
                     }
                 }

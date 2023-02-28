@@ -89,10 +89,6 @@ struct ScheduleDisplayView: View {
                         viewForSubject(subject: subject)
                     }
                 }
-
-//                ScheduleVisualiserView(scheduleSuggestion: schedule,
-//                                       week: .init(weekNo: schedule.currentWeek))
-//                .frame(height: 80)
             } else {
                 ScheduleVisualiserView(scheduleSuggestion: manager.schedule,
                                        week: .init(weekNo: manager.schedule.currentWeek+1))

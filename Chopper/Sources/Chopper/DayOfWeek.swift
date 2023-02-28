@@ -13,18 +13,18 @@ public enum DayOfWeek: String, CaseIterable, Equatable, Identifiable, Codable {
 }
 
 public enum Week: String, CaseIterable, Equatable, Identifiable, Codable {
-    case one, two
+    case odd, even
     public var id: String { self.rawValue }
 
     public init(weekNo: Int) {
-        self = (weekNo%2 == 0) ? .two : .one
+        self = (weekNo%2 == 0) ? .even : .odd
     }
 
     public func matches(weekNo: Int) -> Bool {
         switch self {
-        case .one:
+        case .odd:
             return weekNo%2 != 0
-        case .two:
+        case .even:
             return weekNo%2 == 0
         }
     }
@@ -36,7 +36,7 @@ public struct Day: Equatable, Identifiable, Codable {
 
     public var description: String {
         let dayString = day.rawValue.firstLetterUppercase
-        return "\(dayString), \(week == .one ? "Odd" : "Even") Week"
+        return "\(dayString), \(week == .odd ? "Odd" : "Even") Week"
     }
     public var id: String { description }
 

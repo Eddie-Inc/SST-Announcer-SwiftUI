@@ -48,7 +48,7 @@ public struct SubjectSuggestion: TimeBlock {
         if day < 10 && day >= 0 {
             self.day = .init(week: Week.allCases[rawDay/5], day: DayOfWeek.allCases[rawDay%5])
         } else {
-            self.day = .init(week: .one, day: .monday)
+            self.day = .init(week: .odd, day: .monday)
         }
     }
 
