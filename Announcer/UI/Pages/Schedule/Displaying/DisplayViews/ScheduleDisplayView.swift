@@ -117,9 +117,3 @@ struct ScheduleDisplayView: View {
         }
     }
 }
-
-struct ScheduleDisplayView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScheduleDisplayView()
-    }
-}
