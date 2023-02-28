@@ -50,6 +50,13 @@ public extension ScheduleProvider {
             subject.day.day == day && subject.day.week.matches(weekNo: week)
         }
     }
+
+    /// Returns the subjects matching a day and a week.
+    func subjectsMatching(day: DayOfWeek, week: Week) -> [Block] {
+        return subjects.filter { subject in
+            subject.day.day == day && subject.day.week == week
+        }
+    }
 }
 
 // MARK: Class actions
