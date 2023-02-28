@@ -75,6 +75,15 @@ struct ScheduleDisplayView: View {
                             .font(.subheadline)
                         Spacer()
                     }
+                    .overlay(alignment: .leading) {
+                        LinearGradient(stops: [
+                            .init(color: .clear, location: 0.2),
+                            .init(color: .background, location: 1)
+                        ],
+                                       startPoint: .leading,
+                                       endPoint: .trailing)
+                            .frame(width: 50)
+                    }
                     .padding(.horizontal, -10)
                     .onTapGesture {
                         withAnimation {
@@ -102,13 +111,14 @@ struct ScheduleDisplayView: View {
                     Text("W\(manager.schedule.currentWeek), \(today.weekday.rawValue.firstLetterUppercase)")
                 }
                 Spacer()
-                if !compactTop {
+                if let day = today.weekday.dayOfWeek, indexOfCurrentSubject(day: day) > 3 {
                     Button {
                         withAnimation {
-                            compactTop = true
+                            compactTop.toggle()
                         }
                     } label: {
-                        Image(systemName: "circle")
+                        Image(systemName: "chevron.up")
+                            .rotationEffect(.degrees(compactTop ? 0 : 180))
                     }
                 }
                 Button {
