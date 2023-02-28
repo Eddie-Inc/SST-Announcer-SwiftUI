@@ -57,6 +57,12 @@ public extension TimeBlock {
 
         return formattedString
     }
+
+    /// If the time block contains another time, eg. one ranging 1220 to 0100 contains 1234 but not 1111.
+    func contains(time: Int) -> Bool {
+        let timeRange = self.estimatedTimeRange()
+        return timeRange.0 <= time && time <= timeRange.1
+    }
 }
 
 public extension Array where Element: TimeBlock {

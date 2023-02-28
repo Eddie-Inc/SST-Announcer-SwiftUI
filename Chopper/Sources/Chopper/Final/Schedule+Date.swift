@@ -141,6 +141,6 @@ public extension Date {
         let hours   = calendar.component(.hour, from: self)
         let minutes = calendar.component(.minute, from: self)
 
-        return Int("\(hours)\(minutes)")!
+        return hours*100 + minutes
     }
 }

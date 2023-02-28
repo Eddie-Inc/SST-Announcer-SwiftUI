@@ -53,48 +53,40 @@ struct ScheduleDisplayView: View {
         }
     }
 
+    @State var compactTop: Bool = true
     var todayView: some View {
         Section {
             if let day = today.weekday.dayOfWeek {
-                ForEach(schedule.subjectsMatching(day: day, week: schedule.currentWeek)) { subject in
-                    if #available(iOS 16.0, *) {
-                        ZStack {
-                            SubjectDisplayView(today: today,
-                                               subject: subject,
-                                               allowShowingAsCurrent: today.weekday.dayOfWeek != nil)
-                                .contextMenu {
-                                    Button("Copy Details") {}
-                                } preview: {
-                                    OtherSubjectInstancesView(schedule: schedule, subClass: subject.subjectClass)
-                                }
-                            NavigationLink {
-                                OtherSubjectInstancesView(schedule: schedule,
-                                                          subClass: subject.subjectClass,
-                                                          showVisualiser: true)
-                            } label: {}.opacity(0)
+                // leading things
+                if indexOfCurrentSubject(day: day) > 3 && compactTop {
+                    HStack {
+                        ForEach(0..<min(3, indexOfCurrentSubject(day: day) - 3), id: \.self) { index in
+                            schedule.subjectsMatching(day: day, week: schedule.currentWeek)[index].displayColor
+                                .frame(width: 10, height: 25)
+                                .cornerRadius(5)
                         }
-                        .listRowSeparator(.hidden)
-                    } else {
-                        ZStack {
-                            SubjectDisplayView(today: today,
-                                               subject: subject,
-                                               allowShowingAsCurrent: today.weekday.dayOfWeek != nil)
-                                .contextMenu {
-                                    Button("Copy Details") {}
-                                }
-                            NavigationLink {
-                                OtherSubjectInstancesView(schedule: schedule,
-                                                          subClass: subject.subjectClass,
-                                                          showVisualiser: true)
-                            } label: {}.opacity(0)
+                        Text("\(indexOfCurrentSubject(day: day) - 3) subjects")
+                            .padding(.horizontal, 5)
+                            .font(.subheadline)
+                        Spacer()
+                    }
+                    .padding(.horizontal, -10)
+                    .onTapGesture {
+                        withAnimation {
+                            compactTop = false
                         }
-                        .listRowSeparator(.hidden)
+                    }
+                }
+                ForEach(Array(schedule.subjectsMatching(day: day, week: schedule.currentWeek).enumerated()),
+                        id: \.0) { (index, subject) in
+                    if indexOfCurrentSubject(day: day) - index <= 3 || !compactTop {
+                        viewForSubject(subject: subject)
                     }
                 }
 
-                ScheduleVisualiserView(scheduleSuggestion: schedule,
-                                       week: .init(weekNo: schedule.currentWeek))
-                .frame(height: 80)
+//                ScheduleVisualiserView(scheduleSuggestion: schedule,
+//                                       week: .init(weekNo: schedule.currentWeek))
+//                .frame(height: 80)
             } else {
                 ScheduleVisualiserView(scheduleSuggestion: schedule,
                                        week: .init(weekNo: schedule.currentWeek+1))
@@ -108,6 +100,15 @@ struct ScheduleDisplayView: View {
                     Text("W\(schedule.currentWeek), \(today.weekday.rawValue.firstLetterUppercase)")
                 }
                 Spacer()
+                if !compactTop {
+                    Button {
+                        withAnimation {
+                            compactTop = true
+                        }
+                    } label: {
+                        Image(systemName: "circle")
+                    }
+                }
                 Button {
                     showInfo = true
                 } label: {
@@ -115,5 +116,65 @@ struct ScheduleDisplayView: View {
                 }
             }
         }
+    }
+
+    @ViewBuilder
+    func viewForSubject(subject: Subject) -> some View {
+        if #available(iOS 16.0, *) {
+            ZStack {
+                SubjectDisplayView(today: today,
+                                   subject: subject,
+                                   allowShowingAsCurrent: today.weekday.dayOfWeek != nil)
+                .contextMenu {
+                    Button("Copy Details") {}
+                } preview: {
+                    OtherSubjectInstancesView(schedule: schedule, subClass: subject.subjectClass)
+                }
+                NavigationLink {
+                    OtherSubjectInstancesView(schedule: schedule,
+                                              subClass: subject.subjectClass,
+                                              showVisualiser: true)
+                } label: {}.opacity(0)
+            }
+            .listRowSeparator(.hidden)
+        } else {
+            ZStack {
+                SubjectDisplayView(today: today,
+                                   subject: subject,
+                                   allowShowingAsCurrent: today.weekday.dayOfWeek != nil)
+                .contextMenu {
+                    Button("Copy Details") {}
+                }
+                NavigationLink {
+                    OtherSubjectInstancesView(schedule: schedule,
+                                              subClass: subject.subjectClass,
+                                              showVisualiser: true)
+                } label: {}.opacity(0)
+            }
+            .listRowSeparator(.hidden)
+        }
+    }
+
+    func indexOfCurrentSubject(day: DayOfWeek) -> Int {
+        let subjects = schedule.subjectsMatching(day: day, week: schedule.currentWeek)
+        let todayTime = Date().formattedTime
+
+        // during available subjects
+        if let index = subjects.firstIndex(where: { $0.contains(time: todayTime) }) {
+            return index
+        }
+
+        // before start
+        if let start = subjects.first?.estimatedTimeRange().0, start > todayTime {
+            return -1
+        }
+
+        // after end
+        if let end = subjects.last?.estimatedTimeRange().1, end < todayTime {
+            return subjects.count
+        }
+
+        // default to before start
+        return -1
     }
 }

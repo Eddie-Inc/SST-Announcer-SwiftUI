@@ -117,8 +117,7 @@ struct SubjectDisplayView: View {
     func nowInSubject(subject: Subject) -> Bool {
         if let showAsCurrent { return showAsCurrent }
 
-        let timeRange = subject.estimatedTimeRange()
-        return timeRange.0 <= today.formattedTime && today.formattedTime <= timeRange.1 && allowShowingAsCurrent
+        return subject.contains(time: today.formattedTime) && allowShowingAsCurrent
     }
 
     // for debug purposes only
