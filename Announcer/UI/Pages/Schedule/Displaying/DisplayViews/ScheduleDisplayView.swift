@@ -12,7 +12,9 @@ import PostManager
 struct ScheduleDisplayView: View {
     @State var schedule: Schedule
     @State var showInfo: Bool = false
-    var today: Date = .now
+
+    @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+    @State var today: Date = .now
 
     init() {
         let value = read(Schedule.self, from: "schedule")!
@@ -41,6 +43,9 @@ struct ScheduleDisplayView: View {
                     ClassesDisplayView(schedule: schedule)
                 }
             }
+        }
+        .onReceive(timer) { _ in
+            self.today = .now
         }
         .navigationTitle("Schedule")
         .sheet(isPresented: $showInfo) {
