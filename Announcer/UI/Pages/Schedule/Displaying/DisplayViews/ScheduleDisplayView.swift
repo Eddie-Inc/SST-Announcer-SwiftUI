@@ -66,39 +66,46 @@ struct ScheduleDisplayView: View {
     @State var compactTop: Bool = true
 
     @State var day: Day
+    var todayValue: Day {
+        let todayDay = today.weekday.dayOfWeek ?? .monday
+        return Day(week: manager.schedule.currentWeek%2 == 0 ? .even : .odd,
+                   day: todayDay)
+    }
+
     var isCurrentDay: Bool {
-        guard let todayDay = today.weekday.dayOfWeek else { return false }
-        let todayValue = Day(week: manager.schedule.currentWeek%2 == 0 ? .even : .odd,
-                             day: todayDay)
+        // if the day of week is nil, its always false.
+        guard today.weekday.dayOfWeek != nil else { return false }
         return day.description == todayValue.description
     }
 
     var todayView: some View {
         Section {
-            DayPickerView(selection: $day, schedule: manager.schedule)
+            DayPickerView(selection: $day, schedule: manager.schedule, today: todayValue)
                 .listRowInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0))
             // leading things
             if indexOfCurrentSubject(day: day) > 3 && compactTop {
                 HStack {
-                    ForEach(0..<min(3, indexOfCurrentSubject(day: day) - 3), id: \.self) { index in
-                        manager.schedule.subjectsMatching(day: day.day, week: day.week)[index]
-                            .displayColor
-                            .frame(width: 10, height: 25)
-                            .cornerRadius(5)
+                    HStack {
+                        ForEach(0..<min(3, indexOfCurrentSubject(day: day) - 3), id: \.self) { index in
+                            manager.schedule.subjectsMatching(day: day.day, week: day.week)[index]
+                                .displayColor
+                                .frame(width: 10, height: 25)
+                                .cornerRadius(5)
+                        }
+                    }
+                    .overlay(alignment: .leading) {
+                        LinearGradient(stops: [
+                            .init(color: .clear, location: 0.2),
+                            .init(color: .background, location: 1)
+                        ],
+                                       startPoint: .leading,
+                                       endPoint: .trailing)
+                        .frame(width: 50)
                     }
                     Text("\(indexOfCurrentSubject(day: day) - 3) subjects")
                         .padding(.horizontal, 5)
                         .font(.subheadline)
                     Spacer()
-                }
-                .overlay(alignment: .leading) {
-                    LinearGradient(stops: [
-                        .init(color: .clear, location: 0.2),
-                        .init(color: .background, location: 1)
-                    ],
-                                   startPoint: .leading,
-                                   endPoint: .trailing)
-                        .frame(width: 50)
                 }
                 .padding(.horizontal, -10)
                 .onTapGesture {

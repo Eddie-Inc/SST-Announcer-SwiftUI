@@ -12,6 +12,7 @@ import Updating
 struct DayPickerView: View {
     @Binding var selection: Day
     @Updating var schedule: Schedule
+    @Updating var today: Day
 
     @State var offset: CGFloat = 0
 
@@ -77,12 +78,17 @@ struct DayPickerView: View {
             Spacer()
             ForEach(sortedDays.filter({ $0.week == week })) { day in
                 Text(day.day.rawValue.first!.uppercased())
-                    .foregroundColor(selection == day ? .background : .primary)
+                    .foregroundColor(selection == day ? .background : (today == day ? .red : .primary))
                     .frame(width: 24, height: 24)
                     .background {
                         if selection == day {
-                            Color.blue
-                                .cornerRadius(6)
+                            if today == day {
+                                Color.red
+                                    .cornerRadius(6)
+                            } else {
+                                Color.blue
+                                    .cornerRadius(6)
+                            }
                         } else {
                             Color.white.opacity(0.001)
                                 .frame(width: 24, height: 24)
