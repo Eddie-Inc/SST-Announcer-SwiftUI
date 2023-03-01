@@ -15,6 +15,13 @@ struct ScheduleDisplayView: View {
     @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     @State var today: Date = .now
 
+    init() {
+        let manager = ScheduleManager.default
+        let today = Date.now
+        self._day = State(wrappedValue: .init(week: manager.schedule.currentWeek%2 == 0 ? .even : .odd,
+                                              day: today.weekday.dayOfWeek ?? .monday))
+    }
+
     var body: some View {
         List {
             if manager.schedule.nowInRange {
@@ -43,7 +50,8 @@ struct ScheduleDisplayView: View {
             }
         }
         .onReceive(timer) { _ in
-            self.today = .now
+            // TODO: Fix this to avoid constant reloading
+//            self.today = .now
         }
         .navigationTitle("Schedule")
         .sheet(isPresented: $showInfo) {
@@ -57,51 +65,57 @@ struct ScheduleDisplayView: View {
     }
 
     @State var compactTop: Bool = true
+
+    @State var day: Day
+    var isCurrentDay: Bool {
+        guard let todayDay = today.weekday.dayOfWeek else { return false }
+        let todayValue = Day(week: manager.schedule.currentWeek%2 == 0 ? .even : .odd,
+                             day: todayDay)
+        print("Today: \(todayValue.description)") // swiftlint:disable:this disallow_print
+        print("Compr: \(day.description)")
+        print("Allow? \(day.description == todayValue.description)")
+        return day.description == todayValue.description
+    }
+
     var todayView: some View {
         Section {
-            if let day = today.weekday.dayOfWeek {
-                // leading things
-                if indexOfCurrentSubject(day: day) > 3 && compactTop {
-                    HStack {
-                        ForEach(0..<min(3, indexOfCurrentSubject(day: day) - 3), id: \.self) { index in
-                            manager.schedule.subjectsMatching(day: day,
-                                                              week: manager.schedule.currentWeek)[index]
-                                .displayColor
-                                .frame(width: 10, height: 25)
-                                .cornerRadius(5)
-                        }
-                        Text("\(indexOfCurrentSubject(day: day) - 3) subjects")
-                            .padding(.horizontal, 5)
-                            .font(.subheadline)
-                        Spacer()
+            DayPickerView(selection: $day, schedule: manager.schedule)
+            // leading things
+            if indexOfCurrentSubject(day: day) > 3 && compactTop {
+                HStack {
+                    ForEach(0..<min(3, indexOfCurrentSubject(day: day) - 3), id: \.self) { index in
+                        manager.schedule.subjectsMatching(day: day.day, week: day.week)[index]
+                            .displayColor
+                            .frame(width: 10, height: 25)
+                            .cornerRadius(5)
                     }
-                    .overlay(alignment: .leading) {
-                        LinearGradient(stops: [
-                            .init(color: .clear, location: 0.2),
-                            .init(color: .background, location: 1)
-                        ],
-                                       startPoint: .leading,
-                                       endPoint: .trailing)
-                            .frame(width: 50)
-                    }
-                    .padding(.horizontal, -10)
-                    .onTapGesture {
-                        withAnimation {
-                            compactTop = false
-                        }
+                    Text("\(indexOfCurrentSubject(day: day) - 3) subjects")
+                        .padding(.horizontal, 5)
+                        .font(.subheadline)
+                    Spacer()
+                }
+                .overlay(alignment: .leading) {
+                    LinearGradient(stops: [
+                        .init(color: .clear, location: 0.2),
+                        .init(color: .background, location: 1)
+                    ],
+                                   startPoint: .leading,
+                                   endPoint: .trailing)
+                        .frame(width: 50)
+                }
+                .padding(.horizontal, -10)
+                .onTapGesture {
+                    withAnimation {
+                        compactTop = false
                     }
                 }
-                ForEach(Array(manager.schedule.subjectsMatching(day: day,
-                                                                week: manager.schedule.currentWeek).enumerated()),
-                        id: \.0) { (index, subject) in
-                    if indexOfCurrentSubject(day: day) - index <= 3 || !compactTop {
-                        viewForSubject(subject: subject)
-                    }
+            }
+            ForEach(Array(manager.schedule.subjectsMatching(day: day.day,
+                                                            week: day.week).enumerated()),
+                    id: \.0) { (index, subject) in
+                if indexOfCurrentSubject(day: day) - index <= 3 || !compactTop {
+                    viewForSubject(subject: subject)
                 }
-            } else {
-                ScheduleVisualiserView(scheduleSuggestion: manager.schedule,
-                                       week: .init(weekNo: manager.schedule.currentWeek+1))
-                .frame(height: 80)
             }
         } header: {
             HStack {
@@ -111,7 +125,7 @@ struct ScheduleDisplayView: View {
                     Text("W\(manager.schedule.currentWeek), \(today.weekday.rawValue.firstLetterUppercase)")
                 }
                 Spacer()
-                if let day = today.weekday.dayOfWeek, indexOfCurrentSubject(day: day) > 3 {
+                if indexOfCurrentSubject(day: day) > 3 {
                     Button {
                         withAnimation {
                             compactTop.toggle()
@@ -135,7 +149,7 @@ struct ScheduleDisplayView: View {
         if #available(iOS 16.0, *) {
             SubjectDisplayView(today: today,
                                subject: subject,
-                               allowShowingAsCurrent: today.weekday.dayOfWeek != nil)
+                               allowShowingAsCurrent: isCurrentDay)
             .contextMenu {
                 Button("Copy Details") {}
             } preview: {
@@ -152,7 +166,7 @@ struct ScheduleDisplayView: View {
         } else {
             SubjectDisplayView(today: today,
                                subject: subject,
-                               allowShowingAsCurrent: today.weekday.dayOfWeek != nil)
+                               allowShowingAsCurrent: isCurrentDay)
             .contextMenu {
                 Button("Copy Details") {}
             }
@@ -167,8 +181,10 @@ struct ScheduleDisplayView: View {
         }
     }
 
-    func indexOfCurrentSubject(day: DayOfWeek) -> Int {
-        let subjects = manager.schedule.subjectsMatching(day: day, week: manager.schedule.currentWeek)
+    func indexOfCurrentSubject(day: Day) -> Int {
+        guard isCurrentDay else { return -1 }
+
+        let subjects = manager.schedule.subjectsMatching(day: day.day, week: day.week)
         let todayTime = Date().formattedTime
 
         // during available subjects

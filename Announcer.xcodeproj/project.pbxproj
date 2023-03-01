@@ -32,6 +32,7 @@
 		93528DB8296FDE2600651404 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93528DB7296FDE2600651404 /* SettingsManager.swift */; };
 		935EAB2C29685987005D2F52 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 935EAB2B29685987005D2F52 /* FeedKit */; };
 		935EAB3329686B5B005D2F52 /* TimeAndReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EAB3229686B5B005D2F52 /* TimeAndReminder.swift */; };
+		9372FD7929AEF13200B85918 /* DayPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9372FD7829AEF13200B85918 /* DayPickerView.swift */; };
 		93767C8A29AB8798007B2EAD /* Chopper in Frameworks */ = {isa = PBXBuildFile; productRef = 93767C8929AB8798007B2EAD /* Chopper */; };
 		93767C9629AB8966007B2EAD /* NavigationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93767C8E29AB8966007B2EAD /* NavigationSheet.swift */; };
 		93767C9729AB8966007B2EAD /* ListTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93767C8F29AB8966007B2EAD /* ListTextField.swift */; };
@@ -123,6 +124,7 @@
 		93528DB7296FDE2600651404 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		935EAB3129685EBD005D2F52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		935EAB3229686B5B005D2F52 /* TimeAndReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAndReminder.swift; sourceTree = "<group>"; };
+		9372FD7829AEF13200B85918 /* DayPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPickerView.swift; sourceTree = "<group>"; };
 		93767C8E29AB8966007B2EAD /* NavigationSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationSheet.swift; sourceTree = "<group>"; };
 		93767C8F29AB8966007B2EAD /* ListTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTextField.swift; sourceTree = "<group>"; };
 		93767C9029AB8966007B2EAD /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 				93767C9229AB8966007B2EAD /* Visualiser */,
 				93767C8E29AB8966007B2EAD /* NavigationSheet.swift */,
 				93767C9029AB8966007B2EAD /* ImagePicker.swift */,
+				9372FD7829AEF13200B85918 /* DayPickerView.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -607,6 +610,7 @@
 				931B2C692966C67700BBF397 /* CategoryScrollView.swift in Sources */,
 				937EBBF7296EAFC700722285 /* ShareSheet.swift in Sources */,
 				93767CB329AB89A7007B2EAD /* ChangeSubjectView.swift in Sources */,
+				9372FD7929AEF13200B85918 /* DayPickerView.swift in Sources */,
 				93767CBA29AB8A1B007B2EAD /* ScheduleView.swift in Sources */,
 				93AF704629698B1400BF18F8 /* HTMLString.swift in Sources */,
 				935EAB3329686B5B005D2F52 /* TimeAndReminder.swift in Sources */,

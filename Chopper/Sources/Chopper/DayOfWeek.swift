@@ -11,7 +11,7 @@ public enum DayOfWeek: String, CaseIterable, Equatable, Identifiable, Codable {
     case monday, tuesday, wednesday, thursday, friday
     public var id: String { self.rawValue }
 
-    var number: Int {
+    public var number: Int {
         switch self {
         case .monday: return 0
         case .tuesday: return 1
@@ -55,7 +55,7 @@ public struct Day: Equatable, Identifiable, Codable {
         self.day = day
     }
 
-    func daysFrom(laterDay: Day) -> Int {
+    public func daysFrom(laterDay: Day) -> Int {
         // if its the same, return 0
         guard laterDay != self else { return 0 }
 

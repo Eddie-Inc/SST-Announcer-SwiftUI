@@ -13,7 +13,7 @@ struct SubjectDisplayView: View {
     @Updating var today: Date
     @Updating var subject: Subject
 
-    @State var allowShowingAsCurrent: Bool = true
+    @Updating var allowShowingAsCurrent: Bool = true
 
     var body: some View {
         ZStack(alignment: .leading) {
