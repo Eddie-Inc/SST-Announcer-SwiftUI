@@ -77,29 +77,34 @@ struct DayPickerView: View {
                 .frame(width: 50)
             Spacer()
             ForEach(sortedDays.filter({ $0.week == week })) { day in
-                Text(day.day.rawValue.first!.uppercased())
-                    .foregroundColor(selection == day ? .background : (today == day ? .red : .primary))
-                    .frame(width: 24, height: 24)
-                    .background {
-                        if selection == day {
-                            if today == day {
-                                Color.red
-                                    .cornerRadius(6)
-                            } else {
-                                Color.blue
-                                    .cornerRadius(6)
-                            }
+                ZStack {
+                    if selection == day {
+                        if today == day {
+                            Color.red
+                                .cornerRadius(6)
                         } else {
-                            Color.white.opacity(0.001)
-                                .frame(width: 24, height: 24)
+                            Color.primary
+                                .cornerRadius(6)
                         }
+                    } else {
+                        Color.white.opacity(0.001)
                     }
-                    .frame(width: 40)
-                    .onTapGesture {
-                        withAnimation {
-                            self.selection = day
-                        }
+                    if selection == day {
+                        Text(day.day.rawValue.first!.uppercased())
+                            .bold()
+                            .foregroundColor(.background)
+                    } else {
+                        Text(day.day.rawValue.first!.uppercased())
+                            .foregroundColor(today == day ? .red : .primary)
                     }
+                }
+                .frame(width: 24, height: 24)
+                .frame(width: 40)
+                .onTapGesture {
+                    withAnimation {
+                        self.selection = day
+                    }
+                }
             }
             Spacer().frame(width: 20)
         }
