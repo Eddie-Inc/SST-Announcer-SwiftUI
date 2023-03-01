@@ -125,8 +125,6 @@ struct ChangeSubjectView<Table: ScheduleProvider, Block: TimeBlock>: View where 
                     text.lowercased() == newClass.name.description.lowercased()
                 }) ?? false
             }
-            let formatted = matchingSubjects.map({ $0.timeBlocks.description + $0.day.description })
-                .joined(separator: "\n\t")
             subsToMatch = matchingSubjects.map({ $0.id })
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 if !subsToMatch!.isEmpty {

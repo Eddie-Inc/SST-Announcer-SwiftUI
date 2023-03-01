@@ -133,15 +133,15 @@ struct ScheduleDisplayView: View {
     @ViewBuilder
     func viewForSubject(subject: Subject) -> some View {
         if #available(iOS 16.0, *) {
-            ZStack {
-                SubjectDisplayView(today: today,
-                                   subject: subject,
-                                   allowShowingAsCurrent: today.weekday.dayOfWeek != nil)
-                .contextMenu {
-                    Button("Copy Details") {}
-                } preview: {
-                    OtherSubjectInstancesView(schedule: manager.schedule, subClass: subject.subjectClass)
-                }
+            SubjectDisplayView(today: today,
+                               subject: subject,
+                               allowShowingAsCurrent: today.weekday.dayOfWeek != nil)
+            .contextMenu {
+                Button("Copy Details") {}
+            } preview: {
+                OtherSubjectInstancesView(schedule: manager.schedule, subClass: subject.subjectClass)
+            }
+            .overlay {
                 NavigationLink {
                     OtherSubjectInstancesView(schedule: manager.schedule,
                                               subClass: subject.subjectClass,
@@ -150,13 +150,13 @@ struct ScheduleDisplayView: View {
             }
             .listRowSeparator(.hidden)
         } else {
-            ZStack {
-                SubjectDisplayView(today: today,
-                                   subject: subject,
-                                   allowShowingAsCurrent: today.weekday.dayOfWeek != nil)
-                .contextMenu {
-                    Button("Copy Details") {}
-                }
+            SubjectDisplayView(today: today,
+                               subject: subject,
+                               allowShowingAsCurrent: today.weekday.dayOfWeek != nil)
+            .contextMenu {
+                Button("Copy Details") {}
+            }
+            .overlay {
                 NavigationLink {
                     OtherSubjectInstancesView(schedule: manager.schedule,
                                               subClass: subject.subjectClass,

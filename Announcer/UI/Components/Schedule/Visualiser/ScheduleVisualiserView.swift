@@ -82,7 +82,7 @@ struct ScheduleVisualiserView<Provider: ScheduleProvider>: View {
 
     func viewFor(week: Week, day: DayOfWeek) -> some View {
         ZStack(alignment: .leading) {
-            Color.white.opacity(0.01)
+            Color.white.opacity(0.001)
                 .frame(width: CGFloat(dayHeight *
                                       scheduleSuggestion.timeRange.count * 2/3),
                        height: 10)

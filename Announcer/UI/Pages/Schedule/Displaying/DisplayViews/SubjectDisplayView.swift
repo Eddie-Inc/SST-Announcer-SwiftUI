@@ -10,7 +10,7 @@ import Chopper
 import Updating
 
 struct SubjectDisplayView: View {
-    @State var today: Date
+    @Updating var today: Date
     @Updating var subject: Subject
 
     @State var allowShowingAsCurrent: Bool = true
@@ -38,8 +38,11 @@ struct SubjectDisplayView: View {
             }
         }
         .padding(.vertical, 1)
-        .padding(.horizontal, -15)
         .listRowSeparator(.hidden)
+        .listRowInsets(.init(top: 5,
+                             leading: 5,
+                             bottom: 5,
+                             trailing: 5))
     }
 
     var background: some View {
