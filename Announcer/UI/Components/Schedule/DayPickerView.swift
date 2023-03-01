@@ -99,7 +99,7 @@ struct DayPickerView: View {
                     }
                 }
                 .frame(width: 24, height: 24)
-                .frame(width: 40)
+                .frame(width: 35)
                 .onTapGesture {
                     withAnimation {
                         self.selection = day

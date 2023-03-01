@@ -107,12 +107,16 @@ struct ScheduleDisplayView: View {
                         .font(.subheadline)
                     Spacer()
                 }
-                .padding(.horizontal, -10)
                 .onTapGesture {
                     withAnimation {
                         compactTop = false
                     }
                 }
+                .listRowInsets(.init(top: 5,
+                                     leading: 8,
+                                     bottom: 5,
+                                     trailing: 8))
+                .listRowSeparator(.hidden)
             }
             ForEach(Array(manager.schedule.subjectsMatching(day: day.day,
                                                             week: day.week).enumerated()),
