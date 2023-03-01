@@ -7,26 +7,30 @@
 
 import SwiftUI
 
+/// Represents a subject in a ``Schedule``
 public struct Subject: TimeBlock, Codable {
-    public var timeBlocks: Range<Int>
-    public var day: Day
-
+    /// The actual subject class of the subject. Will always be present, unlike ``displaySubjectClass``.
     public var subjectClass: SubjectClass
+
+    public var day: Day
+    public var timeBlocks: Range<Int>
+    /// A wrapper for `subjectClass.name`
+    public var displayName: Name? { subjectClass.name }
+    /// A wrapper for `subjectClass.teacher`
+    public var displaySubtext: String? { subjectClass.teacher }
+    /// A wrapper for `subjectClass.color`
+    public var displayColor: Color? { subjectClass.color }
+    /// A wrapper for `subjectClass`
     public var displaySubjectClass: SubjectClass? {
-        get {
-            subjectClass
-        }
+        get { subjectClass }
         set {
-            if let newValue {
-                subjectClass = newValue
-            }
+            guard let newValue else { return }
+            subjectClass = newValue
         }
     }
 
-    public var id = UUID()
-
     public init(from suggestion: SubjectSuggestion) {
-        guard let subClass = suggestion.subjectClass else { fatalError("Suggestion must have a class") }
+        guard let subClass = suggestion.displaySubjectClass else { fatalError("Suggestion must have a class") }
         self.timeBlocks = suggestion.timeBlocks
 
         self.day = suggestion.day
@@ -41,7 +45,5 @@ public struct Subject: TimeBlock, Codable {
         self.subjectClass = subjectClass
     }
 
-    public var displayName: Name? { subjectClass.name }
-    public var displaySubtext: String? { subjectClass.teacher }
-    public var displayColor: Color? { subjectClass.color }
+    public var id = UUID()
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A data structure representing a timetable, containing subjects, classes, and other scheduling information.
 public struct Schedule: ScheduleProvider, Codable {
     public var id = UUID()
 
@@ -25,7 +26,8 @@ public struct Schedule: ScheduleProvider, Codable {
         self.repetitions = suggestion.repetitions
     }
 
-    /// Since no classes can be unclassed here, just trim unused ones.
+    /// Trims unused classes. It is not possible to delete classes here, so it assumes that this function
+    /// is being called as clean-up after it has been removed completely.
     public mutating func deleteClass(subClass: SubjectClass) {
         self.trimUnusedClasses()
     }

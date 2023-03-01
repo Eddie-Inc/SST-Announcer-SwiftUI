@@ -33,7 +33,7 @@ extension ScheduleSuggestion {
                 // if name and teacher are identical, assign it to that class
                 subClass.name == subject.name && subClass.teacher == subject.teacher
             }) {
-                mutableSelf.subjects[index].subjectClass = identifiedClass
+                mutableSelf.subjects[index].displaySubjectClass = identifiedClass
                 continue
             }
 
@@ -44,7 +44,7 @@ extension ScheduleSuggestion {
                 let newClass = SubjectClass(name: name,
                                             teacher: subject.teacher,
                                             color: colorFor(name: string))
-                mutableSelf.subjects[index].subjectClass = newClass
+                mutableSelf.subjects[index].displaySubjectClass = newClass
                 mutableSelf.subjectClasses.append(newClass)
             default: break
             }

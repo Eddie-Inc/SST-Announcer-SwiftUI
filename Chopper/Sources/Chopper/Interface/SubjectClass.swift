@@ -8,10 +8,13 @@
 import Foundation
 import SwiftUI
 
-// eg. chinese or math. Not any specific timing, just the class itself.
+/// A struct that represents a class, such as English or Geography.
 public struct SubjectClass: Identifiable, Equatable, Codable {
+    /// The name of the class
     public var name: Name
+    /// The teacher of the class, if one exists
     public var teacher: String?
+    /// The color to show for the class
     public var color: Color
 
     public var id = UUID()

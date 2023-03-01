@@ -7,18 +7,19 @@
 
 import SwiftUI
 
+/// A suggestion for a ``Schedule``, containing code for reading from
+/// a schedule image and other data to aid user customisation.
 public struct ScheduleSuggestion: ScheduleProvider {
-
-    public var id = UUID()
-
+    /// The initial image submitted
     public var sourceImage: UIImage
-    public var subjects: [SubjectSuggestion] = []
+    /// A debug image, derived from the initial submitted image
     public var processedSource: SubjectSuggestion
+
+    public var subjects: [SubjectSuggestion] = []
+    public var subjectClasses: [SubjectClass] = []
     public var timeRange: Range<Int> { processedSource.timeBlocks }
     public var startDate: Date
     public var repetitions: Int
-
-    public var subjectClasses: [SubjectClass] = []
 
     public init?(sourceImage: UIImage) {
         self.sourceImage = sourceImage
@@ -31,4 +32,6 @@ public struct ScheduleSuggestion: ScheduleProvider {
         self.startDate = .now
         self.repetitions = 10
     }
+
+    public var id = UUID()
 }

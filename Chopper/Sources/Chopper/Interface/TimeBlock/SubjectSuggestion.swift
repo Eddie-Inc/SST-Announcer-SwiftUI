@@ -7,25 +7,26 @@
 
 import SwiftUI
 
+/// Represents a suggestion for a subject in a ``ScheduleSuggestion``
 public struct SubjectSuggestion: TimeBlock {
+    /// A cropped part of a schedule for the subject that this `SubjectSuggestion` represents
     public var image: UIImage
+    /// The name of the schedule, if available. Read only externally.
+    public internal(set) var name: Name?
+    /// The teacher of the schedule, if available. Read only externally.
+    public internal(set) var teacher: String?
+    /// The raw text that the Vision API returned, if available. Read only externally.
+    public internal(set) var rawTextContents: [String]?
 
-    public var timeBlocks: Range<Int>
     public var day: Day
-
-    public var name: Name?
-    public var teacher: String?
-    public var rawTextContents: [String]?
-    public var subjectClass: SubjectClass?
-
-    public var displaySubjectClass: SubjectClass? {
-        get {
-            subjectClass
-        }
-        set {
-            subjectClass = newValue
-        }
-    }
+    public var timeBlocks: Range<Int>
+    /// A wrapper for `displaySubjectClass.name`, defaulting to ``name``
+    public var displayName: Name? { displaySubjectClass?.name ?? name }
+    /// A wrapper for `displaySubjectClass.teacher`, defaulting to ``teacher``
+    public var displaySubtext: String? { displaySubjectClass?.teacher ?? teacher }
+    /// A wrapper for `displaySubjectClass.color`
+    public var displayColor: Color? { displaySubjectClass?.color }
+    public var displaySubjectClass: SubjectClass?
 
     public init(image: UIImage,
                 timeBlocks: Range<Int>,
@@ -52,10 +53,5 @@ public struct SubjectSuggestion: TimeBlock {
         }
     }
 
-    // MARK: Identifiable
     public var id = UUID()
-
-    public var displayName: Name? { subjectClass?.name ?? name }
-    public var displaySubtext: String? { subjectClass?.teacher ?? teacher }
-    public var displayColor: Color? { subjectClass?.color }
 }
