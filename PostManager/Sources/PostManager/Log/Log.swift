@@ -223,7 +223,7 @@ public class Log {
             date: date
         )
 
-        // swiftlint:disable: this disallow_print
+        // swiftlint : disable : this disallow_print
         print(result)
     }
 }
