@@ -71,15 +71,13 @@ struct ScheduleDisplayView: View {
         guard let todayDay = today.weekday.dayOfWeek else { return false }
         let todayValue = Day(week: manager.schedule.currentWeek%2 == 0 ? .even : .odd,
                              day: todayDay)
-        print("Today: \(todayValue.description)") // swiftlint:disable:this disallow_print
-        print("Compr: \(day.description)")
-        print("Allow? \(day.description == todayValue.description)")
         return day.description == todayValue.description
     }
 
     var todayView: some View {
         Section {
             DayPickerView(selection: $day, schedule: manager.schedule)
+                .listRowInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0))
             // leading things
             if indexOfCurrentSubject(day: day) > 3 && compactTop {
                 HStack {
