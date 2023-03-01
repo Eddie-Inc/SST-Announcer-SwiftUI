@@ -10,8 +10,7 @@ import Updating
 import Chopper
 
 struct ClassesDisplayView: View {
-    @Updating var schedule: Schedule
-
+    @State var schedule: Schedule // no need to be updating for this one
     @State var searchString: String = ""
 
     var body: some View {

@@ -50,8 +50,7 @@ struct ScheduleDisplayView: View {
             }
         }
         .onReceive(timer) { _ in
-            // TODO: Fix this to avoid constant reloading
-//            self.today = .now
+            self.today = .now
         }
         .navigationTitle("Schedule")
         .sheet(isPresented: $showInfo) {

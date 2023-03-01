@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import PostManager
 
 public extension ScheduleProvider {
     /// The date that the schedule is due to end at.
@@ -28,7 +27,6 @@ public extension ScheduleProvider {
         guard nowInRange else { return -1 }
         let weeks = Date().timeIntervalSince(startDate) / (60 * 60 * 24 * 7)
         // round it up. Eg the first monday has a miniscule time interval, but is still W1
-        Log.info("Weeks: \(weeks) (\(Int(ceil(weeks))))")
         return Int(ceil(weeks))
     }
 
