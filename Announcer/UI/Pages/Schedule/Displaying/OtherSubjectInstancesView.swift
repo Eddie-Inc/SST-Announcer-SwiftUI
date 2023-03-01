@@ -41,11 +41,9 @@ struct OtherSubjectInstancesView: View {
                 }
             }
 
-            Section {
-                ForEach(Array(validDays.enumerated()), id: \.1.id) { (index, day) in
-                    viewForday(day: day)
-                        .padding(.bottom, index == validDays.count-1 ? 5 : 0)
-                }
+            ForEach(Array(validDays.enumerated()), id: \.1.id) { (index, day) in
+                viewForday(day: day)
+                    .padding(.bottom, index == validDays.count-1 ? 5 : 0)
             }
         }
         .navigationTitle(subClass.name.description)
@@ -63,12 +61,9 @@ struct OtherSubjectInstancesView: View {
         return days
     }
 
+    @ViewBuilder
     func viewForday(day: Day) -> some View {
-        VStack(alignment: .leading) {
-            Text(day.description)
-                .font(.caption)
-                .foregroundColor(.gray)
-                .offset(y: 5)
+        Section(day.description) {
             ForEach(subjectsForDay(day: day)) { subject in
                 SubjectDisplayView(today: .now,
                                    subject: subject,
@@ -77,8 +72,6 @@ struct OtherSubjectInstancesView: View {
                                    subject.day.day == Date().weekday.dayOfWeek)
             }
         }
-        .padding(.bottom, -5)
-        .listRowSeparator(.hidden)
     }
 
     func subjectsForDay(day: Day) -> [Subject] {
