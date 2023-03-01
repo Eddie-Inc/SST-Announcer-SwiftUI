@@ -36,6 +36,24 @@ public extension ScheduleProvider {
     mutating func fixStartDate() {
         startDate = startDate.previous(.saturday, considerToday: true)
     }
+
+    /// Returns the number of days until a specific `Day`
+    func daysUntil(day: Day) -> Int {
+        let currentWeek = currentWeek
+        let todayWeek: Week = currentWeek%2 == 0 ? .even : .odd
+        let todayDay = Date().weekday.dayOfWeek ?? .monday // default to monday
+
+        let thisDay = Day(week: todayWeek, day: todayDay)
+
+        return thisDay.daysFrom(laterDay: day)
+    }
+
+    /// Returns a ``Date`` representing the next occurence of a given day.
+    /// The time of the returned date is the same as the current time.
+    func dateOfNext(day: Day) -> Date {
+        let days = daysUntil(day: day)
+        return Date(timeIntervalSinceNow: Double(days * 60 * 60 * 24))
+    }
 }
 
 public extension Date {
@@ -80,6 +98,12 @@ public extension Date {
                                      direction: direction.calendarSearchDirection)
 
         return date!
+    }
+
+    /// Formats it in the format day/month
+    var dayMonthFormat: String {
+        let components = self.formatted(date: .numeric, time: .omitted).split(separator: "/")
+        return components[0..<2].joined(separator: "/")
     }
 }
 

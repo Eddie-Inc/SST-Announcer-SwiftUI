@@ -10,6 +10,16 @@ import Foundation
 public enum DayOfWeek: String, CaseIterable, Equatable, Identifiable, Codable {
     case monday, tuesday, wednesday, thursday, friday
     public var id: String { self.rawValue }
+
+    var number: Int {
+        switch self {
+        case .monday: return 0
+        case .tuesday: return 1
+        case .wednesday: return 2
+        case .thursday: return 3
+        case .friday: return 4
+        }
+    }
 }
 
 public enum Week: String, CaseIterable, Equatable, Identifiable, Codable {
@@ -43,6 +53,27 @@ public struct Day: Equatable, Identifiable, Codable {
     public init(week: Week, day: DayOfWeek) {
         self.week = week
         self.day = day
+    }
+
+    func daysFrom(laterDay: Day) -> Int {
+        // if its the same, return 0
+        guard laterDay != self else { return 0 }
+
+        if laterDay.week == self.week {
+            // same week
+            if self.day.number < laterDay.day.number {
+                // later day is after current one
+                return laterDay.day.number - self.day.number
+            } else {
+                // later day is "before" the current one. Just add 14 days and subtract the difference.
+                return 14 - (self.day.number - laterDay.day.number)
+            }
+        } else {
+            // different week
+            let difference = laterDay.day.number - self.day.number
+            // return the difference + 7 for one week
+            return difference + 7
+        }
     }
 }
 

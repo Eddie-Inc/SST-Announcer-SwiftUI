@@ -41,9 +41,8 @@ struct OtherSubjectInstancesView: View {
                 }
             }
 
-            ForEach(Array(validDays.enumerated()), id: \.1.id) { (index, day) in
+            ForEach(validDays) { day in
                 viewForday(day: day)
-                    .padding(.bottom, index == validDays.count-1 ? 5 : 0)
             }
         }
         .navigationTitle(subClass.name.description)
@@ -58,18 +57,30 @@ struct OtherSubjectInstancesView: View {
             }
         }
 
-        return days
+        return days.sorted { first, second in
+            schedule.daysUntil(day: first) < schedule.daysUntil(day: second)
+        }
     }
 
     @ViewBuilder
     func viewForday(day: Day) -> some View {
-        Section(day.description) {
+        Section {
             ForEach(subjectsForDay(day: day)) { subject in
                 SubjectDisplayView(today: .now,
                                    subject: subject,
                                    allowShowingAsCurrent: subject.day.week
                     .matches(weekNo: schedule.currentWeek) &&
                                    subject.day.day == Date().weekday.dayOfWeek)
+            }
+        } header: {
+            HStack {
+                Text("\(schedule.dateOfNext(day: day).dayMonthFormat) \(day.description)")
+                Spacer()
+                if schedule.daysUntil(day: day) == 0 {
+                    Text("Today")
+                } else {
+                    Text("In \(schedule.daysUntil(day: day)) days")
+                }
             }
         }
     }
