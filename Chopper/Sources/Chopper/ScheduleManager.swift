@@ -8,7 +8,6 @@
 import SwiftUI
 
 // we're using testable here for access to read, write and exists
-#if canImport(PostManager)
 @testable import PostManager
 
 public class ScheduleManager: ObservableObject {
@@ -64,4 +63,3 @@ public class ScheduleManager: ObservableObject {
         objectWillChange.send()
     }
 }
-#endif

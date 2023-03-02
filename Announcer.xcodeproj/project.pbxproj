@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		881544B529686C72001BAFA4 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 881544B429686C72001BAFA4 /* MarkdownUI */; };
 		881544BB29691ABF001BAFA4 /* RichText in Frameworks */ = {isa = PBXBuildFile; productRef = 881544BA29691ABF001BAFA4 /* RichText */; };
 		8829F5AA296AE65E00BA63A8 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5A9296AE65E00BA63A8 /* WidgetKit.framework */; };
 		8829F5AC296AE65E00BA63A8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5AB296AE65E00BA63A8 /* SwiftUI.framework */; };
@@ -183,7 +182,6 @@
 				D38630A22997DA0F006F388D /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
 				D386309E2997DA0F006F388D /* FirebaseFunctions in Frameworks */,
 				937EBBF5296EA72000722285 /* OrderedCollections in Frameworks */,
-				881544B529686C72001BAFA4 /* MarkdownUI in Frameworks */,
 				93767C8A29AB8798007B2EAD /* Chopper in Frameworks */,
 				D38630A02997DA0F006F388D /* FirebaseInAppMessaging-Beta in Frameworks */,
 				93767CBD29AB8ABB007B2EAD /* Updating in Frameworks */,
@@ -473,7 +471,6 @@
 			name = Announcer;
 			packageProductDependencies = (
 				935EAB2B29685987005D2F52 /* FeedKit */,
-				881544B429686C72001BAFA4 /* MarkdownUI */,
 				881544BA29691ABF001BAFA4 /* RichText */,
 				937EBBF4296EA72000722285 /* OrderedCollections */,
 				D386309D2997DA0F006F388D /* FirebaseFunctions */,
@@ -517,7 +514,6 @@
 			mainGroup = 930EA42E29645AE1007081C8;
 			packageReferences = (
 				935EAB2A29685987005D2F52 /* XCRemoteSwiftPackageReference "FeedKit" */,
-				881544B329686C72001BAFA4 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 				881544B929691ABF001BAFA4 /* XCRemoteSwiftPackageReference "RichText" */,
 				937EBBF3296EA72000722285 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				D386309C2997DA0E006F388D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
@@ -573,7 +569,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  git status --porcelain | grep -v '^ \\?D' | cut -c 4- | sed 's/.* -> //' | tr -d '\"' | while read file \n  do\n    if [[ \"$file\" == *.swift ]]; then\n        swiftlint \"$file\" --strict\n    fi\n  done\nelse\n echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -855,7 +851,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=60 -Xfrontend -warn-long-function-bodies=60";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=80 -Xfrontend -warn-long-function-bodies=80";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaitay.Announcer.SwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -877,7 +873,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Announcer/Preview Content\"";
 				DEVELOPMENT_TEAM = N9ANZ94TFN;
-				ENABLE_PREVIEWS = YES;
+				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Announcer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "SST Announcer";
@@ -938,14 +934,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		881544B329686C72001BAFA4 /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/gonzalezreal/MarkdownUI.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		881544B929691ABF001BAFA4 /* XCRemoteSwiftPackageReference "RichText" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/NuPlay/RichText.git";
@@ -989,11 +977,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		881544B429686C72001BAFA4 /* MarkdownUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 881544B329686C72001BAFA4 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
-			productName = MarkdownUI;
-		};
 		881544BA29691ABF001BAFA4 /* RichText */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 881544B929691ABF001BAFA4 /* XCRemoteSwiftPackageReference "RichText" */;

@@ -7,7 +7,6 @@
 
 import SwiftUI
 import FirebaseCore
-import MarkdownUI
 import PostManager
 
 struct AnnouncementsHomeView: View {
@@ -57,29 +56,12 @@ struct AnnouncementsHomeView: View {
                 PostPreviewView(post: $post, posts: $posts)
             }
             if searchString.isEmpty && filterCategories.isEmpty {
-                ForEach(0..<3) { index in
-                    PostPreviewPlaceholderView()
-                        .overlay { GeometryReader { proxy in
-                            Color.white.opacity(0.001)
-                                .onChange(of: proxy.frame(in: .named("scroll"))) { _ in
-                                    if index == 0 {
-                                        loadNextPosts(count: settings.loadNumber)
-                                    }
-                                }
-                        }}
-                }
+                autoLoadSkeleton
             } else {
                 Button {
                     loadNextPosts(count: settings.searchLoadNumber)
                 } label: {
-                    HStack {
-                        Spacer()
-                        Text("Search older posts")
-                        if isLoading {
-                            Image(systemName: "ellipsis")
-                        }
-                        Spacer()
-                    }
+                    loadNextButton
                 }
                 .foregroundColor(.accentColor)
             }
@@ -111,6 +93,31 @@ struct AnnouncementsHomeView: View {
         }
         .onAppear {
             loadNextPosts(count: settings.loadNumber)
+        }
+    }
+
+    var autoLoadSkeleton: some View {
+        ForEach(0..<3) { index in
+            PostPreviewPlaceholderView()
+                .overlay { GeometryReader { proxy in
+                    Color.white.opacity(0.001)
+                        .onChange(of: proxy.frame(in: .named("scroll"))) { _ in
+                            if index == 0 {
+                                loadNextPosts(count: settings.loadNumber)
+                            }
+                        }
+                }}
+        }
+    }
+
+    var loadNextButton: some View {
+        HStack {
+            Spacer()
+            Text("Search older posts")
+            if isLoading {
+                Image(systemName: "ellipsis")
+            }
+            Spacer()
         }
     }
 

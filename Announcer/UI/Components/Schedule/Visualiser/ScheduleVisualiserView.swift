@@ -83,8 +83,7 @@ struct ScheduleVisualiserView<Provider: ScheduleProvider>: View {
     func viewFor(week: Week, day: DayOfWeek) -> some View {
         ZStack(alignment: .leading) {
             Color.white.opacity(0.001)
-                .frame(width: CGFloat(dayHeight *
-                                      scheduleSuggestion.timeRange.count * 2/3),
+                .frame(width: widthOfFrame,
                        height: 10)
             ForEach(0..<scheduleSuggestion.subjects.count, id: \.self) { index in
                 if scheduleSuggestion.subjects[index].day == .init(week: week, day: day) {
@@ -98,5 +97,10 @@ struct ScheduleVisualiserView<Provider: ScheduleProvider>: View {
                 }
             }
         }
+    }
+
+    var widthOfFrame: CGFloat {
+        let count = scheduleSuggestion.timeRange.count
+        return CGFloat(count * blockWidth)
     }
 }

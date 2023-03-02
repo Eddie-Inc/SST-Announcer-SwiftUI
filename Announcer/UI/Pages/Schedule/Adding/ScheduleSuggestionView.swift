@@ -25,66 +25,8 @@ struct ScheduleSuggestionView: View {
                 ScheduleVisualiserView(scheduleSuggestion: scheduleSuggestion)
             }
 
-            Section("Subjects and Classes") {
-                NavigationSheet("Classes") {
-                    List {
-                        ForEach(scheduleSuggestion.subjectClasses) { subClass in
-                            ClassDisplayView(subClass: subClass)
-                        }
-                        .onDelete { indexSet in
-                            let classes = scheduleSuggestion.subjectClasses
-                            for index in indexSet {
-                                scheduleSuggestion.deleteClass(subClass: classes[index])
-                            }
-                        }
-                        .onMove { indexSet, index in
-                            scheduleSuggestion.subjects.move(fromOffsets: indexSet, toOffset: index)
-                        }
-                    }
-                }
-                ForEach(Week.allCases) { week in
-                    Button {
-                        selectedWeek = week
-                    } label: {
-                        HStack {
-                            Text("Week \(week.rawValue.firstLetterUppercase)")
-                            Spacer()
-                            Text("\(scheduleSuggestion.subjects.filter({ $0.day.week == week }).invalidSuggestions)")
-                            Image(systemName: "exclamationmark.triangle")
-                        }
-                        .foregroundColor(.primary)
-                    }
-                }
-            }
-
-            Section {
-                NavigationLink {
-                    // save screen
-                    SaveScheduleView(scheduleSuggestion: scheduleSuggestion,
-                                     showProvideSuggestion: $showProvideSuggestion)
-                } label: {
-                    // debug message
-                    HStack {
-                        if scheduleSuggestion.loadProgress == .loaded {
-                            if scheduleSuggestion.invalidSuggestions > 0 {
-                                Image(systemName: "exclamationmark.triangle")
-                                    .foregroundColor(.red)
-                                Text("There are \(scheduleSuggestion.invalidSuggestions) unassigned subjects")
-                                    .multilineTextAlignment(.leading)
-                            } else {
-                                Text("Continue")
-                            }
-                        } else {
-                            Image(systemName: "ellipsis")
-                                .foregroundColor(.gray)
-                            Text("Loading subjects...")
-                        }
-                        Spacer()
-                    }
-                }
-                .disabled(!(scheduleSuggestion.invalidSuggestions == 0 &&
-                            scheduleSuggestion.loadProgress == .loaded))
-            }
+            subjectsAndClasses
+            saveButton
         }
         .sheet(item: $selectedWeek) { week in
             if #available(iOS 16.0, *) {
@@ -103,6 +45,71 @@ struct ScheduleSuggestionView: View {
                     .navigationTitle("Week \(week.rawValue.firstLetterUppercase)")
                 }
             }
+        }
+    }
+
+    var subjectsAndClasses: some View {
+        Section("Subjects and Classes") {
+            NavigationSheet("Classes") {
+                List {
+                    ForEach(scheduleSuggestion.subjectClasses) { subClass in
+                        ClassDisplayView(subClass: subClass)
+                    }
+                    .onDelete { indexSet in
+                        let classes = scheduleSuggestion.subjectClasses
+                        for index in indexSet {
+                            scheduleSuggestion.deleteClass(subClass: classes[index])
+                        }
+                    }
+                    .onMove { indexSet, index in
+                        scheduleSuggestion.subjects.move(fromOffsets: indexSet, toOffset: index)
+                    }
+                }
+            }
+            ForEach(Week.allCases) { week in
+                Button {
+                    selectedWeek = week
+                } label: {
+                    HStack {
+                        Text("Week \(week.rawValue.firstLetterUppercase)")
+                        Spacer()
+                        Text("\(scheduleSuggestion.subjects.filter({ $0.day.week == week }).invalidSuggestions)")
+                        Image(systemName: "exclamationmark.triangle")
+                    }
+                    .foregroundColor(.primary)
+                }
+            }
+        }
+    }
+
+    var saveButton: some View {
+        Section {
+            NavigationLink {
+                // save screen
+                SaveScheduleView(scheduleSuggestion: scheduleSuggestion,
+                                 showProvideSuggestion: $showProvideSuggestion)
+            } label: {
+                // debug message
+                HStack {
+                    if scheduleSuggestion.loadProgress == .loaded {
+                        if scheduleSuggestion.invalidSuggestions > 0 {
+                            Image(systemName: "exclamationmark.triangle")
+                                .foregroundColor(.red)
+                            Text("There are \(scheduleSuggestion.invalidSuggestions) unassigned subjects")
+                                .multilineTextAlignment(.leading)
+                        } else {
+                            Text("Continue")
+                        }
+                    } else {
+                        Image(systemName: "ellipsis")
+                            .foregroundColor(.gray)
+                        Text("Loading subjects...")
+                    }
+                    Spacer()
+                }
+            }
+            .disabled(!(scheduleSuggestion.invalidSuggestions == 0 &&
+                        scheduleSuggestion.loadProgress == .loaded))
         }
     }
 }

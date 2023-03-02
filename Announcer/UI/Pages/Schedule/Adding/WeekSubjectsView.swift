@@ -21,45 +21,54 @@ struct WeekSubjectsView<Table: ScheduleProvider, Block: TimeBlock>: View where B
     var body: some View {
         ForEach(DayOfWeek.allCases) { day in
             DisclosureGroup {
-                ForEach($scheduleSuggestion.subjects) { $subject in
-                    if subject.day == .init(week: week, day: day) {
-                        NavigationLink {
-                            SubjectSuggestionEditView(suggestion: $subject,
-                                                      schedule: $scheduleSuggestion)
-                        } label: {
-                            viewForSubject(subject: subject)
-                        }
-                        .disabled(scheduleSuggestion.loadProgress != .loaded)
-                    }
-                }
-                .onDelete { indexSet in
-                    scheduleSuggestion.subjects.remove(atOffsets: indexSet)
-                    // remove all subject classes that no longer exist
-                    scheduleSuggestion.trimUnusedClasses()
-                }
-                HStack {
-                    Spacer()
-                    Button {
-                        newSubject(day: day)
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                    Spacer()
-                }
+                viewForDay(day: day)
             } label: {
-                HStack {
-                    Text(day.rawValue.firstLetterUppercase)
-                    Spacer()
-                    if scheduleSuggestion.loadProgress == .loaded &&
-                        scheduleSuggestion.subjects.filter({
-                            $0.day == .init(week: week, day: day)
-                        }).invalidSuggestions > 0 {
-                        Text(
-"\(scheduleSuggestion.subjects.filter({ $0.day == .init(week: week, day: day) }).invalidSuggestions)"
-                        )
-                        Image(systemName: "exclamationmark.triangle")
-                    }
+                headerForDay(day: day)
+            }
+        }
+    }
+
+    @ViewBuilder
+    func viewForDay(day: DayOfWeek) -> some View {
+        ForEach($scheduleSuggestion.subjects) { $subject in
+            if subject.day == .init(week: week, day: day) {
+                NavigationLink {
+                    SubjectSuggestionEditView(suggestion: $subject,
+                                              schedule: $scheduleSuggestion)
+                } label: {
+                    viewForSubject(subject: subject)
                 }
+                .disabled(scheduleSuggestion.loadProgress != .loaded)
+            }
+        }
+        .onDelete { indexSet in
+            scheduleSuggestion.subjects.remove(atOffsets: indexSet)
+            // remove all subject classes that no longer exist
+            scheduleSuggestion.trimUnusedClasses()
+        }
+        HStack {
+            Spacer()
+            Button {
+                newSubject(day: day)
+            } label: {
+                Image(systemName: "plus")
+            }
+            Spacer()
+        }
+    }
+
+    func headerForDay(day: DayOfWeek) -> some View {
+        HStack {
+            Text(day.rawValue.firstLetterUppercase)
+            Spacer()
+            if scheduleSuggestion.loadProgress == .loaded &&
+                scheduleSuggestion.subjects.filter({
+                    $0.day == .init(week: week, day: day)
+                }).invalidSuggestions > 0 {
+                Text(
+"\(scheduleSuggestion.subjects.filter({ $0.day == .init(week: week, day: day) }).invalidSuggestions)"
+                )
+                Image(systemName: "exclamationmark.triangle")
             }
         }
     }
