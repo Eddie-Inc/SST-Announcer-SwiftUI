@@ -75,7 +75,7 @@ struct WeekSubjectsView<Table: ScheduleProvider, Block: TimeBlock>: View where B
                         Text("Subject is unidentifiable! Please manually enter details.")
                     }
                     .foregroundColor(.red)
-                    Text(subject.timeRangeDescription())
+                    Text(subject.timeRangeDescription)
                         .font(.footnote)
                         .foregroundColor(.gray)
                 }
@@ -112,7 +112,7 @@ struct WeekSubjectsView<Table: ScheduleProvider, Block: TimeBlock>: View where B
 )
                         }
                     }
-                    Text(subject.timeRangeDescription())
+                    Text(subject.timeRangeDescription)
                         .font(.footnote)
                         .foregroundColor(.gray)
                 }
@@ -126,7 +126,7 @@ struct WeekSubjectsView<Table: ScheduleProvider, Block: TimeBlock>: View where B
         let thisDaySubjects = scheduleSuggestion.subjects.filter({
             $0.day == .init(week: week, day: day)
         })
-        let timeLowerRange = thisDaySubjects.last?.timeBlocks.upperBound ?? 1
+        let timeLowerRange = thisDaySubjects.last?.timeRange.upperBound ?? .startTime
         guard timeLowerRange < scheduleSuggestion.timeRange.upperBound else {
             // cannot create a subject here
             return
@@ -137,13 +137,13 @@ struct WeekSubjectsView<Table: ScheduleProvider, Block: TimeBlock>: View where B
         // create a blank subject
         var newSubject: Block?
         if Block.self == Subject.self {
-            newSubject = Subject(timeBlocks: newTimeRange,
+            newSubject = Subject(timeRange: newTimeRange,
                                  day: .init(week: week, day: day),
                                  subjectClass: .init(name: .some("Untitled"), color: .gray))
             as? Block
         } else if Block.self == SubjectSuggestion.self {
             newSubject = SubjectSuggestion(image: .init(systemName: "questionmark.square")!,
-                                           timeBlocks: newTimeRange,
+                                           timeRange: newTimeRange,
                                            day: .init(week: week, day: day))
             as? Block
         }

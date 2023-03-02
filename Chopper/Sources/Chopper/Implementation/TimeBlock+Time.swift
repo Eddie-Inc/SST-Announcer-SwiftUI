@@ -8,25 +8,16 @@
 import Foundation
 
 public extension TimeBlock {
-    /// Default implementation of `estimatedTimeRange(startingAt: Int) -> (Int, Int)`
-    func estimatedTimeRange(startingAt: Int = 0800) -> (Int, Int) {
-        let lower = timeBlocks.lowerBound-1
-        let upper = timeBlocks.upperBound-1
-        let first = startingAt + (100*Int(lower/3)) + 20*(lower%3)
-        let second = startingAt + (100*Int(upper/3)) + 20*(upper%3)
-        return (first, second)
+    /// A description of the time range, eg. "0800 - 0840"
+    var timeRangeDescription: String {
+        "\(timeRange.lowerBound.description) - \(timeRange.upperBound.description)"
     }
 
-    /// Default implementation of `timeRangeDescription(startingAt: Int) -> String`
-    func timeRangeDescription(startingAt: Int = 0800) -> String {
-        "\(estimatedTimeRange().0.description) - \(estimatedTimeRange().1.description)"
-    }
-
-    /// Default implementation of `durationFormatted(minutesPerBlock: Int) -> String`
-    func durationFormatted(minutesPerBlock: Int = 20) -> String {
-        let totalMinutes = minutesPerBlock * timeBlocks.count
-        let hours = totalMinutes / 60
-        let minutes = totalMinutes - (hours * 60)
+    /// A formatted version of the duration, eg "1h" for one hour
+    var durationFormatted: String {
+        let difference = timeRange.upperBound - timeRange.lowerBound
+        let hours = difference.hour
+        let minutes = difference.minutes
 
         var formattedString = ""
         if hours > 0 {
@@ -39,9 +30,8 @@ public extension TimeBlock {
         return formattedString
     }
 
-    /// Default implementation of `contains(time: Int) -> Bool`
-    func contains(time: Int) -> Bool {
-        let timeRange = self.estimatedTimeRange()
-        return timeRange.0 <= time && time <= timeRange.1
+    /// Default image
+    func contains(time: TimePoint) -> Bool {
+        return timeRange.contains(time)
     }
 }

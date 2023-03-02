@@ -93,8 +93,8 @@ struct ScheduleVisualiserView<Provider: ScheduleProvider>: View {
                                           blockWidth: blockWidth,
                                           font: font)
                     .padding(.vertical, -4)
-                    .offset(x: CGFloat(blockWidth * scheduleSuggestion.subjects[index]
-                        .timeBlocks.lowerBound))
+                    .offset(x: CGFloat(blockWidth * TimePoint.startTime
+                        .distance(to: scheduleSuggestion.subjects[index].timeRange.lowerBound)))
                 }
             }
         }

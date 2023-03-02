@@ -17,7 +17,7 @@ public struct ScheduleSuggestion: ScheduleProvider {
 
     public var subjects: [SubjectSuggestion] = []
     public var subjectClasses: [SubjectClass] = []
-    public var timeRange: Range<Int> { processedSource.timeBlocks }
+    public var timeRange: TimeRange { processedSource.timeRange }
     public var startDate: Date
     public var repetitions: Int
 

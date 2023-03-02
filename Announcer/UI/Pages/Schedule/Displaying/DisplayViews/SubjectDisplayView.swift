@@ -93,22 +93,22 @@ struct SubjectDisplayView: View {
 
             VStack {
                 Spacer()
-                Text(subject.durationFormatted())
+                Text(subject.durationFormatted)
                     .bold()
                 Spacer()
             }
 
             if nowInSubject(subject: subject) {
                 VStack(alignment: .trailing) {
-                    Text(subject.estimatedTimeRange().0.description)
-                    Text(subject.estimatedTimeRange().1.description)
+                    Text(subject.timeRange.lowerBound.description)
+                    Text(subject.timeRange.upperBound.description)
                 }
                 .frame(width: 40)
                 .padding(5)
             } else {
                 HStack {
-                    Text(subject.estimatedTimeRange().0.description)
-                    Text(subject.estimatedTimeRange().1.description)
+                    Text(subject.timeRange.lowerBound.description)
+                    Text(subject.timeRange.upperBound.description)
                 }
                 .padding(5)
             }
@@ -121,7 +121,7 @@ struct SubjectDisplayView: View {
     func nowInSubject(subject: Subject) -> Bool {
         if let showAsCurrent { return showAsCurrent }
 
-        return subject.contains(time: today.formattedTime) && allowShowingAsCurrent
+        return subject.contains(time: today.timePoint) && allowShowingAsCurrent
     }
 
     // for debug purposes only
@@ -136,14 +136,14 @@ struct SubjectDisplayView_Previews: PreviewProvider {
     static var previews: some View {
         List {
             SubjectDisplayView(today: .now,
-                               subject: .init(timeBlocks: 1..<5,
+                               subject: .init(timeRange: .startTime+1 ..< .startTime+5,
                                               day: .init(week: .odd, day: .monday),
                                               subjectClass:
                                     .init(name: .some("Test"),
                                           color: .blue)))
             .overrideShowAsCurrent(show: false)
             SubjectDisplayView(today: .now,
-                               subject: .init(timeBlocks: 1..<5,
+                               subject: .init(timeRange: .startTime+1 ..< .startTime+5,
                                               day: .init(week: .odd, day: .monday),
                                               subjectClass:
                                     .init(name: .some("ABCD"),
@@ -151,14 +151,14 @@ struct SubjectDisplayView_Previews: PreviewProvider {
                                           color: .purple)))
             .overrideShowAsCurrent(show: false)
             SubjectDisplayView(today: .now,
-                               subject: .init(timeBlocks: 1..<5,
+                               subject: .init(timeRange: .startTime+1 ..< .startTime+5,
                                               day: .init(week: .odd, day: .monday),
                                               subjectClass:
                                     .init(name: .some("IDK man"),
                                           color: .brown)))
             .overrideShowAsCurrent(show: true)
             SubjectDisplayView(today: .now,
-                               subject: .init(timeBlocks: 1..<5,
+                               subject: .init(timeRange: .startTime+1 ..< .startTime+5,
                                               day: .init(week: .odd, day: .monday),
                                               subjectClass:
                                     .init(name: .some("Quite light"),

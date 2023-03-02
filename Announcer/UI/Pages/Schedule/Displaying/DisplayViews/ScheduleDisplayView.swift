@@ -193,7 +193,7 @@ struct ScheduleDisplayView: View {
         guard isCurrentDay else { return -1 }
 
         let subjects = manager.schedule.subjectsMatching(day: day.day, week: day.week)
-        let todayTime = Date().formattedTime
+        let todayTime = Date().timePoint
 
         // during available subjects
         if let index = subjects.firstIndex(where: { $0.contains(time: todayTime) }) {
@@ -201,12 +201,12 @@ struct ScheduleDisplayView: View {
         }
 
         // before start
-        if let start = subjects.first?.estimatedTimeRange().0, start > todayTime {
+        if let start = subjects.first?.timeRange.lowerBound, start > todayTime {
             return -1
         }
 
         // after end
-        if let end = subjects.last?.estimatedTimeRange().1, end < todayTime {
+        if let end = subjects.last?.timeRange.upperBound, end < todayTime {
             return subjects.count
         }
 

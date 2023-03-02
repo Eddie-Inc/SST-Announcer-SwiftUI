@@ -32,7 +32,7 @@ struct SubjectVisualiserView<Block: TimeBlock>: View {
                     .padding(.leading, -5)
             }
         }
-        .frame(width: CGFloat(blockWidth * subject.timeBlocks.count),
+        .frame(width: CGFloat(blockWidth * subject.timeRange.count),
                height: CGFloat(dayHeight))
     }
 

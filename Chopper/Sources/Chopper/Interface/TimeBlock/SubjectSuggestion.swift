@@ -19,7 +19,7 @@ public struct SubjectSuggestion: TimeBlock {
     public internal(set) var rawTextContents: [String]?
 
     public var day: ScheduleDay
-    public var timeBlocks: Range<Int>
+    public var timeRange: TimeRange
     /// A wrapper for `displaySubjectClass.name`, defaulting to ``name``
     public var displayName: Name? { displaySubjectClass?.name ?? name }
     /// A wrapper for `displaySubjectClass.teacher`, defaulting to ``teacher``
@@ -29,22 +29,22 @@ public struct SubjectSuggestion: TimeBlock {
     public var displaySubjectClass: SubjectClass?
 
     public init(image: UIImage,
-                timeBlocks: Range<Int>,
+                timeRange: TimeRange,
                 name: Name? = nil,
                 teacher: String? = nil,
                 day: ScheduleDay) {
         self.image = image
-        self.timeBlocks = timeBlocks
+        self.timeRange = timeRange
         self.name = name
         self.teacher = teacher
         self.day = day
     }
 
     public init(image: UIImage,
-                timeBlocks: Range<Int>,
+                timeRange: TimeRange,
                 rawDay: Int) {
         self.image = image
-        self.timeBlocks = timeBlocks
+        self.timeRange = timeRange
         let day = rawDay%10
         if day < 10 && day >= 0 {
             self.day = .init(week: Week.allCases[rawDay/5], day: DayOfWeek.allCases[rawDay%5])

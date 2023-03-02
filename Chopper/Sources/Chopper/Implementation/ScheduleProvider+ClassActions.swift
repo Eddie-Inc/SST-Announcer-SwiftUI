@@ -42,7 +42,7 @@ public extension ScheduleProvider {
                 return firstIndex < secondIndex
             }
             // day and week are the same, sort by time (we go by start of subject)
-            return first.timeBlocks.lowerBound < second.timeBlocks.lowerBound
+            return first.timeRange.lowerBound < second.timeRange.lowerBound
         }
     }
 

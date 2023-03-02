@@ -61,7 +61,8 @@ extension UIImage {
 
         // crop all the subjects as well. Output image is the first item in the array.
         var imageArray: [SubjectSuggestion] = [.init(image: outputImage,
-                                                     timeBlocks: 1..<scheduleLines.count,
+                                                     timeRange: .startTime ..<
+                                                                .startTime+scheduleLines.count*TimePoint.strideDistance,
                                                      rawDay: -1)]
         imageArray.append(contentsOf: cropSubjectFrames(cgImage: inputCGImage,
                                                         frameOfSubjects: frameOfSubjects,
@@ -162,8 +163,11 @@ extension UIImage {
             // estimate which day's start is closest to this subject's minY
             let day = dayLines.firstIndex(of: closestValue(in: dayLines, to: Int(rect.minY))) ?? -1
 
+            let lowerBound = TimePoint.startTime+start*TimePoint.strideDistance
+            let upperBound = TimePoint.startTime+end*TimePoint.strideDistance
+
             imageArray.append(.init(image: image,
-                                    timeBlocks: start+1..<end+1,
+                                    timeRange: lowerBound ..< upperBound,
                                     rawDay: day))
         }
 

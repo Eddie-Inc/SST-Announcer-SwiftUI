@@ -157,12 +157,12 @@ public extension Date {
         return Weekday(rawValue: weekdaysName[index].lowercased())!
     }
 
-    /// The military time of the date, eg. 4pm is 1600
-    var formattedTime: Int {
+    /// The TimePoint of the date
+    var timePoint: TimePoint {
         let calendar = Calendar(identifier: .gregorian)
         let hours   = calendar.component(.hour, from: self)
         let minutes = calendar.component(.minute, from: self)
 
-        return hours*100 + minutes
+        return .init(hour: hours, minute: minutes)
     }
 }

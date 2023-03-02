@@ -13,7 +13,7 @@ public struct Subject: TimeBlock, Codable {
     public var subjectClass: SubjectClass
 
     public var day: ScheduleDay
-    public var timeBlocks: Range<Int>
+    public var timeRange: TimeRange
     /// A wrapper for `subjectClass.name`
     public var displayName: Name? { subjectClass.name }
     /// A wrapper for `subjectClass.teacher`
@@ -31,16 +31,16 @@ public struct Subject: TimeBlock, Codable {
 
     public init(from suggestion: SubjectSuggestion) {
         guard let subClass = suggestion.displaySubjectClass else { fatalError("Suggestion must have a class") }
-        self.timeBlocks = suggestion.timeBlocks
+        self.timeRange = suggestion.timeRange
 
         self.day = suggestion.day
         self.subjectClass = subClass
     }
 
-    public init(timeBlocks: Range<Int>,
+    public init(timeRange: TimeRange,
                 day: ScheduleDay,
                 subjectClass: SubjectClass) {
-        self.timeBlocks = timeBlocks
+        self.timeRange = timeRange
         self.day = day
         self.subjectClass = subjectClass
     }

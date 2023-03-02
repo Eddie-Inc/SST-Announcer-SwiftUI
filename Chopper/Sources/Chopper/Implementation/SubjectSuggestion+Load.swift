@@ -37,7 +37,7 @@ public extension SubjectSuggestion {
 
                 // if the second result has less than 5 results and the first has more than 5,
                 // it is safe to assume that its flipped.
-                let flipResults = timeBlocks.count >= 6 && result[1].count < 5 && result[0].count > 5
+                let flipResults = timeRange.count >= 6 && result[1].count < 5 && result[0].count > 5
                 mutableSelf.name = .some(result[flipResults ? 1 : 0])
                 if result.count == 2 {
                     mutableSelf.teacher = result[flipResults ? 0 : 1]

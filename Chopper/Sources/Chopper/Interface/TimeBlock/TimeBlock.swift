@@ -12,7 +12,7 @@ public protocol TimeBlock: Identifiable, Equatable {
     /// The day of the block
     var day: ScheduleDay { get }
     /// The time range of the block
-    var timeBlocks: Range<Int> { get set }
+    var timeRange: TimeRange { get set }
 
     /// What to display as the name of the block. Usually the subject name.
     var displayName: Name? { get }
@@ -24,18 +24,8 @@ public protocol TimeBlock: Identifiable, Equatable {
     /// The subject class of the TimeBlock
     var displaySubjectClass: SubjectClass? { get set }
 
-    // MARK: With default implementation
-    /// Returns the estimated time range for the subject given the start time
-    /// in military time. Eg 4:30pm is 1630
-    /// - Parameter startingAt: The time to start at, in military time
-    /// - Returns: A tuple, containing the start and end time in military time
-    func estimatedTimeRange(startingAt: Int) -> (Int, Int)
-    /// A textual representation of the ``estimatedTimeRange(startingAt:)``
-    func timeRangeDescription(startingAt: Int) -> String
-    /// A formatted version of the duration, eg "1h" for one hour
-    func durationFormatted(minutesPerBlock: Int) -> String
     /// If the time block contains another time, eg. one ranging 1220 to 0100 contains 1234 but not 1111.
-    func contains(time: Int) -> Bool
+    func contains(time: TimePoint) -> Bool
 }
 
 extension TimeBlock {

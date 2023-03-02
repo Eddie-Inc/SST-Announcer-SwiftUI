@@ -71,7 +71,7 @@ struct SubjectSuggestionEditView<Table: ScheduleProvider, Block: TimeBlock>: Vie
                 subjectActions
             }
         }
-        .navigationTitle(subjectName + " (" + suggestion.timeRangeDescription() + ")")
+        .navigationTitle(subjectName + " (" + suggestion.timeRangeDescription + ")")
         .alert("Assign class to all similar subjects?", isPresented: $showMatchingSubs) {
             if let subsToMatch {
                 Button("Assign \(subsToMatch.count) subjects") {
@@ -97,40 +97,41 @@ struct SubjectSuggestionEditView<Table: ScheduleProvider, Block: TimeBlock>: Vie
     @ViewBuilder
     var timingInfo: some View {
         Picker("Start Time", selection: .init(get: {
-            suggestion.timeBlocks.lowerBound
+            suggestion.timeRange.lowerBound
         }, set: { newValue in
-            guard newValue+suggestion.timeBlocks.count < schedule.timeRange.upperBound else { return }
-            assignNewTime(newTime: newValue..<newValue+suggestion.timeBlocks.count)
+            let newUpperBound = newValue+suggestion.timeRange.count*TimePoint.strideDistance
+            guard newUpperBound < schedule.timeRange.upperBound else { return }
+            assignNewTime(newTime: newValue..<newUpperBound)
         })) {
-            ForEach(schedule.timeRange, id: \.self) { index in
+            ForEach(schedule.timeRange, id: \.self) { time in
                 // if its valid
-                if index+suggestion.timeBlocks.count < schedule.timeRange.upperBound &&
-                    isNewTimeValid(timeBlocks: index..<index+suggestion.timeBlocks.count) {
-                    Text(timeFor(blocks: index))
-                        .tag(index)
+                if time+suggestion.timeRange.count*TimePoint.strideDistance < schedule.timeRange.upperBound &&
+                    isNewTimeValid(timeRange: time..<time+suggestion.timeRange.count*TimePoint.strideDistance) {
+                    Text(time.description)
+                        .tag(time)
                 }
             }
         }
         .pickerStyle(.menu)
 
         Picker("End Time", selection: .init(get: {
-            suggestion.timeBlocks.upperBound
+            suggestion.timeRange.upperBound
         }, set: { newValue in
-            guard newValue > suggestion.timeBlocks.lowerBound else { return }
-            assignNewTime(newTime: suggestion.timeBlocks.lowerBound..<newValue)
+            guard newValue > suggestion.timeRange.lowerBound else { return }
+            assignNewTime(newTime: suggestion.timeRange.lowerBound..<newValue)
         })) {
-            ForEach(schedule.timeRange, id: \.self) { index in
+            ForEach(schedule.timeRange, id: \.self) { time in
                 // if its valid
-                if suggestion.timeBlocks.lowerBound < index &&
-                    isNewTimeValid(timeBlocks: suggestion.timeBlocks.lowerBound..<index) {
-                    Text(timeFor(blocks: index))
-                        .tag(index)
+                if suggestion.timeRange.lowerBound < time &&
+                    isNewTimeValid(timeRange: suggestion.timeRange.lowerBound..<time) {
+                    Text(time.description)
+                        .tag(time)
                 }
             }
         }
         .pickerStyle(.menu)
 
-        ListText("Duration", value: suggestion.durationFormatted())
+        ListText("Duration", value: suggestion.durationFormatted)
     }
 
     @ViewBuilder
@@ -170,7 +171,7 @@ struct SubjectSuggestionEditView<Table: ScheduleProvider, Block: TimeBlock>: Vie
         }
 
         // two hour block. May have been two one-hour blocks, misclassified.
-        if suggestion.timeBlocks.count == 6 {
+        if suggestion.timeRange.count == 6 {
             Button(role: .destructive) {
                 splitSubject()
             } label: {
@@ -193,20 +194,9 @@ Press this button to split this subject into two subjects.
 
 extension SubjectSuggestionEditView {
 
-    func timeFor(blocks: Int, minutesPerBlock: Int = 20, startingAt: Int = 0800) -> String {
-        let startingMinutes = (startingAt/100 * 60) + startingAt%100
-        let totalMinutes = startingMinutes + minutesPerBlock * (blocks-1)
-        let hours = totalMinutes / 60
-        let minutes = totalMinutes - (hours * 60)
-
-        let formattedString = String(format: "%02d", hours) + ":" + String(format: "%02d", minutes)
-
-        return formattedString
-    }
-
-    func assignNewTime(newTime: Range<Int>) {
-        guard isNewTimeValid(timeBlocks: newTime) else { return }
-        suggestion.timeBlocks = newTime
+    func assignNewTime(newTime: TimeRange) {
+        guard isNewTimeValid(timeRange: newTime) else { return }
+        suggestion.timeRange = newTime
 
         // make sure subjects are in order
         DispatchQueue.main.async {
@@ -214,14 +204,12 @@ extension SubjectSuggestionEditView {
         }
     }
 
-    func isNewTimeValid(timeBlocks: Range<Int>) -> Bool {
+    func isNewTimeValid(timeRange: TimeRange) -> Bool {
         // iterate over all other subjects, and make sure theres no conflicts
-        for subject in schedule.subjects.filter({ $0.day == suggestion.day }) {
-            guard subject != suggestion, subject.timeBlocks.overlaps(timeBlocks) else { continue }
-
-            return false
-        }
-        return true
+        let subjects = schedule.subjects.filter({ sub in
+            sub != suggestion && sub.day == suggestion.day
+        })
+        return !subjects.contains(where: { $0.timeRange.overlaps(timeRange) })
     }
 
     func splitSubject() {
@@ -234,15 +222,15 @@ extension SubjectSuggestionEditView {
 
     func splitSubjectFinal(suggestion: Subject) {
         // determine the times
-        let midBound = suggestion.timeBlocks.lowerBound + suggestion.timeBlocks.count/2
-        let lTime = suggestion.timeBlocks.lowerBound..<midBound
-        let rTime = midBound..<suggestion.timeBlocks.upperBound
+        let midBound = suggestion.timeRange.lowerBound + suggestion.timeRange.count/2
+        let lTime = suggestion.timeRange.lowerBound..<midBound
+        let rTime = midBound..<suggestion.timeRange.upperBound
 
         // create the subjects
-        let lSub = Subject(timeBlocks: lTime,
+        let lSub = Subject(timeRange: lTime,
                            day: suggestion.day,
                            subjectClass: suggestion.subjectClass)
-        let rSub = Subject(timeBlocks: rTime,
+        let rSub = Subject(timeRange: rTime,
                            day: suggestion.day,
                            subjectClass: suggestion.subjectClass)
 
@@ -273,13 +261,17 @@ extension SubjectSuggestionEditView {
         else { return }
 
         // determine the times
-        let midBound = suggestion.timeBlocks.lowerBound + suggestion.timeBlocks.count/2
-        let lTime = suggestion.timeBlocks.lowerBound..<midBound
-        let rTime = midBound..<suggestion.timeBlocks.upperBound
+        let midBound = suggestion.timeRange.lowerBound + suggestion.timeRange.count/2
+        let lTime = suggestion.timeRange.lowerBound..<midBound
+        let rTime = midBound..<suggestion.timeRange.upperBound
 
         // create the subjects
-        let lSub = SubjectSuggestion(image: UIImage(cgImage: lImage), timeBlocks: lTime, day: suggestion.day)
-        let rSub = SubjectSuggestion(image: UIImage(cgImage: rImage), timeBlocks: rTime, day: suggestion.day)
+        let lSub = SubjectSuggestion(image: UIImage(cgImage: lImage),
+                                     timeRange: lTime,
+                                     day: suggestion.day)
+        let rSub = SubjectSuggestion(image: UIImage(cgImage: rImage),
+                                     timeRange: rTime,
+                                     day: suggestion.day)
 
         // determine where to add them
         guard let thisSubjectIndex = (schedule.subjects as? [SubjectSuggestion])?.firstIndex(of: suggestion),

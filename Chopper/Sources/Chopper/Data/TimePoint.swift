@@ -7,14 +7,12 @@
 
 import Foundation
 
-public struct TimePoint: ExpressibleByIntegerLiteral,
-                         AdditiveArithmetic,
+public struct TimePoint: AdditiveArithmetic,
                          Comparable,
                          Identifiable,
+                         Hashable,
                          Codable,
                          Strideable {
-    public typealias IntegerLiteralType = Int
-
     /// An integer representing the time in military time, eg. 0420 for 4:20AM
     var rawValue: Int
 
@@ -31,16 +29,20 @@ public struct TimePoint: ExpressibleByIntegerLiteral,
         self.init(hour*100+minute)
     }
 
-    // MARK: ExpressibleByIntegerLiteral, AdditiveArithmetic
-    public init(integerLiteral value: Int) {
-        self.rawValue = value
-    }
-
+    // MARK: AdditiveArithmetic
+    public typealias IntegerLiteralType = Int
+    public static var zero: TimePoint { .init(00_00) }
     public static func + (lhs: TimePoint, rhs: TimePoint) -> TimePoint {
         return .init(totalMinutes: lhs.minutes + rhs.minutes)
     }
     public static func - (lhs: TimePoint, rhs: TimePoint) -> TimePoint {
         return .init(totalMinutes: lhs.minutes - rhs.minutes)
+    }
+    public static func + (lhs: TimePoint, rhs: Int) -> TimePoint {
+        return .init(totalMinutes: lhs.totalMinutes + rhs)
+    }
+    public static func - (lhs: TimePoint, rhs: Int) -> TimePoint {
+        return .init(totalMinutes: lhs.totalMinutes + rhs)
     }
 
     // MARK: Comparable, Identifiable
@@ -65,11 +67,11 @@ public struct TimePoint: ExpressibleByIntegerLiteral,
     // MARK: Strideable
     // TODO: Allow customisation of strideDistance on current schedule
     public static let strideDistance: Int = 20
+    public static let startTime: TimePoint = .init(08_00)
     public typealias Stride = Int
     public func distance(to other: TimePoint) -> Int {
-        (other.minutes - self.minutes) / 20
+        (other.totalMinutes - self.totalMinutes) / 20
     }
-
     // swiftlint:disable:next identifier_name
     public func advanced(by n: Int) -> TimePoint {
         var mutableSelf = self

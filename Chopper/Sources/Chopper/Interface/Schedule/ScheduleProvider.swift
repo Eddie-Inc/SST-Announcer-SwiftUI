@@ -17,7 +17,7 @@ public protocol ScheduleProvider: Identifiable, Equatable {
     var subjectClasses: [SubjectClass] { get set }
     /// The time range in the schedule.
     /// The range contains the time range of every item in ``subjects``. It may not be an exact fit, it could be larger.
-    var timeRange: Range<Int> { get }
+    var timeRange: TimeRange { get }
 
     /// The date that this schedule is intended to start.
     var startDate: Date { get set }
