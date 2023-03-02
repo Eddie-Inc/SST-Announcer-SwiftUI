@@ -68,7 +68,7 @@
 		93AF704629698B1400BF18F8 /* HTMLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704529698B1400BF18F8 /* HTMLString.swift */; };
 		93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */; };
 		93AF704C2969B10B00BF18F8 /* EditReminderDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */; };
-		93F5CD39299A2FB4002C6FA4 /* PostManager in Frameworks */ = {isa = PBXBuildFile; productRef = 93F5CD38299A2FB4002C6FA4 /* PostManager */; };
+		93DA5F4B29B0DEE500CBB655 /* PostManager in Frameworks */ = {isa = PBXBuildFile; productRef = 93DA5F4A29B0DEE500CBB655 /* PostManager */; };
 		D386309E2997DA0F006F388D /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = D386309D2997DA0F006F388D /* FirebaseFunctions */; };
 		D38630A02997DA0F006F388D /* FirebaseInAppMessaging-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = D386309F2997DA0F006F388D /* FirebaseInAppMessaging-Beta */; };
 		D38630A22997DA0F006F388D /* FirebaseInAppMessagingSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = D38630A12997DA0F006F388D /* FirebaseInAppMessagingSwift-Beta */; };
@@ -176,9 +176,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93DA5F4B29B0DEE500CBB655 /* PostManager in Frameworks */,
 				D38630A42997DA0F006F388D /* FirebaseMessaging in Frameworks */,
 				935EAB2C29685987005D2F52 /* FeedKit in Frameworks */,
-				93F5CD39299A2FB4002C6FA4 /* PostManager in Frameworks */,
 				881544BB29691ABF001BAFA4 /* RichText in Frameworks */,
 				D38630A22997DA0F006F388D /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
 				D386309E2997DA0F006F388D /* FirebaseFunctions in Frameworks */,
@@ -476,13 +476,13 @@
 				881544B429686C72001BAFA4 /* MarkdownUI */,
 				881544BA29691ABF001BAFA4 /* RichText */,
 				937EBBF4296EA72000722285 /* OrderedCollections */,
-				93F5CD38299A2FB4002C6FA4 /* PostManager */,
 				D386309D2997DA0F006F388D /* FirebaseFunctions */,
 				D386309F2997DA0F006F388D /* FirebaseInAppMessaging-Beta */,
 				D38630A12997DA0F006F388D /* FirebaseInAppMessagingSwift-Beta */,
 				D38630A32997DA0F006F388D /* FirebaseMessaging */,
 				93767C8929AB8798007B2EAD /* Chopper */,
 				93767CBC29AB8ABB007B2EAD /* Updating */,
+				93DA5F4A29B0DEE500CBB655 /* PostManager */,
 			);
 			productName = Announcer;
 			productReference = 930EA43729645AE1007081C8 /* Announcer.app */;
@@ -855,7 +855,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=100 -Xfrontend -warn-long-function-bodies=100";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=60 -Xfrontend -warn-long-function-bodies=60";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaitay.Announcer.SwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1018,7 +1018,7 @@
 			package = 937EBBF3296EA72000722285 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
 		};
-		93F5CD38299A2FB4002C6FA4 /* PostManager */ = {
+		93DA5F4A29B0DEE500CBB655 /* PostManager */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PostManager;
 		};

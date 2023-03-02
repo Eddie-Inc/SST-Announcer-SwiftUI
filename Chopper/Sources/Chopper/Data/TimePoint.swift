@@ -33,10 +33,10 @@ public struct TimePoint: AdditiveArithmetic,
     public typealias IntegerLiteralType = Int
     public static var zero: TimePoint { .init(00_00) }
     public static func + (lhs: TimePoint, rhs: TimePoint) -> TimePoint {
-        return .init(totalMinutes: lhs.minutes + rhs.minutes)
+        return .init(totalMinutes: lhs.totalMinutes + rhs.totalMinutes)
     }
     public static func - (lhs: TimePoint, rhs: TimePoint) -> TimePoint {
-        return .init(totalMinutes: lhs.minutes - rhs.minutes)
+        return .init(totalMinutes: lhs.totalMinutes - rhs.totalMinutes)
     }
     public static func + (lhs: TimePoint, rhs: Int) -> TimePoint {
         return .init(totalMinutes: lhs.totalMinutes + rhs)

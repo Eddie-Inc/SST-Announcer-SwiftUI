@@ -19,12 +19,18 @@ struct DayPickerView: View {
     var body: some View {
         GeometryReader { geom in
             HStack {
-                viewForWeek(week: .odd, geom: geom)
-                    .id("odd")
-                    .padding(.trailing, -4)
-                viewForWeek(week: .even, geom: geom)
-                    .id("even")
-                    .padding(.leading, -4)
+                WeekView(week: .odd,
+                         geom: geom,
+                         today: today,
+                         selection: $selection)
+                .id("odd")
+                .padding(.trailing, -4)
+                WeekView(week: .even,
+                         geom: geom,
+                         today: today,
+                         selection: $selection)
+                .id("even")
+                .padding(.leading, -4)
             }
             .frame(width: geom.size.width * 2)
             .offset(x: geom.size.width * (selection.week == .odd ? 0 : -1) + offset)
@@ -69,60 +75,6 @@ struct DayPickerView: View {
         .frame(height: 30)
     }
 
-    func viewForWeek(week: Week, geom: GeometryProxy) -> some View {
-        HStack {
-            Spacer().frame(width: 20)
-            Text(week.rawValue.firstLetterUppercase)
-                .font(.subheadline)
-                .frame(width: 50)
-            Spacer()
-            ForEach(sortedDays.filter({ $0.week == week })) { day in
-                ZStack {
-                    if selection == day {
-                        if today == day {
-                            Color.red
-                                .cornerRadius(6)
-                        } else {
-                            Color.primary
-                                .cornerRadius(6)
-                        }
-                    } else {
-                        Color.white.opacity(0.001)
-                    }
-                    if selection == day {
-                        Text(day.day.rawValue.first!.uppercased())
-                            .bold()
-                            .foregroundColor(.background)
-                    } else {
-                        Text(day.day.rawValue.first!.uppercased())
-                            .foregroundColor(today == day ? .red : .primary)
-                    }
-                }
-                .frame(width: 24, height: 24)
-                .frame(width: 35)
-                .onTapGesture {
-                    withAnimation {
-                        self.selection = day
-                    }
-                }
-            }
-            Spacer().frame(width: 20)
-        }
-        .padding(.horizontal, 10)
-        .frame(height: 30)
-    }
-
-    var sortedDays: [ScheduleDay] {
-        // create all possible days, then sort them
-        var days: [ScheduleDay] = []
-        for week in Week.allCases {
-            for day in DayOfWeek.allCases {
-                days.append(.init(week: week, day: day))
-            }
-        }
-        return days
-    }
-
     // flips odd to even and vice versa
     func flipWeek(animate: Bool = true) {
         var newValue = selection.week
@@ -136,6 +88,72 @@ struct DayPickerView: View {
             }
         } else {
             self.selection.week = newValue
+        }
+    }
+
+    struct WeekView: View {
+        @Updating var week: Week
+        @Updating var geom: GeometryProxy
+        @Updating var today: ScheduleDay
+
+        @Binding var selection: ScheduleDay
+
+        var body: some View {
+            HStack {
+                Spacer().frame(width: 20)
+                Text(week.rawValue.firstLetterUppercase)
+                    .font(.subheadline)
+                    .frame(width: 50)
+                Spacer()
+                ForEach(sortedDays.filter({ $0.week == week })) { day in
+                    viewForDay(day: day)
+                }
+                Spacer().frame(width: 20)
+            }
+            .padding(.horizontal, 10)
+            .frame(height: 30)
+        }
+
+        func viewForDay(day: ScheduleDay) -> some View {
+            ZStack {
+                if selection == day {
+                    if today == day {
+                        Color.red
+                            .cornerRadius(6)
+                    } else {
+                        Color.primary
+                            .cornerRadius(6)
+                    }
+                } else {
+                    Color.white.opacity(0.001)
+                }
+                if selection == day {
+                    Text(day.day.rawValue.first!.uppercased())
+                        .bold()
+                        .foregroundColor(.background)
+                } else {
+                    Text(day.day.rawValue.first!.uppercased())
+                        .foregroundColor(today == day ? .red : .primary)
+                }
+            }
+            .frame(width: 24, height: 24)
+            .frame(width: 35)
+            .onTapGesture {
+                withAnimation {
+                    self.selection = day
+                }
+            }
+        }
+
+        var sortedDays: [ScheduleDay] {
+            // create all possible days, then sort them
+            var days: [ScheduleDay] = []
+            for week in Week.allCases {
+                for day in DayOfWeek.allCases {
+                    days.append(.init(week: week, day: day))
+                }
+            }
+            return days
         }
     }
 }
