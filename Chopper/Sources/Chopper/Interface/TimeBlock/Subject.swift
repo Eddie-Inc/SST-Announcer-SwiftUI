@@ -12,7 +12,7 @@ public struct Subject: TimeBlock, Codable {
     /// The actual subject class of the subject. Will always be present, unlike ``displaySubjectClass``.
     public var subjectClass: SubjectClass
 
-    public var day: Day
+    public var day: ScheduleDay
     public var timeBlocks: Range<Int>
     /// A wrapper for `subjectClass.name`
     public var displayName: Name? { subjectClass.name }
@@ -38,7 +38,7 @@ public struct Subject: TimeBlock, Codable {
     }
 
     public init(timeBlocks: Range<Int>,
-                day: Day,
+                day: ScheduleDay,
                 subjectClass: SubjectClass) {
         self.timeBlocks = timeBlocks
         self.day = day

@@ -10,9 +10,9 @@ import Chopper
 import Updating
 
 struct DayPickerView: View {
-    @Binding var selection: Day
+    @Binding var selection: ScheduleDay
     @Updating var schedule: Schedule
-    @Updating var today: Day
+    @Updating var today: ScheduleDay
 
     @State var offset: CGFloat = 0
 
@@ -112,9 +112,9 @@ struct DayPickerView: View {
         .frame(height: 30)
     }
 
-    var sortedDays: [Day] {
+    var sortedDays: [ScheduleDay] {
         // create all possible days, then sort them
-        var days: [Day] = []
+        var days: [ScheduleDay] = []
         for week in Week.allCases {
             for day in DayOfWeek.allCases {
                 days.append(.init(week: week, day: day))

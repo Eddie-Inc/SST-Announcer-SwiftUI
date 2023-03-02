@@ -18,7 +18,7 @@ public struct SubjectSuggestion: TimeBlock {
     /// The raw text that the Vision API returned, if available. Read only externally.
     public internal(set) var rawTextContents: [String]?
 
-    public var day: Day
+    public var day: ScheduleDay
     public var timeBlocks: Range<Int>
     /// A wrapper for `displaySubjectClass.name`, defaulting to ``name``
     public var displayName: Name? { displaySubjectClass?.name ?? name }
@@ -32,7 +32,7 @@ public struct SubjectSuggestion: TimeBlock {
                 timeBlocks: Range<Int>,
                 name: Name? = nil,
                 teacher: String? = nil,
-                day: Day) {
+                day: ScheduleDay) {
         self.image = image
         self.timeBlocks = timeBlocks
         self.name = name

@@ -36,19 +36,19 @@ public extension ScheduleProvider {
     }
 
     /// Returns the number of days until a specific `Day`
-    func daysUntil(day: Day) -> Int {
+    func daysUntil(day: ScheduleDay) -> Int {
         let currentWeek = currentWeek
         let todayWeek: Week = currentWeek%2 == 0 ? .even : .odd
         let todayDay = Date().weekday.dayOfWeek ?? .monday // default to monday
 
-        let thisDay = Day(week: todayWeek, day: todayDay)
+        let thisDay = ScheduleDay(week: todayWeek, day: todayDay)
 
         return thisDay.daysFrom(laterDay: day)
     }
 
     /// Returns a ``Date`` representing the next occurence of a given day.
     /// The time of the returned date is the same as the current time.
-    func dateOfNext(day: Day) -> Date {
+    func dateOfNext(day: ScheduleDay) -> Date {
         let days = daysUntil(day: day)
         return Date(timeIntervalSinceNow: Double(days * 60 * 60 * 24))
     }

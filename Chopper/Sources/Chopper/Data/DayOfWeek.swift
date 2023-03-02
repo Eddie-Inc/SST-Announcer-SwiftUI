@@ -23,6 +23,7 @@ public enum DayOfWeek: String, CaseIterable, Equatable, Identifiable, Codable {
     }
 }
 
+// TODO: Allow single-week schedules
 /// An enumeration representing if a week is even or odd
 public enum Week: String, CaseIterable, Equatable, Identifiable, Codable {
     case odd, even
@@ -43,7 +44,7 @@ public enum Week: String, CaseIterable, Equatable, Identifiable, Codable {
 }
 
 /// A structure containing a ``DayOfWeek`` and a ``Week``
-public struct Day: Equatable, Identifiable, Codable {
+public struct ScheduleDay: Equatable, Identifiable, Codable {
     /// The week of the Day
     public var week: Week
     /// The day of the week of the Day
@@ -64,7 +65,7 @@ public struct Day: Equatable, Identifiable, Codable {
     /// The number of days until a certain other day.
     /// If the later day comes "before" `self`, it wraps around and returns the
     /// number of days until it reaches that day again
-    public func daysFrom(laterDay: Day) -> Int {
+    public func daysFrom(laterDay: ScheduleDay) -> Int {
         // if its the same, return 0
         guard laterDay != self else { return 0 }
 

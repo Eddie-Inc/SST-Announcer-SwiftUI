@@ -65,10 +65,10 @@ struct ScheduleDisplayView: View {
 
     @State var compactTop: Bool = true
 
-    @State var day: Day
-    var todayValue: Day {
+    @State var day: ScheduleDay
+    var todayValue: ScheduleDay {
         let todayDay = today.weekday.dayOfWeek ?? .monday
-        return Day(week: manager.schedule.currentWeek%2 == 0 ? .even : .odd,
+        return ScheduleDay(week: manager.schedule.currentWeek%2 == 0 ? .even : .odd,
                    day: todayDay)
     }
 
@@ -189,7 +189,7 @@ struct ScheduleDisplayView: View {
         }
     }
 
-    func indexOfCurrentSubject(day: Day) -> Int {
+    func indexOfCurrentSubject(day: ScheduleDay) -> Int {
         guard isCurrentDay else { return -1 }
 
         let subjects = manager.schedule.subjectsMatching(day: day.day, week: day.week)

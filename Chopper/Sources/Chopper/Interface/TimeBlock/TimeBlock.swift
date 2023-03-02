@@ -10,7 +10,7 @@ import SwiftUI
 /// Abstraction for ``Subject`` and ``SubjectSuggestion``
 public protocol TimeBlock: Identifiable, Equatable {
     /// The day of the block
-    var day: Day { get }
+    var day: ScheduleDay { get }
     /// The time range of the block
     var timeBlocks: Range<Int> { get set }
 

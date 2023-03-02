@@ -48,12 +48,12 @@ struct OtherSubjectInstancesView: View {
         .navigationTitle(subClass.name.description)
     }
 
-    var validDays: [Day] {
-        var days: [Day] = []
+    var validDays: [ScheduleDay] {
+        var days: [ScheduleDay] = []
         for week in Week.allCases {
             for day in DayOfWeek.allCases where strippedSchedule.subjectsMatching(day: day, week: week)
                 .contains(where: { $0.subjectClass == subClass }) {
-                days.append(Day(week: week, day: day))
+                days.append(ScheduleDay(week: week, day: day))
             }
         }
 
@@ -63,7 +63,7 @@ struct OtherSubjectInstancesView: View {
     }
 
     @ViewBuilder
-    func viewForday(day: Day) -> some View {
+    func viewForday(day: ScheduleDay) -> some View {
         Section {
             ForEach(subjectsForDay(day: day)) { subject in
                 SubjectDisplayView(today: .now,
@@ -85,7 +85,7 @@ struct OtherSubjectInstancesView: View {
         }
     }
 
-    func subjectsForDay(day: Day) -> [Subject] {
+    func subjectsForDay(day: ScheduleDay) -> [Subject] {
         strippedSchedule.subjectsMatching(day: day.day,
                                           week: day.week).filter({
             $0.subjectClass == subClass
