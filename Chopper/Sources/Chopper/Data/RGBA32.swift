@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Represents a single RGBA pixel.
 struct RGBA32: Equatable {
     private var color: UInt32
 
@@ -52,18 +53,21 @@ struct RGBA32: Equatable {
         return lhs.color == rhs.color
     }
 
+    /// If the pixel is roughly black
     var isBlackish: Bool {
         self.blueComponent < tolerance &&
         self.redComponent < tolerance &&
         self.greenComponent < tolerance
     }
 
+    /// If the pixel is roughly white
     var isWhitish: Bool {
         self.blueComponent > 255-tolerance &&
         self.redComponent > 255-tolerance &&
         self.greenComponent > 255-tolerance
     }
 
+    /// If the pixel roughly matches a certain color
     func roughlyMatches(color: RGBA32) -> Bool {
         Int(self.blueComponent) > Int(color.blueComponent)-tolerance &&
         Int(self.redComponent) > Int(color.redComponent)-tolerance &&

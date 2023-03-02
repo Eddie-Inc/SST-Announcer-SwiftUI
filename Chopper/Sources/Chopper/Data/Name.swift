@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// An enumeration representing a name, which is either unidentified or a name
 public enum Name: Equatable, Hashable, Codable {
     case unidentified
     case some(String)

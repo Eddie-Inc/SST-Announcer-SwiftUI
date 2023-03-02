@@ -8,10 +8,7 @@
 import Foundation
 
 public extension TimeBlock {
-    /// Returns the estimated time range for the subject given the start time
-    /// in military time. Eg 4:30pm is 1630
-    /// - Parameter startingAt: The time to start at, in military time
-    /// - Returns: A tuple, containing the start and end time in military time
+    /// Default implementation of `estimatedTimeRange(startingAt: Int) -> (Int, Int)`
     func estimatedTimeRange(startingAt: Int = 0800) -> (Int, Int) {
         let lower = timeBlocks.lowerBound-1
         let upper = timeBlocks.upperBound-1
@@ -20,17 +17,12 @@ public extension TimeBlock {
         return (first, second)
     }
 
-    /// A textual representation of the ``estimatedTimeRange(startingAt:)``
+    /// Default implementation of `timeRangeDescription(startingAt: Int) -> String`
     func timeRangeDescription(startingAt: Int = 0800) -> String {
         "\(estimatedTimeRange().0.description) - \(estimatedTimeRange().1.description)"
     }
 
-    /// If the given time block is invalid
-    var isInvalid: Bool {
-        return displaySubjectClass == nil
-    }
-
-    /// A formatted version of the duration, eg "1h" for one hour
+    /// Default implementation of `durationFormatted(minutesPerBlock: Int) -> String`
     func durationFormatted(minutesPerBlock: Int = 20) -> String {
         let totalMinutes = minutesPerBlock * timeBlocks.count
         let hours = totalMinutes / 60
@@ -47,7 +39,7 @@ public extension TimeBlock {
         return formattedString
     }
 
-    /// If the time block contains another time, eg. one ranging 1220 to 0100 contains 1234 but not 1111.
+    /// Default implementation of `contains(time: Int) -> Bool`
     func contains(time: Int) -> Bool {
         let timeRange = self.estimatedTimeRange()
         return timeRange.0 <= time && time <= timeRange.1

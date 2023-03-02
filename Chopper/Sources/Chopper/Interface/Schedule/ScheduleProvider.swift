@@ -26,4 +26,14 @@ public protocol ScheduleProvider: Identifiable, Equatable {
 
     /// Deletes a class from the schedule. Usually involves removing the class from items in ``subjects``.
     mutating func deleteClass(subClass: SubjectClass)
+
+    // MARK: With default implementations
+    /// Update the values of the `subjectClass` of the ``subjects``, where the ids match.
+    mutating func updateClass(subClass: SubjectClass)
+    /// Removes unused classes
+    mutating func trimUnusedClasses()
+    /// Sorts subjects by day, then time
+    mutating func sortClasses()
+    /// Gets the color for a given subject name
+    func colorFor(name: String) -> Color
 }

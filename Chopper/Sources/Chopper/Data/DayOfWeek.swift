@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// An enumeration representing weekdays
 public enum DayOfWeek: String, CaseIterable, Equatable, Identifiable, Codable {
     case monday, tuesday, wednesday, thursday, friday
     public var id: String { self.rawValue }
@@ -22,6 +23,7 @@ public enum DayOfWeek: String, CaseIterable, Equatable, Identifiable, Codable {
     }
 }
 
+/// An enumeration representing if a week is even or odd
 public enum Week: String, CaseIterable, Equatable, Identifiable, Codable {
     case odd, even
     public var id: String { self.rawValue }
@@ -40,10 +42,14 @@ public enum Week: String, CaseIterable, Equatable, Identifiable, Codable {
     }
 }
 
+/// A structure containing a ``DayOfWeek`` and a ``Week``
 public struct Day: Equatable, Identifiable, Codable {
+    /// The week of the Day
     public var week: Week
+    /// The day of the week of the Day
     public var day: DayOfWeek
 
+    /// A textual representation of the Day
     public var description: String {
         let dayString = day.rawValue.firstLetterUppercase
         return "\(dayString), \(week == .odd ? "Odd" : "Even") Week"
@@ -55,6 +61,9 @@ public struct Day: Equatable, Identifiable, Codable {
         self.day = day
     }
 
+    /// The number of days until a certain other day.
+    /// If the later day comes "before" `self`, it wraps around and returns the
+    /// number of days until it reaches that day again
     public func daysFrom(laterDay: Day) -> Int {
         // if its the same, return 0
         guard laterDay != self else { return 0 }

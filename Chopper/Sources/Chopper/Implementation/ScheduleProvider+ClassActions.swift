@@ -8,7 +8,7 @@
 import SwiftUI
 
 public extension ScheduleProvider {
-    /// Update the values of the `subjectClass` of the ``subjects``, where the ids match.
+    /// Default implementation of `updateClass(subClass: SubjectClass)`
     mutating func updateClass(subClass: SubjectClass) {
         guard let firstIndex = subjectClasses.firstIndex(where: { $0.id == subClass.id }) else { return }
 
@@ -18,7 +18,7 @@ public extension ScheduleProvider {
         }
     }
 
-    /// Removes unused classes
+    /// Default implementation of `trimUnusedClasses()`
     mutating func trimUnusedClasses() {
         let subjects = subjects
         self.subjectClasses.removeAll { elem in
@@ -26,7 +26,7 @@ public extension ScheduleProvider {
         }
     }
 
-    /// Sorts subjects by day, then time
+    /// Default implementation of `sortClasses()`
     mutating func sortClasses() {
         self.subjects.sort { first, second in
             // check if the week is different
@@ -46,7 +46,7 @@ public extension ScheduleProvider {
         }
     }
 
-    /// Gets the color for a given subject name
+    /// Default implementation of `colorFor(name: String) -> Color`
     func colorFor(name: String) -> Color {
         let defaultColors: [[String]: Color] = [
             // core subjects
