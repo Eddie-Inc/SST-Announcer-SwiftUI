@@ -69,7 +69,7 @@ struct ScheduleDisplayView: View {
     var todayValue: ScheduleDay {
         let todayDay = today.weekday.dayOfWeek ?? .monday
         return ScheduleDay(week: manager.schedule.currentWeek%2 == 0 ? .even : .odd,
-                   day: todayDay)
+                           day: todayDay)
     }
 
     var isCurrentDay: Bool {
