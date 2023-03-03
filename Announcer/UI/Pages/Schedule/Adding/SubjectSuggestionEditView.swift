@@ -61,11 +61,6 @@ struct SubjectSuggestionEditView<Table: ScheduleProvider, Block: TimeBlock>: Vie
             Section("Class Information") {
                 classInfo
             }
-            .onChange(of: suggestion.displaySubjectClass) { _ in
-                if let subClass = suggestion.displaySubjectClass {
-                    schedule.updateClass(subClass: subClass)
-                }
-            }
 
             Section {
                 subjectActions
@@ -143,10 +138,24 @@ struct SubjectSuggestionEditView<Table: ScheduleProvider, Block: TimeBlock>: Vie
                         supportsOpacity: false)
             ListTextField("Name", value: .init(get: { subClass.name.description },
                                                set: { suggestion.displaySubjectClass?.name = .some($0) }))
+            .onSubmit {
+                DispatchQueue.main.async {
+                    if let subClass = suggestion.displaySubjectClass {
+                        schedule.updateClass(subClass: subClass, sender: suggestion)
+                    }
+                }
+            }
             ListTextField("Teacher", value: .init(get: { subClass.teacher ?? "" },
                                                   set: { newTeacher in
                 suggestion.displaySubjectClass?.teacher = newTeacher.isEmpty ? nil : newTeacher
             }))
+            .onSubmit {
+                DispatchQueue.main.async {
+                    if let subClass = suggestion.displaySubjectClass {
+                        schedule.updateClass(subClass: subClass, sender: suggestion)
+                    }
+                }
+            }
             Button("Change Class") {
                 showAssignClassSheet = true
             }
@@ -222,7 +231,7 @@ extension SubjectSuggestionEditView {
 
     func splitSubjectFinal(suggestion: Subject) {
         // determine the times
-        let midBound = suggestion.timeRange.lowerBound + suggestion.timeRange.count/2
+        let midBound = suggestion.timeRange.lowerBound + suggestion.timeRange.count/2 * TimePoint.strideDistance
         let lTime = suggestion.timeRange.lowerBound..<midBound
         let rTime = midBound..<suggestion.timeRange.upperBound
 
@@ -261,7 +270,7 @@ extension SubjectSuggestionEditView {
         else { return }
 
         // determine the times
-        let midBound = suggestion.timeRange.lowerBound + suggestion.timeRange.count/2
+        let midBound = suggestion.timeRange.lowerBound + suggestion.timeRange.count/2 * TimePoint.strideDistance
         let lTime = suggestion.timeRange.lowerBound..<midBound
         let rTime = midBound..<suggestion.timeRange.upperBound
 

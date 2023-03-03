@@ -9,11 +9,13 @@ import SwiftUI
 
 public extension ScheduleProvider {
     /// Default implementation of `updateClass(subClass: SubjectClass)`
-    mutating func updateClass(subClass: SubjectClass) {
+    mutating func updateClass(subClass: SubjectClass, sender: Block? = nil) {
         guard let firstIndex = subjectClasses.firstIndex(where: { $0.id == subClass.id }) else { return }
 
         subjectClasses[firstIndex] = subClass
-        for index in (0..<subjects.count).filter({ subjects[$0].displaySubjectClass?.id == subClass.id }) {
+        for index in (0..<subjects.count).filter({
+            subjects[$0].displaySubjectClass?.id == subClass.id && subjects[$0].id != sender?.id
+        }) {
             subjects[index].displaySubjectClass = subClass
         }
     }

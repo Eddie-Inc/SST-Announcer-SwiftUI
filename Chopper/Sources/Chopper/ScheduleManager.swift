@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-// we're using testable here for access to read, write and exists
-@testable import PostManager
-
 public class ScheduleManager: ObservableObject {
     public static let `default`: ScheduleManager = .init()
 

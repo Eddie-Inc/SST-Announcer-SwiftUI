@@ -15,6 +15,7 @@ struct ListTextField: View {
     init(_ label: String, value: Binding<String>) {
         self._label = <-label
         self._value = value
+        print("LIST TEXT FIELD CREATED: \(label)")
     }
 
     var body: some View {

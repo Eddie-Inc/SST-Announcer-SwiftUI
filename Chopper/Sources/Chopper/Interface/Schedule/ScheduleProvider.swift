@@ -29,7 +29,7 @@ public protocol ScheduleProvider: Identifiable, Equatable {
 
     // MARK: With default implementations
     /// Update the values of the `subjectClass` of the ``subjects``, where the ids match.
-    mutating func updateClass(subClass: SubjectClass)
+    mutating func updateClass(subClass: SubjectClass, sender: Block?)
     /// Removes unused classes
     mutating func trimUnusedClasses()
     /// Sorts subjects by day, then time

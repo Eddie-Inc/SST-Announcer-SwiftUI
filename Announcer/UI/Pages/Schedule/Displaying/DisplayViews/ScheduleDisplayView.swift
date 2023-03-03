@@ -96,7 +96,7 @@ struct ScheduleDisplayView: View {
                     .overlay(alignment: .leading) {
                         LinearGradient(stops: [
                             .init(color: .clear, location: 0.2),
-                            .init(color: .background, location: 1)
+                            .init(color: .listRowBackground, location: 1)
                         ],
                                        startPoint: .leading,
                                        endPoint: .trailing)

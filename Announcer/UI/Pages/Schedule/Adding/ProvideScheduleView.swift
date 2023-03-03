@@ -101,4 +101,5 @@ struct ProvideScheduleView_Previews: PreviewProvider {
 extension Color {
     static let background: Color = .init(uiColor: .systemBackground)
     static let listBackground: Color = .init(uiColor: .systemGroupedBackground)
+    static let listRowBackground: Color = .init(uiColor: .secondarySystemBackground)
 }
