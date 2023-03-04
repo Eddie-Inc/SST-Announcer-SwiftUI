@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import FirebaseCore
 import PostManager
 
 struct AnnouncementsHomeView: View {

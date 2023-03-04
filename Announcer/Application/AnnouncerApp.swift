@@ -6,21 +6,14 @@
 //
 
 import SwiftUI
-import FirebaseCore
-import FirebaseMessaging
-import UserNotifications
 import PostManager
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    // MARK: Put in gcmMessageIDKey
-    let gcmMessageIDKey = "gcm.message_id"
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions:
                      [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        FirebaseApp.configure()
 
-        Messaging.messaging().delegate = self
 
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -44,23 +37,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 
-        if let messageID = userInfo[gcmMessageIDKey] {
-            Log.info("Message ID: \(messageID)")
-        }
-
         Log.info(userInfo)
 
         completionHandler(UIBackgroundFetchResult.newData)
     }
 }
 
-extension AppDelegate: MessagingDelegate {
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-
-        let deviceToken: [String: String] = ["token": fcmToken ?? ""]
-        Log.info("Device token: ", deviceToken) // This token can be used for testing notifications on FCM
-    }
-}
 
 @available(iOS 10, *)
 extension AppDelegate: UNUserNotificationCenterDelegate {
@@ -72,9 +54,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                                     @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
 
-        if let messageID = userInfo[gcmMessageIDKey] {
-            Log.info("Message ID: \(messageID)")
-        }
 
         Log.info(userInfo)
 
@@ -93,9 +72,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
 
-        if let messageID = userInfo[gcmMessageIDKey] {
-            Log.info("Message ID from userNotificationCenter didReceive: \(messageID)")
-        }
 
         Log.info(userInfo)
 
@@ -105,7 +81,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 @main
 struct YourApp: App {
-    // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {
