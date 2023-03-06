@@ -27,7 +27,8 @@ extension AnnouncementDetailView {
                     isLoadingSafariView = true
                 }
                 loadQueue.async {
-                    safariViewURL = post.getBlogURL()
+                    guard let url = post.blogUrl else { return }
+                    safariViewURL = URL(string: url)
                     isLoadingSafariView = false
                     showSafariView = true
                 }
