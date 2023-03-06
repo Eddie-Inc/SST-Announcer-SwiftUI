@@ -11,11 +11,10 @@ import PostManager
 
 let fakeStorage: OrderedDictionary<PostTitle, Post> =
     .init(uniqueKeys: [PostTitle(date: .now, title: "test")],
-          values: [Post(title: "test",
+          values: [Post(title: placeholderTextShort,
                         content: placeholderTextLong,
                         date: .now,
-                        pinned: false,
-                        read: true,
+                        blogURL: nil,
                         categories: [])])
 
 struct Settings: View {

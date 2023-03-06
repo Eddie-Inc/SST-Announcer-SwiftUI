@@ -74,16 +74,12 @@ struct AnnouncementDetailViewRender_Previews: PreviewProvider {
                 Post(title: "\(placeholderTextShort) abcdefg \(placeholderTextShort) 1",
                      content: "<p>\(placeholderTextLong)<p>",
                      date: .now,
-                     pinned: true,
-                     read: false,
-                     categories: [
+                     blogURL: nil, categories: [
                         "short",
                         "secondary 3",
                         "you wanted more?"
-                     ],
-                     userCategories: [
-                        .init("placeholder")
-                     ])), posts: .constant([]))
+                     ])),
+                                   posts: .constant([]))
         }
     }
 }

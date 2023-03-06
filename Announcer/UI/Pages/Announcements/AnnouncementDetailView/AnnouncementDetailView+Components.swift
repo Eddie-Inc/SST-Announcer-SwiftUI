@@ -123,17 +123,13 @@ struct AnnouncementDetailViewComponents_Previews: PreviewProvider {
         NavigationView {
             AnnouncementDetailView(post: .constant(
                 Post(title: "\(placeholderTextShort) abcdefg \(placeholderTextShort) 1",
-                     content: "<p>\(placeholderTextLong)<p>",
+                     content: placeholderTextLong,
                      date: .now,
-                     pinned: true,
-                     read: false,
+                     blogURL: nil,
                      categories: [
                         "short",
                         "secondary 3",
                         "you wanted more?"
-                     ],
-                     userCategories: [
-                        .init("placeholder")
                      ])), posts: .constant([]))
         }
     }

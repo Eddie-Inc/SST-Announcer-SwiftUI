@@ -64,20 +64,17 @@ struct EditFilterView_Previews: PreviewProvider {
             Post(title: "\(placeholderTextShort) 1",
                  content: placeholderTextLong,
                  date: .now,
-                 pinned: true,
-                 read: false,
+                 blogURL: nil,
                  categories: ["Random Category"]),
             Post(title: "\(placeholderTextShort) 2",
                  content: placeholderTextLong,
                  date: .now,
-                 pinned: false,
-                 read: true,
+                 blogURL: nil,
                  categories: ["Random Category 2"]),
             Post(title: "\(placeholderTextShort) 3",
                  content: placeholderTextLong,
                  date: .now,
-                 pinned: false,
-                 read: false,
+                 blogURL: nil,
                  categories: ["Random Category 3"])
         ], filterCategories: .constant([]))
     }

@@ -158,15 +158,11 @@ struct EditCategoriesView_Previews: PreviewProvider {
                 Post(title: "\(placeholderTextShort) abcdefg \(placeholderTextShort) 1",
                      content: placeholderTextLong,
                      date: .now,
-                     pinned: true,
-                     read: false,
+                     blogURL: nil,
                      categories: [
                         "short",
                         "secondary 3",
                         "you wanted more?"
-                     ],
-                     userCategories: [
-                        .init(name: "placeholder")
                      ])),
                                posts: .constant([]),
                                showEditCategoryView: .constant(true))

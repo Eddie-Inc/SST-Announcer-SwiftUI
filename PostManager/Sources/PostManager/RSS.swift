@@ -115,19 +115,19 @@ public extension PostManager {
 
             let title = entry.title ?? ""
             let content = (entry.content?.value) ?? ""
+            let authors = entry.authors?.compactMap({ $0.name })
             let date = entry.published ?? .now
+            let url = entry.links?.last?.attributes?.href
 
             let categories = entry.categories?.compactMap({ entry in
                 entry.attributes?.term
             }) ?? []
 
             var post = Post(title: title,
-                            authors: entry.authors?.compactMap({ $0.name }),
+                            authors: authors,
                             content: content,
                             date: date,
-                            pinned: false,
-                            read: false,
-                            reminderDate: nil,
+                            blogURL: url,
                             categories: categories)
 
             updatePostProperties(post: &post)

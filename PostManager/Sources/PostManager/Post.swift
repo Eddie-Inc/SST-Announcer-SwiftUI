@@ -15,8 +15,13 @@ import Foundation
  */
 public struct Post: Codable, Equatable, Identifiable {
     public var title: String
+    public var authors: [String]?
     public var content: String // This content will be a HTML as a String
     public var date: Date
+    public var blogUrl: String?
+
+    public var categories: [String]
+    public var userCategories: [UserCategory]? // optional so that it plays well with Codable
 
     public var pinned: Bool {
         didSet {
@@ -59,11 +64,6 @@ public struct Post: Codable, Equatable, Identifiable {
     public var postTitle: PostTitle {
         PostTitle(date: date, title: title)
     }
-
-    public var authors: [String]?
-
-    public var categories: [String]
-    public var userCategories: [UserCategory]? // optional so that it plays well with Codable
 
     public func getLinks() -> [URL] {
         // separate each link
@@ -168,20 +168,18 @@ public struct Post: Codable, Equatable, Identifiable {
                 authors: [String]? = nil,
                 content: String,
                 date: Date,
-                pinned: Bool,
-                read: Bool,
-                reminderDate: Date? = nil,
-                categories: [String],
-                userCategories: [UserCategory]? = nil) {
+                blogURL: String?,
+                categories: [String]) {
         self.title = title
         self.authors = (authors?.isEmpty ?? true) ? nil : authors
         self.content = content
         self.date = date
-        self.pinned = pinned
-        self.read = read
-        self.reminderDate = reminderDate
+        self.blogUrl = blogURL
         self.categories = categories
-        self.userCategories = userCategories
+
+        self.pinned = false
+        self.read = false
+        self.userCategories = nil
     }
 }
 
