@@ -171,7 +171,7 @@ struct AnnouncementsHomeView: View {
             self.posts.append(contentsOf: PostManager.getPosts(range: range))
 
             // implement some debounce to prevent too many loads
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 500) {
                 isLoading = false
             }
         }

@@ -187,6 +187,11 @@ public enum PostManager {
 
     private static var _userCategories: [PostTitle: [UserCategory]]?
 
+    /// A flat list of user categories
+    public static var userCategoriesFlat: [UserCategory] {
+        Array(Set(userCategoriesForPosts.values.flatMap({ $0 })))
+    }
+
     /// The cache for the posts
     public static var postStorage: OrderedDictionary<PostTitle, Post> {
         get {

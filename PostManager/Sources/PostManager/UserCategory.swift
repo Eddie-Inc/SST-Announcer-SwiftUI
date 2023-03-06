@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct UserCategory: Codable, Equatable, Identifiable {
+public struct UserCategory: Codable, Equatable, Identifiable, Hashable {
     public var id = UUID()
 
     public var name: String

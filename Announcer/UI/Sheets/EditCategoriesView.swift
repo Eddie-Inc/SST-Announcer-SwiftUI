@@ -36,17 +36,31 @@ struct EditCategoriesView: View {
             }
 
             Section {
-                ForEach(PostManager.userCategoriesForPosts.values.flatMap({ $0 }), id: \.id) { category in
+                ForEach(PostManager.userCategoriesFlat, id: \.id) { category in
                     categoryView(category: category)
                 }
-//                .onDelete { indexSet in
-//                    PostManager.userCategoriesForPosts[post.postTitle]?
-//                        .remove(atOffsets: indexSet)
-//                }
-//                .onMove { indexSet, moveTo in
-//                    PostManager.userCategoriesForPosts[post.postTitle]?
-//                        .move(fromOffsets: indexSet, toOffset: moveTo)
-//                }
+                .onDelete { indexSet in
+                    // get the categories and stuff to remove
+                    let toRemove = PostManager.userCategoriesFlat.enumerated().filter { (index, _) in
+                        indexSet.contains(index)
+                    }.map { $1 }
+
+                    // remove them from PostManager, then apply the changes
+                    var categories = PostManager.userCategoriesForPosts
+                    for postTitle in categories.keys {
+                        categories[postTitle]?.removeAll(where: { category in
+                            toRemove.contains(category)
+                        })
+                    }
+                    PostManager.userCategoriesForPosts = categories
+
+                    // remove them from posts
+                    for index in 0..<posts.count {
+                        posts[index].userCategories?.removeAll(where: { category in
+                            toRemove.contains(category)
+                        })
+                    }
+                }
             }
         }
         .searchable(text: $searchString)
@@ -93,6 +107,7 @@ struct EditCategoriesView: View {
             }
 
             post.userCategories = categories
+            PostManager.userCategoriesForPosts[post.postTitle] = categories
             PostManager.savePost(post: post)
         } label: {
             HStack {

@@ -21,7 +21,11 @@ public struct Post: Codable, Equatable, Identifiable {
     public var blogUrl: String?
 
     public var categories: [String]
-    public var userCategories: [UserCategory]? // optional so that it plays well with Codable
+    public var userCategories: [UserCategory]? { // optional so that it plays well with Codable
+        didSet {
+            print("User categories set to \(userCategories?.map({ $0.name }).joined(separator: ", ") ?? "none")")
+        }
+    }
 
     public var pinned: Bool {
         didSet {
