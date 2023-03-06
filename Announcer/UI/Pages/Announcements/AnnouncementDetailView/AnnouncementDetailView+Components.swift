@@ -9,6 +9,7 @@ import SwiftUI
 import PostManager
 
 extension AnnouncementDetailView {
+    @ViewBuilder
     var title: some View {
         // title
         HStack {
@@ -34,6 +35,15 @@ extension AnnouncementDetailView {
                 Image(systemName: "arrow.up.forward.circle")
                     .opacity(0.6)
                     .offset(x: 0, y: -10)
+            }
+        }
+        if let authors = post.authors {
+            HStack {
+                ForEach(authors, id: \.self) { author in
+                    Text(author)
+                        .lineLimit(1)
+                }
+                Spacer()
             }
         }
     }

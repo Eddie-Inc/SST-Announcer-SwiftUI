@@ -60,6 +60,8 @@ public struct Post: Codable, Equatable, Identifiable {
         PostTitle(date: date, title: title)
     }
 
+    public var authors: [String]?
+
     public var categories: [String]
     public var userCategories: [UserCategory]? // optional so that it plays well with Codable
 
@@ -163,6 +165,7 @@ public struct Post: Codable, Equatable, Identifiable {
     }
 
     public init(title: String,
+                authors: [String]? = nil,
                 content: String,
                 date: Date,
                 pinned: Bool,
@@ -171,6 +174,7 @@ public struct Post: Codable, Equatable, Identifiable {
                 categories: [String],
                 userCategories: [UserCategory]? = nil) {
         self.title = title
+        self.authors = (authors?.isEmpty ?? true) ? nil : authors
         self.content = content
         self.date = date
         self.pinned = pinned

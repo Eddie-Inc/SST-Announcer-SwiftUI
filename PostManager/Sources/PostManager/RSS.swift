@@ -122,6 +122,7 @@ public extension PostManager {
             }) ?? []
 
             var post = Post(title: title,
+                            authors: entry.authors?.compactMap({ $0.name }),
                             content: content,
                             date: date,
                             pinned: false,
