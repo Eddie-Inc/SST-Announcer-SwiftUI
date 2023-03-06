@@ -11,9 +11,12 @@ import Chopper
 struct ScheduleDisplayView: View {
     @ObservedObject var manager: ScheduleManager = .default
     @State var showInfo: Bool = false
+    @State var showProvideSchedule: Bool = false
 
     @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     @State var today: Date = .now
+
+    @State var offsetAmount: Int = 0
 
     init() {
         let manager = ScheduleManager.default
@@ -50,15 +53,24 @@ struct ScheduleDisplayView: View {
             }
         }
         .onReceive(timer) { _ in
-            self.today = .now
+            self.today = .now.addingTimeInterval(Double(offsetAmount * 60 * 20))
         }
         .navigationTitle("Schedule")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    showInfo = true
+                } label: {
+                    Image(systemName: "info.circle")
+                }
+            }
+        }
         .sheet(isPresented: $showInfo) {
             if #available(iOS 16.0, *) {
-                ScheduleInformationView()
+                ScheduleInformationView(showProvideSchedule: $showProvideSchedule)
                     .presentationDetents([.medium, .large])
             } else {
-                ScheduleInformationView()
+                ScheduleInformationView(showProvideSchedule: $showProvideSchedule)
             }
         }
     }
@@ -93,10 +105,10 @@ struct ScheduleDisplayView: View {
                                 .cornerRadius(5)
                         }
                     }
-                    .overlay(alignment: .leading) {
+                    .mask(alignment: .leading) {
                         LinearGradient(stops: [
-                            .init(color: .clear, location: 0.2),
-                            .init(color: .listRowBackground, location: 1)
+                            .init(color: .white, location: 0.2),
+                            .init(color: .clear, location: 1)
                         ],
                                        startPoint: .leading,
                                        endPoint: .trailing)
@@ -125,6 +137,21 @@ struct ScheduleDisplayView: View {
                     viewForSubject(subject: subject)
                 }
             }
+            HStack {
+                Button("Less") {
+                    offsetAmount -= 1
+                    self.today = .now.addingTimeInterval(Double(offsetAmount * 60 * 20))
+                }
+                .buttonStyle(.plain)
+                Spacer()
+                Text("\(offsetAmount), \(today.formatted(date: .omitted, time: .shortened))")
+                Spacer()
+                Button("More") {
+                    offsetAmount += 1
+                    self.today = .now.addingTimeInterval(Double(offsetAmount * 60 * 20))
+                }
+                .buttonStyle(.plain)
+            }
         } header: {
             HStack {
                 if today.weekday.dayOfWeek == nil {
@@ -143,10 +170,10 @@ struct ScheduleDisplayView: View {
                             .rotationEffect(.degrees(compactTop ? 0 : 180))
                     }
                 }
-                Button {
-                    showInfo = true
+                NavigationLink(isActive: $showProvideSchedule) {
+                    ProvideScheduleView(showProvideSuggestion: $showProvideSchedule)
                 } label: {
-                    Image(systemName: "info.circle")
+                    EmptyView()
                 }
             }
         }
@@ -193,24 +220,28 @@ struct ScheduleDisplayView: View {
         guard isCurrentDay else { return -1 }
 
         let subjects = manager.schedule.subjectsMatching(day: day.day, week: day.week)
-        let todayTime = Date().timePoint
+        let todayTime = today.timePoint
 
         // during available subjects
         if let index = subjects.firstIndex(where: { $0.contains(time: todayTime) }) {
+            print("Current subject for \(day.description): \(index)")
             return index
         }
 
         // before start
         if let start = subjects.first?.timeRange.lowerBound, start > todayTime {
+            print("Current subject for \(day.description): before")
             return -1
         }
 
         // after end
         if let end = subjects.last?.timeRange.upperBound, end < todayTime {
+            print("Current subject for \(day.description): after \(subjects.count)")
             return subjects.count
         }
 
         // default to before start
+        print("Current subject for \(day.description): defaulting to -1")
         return -1
     }
 }

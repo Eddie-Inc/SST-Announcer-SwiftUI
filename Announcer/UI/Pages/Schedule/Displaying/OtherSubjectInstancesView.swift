@@ -25,7 +25,7 @@ struct OtherSubjectInstancesView: View {
             strippedSchedule.subjects = strippedSchedule.subjects.map { subject in
                 var mutableSubject = subject
                 if subject.subjectClass != subClass {
-                    mutableSubject.subjectClass.color = .listBackground
+                    mutableSubject.subjectClass.color = .clear
                 }
                 return mutableSubject
             }

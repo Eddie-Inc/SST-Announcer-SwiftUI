@@ -13,12 +13,14 @@ struct ScheduleInformationView: View {
     @State var editedSchedule: Schedule
 
     @Environment(\.presentationMode) var presentationMode
+    @Binding var showProvideSchedule: Bool
 
-    init() {
+    init(showProvideSchedule: Binding<Bool>) {
         let manager = ScheduleManager.default
         guard let schedule = manager.currentSchedule else { fatalError("Schedule not found") }
         self._manager = .init(wrappedValue: manager)
         self._editedSchedule = .init(wrappedValue: schedule)
+        self._showProvideSchedule = showProvideSchedule
     }
 
     var body: some View {
@@ -69,6 +71,10 @@ struct ScheduleInformationView: View {
                     presentationMode.wrappedValue.dismiss()
                 }
                 .disabled(manager.currentSchedule == editedSchedule)
+                Button("Upload new schedule") {
+                    presentationMode.wrappedValue.dismiss()
+                    showProvideSchedule = true
+                }
             }
         }
     }

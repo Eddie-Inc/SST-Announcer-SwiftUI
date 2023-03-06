@@ -32,15 +32,6 @@ struct ScheduleView: View {
             if scheduleExists || !showProvideSchedule {
                 ScheduleDisplayView()
                     .id(refresherID)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink(isActive: $showProvideSchedule) {
-                                ProvideScheduleView(showProvideSuggestion: $showProvideSchedule)
-                            } label: {
-                                Image(systemName: "calendar.badge.plus")
-                            }
-                        }
-                    }
             } else {
                 ProvideScheduleView(showProvideSuggestion: $showProvideSchedule)
             }
