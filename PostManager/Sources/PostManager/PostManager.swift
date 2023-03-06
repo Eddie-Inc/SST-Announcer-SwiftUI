@@ -107,7 +107,7 @@ public enum PostManager {
     // MARK: Read posts
     static var readPosts: Set<PostTitle> {
         get {
-            if let posts = _readPosts {
+            if let posts = _readPosts, !posts.isEmpty {
                 return posts
             }
 
@@ -117,6 +117,7 @@ public enum PostManager {
                 return Set(posts)
             }
 
+            print("Init.... somehow")
             return .init()
         }
         set {
@@ -126,10 +127,15 @@ public enum PostManager {
                 // As the set gets larger, this will become a more and more expensive task to do.
                 // save to file system
                 write(Array(newValue), to: "readPosts.json")
+                print("Write posts: \(newValue.map({ $0.title }).joined(separator: " - "))")
             }
         }
     }
-    private static var _readPosts: Set<PostTitle>?
+    private static var _readPosts: Set<PostTitle>? {
+        didSet {
+            print("SET YAAAAA \(_readPosts?.count ?? -1)")
+        }
+    }
 
     // TODO: Reminder Dates
     static var reminderDates: [PostTitle: Date] {
