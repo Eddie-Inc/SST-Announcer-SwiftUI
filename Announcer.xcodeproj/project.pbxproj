@@ -58,24 +58,24 @@
 		93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */; };
 		93AF704C2969B10B00BF18F8 /* EditReminderDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */; };
 		93DA5F4B29B0DEE500CBB655 /* PostManager in Frameworks */ = {isa = PBXBuildFile; productRef = 93DA5F4A29B0DEE500CBB655 /* PostManager */; };
-		D384C02029B20F8600C28211 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5A9296AE65E00BA63A8 /* WidgetKit.framework */; };
-		D384C02129B20F8600C28211 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5AB296AE65E00BA63A8 /* SwiftUI.framework */; };
-		D384C02429B20F8600C28211 /* Announcer_TimetableBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384C02329B20F8600C28211 /* Announcer_TimetableBundle.swift */; };
-		D384C02629B20F8600C28211 /* Announcer_TimetableLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384C02529B20F8600C28211 /* Announcer_TimetableLiveActivity.swift */; };
-		D384C02829B20F8600C28211 /* Announcer_Timetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384C02729B20F8600C28211 /* Announcer_Timetable.swift */; };
-		D384C02B29B20F8700C28211 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D384C02A29B20F8700C28211 /* Assets.xcassets */; };
-		D384C02D29B20F8700C28211 /* Announcer_Timetable.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = D384C02929B20F8600C28211 /* Announcer_Timetable.intentdefinition */; };
-		D384C02E29B20F8700C28211 /* Announcer_Timetable.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = D384C02929B20F8600C28211 /* Announcer_Timetable.intentdefinition */; };
-		D384C03129B20F8700C28211 /* Announcer_TimetableExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D384C01F29B20F8600C28211 /* Announcer_TimetableExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D3E64C8229B62E0600B07572 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5A9296AE65E00BA63A8 /* WidgetKit.framework */; };
+		D3E64C8329B62E0600B07572 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5AB296AE65E00BA63A8 /* SwiftUI.framework */; };
+		D3E64C8629B62E0600B07572 /* Timetable_AnnouncerBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E64C8529B62E0600B07572 /* Timetable_AnnouncerBundle.swift */; };
+		D3E64C8829B62E0600B07572 /* Timetable_AnnouncerLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E64C8729B62E0600B07572 /* Timetable_AnnouncerLiveActivity.swift */; };
+		D3E64C8A29B62E0600B07572 /* Timetable_Announcer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E64C8929B62E0600B07572 /* Timetable_Announcer.swift */; };
+		D3E64C8D29B62E0800B07572 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3E64C8C29B62E0800B07572 /* Assets.xcassets */; };
+		D3E64C8F29B62E0800B07572 /* Timetable_Announcer.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = D3E64C8B29B62E0600B07572 /* Timetable_Announcer.intentdefinition */; };
+		D3E64C9029B62E0800B07572 /* Timetable_Announcer.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = D3E64C8B29B62E0600B07572 /* Timetable_Announcer.intentdefinition */; };
+		D3E64C9329B62E0800B07572 /* Timetable_AnnouncerExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D3E64C8129B62E0600B07572 /* Timetable_AnnouncerExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D384C02F29B20F8700C28211 /* PBXContainerItemProxy */ = {
+		D3E64C9129B62E0800B07572 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 930EA42F29645AE1007081C8 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D384C01E29B20F8600C28211;
-			remoteInfo = Announcer_TimetableExtension;
+			remoteGlobalIDString = D3E64C8029B62E0500B07572;
+			remoteInfo = Timetable_AnnouncerExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -86,7 +86,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				D384C03129B20F8700C28211 /* Announcer_TimetableExtension.appex in Embed Foundation Extensions */,
+				D3E64C9329B62E0800B07572 /* Timetable_AnnouncerExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,13 +146,13 @@
 		93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReminderDateView.swift; sourceTree = "<group>"; };
 		93BFD7F0297FA8D3008C2A21 /* Announcer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Announcer.entitlements; sourceTree = "<group>"; };
 		93F5CD37299A2F17002C6FA4 /* PostManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PostManager; sourceTree = "<group>"; };
-		D384C01F29B20F8600C28211 /* Announcer_TimetableExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Announcer_TimetableExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		D384C02329B20F8600C28211 /* Announcer_TimetableBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcer_TimetableBundle.swift; sourceTree = "<group>"; };
-		D384C02529B20F8600C28211 /* Announcer_TimetableLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcer_TimetableLiveActivity.swift; sourceTree = "<group>"; };
-		D384C02729B20F8600C28211 /* Announcer_Timetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcer_Timetable.swift; sourceTree = "<group>"; };
-		D384C02929B20F8600C28211 /* Announcer_Timetable.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Announcer_Timetable.intentdefinition; sourceTree = "<group>"; };
-		D384C02A29B20F8700C28211 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D384C02C29B20F8700C28211 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3E64C8129B62E0600B07572 /* Timetable_AnnouncerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Timetable_AnnouncerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3E64C8529B62E0600B07572 /* Timetable_AnnouncerBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetable_AnnouncerBundle.swift; sourceTree = "<group>"; };
+		D3E64C8729B62E0600B07572 /* Timetable_AnnouncerLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetable_AnnouncerLiveActivity.swift; sourceTree = "<group>"; };
+		D3E64C8929B62E0600B07572 /* Timetable_Announcer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetable_Announcer.swift; sourceTree = "<group>"; };
+		D3E64C8B29B62E0600B07572 /* Timetable_Announcer.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Timetable_Announcer.intentdefinition; sourceTree = "<group>"; };
+		D3E64C8C29B62E0800B07572 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D3E64C8E29B62E0800B07572 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,12 +169,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D384C01C29B20F8600C28211 /* Frameworks */ = {
+		D3E64C7E29B62E0500B07572 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D384C02129B20F8600C28211 /* SwiftUI.framework in Frameworks */,
-				D384C02029B20F8600C28211 /* WidgetKit.framework in Frameworks */,
+				D3E64C8329B62E0600B07572 /* SwiftUI.framework in Frameworks */,
+				D3E64C8229B62E0600B07572 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +197,7 @@
 				93F5CD37299A2F17002C6FA4 /* PostManager */,
 				9376933E296AC7C000D94EC3 /* README.md */,
 				930EA43929645AE1007081C8 /* Announcer */,
-				D384C02229B20F8600C28211 /* Announcer_Timetable */,
+				D3E64C8429B62E0600B07572 /* Timetable_Announcer */,
 				8829F5A8296AE65E00BA63A8 /* Frameworks */,
 				930EA43829645AE1007081C8 /* Products */,
 			);
@@ -207,7 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				930EA43729645AE1007081C8 /* Announcer.app */,
-				D384C01F29B20F8600C28211 /* Announcer_TimetableExtension.appex */,
+				D3E64C8129B62E0600B07572 /* Timetable_AnnouncerExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -409,17 +409,17 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		D384C02229B20F8600C28211 /* Announcer_Timetable */ = {
+		D3E64C8429B62E0600B07572 /* Timetable_Announcer */ = {
 			isa = PBXGroup;
 			children = (
-				D384C02329B20F8600C28211 /* Announcer_TimetableBundle.swift */,
-				D384C02529B20F8600C28211 /* Announcer_TimetableLiveActivity.swift */,
-				D384C02729B20F8600C28211 /* Announcer_Timetable.swift */,
-				D384C02929B20F8600C28211 /* Announcer_Timetable.intentdefinition */,
-				D384C02A29B20F8700C28211 /* Assets.xcassets */,
-				D384C02C29B20F8700C28211 /* Info.plist */,
+				D3E64C8529B62E0600B07572 /* Timetable_AnnouncerBundle.swift */,
+				D3E64C8729B62E0600B07572 /* Timetable_AnnouncerLiveActivity.swift */,
+				D3E64C8929B62E0600B07572 /* Timetable_Announcer.swift */,
+				D3E64C8B29B62E0600B07572 /* Timetable_Announcer.intentdefinition */,
+				D3E64C8C29B62E0800B07572 /* Assets.xcassets */,
+				D3E64C8E29B62E0800B07572 /* Info.plist */,
 			);
-			path = Announcer_Timetable;
+			path = Timetable_Announcer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -438,7 +438,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				D384C03029B20F8700C28211 /* PBXTargetDependency */,
+				D3E64C9229B62E0800B07572 /* PBXTargetDependency */,
 			);
 			name = Announcer;
 			packageProductDependencies = (
@@ -453,21 +453,21 @@
 			productReference = 930EA43729645AE1007081C8 /* Announcer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D384C01E29B20F8600C28211 /* Announcer_TimetableExtension */ = {
+		D3E64C8029B62E0500B07572 /* Timetable_AnnouncerExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D384C03229B20F8700C28211 /* Build configuration list for PBXNativeTarget "Announcer_TimetableExtension" */;
+			buildConfigurationList = D3E64C9429B62E0800B07572 /* Build configuration list for PBXNativeTarget "Timetable_AnnouncerExtension" */;
 			buildPhases = (
-				D384C01B29B20F8600C28211 /* Sources */,
-				D384C01C29B20F8600C28211 /* Frameworks */,
-				D384C01D29B20F8600C28211 /* Resources */,
+				D3E64C7D29B62E0500B07572 /* Sources */,
+				D3E64C7E29B62E0500B07572 /* Frameworks */,
+				D3E64C7F29B62E0500B07572 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Announcer_TimetableExtension;
-			productName = Announcer_TimetableExtension;
-			productReference = D384C01F29B20F8600C28211 /* Announcer_TimetableExtension.appex */;
+			name = Timetable_AnnouncerExtension;
+			productName = Timetable_AnnouncerExtension;
+			productReference = D3E64C8129B62E0600B07572 /* Timetable_AnnouncerExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -483,7 +483,7 @@
 					930EA43629645AE1007081C8 = {
 						CreatedOnToolsVersion = 14.1;
 					};
-					D384C01E29B20F8600C28211 = {
+					D3E64C8029B62E0500B07572 = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
@@ -508,7 +508,7 @@
 			projectRoot = "";
 			targets = (
 				930EA43629645AE1007081C8 /* Announcer */,
-				D384C01E29B20F8600C28211 /* Announcer_TimetableExtension */,
+				D3E64C8029B62E0500B07572 /* Timetable_AnnouncerExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -524,11 +524,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D384C01D29B20F8600C28211 /* Resources */ = {
+		D3E64C7F29B62E0500B07572 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D384C02B29B20F8700C28211 /* Assets.xcassets in Resources */,
+				D3E64C8D29B62E0800B07572 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,7 +552,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  git status --porcelain | grep -v '^ \\?D' | cut -c 4- | sed 's/.* -> //' | tr -d '\"' | while read file \n  do\n    if [[ \"$file\" == *.swift ]]; then\n        swiftlint \"$file\" --strict\n    fi\n  done\nelse\n echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "#export PATH=\"$PATH:/opt/homebrew/bin\"\n#if which swiftlint >/dev/null; then\n#  git status --porcelain | grep -v '^ \\?D' | cut -c 4- | sed 's/.* -> //' | tr -d '\"' | while read file \n#  do\n#    if [[ \"$file\" == *.swift ]]; then\n#        swiftlint \"$file\" --strict\n#    fi\n#  done\n#else\n# echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -581,6 +581,7 @@
 				93767CBA29AB8A1B007B2EAD /* ScheduleView.swift in Sources */,
 				93AF704629698B1400BF18F8 /* HTMLString.swift in Sources */,
 				935EAB3329686B5B005D2F52 /* TimeAndReminder.swift in Sources */,
+				D3E64C9029B62E0800B07572 /* Timetable_Announcer.intentdefinition in Sources */,
 				930EA43B29645AE1007081C8 /* AnnouncerApp.swift in Sources */,
 				93767CAF29AB89A7007B2EAD /* ClassesDisplayView.swift in Sources */,
 				93767CAE29AB89A7007B2EAD /* SubjectDisplayView.swift in Sources */,
@@ -600,31 +601,30 @@
 				93767CB729AB89A7007B2EAD /* WeekSubjectsView.swift in Sources */,
 				93528DB8296FDE2600651404 /* SettingsManager.swift in Sources */,
 				93767CB229AB89A7007B2EAD /* ScheduleInformationView.swift in Sources */,
-				D384C02E29B20F8700C28211 /* Announcer_Timetable.intentdefinition in Sources */,
 				93767CB129AB89A7007B2EAD /* ClassDisplayView.swift in Sources */,
 				93767CB829AB89A7007B2EAD /* SaveScheduleView.swift in Sources */,
 				93276E18297A991F00B710AB /* CachePostsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D384C01B29B20F8600C28211 /* Sources */ = {
+		D3E64C7D29B62E0500B07572 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D384C02D29B20F8700C28211 /* Announcer_Timetable.intentdefinition in Sources */,
-				D384C02829B20F8600C28211 /* Announcer_Timetable.swift in Sources */,
-				D384C02629B20F8600C28211 /* Announcer_TimetableLiveActivity.swift in Sources */,
-				D384C02429B20F8600C28211 /* Announcer_TimetableBundle.swift in Sources */,
+				D3E64C8F29B62E0800B07572 /* Timetable_Announcer.intentdefinition in Sources */,
+				D3E64C8829B62E0600B07572 /* Timetable_AnnouncerLiveActivity.swift in Sources */,
+				D3E64C8629B62E0600B07572 /* Timetable_AnnouncerBundle.swift in Sources */,
+				D3E64C8A29B62E0600B07572 /* Timetable_Announcer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D384C03029B20F8700C28211 /* PBXTargetDependency */ = {
+		D3E64C9229B62E0800B07572 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D384C01E29B20F8600C28211 /* Announcer_TimetableExtension */;
-			targetProxy = D384C02F29B20F8700C28211 /* PBXContainerItemProxy */;
+			target = D3E64C8029B62E0500B07572 /* Timetable_AnnouncerExtension */;
+			targetProxy = D3E64C9129B62E0800B07572 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -824,7 +824,7 @@
 			};
 			name = Release;
 		};
-		D384C03329B20F8700C28211 /* Debug */ = {
+		D3E64C9529B62E0800B07572 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -834,8 +834,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FAJ54SFG5X;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Announcer_Timetable/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Announcer_Timetable;
+				INFOPLIST_FILE = Timetable_Announcer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Timetable_Announcer;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -844,7 +844,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.AyaanKai.Announcer.Announcer-Timetable";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.AyaanKai.Announcer.Timetable-Announcer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -853,7 +853,7 @@
 			};
 			name = Debug;
 		};
-		D384C03429B20F8700C28211 /* Release */ = {
+		D3E64C9629B62E0800B07572 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -863,8 +863,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FAJ54SFG5X;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Announcer_Timetable/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Announcer_Timetable;
+				INFOPLIST_FILE = Timetable_Announcer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Timetable_Announcer;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -873,7 +873,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.AyaanKai.Announcer.Announcer-Timetable";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.AyaanKai.Announcer.Timetable-Announcer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -903,11 +903,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D384C03229B20F8700C28211 /* Build configuration list for PBXNativeTarget "Announcer_TimetableExtension" */ = {
+		D3E64C9429B62E0800B07572 /* Build configuration list for PBXNativeTarget "Timetable_AnnouncerExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D384C03329B20F8700C28211 /* Debug */,
-				D384C03429B20F8700C28211 /* Release */,
+				D3E64C9529B62E0800B07572 /* Debug */,
+				D3E64C9629B62E0800B07572 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,15 +1,15 @@
 //
-//  Announcer_TimetableLiveActivity.swift
-//  Announcer_Timetable
+//  Timetable_AnnouncerLiveActivity.swift
+//  Timetable_Announcer
 //
-//  Created by Ayaan Jain on 3/3/23.
+//  Created by Ayaan Jain on 6/3/23.
 //
 
 import ActivityKit
 import WidgetKit
 import SwiftUI
 
-struct Announcer_TimetableAttributes: ActivityAttributes {
+struct Timetable_AnnouncerAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!
         var value: Int
@@ -19,9 +19,9 @@ struct Announcer_TimetableAttributes: ActivityAttributes {
     var name: String
 }
 
-struct Announcer_TimetableLiveActivity: Widget {
+struct Timetable_AnnouncerLiveActivity: Widget {
     var body: some WidgetConfiguration {
-        ActivityConfiguration(for: Announcer_TimetableAttributes.self) { context in
+        ActivityConfiguration(for: Timetable_AnnouncerAttributes.self) { context in
             // Lock screen/banner UI goes here
             VStack {
                 Text("Hello")
@@ -56,9 +56,9 @@ struct Announcer_TimetableLiveActivity: Widget {
     }
 }
 
-struct Announcer_TimetableLiveActivity_Previews: PreviewProvider {
-    static let attributes = Announcer_TimetableAttributes(name: "Me")
-    static let contentState = Announcer_TimetableAttributes.ContentState(value: 3)
+struct Timetable_AnnouncerLiveActivity_Previews: PreviewProvider {
+    static let attributes = Timetable_AnnouncerAttributes(name: "Me")
+    static let contentState = Timetable_AnnouncerAttributes.ContentState(value: 3)
 
     static var previews: some View {
         attributes
