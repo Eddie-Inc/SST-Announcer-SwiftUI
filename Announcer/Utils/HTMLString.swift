@@ -19,8 +19,8 @@ extension String {
                                                                  range: range,
                                                                  withTemplate: "")
 
-        // Decode any remaining HTML entities
-        let decodedHTML = htmlStripped.htmlDecoded
+        // Remove &nbsp;
+        let decodedHTML = htmlStripped.replacingOccurrences(of: "&nbsp;", with: "")
         return decodedHTML
     }
 
@@ -36,6 +36,7 @@ extension String {
         return fontStripped
     }
 
+    @available(*, deprecated, message: "This causes attribute graph errors")
     var htmlDecoded: String {
         let decoded = try? NSAttributedString(data: Data(utf8), options: [
             .documentType: NSAttributedString.DocumentType.html,
