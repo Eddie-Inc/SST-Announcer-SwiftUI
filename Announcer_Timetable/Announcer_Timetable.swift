@@ -8,12 +8,14 @@
 import WidgetKit
 import SwiftUI
 import Intents
+import Chopper
 
-struct Provider: IntentTimelineProvider {
+struct Provider: IntentTimelineProvider { //Dummy data placeholder
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), configuration: ConfigurationIntent())
     }
 
+//Allow user to see what the widget would look like before they inst
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         let entry = SimpleEntry(date: Date(), configuration: configuration)
         completion(entry)
@@ -44,7 +46,10 @@ struct Announcer_TimetableEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date, style: .time)
+        ZStack {
+            ContainerRelativeShape()
+                .fill(.gray.gradient)
+        }
     }
 }
 
@@ -52,11 +57,9 @@ struct Announcer_Timetable: Widget {
     let kind: String = "Announcer_Timetable"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            Announcer_TimetableEntryView(entry: entry)
+        HStack{
+            
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
     }
 }
 

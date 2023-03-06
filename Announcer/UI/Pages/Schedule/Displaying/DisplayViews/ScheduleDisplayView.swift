@@ -245,3 +245,9 @@ struct ScheduleDisplayView: View {
         return -1
     }
 }
+
+struct Previews_ScheduleDisplayView_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    }
+}

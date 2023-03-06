@@ -552,7 +552,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#export PATH=\"$PATH:/opt/homebrew/bin\"\n#if which swiftlint >/dev/null; then\n#  git status --porcelain | grep -v '^ \\?D' | cut -c 4- | sed 's/.* -> //' | tr -d '\"' | while read file \n#  do\n #   if [[ \"$file\" == *.swift ]]; then\n        swiftlint \"$file\" --strict\n#    fi\n#  done\n#else\n# echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  git status --porcelain | grep -v '^ \\?D' | cut -c 4- | sed 's/.* -> //' | tr -d '\"' | while read file \n  do\n    if [[ \"$file\" == *.swift ]]; then\n        swiftlint \"$file\" --strict\n    fi\n  done\nelse\n echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
