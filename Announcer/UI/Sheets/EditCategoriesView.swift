@@ -22,12 +22,6 @@ struct EditCategoriesView: View {
     @State var showCreateNewCategoryAlert: Bool = false
     @State var newCategoryName: String = ""
 
-//    @State
-//    var showEditSingleCategory: Bool = false
-//
-//    @State var originalName: String = ""
-//    @State var categoryName: String = ""
-
     @State var searchString: String = ""
 
     var body: some View {
@@ -42,17 +36,17 @@ struct EditCategoriesView: View {
             }
 
             Section {
-                ForEach(PostManager.userCategoriesForPosts[post.postTitle] ?? [], id: \.id) { category in
+                ForEach(PostManager.userCategoriesForPosts.values.flatMap({ $0 }), id: \.id) { category in
                     categoryView(category: category)
                 }
-                .onDelete { indexSet in
-                    PostManager.userCategoriesForPosts[post.postTitle]?
-                        .remove(atOffsets: indexSet)
-                }
-                .onMove { indexSet, moveTo in
-                    PostManager.userCategoriesForPosts[post.postTitle]?
-                        .move(fromOffsets: indexSet, toOffset: moveTo)
-                }
+//                .onDelete { indexSet in
+//                    PostManager.userCategoriesForPosts[post.postTitle]?
+//                        .remove(atOffsets: indexSet)
+//                }
+//                .onMove { indexSet, moveTo in
+//                    PostManager.userCategoriesForPosts[post.postTitle]?
+//                        .move(fromOffsets: indexSet, toOffset: moveTo)
+//                }
             }
         }
         .searchable(text: $searchString)
