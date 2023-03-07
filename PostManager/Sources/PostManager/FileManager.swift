@@ -49,8 +49,9 @@ func exists(file: String) -> Bool {
 
 /// Gets the documents directory
 public func getDocumentsDirectory() -> URL {
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return paths[0]
+    let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.kaitay.Announcer")!
+    print("Documents live at \(url.description)")
+    return url
 }
 
 public extension URL {

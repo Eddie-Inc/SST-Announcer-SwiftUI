@@ -160,7 +160,6 @@
 		93BC631429B7639B00BF4BA3 /* TimeTableSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableSmall.swift; sourceTree = "<group>"; };
 		93BC631629B763A500BF4BA3 /* TimeTableMedium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableMedium.swift; sourceTree = "<group>"; };
 		93BC631829B763AB00BF4BA3 /* TimeTableLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableLarge.swift; sourceTree = "<group>"; };
-		93BFD7F0297FA8D3008C2A21 /* Announcer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Announcer.entitlements; sourceTree = "<group>"; };
 		93F5CD37299A2F17002C6FA4 /* PostManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PostManager; sourceTree = "<group>"; };
 		D3E64C8129B62E0600B07572 /* Timetable_AnnouncerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Timetable_AnnouncerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3E64C8529B62E0600B07572 /* Timetable_AnnouncerBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetable_AnnouncerBundle.swift; sourceTree = "<group>"; };
@@ -233,7 +232,6 @@
 		930EA43929645AE1007081C8 /* Announcer */ = {
 			isa = PBXGroup;
 			children = (
-				93BFD7F0297FA8D3008C2A21 /* Announcer.entitlements */,
 				935EAB3129685EBD005D2F52 /* Info.plist */,
 				937860222964626D00FEA668 /* Utils */,
 				930EA44C29645CD8007081C8 /* Data */,
