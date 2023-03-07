@@ -72,15 +72,32 @@ extension AnnouncementDetailView {
             Text("Links")
                 .bold()
                 .padding(.bottom, 5)
+            LazyVGrid(columns: .init(repeating: .init(), count: 2)) {
+                ForEach(0..<metadatas.count, id: \.self) { index in
+                    LinkPreview(metadata: metadatas.values[index])
+                }
+            }
             ForEach(post.getLinks(), id: \.absoluteString) { url in
-                Text(url.description)
-                    .underline()
-                    .foregroundColor(.accentColor)
-                    .lineLimit(1)
-                    .onTapGesture {
-                        safariViewURL = url
-                        showSafariView = true
-                    }
+                if metadatas[url] == nil {
+                    Text(url.description)
+                        .underline()
+                        .foregroundColor(.accentColor)
+                        .lineLimit(1)
+                        .onTapGesture {
+                            safariViewURL = url
+                            showSafariView = true
+                        }
+                        .onAppear {
+                            LinkPreview.fetchMetadata(for: url) { result in
+                                switch result {
+                                case .success(let success):
+                                    metadatas[url] = success
+                                case .failure(let failure):
+                                    print("Failure: \(failure)")
+                                }
+                            }
+                        }
+                }
             }
         }
     }
@@ -107,7 +124,11 @@ struct AnnouncementDetailViewComponents_Previews: PreviewProvider {
             AnnouncementDetailView(post: .constant(
                 Post(title: "\(placeholderTextShort) abcdefg \(placeholderTextShort) 1",
                      authors: ["Some Guy"],
-                     content: placeholderTextLong,
+                     content: """
+\(placeholderTextLong)
+<a href=\"https://www.google.com\">
+<a href=\"https://www.kagi.com\">
+""",
                      date: .now,
                      blogURL: nil,
                      categories: [

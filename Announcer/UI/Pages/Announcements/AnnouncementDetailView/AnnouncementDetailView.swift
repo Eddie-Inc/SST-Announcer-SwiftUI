@@ -7,6 +7,8 @@
 
 import SwiftUI
 import PostManager
+import OrderedCollections
+import LinkPresentation
 
 let noZeroAndPoint: CharacterSet = .init(["0", "."])
 
@@ -43,6 +45,9 @@ struct AnnouncementDetailView: View {
     @State
     var isLoadingSafariView: Bool = false
 
+    @State
+    var metadatas: OrderedDictionary<URL, LPLinkMetadata> = [:]
+
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
@@ -73,11 +78,11 @@ struct AnnouncementDetailView: View {
                 .tint(.gray)
             }
 
+            bodyText
+
             if !post.getLinks().isEmpty {
                 links
             }
-
-            bodyText
         }
         .navigationTitle("Post")
         .navigationBarTitleDisplayMode(.inline)
