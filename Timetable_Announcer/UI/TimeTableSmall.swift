@@ -29,20 +29,20 @@ struct TimeTableSmall: TimeTableProtocol {
         ZStack {
             if manager.currentSchedule != nil {
                 VStack(alignment: .leading) {
-                    Text("W\(manager.schedule.currentWeek), \(today.weekday.rawValue.firstLetterUppercase)")
-//                    if indexOfCurrentSubject() < todaySubjects.count {
+                    Text("W\(manager.schedule.currentWeek), \(today.weekday.rawValue.firstLetterUppercase). \(indexOfCurrentSubject())")
+                    if indexOfCurrentSubject() < todaySubjects.count {
                         subjectsView
                         otherSubjectsView
-//                    } else {
-//                        Spacer()
-//                        HStack {
-//                            Text("No more subjects!")
-//                                .font(.caption)
-//                                .foregroundColor(.gray)
-//                            Spacer()
-//                        }
-//                        Spacer()
-//                    }
+                    } else {
+                        Spacer()
+                        HStack {
+                            Text("No more subjects!")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                            Spacer()
+                        }
+                        Spacer()
+                    }
                 }
             } else {
                 Text("No Schedule Found")
@@ -52,12 +52,13 @@ struct TimeTableSmall: TimeTableProtocol {
     }
 
     var subjectsView: some View {
-        ForEach(0..<3) { index in
-            viewForSubject(subject: todaySubjects[index], isCurrent: index == 0)
+        ForEach(0..<max(0, min(3, todaySubjects.count-indexOfCurrentSubject())), id: \.self) { index in
+            viewForSubject(subject: todaySubjects[indexOfCurrentSubject()+index], isCurrent: index == 0)
                 .padding(.vertical, -2)
         }
     }
 
+    // TODO: Get this working
     var otherSubjectsView: some View {
         HStack {
             ForEach([Color.red, Color.blue, Color.green], id: \.self) { color in
