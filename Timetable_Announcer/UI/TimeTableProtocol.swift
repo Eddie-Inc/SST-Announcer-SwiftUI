@@ -26,13 +26,17 @@ extension TimeTableProtocol {
                                           week: todayValue.week)
     }
 
-    var compactedSubjects: Int {
-        max(0, indexOfCurrentSubject(day: todayValue) - 3)
+    // eg. if there are five subjects and subject 0 is the current one, subject 0, 1, and 2 will be shown.
+    // 3 and 4 will be hidden.
+    // if subject 2 is the current one, subject 2, 3, and 4 will be shown. None are hidden.
+    var bottomCompactedSubjects: Int {
+        max(0, todaySubjects.count - (indexOfCurrentSubject()+3))
     }
 
-    func indexOfCurrentSubject(day: ScheduleDay) -> Int {
-        let subjects = manager.schedule.subjectsMatching(day: day.day, week: day.week)
+    func indexOfCurrentSubject() -> Int {
+        let day = todayValue
         let todayTime = today.timePoint
+        let subjects = todaySubjects
 
         // during available subjects
         if let index = subjects.firstIndex(where: { $0.contains(time: todayTime) }) {

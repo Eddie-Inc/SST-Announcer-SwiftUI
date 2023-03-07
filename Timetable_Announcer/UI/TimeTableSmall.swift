@@ -30,46 +30,96 @@ struct TimeTableSmall: TimeTableProtocol {
             if manager.currentSchedule != nil {
                 VStack(alignment: .leading) {
                     Text("W\(manager.schedule.currentWeek), \(today.weekday.rawValue.firstLetterUppercase)")
-                    ForEach(0..<3) { index in
-                        HStack {
-                            (todaySubjects[index].displayColor ?? .accentColor)
-                                .frame(width: 6)
-                                .cornerRadius(3)
-                                .padding(.trailing, -4)
-                            ZStack(alignment: .leading) {
-                                (todaySubjects[index].displayColor ?? .accentColor)
-                                    .cornerRadius(4)
-                                    .opacity(0.3)
-                                HStack {
-                                    Text(todaySubjects[index].displayName?.description ?? "Unnamed")
-                                        .font(.caption)
-                                    Spacer()
-                                    Text(todaySubjects[index].durationFormatted)
-                                        .font(.caption2)
-                                }
-                                .padding(.horizontal, 5)
-                            }
-                        }
-                        .padding(.vertical, -2)
-                    }
-                    HStack {
-                        ForEach([Color.red, Color.blue, Color.green], id: \.self) { color in
-                            color
-                                .cornerRadius(3)
-                                .frame(width: 6, height: 6)
-                                .padding(.horizontal, -2)
-                        }
-                        Text("3 More")
-                            .font(.caption)
-                    }
-                    .padding(.leading, 2)
-                    .frame(height: 10)
+//                    if indexOfCurrentSubject() < todaySubjects.count {
+                        subjectsView
+                        otherSubjectsView
+//                    } else {
+//                        Spacer()
+//                        HStack {
+//                            Text("No more subjects!")
+//                                .font(.caption)
+//                                .foregroundColor(.gray)
+//                            Spacer()
+//                        }
+//                        Spacer()
+//                    }
                 }
             } else {
                 Text("No Schedule Found")
             }
         }
         .padding(12)
+    }
+
+    var subjectsView: some View {
+        ForEach(0..<3) { index in
+            viewForSubject(subject: todaySubjects[index], isCurrent: index == 0)
+                .padding(.vertical, -2)
+        }
+    }
+
+    var otherSubjectsView: some View {
+        HStack {
+            ForEach([Color.red, Color.blue, Color.green], id: \.self) { color in
+                color
+                    .cornerRadius(3)
+                    .frame(width: 6, height: 6)
+                    .padding(.horizontal, -2)
+            }
+            Text("3 More")
+                .font(.caption)
+        }
+        .padding(.leading, 2)
+        .frame(height: 10)
+    }
+
+    @ViewBuilder
+    func viewForSubject(subject: Subject, isCurrent: Bool) -> some View {
+        if isCurrent {
+            ZStack {
+                (subject.displayColor ?? .accentColor)
+                    .cornerRadius(4)
+                    .opacity(0.5)
+                HStack {
+                    (subject.displayColor ?? .accentColor)
+                        .frame(width: 6)
+                        .cornerRadius(3)
+                        .padding(3)
+                        .padding(.trailing, -4)
+
+                    HStack {
+                        Text(subject.displayName?.description ?? "Unnamed")
+                            .font(.caption)
+                        Spacer()
+                        Text(subject.durationFormatted)
+                            .font(.caption2)
+                    }
+                    .padding(.horizontal, 5)
+                }
+            }
+            .padding(.leading, -3)
+        } else {
+            HStack {
+                (subject.displayColor ?? .accentColor)
+                    .frame(width: 6)
+                    .cornerRadius(3)
+                    .padding(.trailing, -4)
+                ZStack(alignment: .leading) {
+                    (subject.displayColor ?? .accentColor)
+                        .cornerRadius(4)
+                        .opacity(0.2)
+
+                    HStack {
+                        Text(subject.displayName?.description ?? "Unnamed")
+                            .font(.caption)
+                        Spacer()
+                        Text(subject.durationFormatted)
+                            .font(.caption2)
+                    }
+                    .padding(.horizontal, 5)
+                }
+            }
+        }
     }
 }
 
