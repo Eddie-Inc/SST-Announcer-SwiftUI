@@ -43,12 +43,34 @@ struct AnnouncementDetailView: View {
     @State
     var isLoadingSafariView: Bool = false
 
+    @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
         List {
-            VStack(alignment: .leading) {
+            VStack {
                 title
                 categories
                 postAndReminder
+            }
+            .swipeActions(edge: .leading,
+                          allowsFullSwipe: true) {
+                Button {
+                    post.read = false
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Label("Unread", systemImage: "book.closed")
+                }
+                .tint(.accentColor)
+
+                Button {
+                    withAnimation {
+                        post.pinned.toggle()
+                    }
+                } label: {
+                    Label(post.pinned ? "Unpin" : "Pin",
+                          systemImage: post.pinned ? "pin.slash.fill" : "pin.fill")
+                }
+                .tint(.gray)
             }
 
             if !post.getLinks().isEmpty {
@@ -80,9 +102,9 @@ struct AnnouncementDetailView: View {
                 Button {
                     isLoadingSafariView = true
                     loadQueue.async {
+                        defer { isLoadingSafariView = false }
                         guard let url = post.blogUrl else { return }
                         safariViewURL = URL(string: url)
-                        isLoadingSafariView = false
                         showShareLink = true
                     }
                 } label: {
@@ -90,10 +112,27 @@ struct AnnouncementDetailView: View {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    post.pinned.toggle()
+                Menu {
+                    Button {
+                        post.pinned.toggle()
+                    } label: {
+                        Label(post.pinned ? "Unpin" : "Pin",
+                              systemImage: post.pinned ? "pin.fill" : "pin")
+                    }
+                    Button {
+                        showEditCategoryView.toggle()
+                    } label: {
+                        Label("User Categories",
+                              systemImage: (post.userCategories?.isEmpty ?? true) ? "tag" : "tag.fill")
+                    }
+                    Button {
+                        showEditReminderDateView.toggle()
+                    } label: {
+                        Label("Reminder Date",
+                              systemImage: post.reminderDate == nil ? "calendar.badge.plus" : "calendar.badge.nil")
+                    }
                 } label: {
-                    Image(systemName: post.pinned ? "pin.fill" : "pin")
+                    Image(systemName: "slider.horizontal.3")
                 }
             }
         }
@@ -142,9 +181,10 @@ struct AnnouncementDetailView_Previews: PreviewProvider {
         NavigationView {
             AnnouncementDetailView(post: .constant(
                 Post(title: "\(placeholderTextShort) abcdefg \(placeholderTextShort) 1",
+                     authors: ["Somebody"],
                      content: placeholderTextLong,
                      date: .now,
-                     blogURL: nil,
+                     blogURL: "http://www.google.com",
                      categories: [
                         "short",
                         "secondary 3",

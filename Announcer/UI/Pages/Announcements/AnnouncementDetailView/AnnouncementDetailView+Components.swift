@@ -11,77 +11,59 @@ import PostManager
 extension AnnouncementDetailView {
     @ViewBuilder
     var title: some View {
-        // title
-        HStack {
-            Text(post.title)
-                .bold()
-                .multilineTextAlignment(.leading)
-            Spacer()
-        }
-        .font(.title2)
-        .padding(.bottom, 8)
-        .overlay(alignment: .bottomTrailing) {
-            Button {
-                // open in safari
-                withAnimation(.easeIn(duration: 0.08)) {
-                    isLoadingSafariView = true
-                }
-                loadQueue.async {
-                    guard let url = post.blogUrl else { return }
-                    safariViewURL = URL(string: url)
-                    isLoadingSafariView = false
-                    showSafariView = true
-                }
-            } label: {
-                Image(systemName: "arrow.up.forward.circle")
-                    .opacity(0.6)
-                    .offset(x: 0, y: -10)
-            }
-        }
-        if let authors = post.authors {
+        VStack {
+            // title
             HStack {
-                ForEach(authors, id: \.self) { author in
-                    Text(author)
-                        .lineLimit(1)
-                }
+                Text(post.title)
+                    .bold()
+                    .multilineTextAlignment(.leading)
                 Spacer()
+            }
+            .font(.title2)
+            .padding(.bottom, 8)
+            if let authors = post.authors {
+                HStack {
+                    ForEach(authors, id: \.self) { author in
+                        Text(author)
+                            .font(.subheadline)
+                            .lineLimit(1)
+                    }
+                    Spacer()
+                }
+                .padding(.top, -8)
             }
         }
     }
 
+    @ViewBuilder
     var categories: some View {
         // categories
-        HStack {
-            CategoryScrollView(post: $post)
-                .font(.subheadline)
-            Button {
-                // add category
+        if !(post.userCategories?.isEmpty ?? true) {
+            // only show categories if available
+            HStack {
+                CategoryScrollView(post: $post)
+                    .font(.subheadline)
+            }
+            .onTapGesture {
                 showEditCategoryView.toggle()
-            } label: {
-                Image(systemName: "slider.horizontal.3")
-                    .opacity(0.6)
             }
             .buttonStyle(.plain)
+            .offset(y: -3)
+        } else {
+            Spacer()
+                .frame(height: 10)
         }
-        .padding(.bottom, 4)
     }
 
     var postAndReminder: some View {
         HStack {
             TimeAndReminder(post: $post)
                 .font(.subheadline)
-            Spacer()
-            Button {
-                showEditReminderDateView.toggle()
-            } label: {
-                if post.reminderDate == nil {
-                    Image(systemName: "calendar.badge.plus")
-                } else {
-                    Image(systemName: "slider.horizontal.3")
+                .onTapGesture {
+                    showEditReminderDateView.toggle()
                 }
-            }
-            .buttonStyle(.plain)
-            .opacity(0.6)
+                .buttonStyle(.plain)
+            Spacer()
         }
     }
 
@@ -124,6 +106,7 @@ struct AnnouncementDetailViewComponents_Previews: PreviewProvider {
         NavigationView {
             AnnouncementDetailView(post: .constant(
                 Post(title: "\(placeholderTextShort) abcdefg \(placeholderTextShort) 1",
+                     authors: ["Some Guy"],
                      content: placeholderTextLong,
                      date: .now,
                      blogURL: nil,
