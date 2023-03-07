@@ -90,7 +90,11 @@ public struct Post: Codable, Equatable, Identifiable {
         links.removeDuplicates()
 
         links = links.filter { (link) -> Bool in
-            !link.absoluteString.contains("bp.blogspot.com/")
+            !link.absoluteString.contains("bp.blogspot.com/") &&
+            ( // check that it is https or http
+                link.absoluteString.hasPrefix("https://") ||
+                link.absoluteString.hasPrefix("http://")
+            )
         }
 
         return links

@@ -75,8 +75,10 @@ extension AnnouncementDetailView {
             LazyVGrid(columns: .init(repeating: .init(), count: 2)) {
                 ForEach(0..<metadatas.count, id: \.self) { index in
                     LinkPreview(metadata: metadatas.values[index])
+                        .frame(height: 80)
                 }
             }
+            .frame(minHeight: CGFloat((metadatas.count+1)/2) * 80)
             ForEach(post.getLinks(), id: \.absoluteString) { url in
                 if metadatas[url] == nil {
                     Text(url.description)

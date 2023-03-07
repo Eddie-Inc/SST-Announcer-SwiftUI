@@ -7,6 +7,7 @@
 
 import SwiftUI
 import LinkPresentation
+import PostManager
 
 class CustomLinkView: LPLinkView {
     override var intrinsicContentSize: CGSize {
@@ -22,7 +23,12 @@ struct LinkPreview: UIViewRepresentable {
     var metadata: LPLinkMetadata?
 
     init(metadata: LPLinkMetadata? = nil) {
-        self.metadata = metadata
+        guard let metadata else { return }
+        self.metadata = .init()
+        self.metadata?.url = metadata.url
+        self.metadata?.originalURL = metadata.originalURL
+        self.metadata?.title = metadata.title
+        self.metadata?.iconProvider = metadata.iconProvider
     }
 
     func makeUIView(context: Context) -> CustomLinkView {
@@ -39,13 +45,15 @@ struct LinkPreview: UIViewRepresentable {
 
         let metadataProvider = LPMetadataProvider()
         metadataProvider.startFetchingMetadata(for: url) { (metadata, error) in
-            if let error = error {
-                print(error)
-                completion(.failure(error))
-                return
-            }
-            if let metadata = metadata {
-                completion(.success(metadata))
+            loadQueue.async {
+                if let error = error {
+                    print(error)
+                    completion(.failure(error))
+                    return
+                }
+                if let metadata = metadata {
+                    completion(.success(metadata))
+                }
             }
         }
     }
