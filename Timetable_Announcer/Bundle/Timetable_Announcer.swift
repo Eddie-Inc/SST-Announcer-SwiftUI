@@ -48,7 +48,16 @@ struct Timetable_AnnouncerEntryView : View {
     let entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date.description)
+        switch family {
+        case .systemSmall:
+            TimeTableSmall(today: entry.date)
+        case .systemMedium:
+            TimeTableMedium(today: entry.date)
+        case .systemLarge:
+            TimeTableLarge(today: entry.date)
+        default:
+            Text("Unsupported")
+        }
     }
 }
 struct Timetable_Announcer: Widget {

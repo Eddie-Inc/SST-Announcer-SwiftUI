@@ -9,8 +9,6 @@ import SwiftUI
 import Chopper
 
 protocol TimeTableProtocol: View {
-    associatedtype SubjectView: View
-
     var manager: ScheduleManager { get }
     var today: Date { get }
 }
