@@ -136,14 +136,16 @@ struct SubjectDisplayView_Previews: PreviewProvider {
     static var previews: some View {
         List {
             SubjectDisplayView(today: .now,
-                               subject: .init(timeRange: .startTime+1 ..< .startTime+5,
+                               subject: .init(timeRange: .startTime.addingBlocks(blocks: 1) ..<
+                                                         .startTime.addingBlocks(blocks: 5),
                                               day: .init(week: .odd, day: .monday),
                                               subjectClass:
                                     .init(name: .some("Test"),
                                           color: .blue)))
             .overrideShowAsCurrent(show: false)
             SubjectDisplayView(today: .now,
-                               subject: .init(timeRange: .startTime+1 ..< .startTime+5,
+                               subject: .init(timeRange: .startTime.addingBlocks(blocks: 1) ..<
+                                                         .startTime.addingBlocks(blocks: 5),
                                               day: .init(week: .odd, day: .monday),
                                               subjectClass:
                                     .init(name: .some("ABCD"),
@@ -151,14 +153,16 @@ struct SubjectDisplayView_Previews: PreviewProvider {
                                           color: .purple)))
             .overrideShowAsCurrent(show: false)
             SubjectDisplayView(today: .now,
-                               subject: .init(timeRange: .startTime+1 ..< .startTime+5,
+                               subject: .init(timeRange: .startTime.addingBlocks(blocks: 1) ..<
+                                                         .startTime.addingBlocks(blocks: 5),
                                               day: .init(week: .odd, day: .monday),
                                               subjectClass:
                                     .init(name: .some("IDK man"),
                                           color: .brown)))
             .overrideShowAsCurrent(show: true)
             SubjectDisplayView(today: .now,
-                               subject: .init(timeRange: .startTime+1 ..< .startTime+5,
+                               subject: .init(timeRange: .startTime.addingBlocks(blocks: 1) ..<
+                                                         .startTime.addingBlocks(blocks: 5),
                                               day: .init(week: .odd, day: .monday),
                                               subjectClass:
                                     .init(name: .some("Quite light"),

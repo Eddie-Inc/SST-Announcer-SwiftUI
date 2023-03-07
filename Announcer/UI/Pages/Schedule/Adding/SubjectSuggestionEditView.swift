@@ -94,14 +94,14 @@ struct SubjectSuggestionEditView<Table: ScheduleProvider, Block: TimeBlock>: Vie
         Picker("Start Time", selection: .init(get: {
             suggestion.timeRange.lowerBound
         }, set: { newValue in
-            let newUpperBound = newValue+suggestion.timeRange.count*TimePoint.strideDistance
+            let newUpperBound = newValue.addingBlocks(blocks: suggestion.timeRange.count)
             guard newUpperBound < schedule.timeRange.upperBound else { return }
             assignNewTime(newTime: newValue..<newUpperBound)
         })) {
             ForEach(schedule.timeRange, id: \.self) { time in
                 // if its valid
-                if time+suggestion.timeRange.count*TimePoint.strideDistance < schedule.timeRange.upperBound &&
-                    isNewTimeValid(timeRange: time..<time+suggestion.timeRange.count*TimePoint.strideDistance) {
+                if time.addingBlocks(blocks: suggestion.timeRange.count) < schedule.timeRange.upperBound &&
+                    isNewTimeValid(timeRange: time..<time.addingBlocks(blocks: suggestion.timeRange.count)) {
                     Text(time.description)
                         .tag(time)
                 }
@@ -231,7 +231,7 @@ extension SubjectSuggestionEditView {
 
     func splitSubjectFinal(suggestion: Subject) {
         // determine the times
-        let midBound = suggestion.timeRange.lowerBound + suggestion.timeRange.count/2 * TimePoint.strideDistance
+        let midBound = suggestion.timeRange.lowerBound.addingBlocks(blocks: suggestion.timeRange.count/2)
         let lTime = suggestion.timeRange.lowerBound..<midBound
         let rTime = midBound..<suggestion.timeRange.upperBound
 
@@ -270,7 +270,7 @@ extension SubjectSuggestionEditView {
         else { return }
 
         // determine the times
-        let midBound = suggestion.timeRange.lowerBound + suggestion.timeRange.count/2 * TimePoint.strideDistance
+        let midBound = suggestion.timeRange.lowerBound.addingBlocks(blocks: suggestion.timeRange.count/2)
         let lTime = suggestion.timeRange.lowerBound..<midBound
         let rTime = midBound..<suggestion.timeRange.upperBound
 

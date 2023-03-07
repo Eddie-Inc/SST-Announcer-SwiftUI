@@ -38,11 +38,12 @@ public struct TimePoint: AdditiveArithmetic,
     public static func - (lhs: TimePoint, rhs: TimePoint) -> TimePoint {
         return .init(totalMinutes: lhs.totalMinutes - rhs.totalMinutes)
     }
-    public static func + (lhs: TimePoint, rhs: Int) -> TimePoint {
-        return .init(totalMinutes: lhs.totalMinutes + rhs)
+
+    public func addingMinutes(minutes: Int) -> TimePoint {
+        return .init(totalMinutes: self.totalMinutes + minutes)
     }
-    public static func - (lhs: TimePoint, rhs: Int) -> TimePoint {
-        return .init(totalMinutes: lhs.totalMinutes + rhs)
+    public func addingBlocks(blocks: Int) -> TimePoint {
+        return addingMinutes(minutes: blocks*Self.strideDistance)
     }
 
     // MARK: Comparable, Identifiable

@@ -140,7 +140,8 @@ struct WeekSubjectsView<Table: ScheduleProvider, Block: TimeBlock>: View where B
             // cannot create a subject here
             return
         }
-        let timeUpperRange = min(timeLowerRange+3, scheduleSuggestion.timeRange.upperBound-1)
+        let timeUpperRange = min(timeLowerRange.addingBlocks(blocks: 3),
+                                 scheduleSuggestion.timeRange.upperBound.addingBlocks(blocks: -1))
         let newTimeRange = timeLowerRange..<timeUpperRange
 
         // create a blank subject
