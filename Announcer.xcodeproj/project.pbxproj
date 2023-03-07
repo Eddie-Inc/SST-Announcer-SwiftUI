@@ -160,6 +160,7 @@
 		93BC631429B7639B00BF4BA3 /* TimeTableSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableSmall.swift; sourceTree = "<group>"; };
 		93BC631629B763A500BF4BA3 /* TimeTableMedium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableMedium.swift; sourceTree = "<group>"; };
 		93BC631829B763AB00BF4BA3 /* TimeTableLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableLarge.swift; sourceTree = "<group>"; };
+		93BC632629B775D100BF4BA3 /* Timetable_AnnouncerExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timetable_AnnouncerExtension.entitlements; sourceTree = "<group>"; };
 		93F5CD37299A2F17002C6FA4 /* PostManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PostManager; sourceTree = "<group>"; };
 		D3E64C8129B62E0600B07572 /* Timetable_AnnouncerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Timetable_AnnouncerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3E64C8529B62E0600B07572 /* Timetable_AnnouncerBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetable_AnnouncerBundle.swift; sourceTree = "<group>"; };
@@ -210,6 +211,7 @@
 		930EA42E29645AE1007081C8 = {
 			isa = PBXGroup;
 			children = (
+				93BC632629B775D100BF4BA3 /* Timetable_AnnouncerExtension.entitlements */,
 				939558AE29AB87670088B712 /* Chopper */,
 				93F5CD37299A2F17002C6FA4 /* PostManager */,
 				9376933E296AC7C000D94EC3 /* README.md */,
@@ -879,6 +881,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = Timetable_AnnouncerExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -908,6 +911,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = Timetable_AnnouncerExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
