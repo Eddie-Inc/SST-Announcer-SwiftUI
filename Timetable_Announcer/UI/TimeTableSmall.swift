@@ -27,5 +27,7 @@ struct TimeTableSmall: TimeTableProtocol {
 struct TimeTableSmall_Previews: PreviewProvider {
     static var previews: some View {
         TimeTableSmall(today: .now)
+            .frame(width: 155, height: 155)
+            .border(.black, width: 1)
     }
 }

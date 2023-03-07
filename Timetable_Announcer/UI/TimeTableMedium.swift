@@ -27,5 +27,7 @@ struct TimeTableMedium: View {
 struct TimeTableMedium_Previews: PreviewProvider {
     static var previews: some View {
         TimeTableMedium(today: .now)
+            .frame(width: 329, height: 155)
+            .border(.black, width: 1)
     }
 }

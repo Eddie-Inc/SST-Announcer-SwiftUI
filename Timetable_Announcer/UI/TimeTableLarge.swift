@@ -27,5 +27,7 @@ struct TimeTableLarge: View {
 struct TimeTableLarge_Previews: PreviewProvider {
     static var previews: some View {
         TimeTableLarge(today: .now)
+            .frame(width: 329, height: 329)
+            .border(.black, width: 1)
     }
 }
