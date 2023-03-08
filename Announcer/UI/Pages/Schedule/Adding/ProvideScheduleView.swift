@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Chopper
+import CodeScanner
 
 struct ProvideScheduleView: View {
     @State var image: UIImage?
@@ -29,7 +30,9 @@ struct ProvideScheduleView: View {
                 }
 
                 NavigationSheet {
-                    Text("Scanning")
+                    CodeScannerView(codeTypes: [.qr]) { _ in
+                        print("SCANNED!")
+                    }
                 } label: {
                     Text("Scan Code")
                         .foregroundColor(.accentColor)

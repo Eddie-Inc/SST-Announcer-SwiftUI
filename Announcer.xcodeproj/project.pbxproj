@@ -70,6 +70,7 @@
 		93BC632529B7655100BF4BA3 /* Updating in Frameworks */ = {isa = PBXBuildFile; productRef = 93BC632429B7655100BF4BA3 /* Updating */; };
 		93DA5F4B29B0DEE500CBB655 /* PostManager in Frameworks */ = {isa = PBXBuildFile; productRef = 93DA5F4A29B0DEE500CBB655 /* PostManager */; };
 		93E5302829B8B6CB0026F4BE /* ScheduleQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5302729B8B6CB0026F4BE /* ScheduleQRView.swift */; };
+		93E5302E29B8C9A60026F4BE /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 93E5302D29B8C9A60026F4BE /* CodeScanner */; };
 		D3E64C8229B62E0600B07572 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5A9296AE65E00BA63A8 /* WidgetKit.framework */; };
 		D3E64C8329B62E0600B07572 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5AB296AE65E00BA63A8 /* SwiftUI.framework */; };
 		D3E64C8629B62E0600B07572 /* Timetable_AnnouncerBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E64C8529B62E0600B07572 /* Timetable_AnnouncerBundle.swift */; };
@@ -183,6 +184,7 @@
 				881544BB29691ABF001BAFA4 /* RichText in Frameworks */,
 				937EBBF5296EA72000722285 /* OrderedCollections in Frameworks */,
 				93767C8A29AB8798007B2EAD /* Chopper in Frameworks */,
+				93E5302E29B8C9A60026F4BE /* CodeScanner in Frameworks */,
 				93767CBD29AB8ABB007B2EAD /* Updating in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,6 +492,7 @@
 				93767C8929AB8798007B2EAD /* Chopper */,
 				93767CBC29AB8ABB007B2EAD /* Updating */,
 				93DA5F4A29B0DEE500CBB655 /* PostManager */,
+				93E5302D29B8C9A60026F4BE /* CodeScanner */,
 			);
 			productName = Announcer;
 			productReference = 930EA43729645AE1007081C8 /* Announcer.app */;
@@ -548,6 +551,7 @@
 				881544B929691ABF001BAFA4 /* XCRemoteSwiftPackageReference "RichText" */,
 				937EBBF3296EA72000722285 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				93767CBB29AB8ABB007B2EAD /* XCRemoteSwiftPackageReference "UpdatedSwiftUI" */,
+				93E5302C29B8C9A60026F4BE /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = 930EA43829645AE1007081C8 /* Products */;
 			projectDirPath = "";
@@ -1007,6 +1011,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		93E5302C29B8C9A60026F4BE /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1046,6 +1058,11 @@
 		93DA5F4A29B0DEE500CBB655 /* PostManager */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PostManager;
+		};
+		93E5302D29B8C9A60026F4BE /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 93E5302C29B8C9A60026F4BE /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
