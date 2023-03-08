@@ -32,11 +32,20 @@ extension Color: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let r = try container.decode(Double.self, forKey: .red)
-        let g = try container.decode(Double.self, forKey: .green) // swiftlint:disable:this identifier_name
-        let b = try container.decode(Double.self, forKey: .blue)  // swiftlint:disable:this identifier_name
-
-        self.init(red: r, green: g, blue: b)
+        do {
+            let r = try container.decode(Int.self, forKey: .red)
+            let g = try container.decode(Int.self, forKey: .green) // swiftlint:disable:this identifier_name
+            let b = try container.decode(Int.self, forKey: .blue)  // swiftlint:disable:this identifier_name
+            self.init(red: Double(r)/255,
+                      green: Double(g)/255,
+                      blue: Double(b)/255)
+        } catch {
+            // legacy system
+            let r = try container.decode(Double.self, forKey: .red)
+            let g = try container.decode(Double.self, forKey: .green)
+            let b = try container.decode(Double.self, forKey: .blue)
+            self.init(red: r, green: g, blue: b)
+        }
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -46,8 +55,8 @@ extension Color: Codable {
 
         var container = encoder.container(keyedBy: CodingKeys.self)
 
-        try container.encode(colorComponents.red, forKey: .red)
-        try container.encode(colorComponents.green, forKey: .green)
-        try container.encode(colorComponents.blue, forKey: .blue)
+        try container.encode(Int(colorComponents.red * 255), forKey: .red)
+        try container.encode(Int(colorComponents.green * 255), forKey: .green)
+        try container.encode(Int(colorComponents.blue * 255), forKey: .blue)
     }
 }

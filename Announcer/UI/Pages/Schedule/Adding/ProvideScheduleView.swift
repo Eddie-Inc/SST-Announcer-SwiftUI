@@ -28,6 +28,13 @@ struct ProvideScheduleView: View {
                         .foregroundColor(.accentColor)
                 }
 
+                NavigationSheet {
+                    Text("Scanning")
+                } label: {
+                    Text("Scan Code")
+                        .foregroundColor(.accentColor)
+                }
+
                 if let image = schedule?.processedSource.image {
                     ScrollView(.vertical, showsIndicators: true) {
                         Text("Processed Schedule:")
