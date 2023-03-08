@@ -12,6 +12,7 @@ struct ScheduleDisplayView: View {
     @ObservedObject var manager: ScheduleManager = .default
     @State var showInfo: Bool = false
     @State var showProvideSchedule: Bool = false
+    @State var showQRView: Bool = false
 
     @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     @State var today: Date = .now
@@ -59,6 +60,13 @@ struct ScheduleDisplayView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
+                    showQRView = true
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
                     showInfo = true
                 } label: {
                     Image(systemName: "info.circle")
@@ -71,6 +79,14 @@ struct ScheduleDisplayView: View {
                     .presentationDetents([.medium, .large])
             } else {
                 ScheduleInformationView(showProvideSchedule: $showProvideSchedule)
+            }
+        }
+        .sheet(isPresented: $showQRView) {
+            if #available(iOS 16.0, *) {
+                ScheduleQRView()
+                    .presentationDetents([.medium])
+            } else {
+                ScheduleQRView()
             }
         }
     }
@@ -239,11 +255,5 @@ struct ScheduleDisplayView: View {
 
         // default to before start
         return -1
-    }
-}
-
-struct Previews_ScheduleDisplayView_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }
