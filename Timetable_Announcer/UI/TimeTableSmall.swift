@@ -36,6 +36,7 @@ struct TimeTableSmall: TimeTableProtocol {
                     } else {
                         Spacer()
                         HStack {
+                            Spacer()
                             Text("No more subjects!")
                                 .font(.caption)
                                 .foregroundColor(.gray)
@@ -52,6 +53,7 @@ struct TimeTableSmall: TimeTableProtocol {
     }
 
     var subjectsView: some View {
+        // NOTE: Fix index out of bounds error that sometimes happens here.
         ForEach(0..<max(0, min(3, todaySubjects.count-indexOfCurrentSubject())), id: \.self) { index in
             viewForSubject(subject: todaySubjects[indexOfCurrentSubject()+index], isCurrent: index == 0)
                 .padding(.vertical, -2)
