@@ -424,17 +424,8 @@ extension CodeScannerView {
 
         public func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
             if let metadataObject = metadataObjects.first {
-                print("Detected an object!")
-                guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else {
-                    print("Could not find readable object")
-                    return
-                }
-                print("Redable object: \(readableObject.description)")
-                guard let stringValue = readableObject.stringValue else {
-                    print("Could not find string value")
-                    return
-                }
-                print("String value: \(stringValue)")
+                guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
+                guard let stringValue = readableObject.stringValue else { return }
                 
                 guard didFinishScanning == false else { return }
                 

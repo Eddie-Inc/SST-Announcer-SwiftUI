@@ -14,14 +14,19 @@ struct ScheduleQRView: View {
     init() {
         let manager = ScheduleManager.default
         let schedule = manager.schedule
+
+        // get the data. First, we encode, then, compress.
         guard let data = try? JSONEncoder().encode(schedule),
               let compressed = try? (data as NSData).compressed(using: .lzfse) else {
             fatalError("Could not get schedule data")
         }
+        // then, we get the base64 encoded string, as QR can't accept raw data
+        let string = compressed.base64EncodedString()
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else {
             fatalError("QR Filter not found")
         }
-        qrFilter.setValue(compressed, forKey: "inputMessage")
+        // then, we encode it using utf8
+        qrFilter.setValue(string.data(using: .utf8), forKey: "inputMessage")
         guard let qrImage = qrFilter.outputImage else {
             fatalError("Could not generate QR image")
         }
