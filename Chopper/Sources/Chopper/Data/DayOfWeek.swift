@@ -21,6 +21,17 @@ public enum DayOfWeek: String, CaseIterable, Equatable, Identifiable, Codable {
         case .friday: return 4
         }
     }
+
+    init?(number: Int) {
+        switch number {
+        case 0: self = .monday
+        case 1: self = .tuesday
+        case 2: self = .wednesday
+        case 3: self = .thursday
+        case 4: self = .friday
+        default: return nil
+        }
+    }
 }
 
 // TODO: Allow single-week schedules
@@ -83,6 +94,30 @@ public struct ScheduleDay: Equatable, Identifiable, Codable {
             let difference = laterDay.day.number - self.day.number
             // return the difference + 7 for one week
             return difference + 7
+        }
+    }
+
+    enum Keys: CodingKey {
+        case week, day
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode("\(week.rawValue),\(day.number)")
+    }
+
+    public init(from decoder: Decoder) throws {
+        do {
+            // support for legacy encoder
+            let container = try decoder.container(keyedBy: Keys.self)
+            self.week = try container.decode(Week.self, forKey: .week)
+            self.day = try container.decode(DayOfWeek.self, forKey: .day)
+        } catch {
+            let container = try decoder.singleValueContainer()
+            let string = try container.decode(String.self)
+            let components = string.split(separator: ",")
+            self.week = .init(rawValue: String(components[0]))!
+            self.day = .init(number: Int(components[1])!)!
         }
     }
 }

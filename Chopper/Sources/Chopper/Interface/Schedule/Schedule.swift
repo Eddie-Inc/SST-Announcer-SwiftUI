@@ -8,7 +8,7 @@
 import Foundation
 
 /// A data structure representing a timetable, containing subjects, classes, and other scheduling information.
-public struct Schedule: ScheduleProvider, Codable {
+public struct Schedule: ScheduleProvider {
     public var id = UUID()
 
     public var subjects: [Subject]

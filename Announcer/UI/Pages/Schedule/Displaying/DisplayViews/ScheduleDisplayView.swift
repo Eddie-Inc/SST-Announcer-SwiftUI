@@ -224,24 +224,20 @@ struct ScheduleDisplayView: View {
 
         // during available subjects
         if let index = subjects.firstIndex(where: { $0.contains(time: todayTime) }) {
-            print("Current subject for \(day.description): \(index)")
             return index
         }
 
         // before start
         if let start = subjects.first?.timeRange.lowerBound, start > todayTime {
-            print("Current subject for \(day.description): before")
             return -1
         }
 
         // after end
         if let end = subjects.last?.timeRange.upperBound, end < todayTime {
-            print("Current subject for \(day.description): after \(subjects.count)")
             return subjects.count
         }
 
         // default to before start
-        print("Current subject for \(day.description): defaulting to -1")
         return -1
     }
 }
