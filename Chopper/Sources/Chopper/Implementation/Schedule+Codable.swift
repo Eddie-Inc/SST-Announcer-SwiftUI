@@ -18,12 +18,12 @@ extension Schedule: Codable {
     }
 
     struct SubjectDecoder: Codable {
-        var classID: UUID
+        var classID: Int
         var day: ScheduleDay
         var timeRange: TimeRange
 
-        init(from subject: Subject) {
-            self.classID = subject.subjectClass.id
+        init(from subject: Subject, classes: [SubjectClass]) {
+            self.classID = classes.firstIndex(of: subject.subjectClass)!
             self.day = subject.day
             self.timeRange = subject.timeRange
         }
@@ -34,7 +34,7 @@ extension Schedule: Codable {
 
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: Keys.self)
-            self.classID = try container.decode(UUID.self, forKey: .classID)
+            self.classID = try container.decode(Int.self, forKey: .classID)
             self.day = try container.decode(ScheduleDay.self, forKey: .day)
             self.timeRange = try container.decode(TimeRange.self, forKey: .timeRange)
         }
@@ -49,17 +49,16 @@ extension Schedule: Codable {
 
         /// Expands this `SubjectDecoder` into a full `Subject`, given the classes.
         func subjectGiven(classes: [SubjectClass]) -> Subject? {
-            guard let subClass = classes.first(where: { $0.id == classID }) else { return nil }
             return .init(timeRange: self.timeRange,
                          day: self.day,
-                         subjectClass: subClass)
+                         subjectClass: classes[classID])
         }
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: Keys.self)
         try container.encode(id, forKey: .id)
-        try container.encode(subjects.map({ SubjectDecoder(from: $0) }), forKey: .subjects)
+        try container.encode(subjects.map({ SubjectDecoder(from: $0, classes: subjectClasses) }), forKey: .subjects)
         try container.encode(subjectClasses, forKey: .subjectClasses)
         try container.encode(timeRange, forKey: .timeRange)
         try container.encode(startDate, forKey: .startDate)

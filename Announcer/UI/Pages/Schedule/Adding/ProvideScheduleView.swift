@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Chopper
-import CodeScanner
 
 struct ProvideScheduleView: View {
     @State var image: UIImage?
