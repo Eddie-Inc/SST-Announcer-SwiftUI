@@ -55,12 +55,16 @@ struct SubjectDisplayView: View {
     }
 
     var pillShape: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             subject.displayColor
+                .opacity(0.5)
+            GeometryReader { geom in
+                subject.displayColor
+                    .frame(height: geom.size.height * progress())
+            }
         }
         .frame(width: 10)
         .cornerRadius(5)
-        .opacity(nowInSubject(subject: subject) ? 1 : 0.5)
         .padding(.trailing, -3)
         .padding(.trailing, -3)
     }
@@ -122,6 +126,17 @@ struct SubjectDisplayView: View {
         if let showAsCurrent { return showAsCurrent }
 
         return subject.contains(time: today.timePoint) && allowShowingAsCurrent
+    }
+
+    func progress() -> Double {
+        guard nowInSubject(subject: subject) else { return 0 }
+
+        let upperbound = subject.timeRange.upperBound
+        let lowerbound = subject.timeRange.lowerBound
+        let minutesRange = upperbound.totalMinutes - lowerbound.totalMinutes
+        let todayMinutes = today.timePoint.totalMinutes - lowerbound.totalMinutes
+
+        return Double(todayMinutes) / Double(minutesRange)
     }
 
     // for debug purposes only
