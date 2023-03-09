@@ -14,6 +14,8 @@ struct ProvideScheduleView: View {
 
     @Binding var showProvideSuggestion: Bool
 
+    @State var showCodeScanner: Bool = false
+
     var body: some View {
         List {
             LargeListHeader(image: Image(systemName: "calendar.badge.clock"),
@@ -28,7 +30,10 @@ struct ProvideScheduleView: View {
                         .foregroundColor(.accentColor)
                 }
 
-                NavigationSheet {
+                Button("Show code scanner") {
+                    showCodeScanner = true
+                }
+                .sheet(isPresented: $showCodeScanner) {
                     CodeScannerView(codeTypes: [.qr]) { result in
                         switch result {
                         case .success(let result):
@@ -37,9 +42,6 @@ struct ProvideScheduleView: View {
                             print("Failure: \(failure.localizedDescription)")
                         }
                     }
-                } label: {
-                    Text("Scan Code")
-                        .foregroundColor(.accentColor)
                 }
 
                 if let image = schedule?.processedSource.image {
@@ -129,6 +131,7 @@ struct ProvideScheduleView: View {
         // TODO: show confirmation thing
         let manager = ScheduleManager.default
         manager.writeSchedule(schedule: schedule)
+        showCodeScanner = false
         showProvideSuggestion = false
     }
 }

@@ -59,4 +59,14 @@ public class ScheduleManager: ObservableObject {
         hasScheduleInStorage = exists(file: "schedule")
         objectWillChange.send()
     }
+
+    /// Deletes the schedule file
+    public func removeSchedule() {
+        let documents = getDocumentsDirectory()
+        let filePath = documents.appendingPathComponent("schedule")
+        try? FileManager.default.removeItem(at: filePath)
+        hasScheduleInStorage = exists(file: "schedule")
+        self.currentSchedule = nil
+        objectWillChange.send()
+    }
 }

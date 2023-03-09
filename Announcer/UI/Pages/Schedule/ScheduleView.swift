@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Chopper
+import Combine
 
 struct ScheduleView: View {
     @State var scheduleExists: Bool
@@ -15,6 +16,8 @@ struct ScheduleView: View {
     @State var refresherID: Int = 0 // used to refresh the schedule display view
 
     @StateObject var manager: ScheduleManager
+
+    @State var managerSink: AnyCancellable?
 
     init() {
         let manager = ScheduleManager.default
@@ -29,7 +32,7 @@ struct ScheduleView: View {
 
     var body: some View {
         NavigationView {
-            if scheduleExists || !showProvideSchedule {
+            if scheduleExists && !showProvideSchedule {
                 ScheduleDisplayView()
                     .id(refresherID)
             } else {
@@ -37,8 +40,19 @@ struct ScheduleView: View {
             }
         }
         .onChange(of: showProvideSchedule) { _ in
+            print("Show provide schedule changed")
             manager.fetchSchedule()
-            refresherID += 1
+            if manager.currentSchedule != nil {
+                refresherID += 1
+            }
+        }
+        .onAppear {
+            managerSink = manager.objectWillChange.sink {
+                print("Manager sink changed")
+                self.scheduleExists = manager.currentSchedule != nil
+                showProvideSchedule = !scheduleExists
+                print("Schedule exists: \(scheduleExists)")
+            }
         }
     }
 }

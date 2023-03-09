@@ -71,6 +71,11 @@ struct ScheduleInformationView: View {
                     presentationMode.wrappedValue.dismiss()
                 }
                 .disabled(manager.currentSchedule == editedSchedule)
+                Button("Remove") {
+                    // TODO: Add confirmation
+                    // TODO: Fix the unwrapping bug
+                    manager.removeSchedule()
+                }
                 Button("Upload new schedule") {
                     presentationMode.wrappedValue.dismiss()
                     showProvideSchedule = true
