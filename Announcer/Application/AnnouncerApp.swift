@@ -86,6 +86,22 @@ struct YourApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onOpenURL { url in
+                    print("Asked to open URL: \(url.description)")
+
+                    guard let scheme = url.scheme,
+                          scheme.localizedCaseInsensitiveCompare("announcer") == .orderedSame
+                    else { return }
+
+                    var parameters: [String: String] = [:]
+                    URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.forEach {
+                        parameters[$0.name] = $0.value
+                    }
+
+                    guard url.host == "schedule", let source = parameters["source"] else { return }
+
+                    print("Source: \(source)")
+                }
         }
     }
 }

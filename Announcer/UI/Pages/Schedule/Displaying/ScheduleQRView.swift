@@ -21,7 +21,7 @@ struct ScheduleQRView: View {
             fatalError("Could not get schedule data")
         }
         // then, we get the base64 encoded string, as QR can't accept raw data
-        let string = compressed.base64EncodedString()
+        let string = "announcer://schedule?source=" + compressed.base64EncodedString()
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else {
             fatalError("QR Filter not found")
         }

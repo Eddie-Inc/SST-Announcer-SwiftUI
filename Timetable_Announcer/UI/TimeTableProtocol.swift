@@ -34,7 +34,6 @@ extension TimeTableProtocol {
     }
 
     func indexOfCurrentSubject() -> Int {
-        let day = todayValue
         let todayTime = today.timePoint
         let subjects = todaySubjects
 

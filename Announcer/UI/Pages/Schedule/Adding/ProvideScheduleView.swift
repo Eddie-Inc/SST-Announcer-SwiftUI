@@ -37,7 +37,20 @@ struct ProvideScheduleView: View {
                     CodeScannerView(codeTypes: [.qr]) { result in
                         switch result {
                         case .success(let result):
-                            decodeString(string: result.string)
+                            guard let url = URL(string: result.string),
+                                  let scheme = url.scheme,
+                                  scheme.localizedCaseInsensitiveCompare("announcer") == .orderedSame
+                            else { return }
+
+                            var parameters: [String: String] = [:]
+                            URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.forEach {
+                                parameters[$0.name] = $0.value
+                            }
+
+                            guard url.host == "schedule", let source = parameters["source"] else { return }
+
+                            print("Source: \(source)")
+                            decodeString(string: source)
                         case .failure(let failure):
                             print("Failure: \(failure.localizedDescription)")
                         }
