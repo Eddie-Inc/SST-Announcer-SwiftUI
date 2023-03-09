@@ -29,8 +29,13 @@ struct ProvideScheduleView: View {
                 }
 
                 NavigationSheet {
-                    CodeScannerView(codeTypes: [.qr]) { _ in
-                        print("SCANNED!")
+                    CodeScannerView(codeTypes: [.qr]) { result in
+                        switch result {
+                        case .success(let result):
+                            decodeString(string: result.string)
+                        case .failure(let failure):
+                            print("Failure: \(failure.localizedDescription)")
+                        }
                     }
                 } label: {
                     Text("Scan Code")
@@ -98,6 +103,33 @@ struct ProvideScheduleView: View {
                 }
             }
         }
+    }
+
+    func decodeString(string: String) {
+        print("String: \(string)")
+        guard let stringData = string.data(using: .utf8),
+              let data = Data(base64Encoded: stringData),
+              let uncompressed = try? (data as NSData).decompressed(using: .lzfse)
+        else {
+            print("Could not get string data, data, or uncompressed")
+            return
+        }
+
+        print("Uncompressed data: \(uncompressed.description)")
+        if let result = String(data: uncompressed as Data, encoding: .utf8) {
+            print("Data contents: \(result)")
+        }
+
+        guard let schedule = try? JSONDecoder().decode(Schedule.self, from: uncompressed as Data)
+        else {
+            print("Could not get schedule")
+            return
+        }
+
+        // TODO: show confirmation thing
+        let manager = ScheduleManager.default
+        manager.writeSchedule(schedule: schedule)
+        showProvideSuggestion = false
     }
 }
 
