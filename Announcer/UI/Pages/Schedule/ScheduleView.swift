@@ -19,15 +19,18 @@ struct ScheduleView: View {
 
     @State var managerSink: AnyCancellable?
 
-    init() {
+    @Binding var proposalSchedule: Schedule?
+
+    init(proposalSchedule: Binding<Schedule?>) {
         let manager = ScheduleManager.default
         let scheduleExists = manager.hasScheduleInStorage
         if !scheduleExists {
             self._showProvideSchedule = State(wrappedValue: true)
         }
 
-        self.scheduleExists = scheduleExists
+        self._scheduleExists = .init(wrappedValue: scheduleExists)
         self._manager = .init(wrappedValue: manager)
+        self._proposalSchedule = proposalSchedule
     }
 
     var body: some View {
@@ -54,11 +57,13 @@ struct ScheduleView: View {
                 print("Schedule exists: \(scheduleExists)")
             }
         }
-    }
-}
-
-struct ScheduleView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScheduleView()
+        .alert(item: $proposalSchedule) { schedule in
+            Alert(title: Text("Schedule Available"),
+                  message: Text("Would you like to replace your current one?"),
+                  primaryButton: .default(Text("Replace"), action: {
+                manager.writeSchedule(schedule: schedule)
+            }),
+                  secondaryButton: .cancel(Text("Do not replace")))
+        }
     }
 }
