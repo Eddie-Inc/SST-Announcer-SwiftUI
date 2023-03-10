@@ -61,6 +61,7 @@ struct SubjectDisplayView: View {
             GeometryReader { geom in
                 subject.displayColor
                     .frame(height: geom.size.height * progress())
+                    .cornerRadius(5)
             }
         }
         .frame(width: 10)
@@ -107,7 +108,6 @@ struct SubjectDisplayView: View {
                     Text(subject.timeRange.lowerBound.description)
                     Text(subject.timeRange.upperBound.description)
                 }
-                .frame(width: 40)
                 .padding(5)
             } else {
                 HStack {

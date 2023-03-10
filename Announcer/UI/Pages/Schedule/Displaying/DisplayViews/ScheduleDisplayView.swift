@@ -10,6 +10,7 @@ import Chopper
 
 struct ScheduleDisplayView: View {
     @ObservedObject var manager: ScheduleManager = .default
+    @ObservedObject var settings: SettingsManager = .shared
     @State var showInfo: Bool = false
     @State var showProvideSchedule: Bool = false
     @State var showQRView: Bool = false
@@ -153,20 +154,22 @@ struct ScheduleDisplayView: View {
                     viewForSubject(subject: subject)
                 }
             }
-            HStack {
-                Button("Less") {
-                    offsetAmount -= 1
-                    self.today = .now.addingTimeInterval(Double(offsetAmount * 60 * 20))
+            if settings.debugMode {
+                HStack {
+                    Button("Less") {
+                        offsetAmount -= 1
+                        self.today = .now.addingTimeInterval(Double(offsetAmount * 60 * 20))
+                    }
+                    .buttonStyle(.plain)
+                    Spacer()
+                    Text("\(offsetAmount), \(today.formatted(date: .omitted, time: .shortened))")
+                    Spacer()
+                    Button("More") {
+                        offsetAmount += 1
+                        self.today = .now.addingTimeInterval(Double(offsetAmount * 60 * 20))
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
-                Spacer()
-                Text("\(offsetAmount), \(today.formatted(date: .omitted, time: .shortened))")
-                Spacer()
-                Button("More") {
-                    offsetAmount += 1
-                    self.today = .now.addingTimeInterval(Double(offsetAmount * 60 * 20))
-                }
-                .buttonStyle(.plain)
             }
         } header: {
             HStack {

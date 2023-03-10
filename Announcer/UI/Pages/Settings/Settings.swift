@@ -77,6 +77,10 @@ struct Settings: View {
                     ClearStorageView()
                 }
             }
+
+            Section {
+                Toggle("Debug Mode", isOn: $settings.debugMode)
+            }
         }
     }
 }

@@ -124,8 +124,35 @@ public extension TimePoint {
     }
 
     /// The textual form of the TimePoint's rawValue
+    /// Respecting the user's preference for 12 hour or 24 hour time
     var description: String {
-        String(rawValue)
+        if Locale.is24HoursFormat() {
+            return String(rawValue)
+        } else {
+            if rawValue > 13_00 {
+                return String("\(rawValue-12_00)PM")
+            } else {
+                return String("\(rawValue)\(rawValue >= 1200 ? "PM" : "AM")")
+            }
+        }
+    }
+}
+
+extension Locale {
+    static func is12HoursFormat() -> Bool {
+        DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: Locale.current)?.range(of: "a") != nil
+    }
+
+    static func is24HoursFormat() -> Bool {
+        !Self.is12HoursFormat()
+    }
+
+    func is12HoursFormat() -> Bool {
+        DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: self)?.range(of: "a") != nil
+    }
+
+    func is24HoursFormat() -> Bool {
+        !is12HoursFormat()
     }
 }
 
