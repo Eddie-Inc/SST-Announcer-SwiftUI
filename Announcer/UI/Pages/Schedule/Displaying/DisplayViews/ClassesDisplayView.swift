@@ -15,7 +15,7 @@ struct ClassesDisplayView: View {
 
     var body: some View {
         List {
-            ForEach(schedule.subjectClasses) { subClass in
+            ForEach(schedule.subjectClasses.sorted(by: sort)) { subClass in
                 if shouldBeShown(subClass: subClass) {
                     NavigationLink {
                         OtherSubjectInstancesView(schedule: schedule,
@@ -55,5 +55,23 @@ struct ClassesDisplayView: View {
         let nameMatches = subClass.name.description.lowercased().contains(lowerSearch)
 
         return teacherMatches || nameMatches
+    }
+
+    func sort(first: SubjectClass, second: SubjectClass) -> Bool {
+        let firstCol = UIColor(first.color)
+        let secondCol = UIColor(second.color)
+        var firstHue: CGFloat = 0
+        var firstBrightness: CGFloat = 0
+        var secondHue: CGFloat = 0
+        var secondBrightness: CGFloat = 0
+        firstCol.getHue(&firstHue,
+                        saturation: nil,
+                        brightness: &firstBrightness,
+                        alpha: nil)
+        secondCol.getHue(&secondHue,
+                        saturation: nil,
+                        brightness: &secondBrightness,
+                        alpha: nil)
+        return firstHue+firstBrightness < secondHue+secondBrightness
     }
 }
