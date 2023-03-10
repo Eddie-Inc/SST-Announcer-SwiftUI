@@ -72,6 +72,9 @@
 		93E5302829B8B6CB0026F4BE /* ScheduleQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5302729B8B6CB0026F4BE /* ScheduleQRView.swift */; };
 		93E5303229B8D30F0026F4BE /* CodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5303029B8D30F0026F4BE /* CodeScanner.swift */; };
 		93E5303329B8D30F0026F4BE /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5303129B8D30F0026F4BE /* ScannerViewController.swift */; };
+		D3B47C1829BB3C1700C1832D /* AWSPluginsCore in Frameworks */ = {isa = PBXBuildFile; productRef = D3B47C1729BB3C1700C1832D /* AWSPluginsCore */; };
+		D3B47C1A29BB3C1700C1832D /* AWSS3StoragePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = D3B47C1929BB3C1700C1832D /* AWSS3StoragePlugin */; };
+		D3B47C1C29BB3C1700C1832D /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = D3B47C1B29BB3C1700C1832D /* Amplify */; };
 		D3E64C8229B62E0600B07572 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5A9296AE65E00BA63A8 /* WidgetKit.framework */; };
 		D3E64C8329B62E0600B07572 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5AB296AE65E00BA63A8 /* SwiftUI.framework */; };
 		D3E64C8629B62E0600B07572 /* Timetable_AnnouncerBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E64C8529B62E0600B07572 /* Timetable_AnnouncerBundle.swift */; };
@@ -182,12 +185,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3B47C1C29BB3C1700C1832D /* Amplify in Frameworks */,
 				93DA5F4B29B0DEE500CBB655 /* PostManager in Frameworks */,
+				D3B47C1829BB3C1700C1832D /* AWSPluginsCore in Frameworks */,
 				935EAB2C29685987005D2F52 /* FeedKit in Frameworks */,
 				881544BB29691ABF001BAFA4 /* RichText in Frameworks */,
 				937EBBF5296EA72000722285 /* OrderedCollections in Frameworks */,
 				93767C8A29AB8798007B2EAD /* Chopper in Frameworks */,
 				93767CBD29AB8ABB007B2EAD /* Updating in Frameworks */,
+				D3B47C1A29BB3C1700C1832D /* AWSS3StoragePlugin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +510,9 @@
 				93767C8929AB8798007B2EAD /* Chopper */,
 				93767CBC29AB8ABB007B2EAD /* Updating */,
 				93DA5F4A29B0DEE500CBB655 /* PostManager */,
+				D3B47C1729BB3C1700C1832D /* AWSPluginsCore */,
+				D3B47C1929BB3C1700C1832D /* AWSS3StoragePlugin */,
+				D3B47C1B29BB3C1700C1832D /* Amplify */,
 			);
 			productName = Announcer;
 			productReference = 930EA43729645AE1007081C8 /* Announcer.app */;
@@ -562,6 +571,7 @@
 				881544B929691ABF001BAFA4 /* XCRemoteSwiftPackageReference "RichText" */,
 				937EBBF3296EA72000722285 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				93767CBB29AB8ABB007B2EAD /* XCRemoteSwiftPackageReference "UpdatedSwiftUI" */,
+				D3B47C1629BB3C1700C1832D /* XCRemoteSwiftPackageReference "amplify-ios" */,
 			);
 			productRefGroup = 930EA43829645AE1007081C8 /* Products */;
 			projectDirPath = "";
@@ -1025,6 +1035,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		D3B47C1629BB3C1700C1832D /* XCRemoteSwiftPackageReference "amplify-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/amplify-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1064,6 +1082,21 @@
 		93DA5F4A29B0DEE500CBB655 /* PostManager */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PostManager;
+		};
+		D3B47C1729BB3C1700C1832D /* AWSPluginsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D3B47C1629BB3C1700C1832D /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSPluginsCore;
+		};
+		D3B47C1929BB3C1700C1832D /* AWSS3StoragePlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D3B47C1629BB3C1700C1832D /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSS3StoragePlugin;
+		};
+		D3B47C1B29BB3C1700C1832D /* Amplify */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D3B47C1629BB3C1700C1832D /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = Amplify;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
