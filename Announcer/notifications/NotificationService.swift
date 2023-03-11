@@ -23,7 +23,7 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate, Observabl
     }
 
     // send notification when app is in foreground
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping () -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         logContents(of: notification)
         completionHandler([.banner, .sound]) //send notification with banner and with sound
     }

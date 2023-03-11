@@ -71,6 +71,8 @@
 		93E5302829B8B6CB0026F4BE /* ScheduleQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5302729B8B6CB0026F4BE /* ScheduleQRView.swift */; };
 		93E5303229B8D30F0026F4BE /* CodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5303029B8D30F0026F4BE /* CodeScanner.swift */; };
 		93E5303329B8D30F0026F4BE /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5303129B8D30F0026F4BE /* ScannerViewController.swift */; };
+		D30F136A29BCD49E0054C519 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = D30F136929BCD49E0054C519 /* amplifyconfiguration.json */; };
+		D30F136C29BCD4B20054C519 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = D30F136B29BCD4B20054C519 /* awsconfiguration.json */; };
 		D3B47C2429BCB85200C1832D /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B47C2229BCB85200C1832D /* NotificationService.swift */; };
 		D3B47C2529BCB85200C1832D /* push_notifications_handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B47C2329BCB85200C1832D /* push_notifications_handler.swift */; };
 		D3B47C2729BCB87C00C1832D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 9376933E296AC7C000D94EC3 /* README.md */; };
@@ -176,6 +178,8 @@
 		93E5303029B8D30F0026F4BE /* CodeScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeScanner.swift; sourceTree = "<group>"; };
 		93E5303129B8D30F0026F4BE /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		93F5CD37299A2F17002C6FA4 /* PostManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PostManager; sourceTree = "<group>"; };
+		D30F136929BCD49E0054C519 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		D30F136B29BCD4B20054C519 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		D3B47C2229BCB85200C1832D /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		D3B47C2329BCB85200C1832D /* push_notifications_handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = push_notifications_handler.swift; sourceTree = "<group>"; };
 		D3B47C2829BCB9A500C1832D /* AnnouncerPushNotif+Schema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "AnnouncerPushNotif+Schema.swift"; path = "Announcer/notifications/Amplify/AnnouncerPushNotif+Schema.swift"; sourceTree = SOURCE_ROOT; };
@@ -234,6 +238,8 @@
 		930EA42E29645AE1007081C8 = {
 			isa = PBXGroup;
 			children = (
+				D30F136B29BCD4B20054C519 /* awsconfiguration.json */,
+				D30F136929BCD49E0054C519 /* amplifyconfiguration.json */,
 				93BC632629B775D100BF4BA3 /* Timetable_AnnouncerExtension.entitlements */,
 				939558AE29AB87670088B712 /* Chopper */,
 				93F5CD37299A2F17002C6FA4 /* PostManager */,
@@ -620,9 +626,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D30F136C29BCD4B20054C519 /* awsconfiguration.json in Resources */,
 				930EA44229645AE2007081C8 /* Preview Assets.xcassets in Resources */,
 				9376933F296AC7C000D94EC3 /* README.md in Resources */,
 				930EA43F29645AE2007081C8 /* Assets.xcassets in Resources */,
+				D30F136A29BCD49E0054C519 /* amplifyconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

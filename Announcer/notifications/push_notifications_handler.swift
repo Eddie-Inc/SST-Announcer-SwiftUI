@@ -15,12 +15,12 @@ import AWSDataStorePlugin
 
 class DeviceTokenManager {
     private init() {}
-    static let shared = DeviceTokenManager.self
+    static let shared = DeviceTokenManager()
 
     var deviceToken: String?
 }
 
-@main
+
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -34,21 +34,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 
-
+@main
 struct push_notifications_handler: App {
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate //Connect App Delegate to rest of app
 
-    @State var notificationsService = NotificationService()
+    @State var notificationService = NotificationService()
     
     init() {
         configureAmplify()  
     }
 
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .onAppear(perform: NotificationService.requestPermission)
+                .onAppear(perform: notificationService.requestPermission)
         }
     }
     
@@ -63,6 +64,7 @@ struct push_notifications_handler: App {
             print("Configured amplify")
         } catch {
             print(error)
+            print("Broken")
         }
     }
 }
