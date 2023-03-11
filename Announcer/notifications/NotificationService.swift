@@ -6,7 +6,7 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate, Observabl
         super.init()
     }
 
-    func requestAuthorization() {
+    func requestPermission() {
         UNUserNotificationCenter.current().delegate = self
 
         UNUserNotificationCenter.current()

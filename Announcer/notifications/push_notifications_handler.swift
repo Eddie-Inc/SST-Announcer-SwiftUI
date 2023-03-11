@@ -9,13 +9,18 @@
 import SwiftUI
 import Foundation
 import Amplify
+import AWSAPIPlugin
+import AWSDataStorePlugin
+
 
 class DeviceTokenManager {
     private init() {}
-    static let shared  =DeviceTokenManager
+    static let shared = DeviceTokenManager.self
 
     var deviceToken: String?
 }
+
+@main
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -30,17 +35,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
-@main 
 struct push_notifications_handler: App {
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate //Connect App Delegate to rest of app
 
     @State var notificationsService = NotificationService()
+    
+    init() {
+        configureAmplify()  
+    }
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .onAppear(perform: notificationService.requestPermission)
+                .onAppear(perform: NotificationService.requestPermission)
+        }
+    }
+    
+    func configureAmplify() {
+        do {
+            let models = AmplifyModels()
+            try Amplify.add(plugin: AWSDataStorePlugin(modelRegistration: models))
+            try Amplify.add(plugin: AWSAPIPlugin(modelRegistration: models))
+            
+            try Amplify.configure()
+            
+            print("Configured amplify")
+        } catch {
+            print(error)
         }
     }
 }
