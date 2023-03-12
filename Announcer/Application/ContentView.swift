@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Amplify
 import PostManager
 import Chopper
 
@@ -89,8 +90,24 @@ extension ContentView {
         @Published var messageText = ""
         
         func sendMessage() {
-            print(messageText)
-            messageText.removeAll()
+            guard let deviceToken = DeviceTokenManager.shared.deviceToken else { return }
+            
+            print(messageText, deviceToken)
+            
+            let message = Message(body: messageText, deviceToken: deviceToken)
+            
+            Amplify.DataStore.save(message) { result in
+                switch result {
+                case .success(let savedMessages):
+                    print("Sent", savedMessages)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.messageText.removeAll()
+                    }
+                case .failure(let error):
+                    print(error)
+                    
+                }
+            }
         }
     }
 }
