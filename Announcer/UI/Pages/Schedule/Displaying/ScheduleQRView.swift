@@ -13,7 +13,7 @@ struct ScheduleQRView: View {
 
     init() {
         let manager = ScheduleManager.default
-        let schedule = manager.schedule
+        let schedule = manager.currentSchedule
 
         // get the data. First, we encode, then, compress.
         guard let data = try? JSONEncoder().encode(schedule),

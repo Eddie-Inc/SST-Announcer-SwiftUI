@@ -22,14 +22,14 @@ struct TimeTableSmall: TimeTableProtocol {
 
     init(today: Date) {
         self._today = <-today
-        ScheduleManager.default.fetchSchedule()
+        ScheduleManager.default.fetchSchedules()
     }
 
     var body: some View {
         ZStack {
             if manager.currentSchedule != nil {
                 VStack(alignment: .leading) {
-                    Text("W\(manager.schedule.currentWeek), \(today.weekday.rawValue.firstLetterUppercase). \(indexOfCurrentSubject())")
+                    Text("W\(manager.currentSchedule.currentWeek), \(today.weekday.rawValue.firstLetterUppercase). \(indexOfCurrentSubject())")
                     if indexOfCurrentSubject() < todaySubjects.count {
                         subjectsView
                         otherSubjectsView

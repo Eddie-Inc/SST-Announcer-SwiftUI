@@ -23,8 +23,11 @@ struct ScheduleView: View {
 
     init(proposalSchedule: Binding<Schedule?>) {
         let manager = ScheduleManager.default
-        let scheduleExists = manager.hasScheduleInStorage
-        if !scheduleExists {
+        let scheduleExists: Bool
+        if let _ = manager.currentSchedule {
+            scheduleExists = true
+        } else {
+            scheduleExists = false
             self._showProvideSchedule = State(wrappedValue: true)
         }
 
@@ -44,8 +47,8 @@ struct ScheduleView: View {
         }
         .onChange(of: showProvideSchedule) { _ in
             print("Show provide schedule changed")
-            manager.fetchSchedule()
-            if manager.currentSchedule != nil {
+            manager.fetchSchedules()
+            if let _ = manager.currentSchedule {
                 refresherID += 1
             }
         }
@@ -61,7 +64,7 @@ struct ScheduleView: View {
             Alert(title: Text("Schedule Available"),
                   message: Text("Would you like to replace your current one?"),
                   primaryButton: .default(Text("Replace"), action: {
-                manager.writeSchedule(schedule: schedule)
+                manager.overwriteSchedule(schedule: schedule)
             }),
                   secondaryButton: .cancel(Text("Do not replace")))
         }

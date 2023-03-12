@@ -47,6 +47,16 @@ func exists(file: String) -> Bool {
     return FileManager.default.fileExists(atPath: path.relativePath)
 }
 
+func makeDirectory(name: String,
+                   onError: (Error) -> Void = { _ in }) {
+    let path = getDocumentsDirectory().appendingPathComponent(name)
+    do {
+        try FileManager.default.createDirectory(at: path, withIntermediateDirectories: true)
+    } catch {
+        onError(error)
+    }
+}
+
 /// Gets the documents directory
 public func getDocumentsDirectory() -> URL {
     let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.kaitay.Announcer")!

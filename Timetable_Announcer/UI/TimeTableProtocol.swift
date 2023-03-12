@@ -17,13 +17,13 @@ extension TimeTableProtocol {
 
     var todayValue: ScheduleDay {
         let todayDay = today.weekday.dayOfWeek ?? .monday
-        return ScheduleDay(week: manager.schedule.currentWeek%2 == 0 ? .even : .odd,
+        return ScheduleDay(week: manager.currentSchedule.currentWeek%2 == 0 ? .even : .odd,
                            day: todayDay)
     }
 
     var todaySubjects: [Subject] {
-        manager.schedule.subjectsMatching(day: todayValue.day,
-                                          week: todayValue.week)
+        manager.currentSchedule.subjectsMatching(day: todayValue.day,
+                                                 week: todayValue.week)
     }
 
     // eg. if there are five subjects and subject 0 is the current one, subject 0, 1, and 2 will be shown.

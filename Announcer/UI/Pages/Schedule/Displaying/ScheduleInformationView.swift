@@ -67,14 +67,14 @@ struct ScheduleInformationView: View {
 
             Section {
                 Button("Save") {
-                    manager.writeSchedule(schedule: editedSchedule)
+                    manager.overwriteSchedule(schedule: editedSchedule)
                     presentationMode.wrappedValue.dismiss()
                 }
                 .disabled(manager.currentSchedule == editedSchedule)
                 Button("Remove") {
                     // TODO: Add confirmation
                     // TODO: Fix the unwrapping bug
-                    manager.removeSchedule()
+                    manager.removeSchedule(id: manager.currentSchedule.id)
                 }
                 Button("Upload new schedule") {
                     presentationMode.wrappedValue.dismiss()

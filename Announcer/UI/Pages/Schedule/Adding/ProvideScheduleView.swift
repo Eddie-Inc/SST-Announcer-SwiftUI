@@ -143,7 +143,7 @@ struct ProvideScheduleView: View {
 
         // TODO: show confirmation thing
         let manager = ScheduleManager.default
-        manager.writeSchedule(schedule: schedule)
+        manager.overwriteSchedule(schedule: schedule)
         showCodeScanner = false
         showProvideSuggestion = false
     }

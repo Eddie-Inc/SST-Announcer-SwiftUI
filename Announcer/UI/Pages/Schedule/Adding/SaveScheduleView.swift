@@ -41,7 +41,7 @@ struct SaveScheduleView: View {
             Section {
                 Button("Save") {
                     let manager = ScheduleManager.default
-                    if manager.hasScheduleInStorage {
+                    if let _ = manager.currentSchedule {
                         showConfirmAlert = true
                     } else {
                         save()
@@ -61,7 +61,7 @@ struct SaveScheduleView: View {
     func save() {
         let schedule = Schedule(from: scheduleSuggestion)
         let manager = ScheduleManager.default
-        manager.writeSchedule(schedule: schedule)
+        manager.overwriteSchedule(schedule: schedule)
         showProvideSuggestion = false
     }
 }
