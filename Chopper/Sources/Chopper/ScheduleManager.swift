@@ -31,7 +31,8 @@ public class ScheduleManager: ObservableObject {
         var schedules: [Schedule] = []
 
         for content in contents {
-            if let schedule = read(Schedule.self, from: "schedules/\(content)") {
+            if var schedule = read(Schedule.self, from: "schedules/\(content)") {
+                schedule.id = .init(uuidString: content)!
                 schedules.append(schedule)
             }
         }
@@ -53,7 +54,7 @@ public class ScheduleManager: ObservableObject {
     /// Writes the ``currentSchedule`` to memory
     public func saveSchedule() {
         guard let currentSchedule else { return }
-        write(currentSchedule, to: "schedule")
+        write(currentSchedule, to: "schedules/\(currentSchedule.id.description)")
         objectWillChange.send()
     }
 
@@ -63,15 +64,16 @@ public class ScheduleManager: ObservableObject {
             makeDirectory(name: "schedules")
         }
 
-        write(schedule, to: "schedules/schedule")
+        write(schedule, to: "schedules/\(schedule.id.description)")
         self.currentSchedule = schedule
         objectWillChange.send()
     }
 
     /// Deletes the schedule file
     public func removeCurrentSchedule() {
+        guard let currentSchedule else { return }
         let documents = getDocumentsDirectory()
-        let filePath = documents.appendingPathComponent("schedule")
+        let filePath = documents.appendingPathComponent("schedules/\(currentSchedule.id)")
         try? FileManager.default.removeItem(at: filePath)
         self.currentSchedule = nil
         objectWillChange.send()
