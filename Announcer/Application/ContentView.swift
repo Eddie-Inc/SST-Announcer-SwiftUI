@@ -84,6 +84,17 @@ struct ContentView: View {
     }
 }
 
+extension ContentView {
+    class ViewModel: ObservableObject {
+        @Published var messageText = ""
+        
+        func sendMessage() {
+            print(messageText)
+            messageText.removeAll()
+        }
+    }
+}
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
