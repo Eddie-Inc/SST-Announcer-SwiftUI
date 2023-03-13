@@ -14,6 +14,7 @@ struct ScheduleDisplayView: View {
     @State var showInfo: Bool = false
     @State var showProvideSchedule: Bool = false
     @State var showQRView: Bool = false
+    @State var showSwitchScheduleView: Bool = false
 
     @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     @State var today: Date = .now
@@ -89,6 +90,9 @@ struct ScheduleDisplayView: View {
             } else {
                 ScheduleQRView()
             }
+        }
+        .sheet(isPresented: $showSwitchScheduleView) {
+            SwitchScheduleView()
         }
     }
 
@@ -189,10 +193,11 @@ struct ScheduleDisplayView: View {
                             .rotationEffect(.degrees(compactTop ? 0 : 180))
                     }
                 }
-                NavigationLink(isActive: $showProvideSchedule) {
-                    ProvideScheduleView(showProvideSuggestion: $showProvideSchedule)
+                Button {
+                    // show switch schedules view
+                    showSwitchScheduleView.toggle()
                 } label: {
-                    EmptyView()
+                    Image(systemName: "calendar.day.timeline.left")
                 }
             }
         }

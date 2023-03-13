@@ -17,6 +17,7 @@
 		931B2C692966C67700BBF397 /* CategoryScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931B2C682966C67700BBF397 /* CategoryScrollView.swift */; };
 		93276E18297A991F00B710AB /* CachePostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93276E17297A991F00B710AB /* CachePostsView.swift */; };
 		93436ACA2965B4D600AD3148 /* PostPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93436AC92965B4D600AD3148 /* PostPreviewView.swift */; };
+		9348BE8C29BFE95A00E96571 /* SwitchScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9348BE8B29BFE95A00E96571 /* SwitchScheduleView.swift */; };
 		93528DB3296FC23200651404 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93528DB2296FC23200651404 /* Settings.swift */; };
 		93528DB6296FC95B00651404 /* ClearStorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93528DB5296FC95B00651404 /* ClearStorageView.swift */; };
 		93528DB8296FDE2600651404 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93528DB7296FDE2600651404 /* SettingsManager.swift */; };
@@ -132,6 +133,7 @@
 		931B2C682966C67700BBF397 /* CategoryScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryScrollView.swift; sourceTree = "<group>"; };
 		93276E17297A991F00B710AB /* CachePostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachePostsView.swift; sourceTree = "<group>"; };
 		93436AC92965B4D600AD3148 /* PostPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewView.swift; sourceTree = "<group>"; };
+		9348BE8B29BFE95A00E96571 /* SwitchScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchScheduleView.swift; sourceTree = "<group>"; };
 		93528DB2296FC23200651404 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		93528DB5296FC95B00651404 /* ClearStorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearStorageView.swift; sourceTree = "<group>"; };
 		93528DB7296FDE2600651404 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 				93767CA029AB89A7007B2EAD /* DisplayViews */,
 				93767C9F29AB89A7007B2EAD /* OtherSubjectInstancesView.swift */,
 				93767CA529AB89A7007B2EAD /* ScheduleInformationView.swift */,
+				9348BE8B29BFE95A00E96571 /* SwitchScheduleView.swift */,
 				93E5302729B8B6CB0026F4BE /* ScheduleQRView.swift */,
 			);
 			path = Displaying;
@@ -691,6 +694,7 @@
 				93767C9A29AB8966007B2EAD /* ScheduleVisualiserView.swift in Sources */,
 				93767C9629AB8966007B2EAD /* NavigationSheet.swift in Sources */,
 				931B2C692966C67700BBF397 /* CategoryScrollView.swift in Sources */,
+				9348BE8C29BFE95A00E96571 /* SwitchScheduleView.swift in Sources */,
 				D30F136E29BCD6720054C519 /* message.swift in Sources */,
 				93E5303229B8D30F0026F4BE /* CodeScanner.swift in Sources */,
 				937EBBF7296EAFC700722285 /* ShareSheet.swift in Sources */,

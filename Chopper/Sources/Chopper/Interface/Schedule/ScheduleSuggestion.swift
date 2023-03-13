@@ -31,6 +31,8 @@ public struct ScheduleSuggestion: ScheduleProvider {
 
         self.startDate = .now
         self.repetitions = 10
+
+        self.fixStartDate()
     }
 
     public var id = UUID()

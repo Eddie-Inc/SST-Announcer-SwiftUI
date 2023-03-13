@@ -95,7 +95,8 @@ extension ContentView {
             print(messageText, deviceToken)
             
             let message = Message(body: messageText, deviceToken: deviceToken)
-            
+
+            /*
             Amplify.DataStore.save(message) { result in
                 switch result {
                 case .success(let savedMessages):
@@ -108,6 +109,7 @@ extension ContentView {
                     
                 }
             }
+             */
         }
     }
 }
