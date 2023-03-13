@@ -6,15 +6,24 @@
 //
 
 import SwiftUI
+import Chopper
 
 struct SwitchScheduleView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    @ObservedObject var manager: ScheduleManager = .default
 
-struct SwitchScheduleView_Previews: PreviewProvider {
-    static var previews: some View {
-        SwitchScheduleView()
+    var body: some View {
+        List {
+            ForEach(manager.schedules) { schedule in
+                HStack {
+                    Image(systemName: "checkmark")
+                        .opacity(schedule == manager.currentSchedule ? 1 : 0)
+                    Text(schedule.name ?? "Untitled")
+                    Spacer()
+                    Text(schedule.startDate.formatted(date: .numeric, time: .omitted) + "\n" +
+                         schedule.endDate.formatted(date: .numeric, time: .omitted))
+                    .multilineTextAlignment(.trailing)
+                }
+            }
+        }
     }
 }
