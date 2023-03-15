@@ -11,6 +11,9 @@ import SwiftUI
 public protocol ScheduleProvider: Identifiable, Equatable {
     associatedtype Block: TimeBlock
 
+    /// The name of the schedule
+    var name: String? { get set }
+
     /// The subjects in the Schedule
     var subjects: [Block] { get set }
     /// The classes for the ``subjects``

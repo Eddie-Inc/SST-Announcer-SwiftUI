@@ -10,6 +10,8 @@ import SwiftUI
 /// A suggestion for a ``Schedule``, containing code for reading from
 /// a schedule image and other data to aid user customisation.
 public struct ScheduleSuggestion: ScheduleProvider {
+    public var name: String?
+
     /// The initial image submitted
     public var sourceImage: UIImage
     /// A debug image, derived from the initial submitted image

@@ -51,9 +51,10 @@ public class ScheduleManager: ObservableObject {
     /// It is a `Schedule!` for ease of use. Use a `guard let` statement whenever this may be nil.
     @Published public var currentSchedule: Schedule!
 
-    /// Writes the schedule with the given ID or ``currentSchedule`` to memory
+    /// Writes the schedule with the given ID, or ``currentSchedule`` by default, to memory
     public func saveSchedule(id: Schedule.ID? = nil) {
         if let id, let scheduleToSave = schedules.first(where: { $0.id == id }) {
+            print("Saving schedule: \(scheduleToSave.id)")
             write(scheduleToSave, to: "schedules/\(scheduleToSave.id.description)")
         } else {
             guard let currentSchedule else { return }

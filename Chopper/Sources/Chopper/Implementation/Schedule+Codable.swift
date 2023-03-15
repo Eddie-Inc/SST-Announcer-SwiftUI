@@ -10,6 +10,7 @@ import Foundation
 extension Schedule: Codable {
     enum Keys: CodingKey {
         case id
+        case name
         case subjects
         case subjectClasses
         case timeRange
@@ -58,6 +59,9 @@ extension Schedule: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: Keys.self)
         try container.encode(id, forKey: .id)
+        if let name {
+            try container.encode(name, forKey: .name)
+        }
         try container.encode(subjects.map({ SubjectDecoder(from: $0, classes: subjectClasses) }), forKey: .subjects)
         try container.encode(subjectClasses, forKey: .subjectClasses)
         try container.encode(timeRange, forKey: .timeRange)
@@ -71,6 +75,9 @@ extension Schedule: Codable {
         self.timeRange = try container.decode(TimeRange.self, forKey: .timeRange)
         self.startDate = try container.decode(Date.self, forKey: .startDate)
         self.repetitions = try container.decode(Int.self, forKey: .repetitions)
+        if let name = try? container.decode(String.self, forKey: .name) {
+            self.name = name
+        }
 
         let subjectClasses = try container.decode([SubjectClass].self, forKey: .subjectClasses)
         self.subjectClasses = subjectClasses

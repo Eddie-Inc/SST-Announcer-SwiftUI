@@ -20,6 +20,7 @@ public struct Schedule: ScheduleProvider {
     public var repetitions: Int
 
     public init(from suggestion: ScheduleSuggestion) {
+        self.name = suggestion.name
         self.subjects = suggestion.subjects.map({ Subject(from: $0) })
         self.subjectClasses = suggestion.subjectClasses
         self.timeRange = suggestion.processedSource.timeRange

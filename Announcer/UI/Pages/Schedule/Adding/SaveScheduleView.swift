@@ -24,6 +24,11 @@ struct SaveScheduleView: View {
             }
 
             Section {
+                TextField("Name", text: .init(get: {
+                    scheduleSuggestion.name ?? "Untitled"
+                }, set: { newValue in
+                    scheduleSuggestion.name = newValue
+                }))
                 DatePicker("Start Date",
                            selection: $scheduleSuggestion.startDate,
                            displayedComponents: .date)
