@@ -29,29 +29,33 @@ struct ScheduleDisplayView: View {
 
     var body: some View {
         List {
-            if manager.currentSchedule.nowInRange {
-                todayView
-            } else {
-                Section {
-                    if manager.currentSchedule.startDate > .now {
-                        Text(
-"Schedule starts on \(manager.currentSchedule.startDate.formatted(date: .abbreviated, time: .omitted))"
-)
-                    } else {
-                        Text(
-"Schedule ended on \(manager.currentSchedule.endDate.formatted(date: .abbreviated, time: .omitted))"
-)
-                    }
-                    Button("Edit Schedule") {
-                        showInfo = true
+            if let currentSchedule = manager.currentSchedule {
+                if currentSchedule.nowInRange {
+                    todayView
+                } else {
+                    Section {
+                        if currentSchedule.startDate > .now {
+                            Text(
+                                "Schedule starts on \(currentSchedule.startDate.formatted(date: .abbreviated, time: .omitted))"
+                            )
+                        } else {
+                            Text(
+                                "Schedule ended on \(currentSchedule.endDate.formatted(date: .abbreviated, time: .omitted))"
+                            )
+                        }
+                        Button("Edit Schedule") {
+                            showInfo = true
+                        }
                     }
                 }
-            }
 
-            Section {
-                NavigationLink("Classes") {
-                    ClassesDisplayView(schedule: manager.currentSchedule)
+                Section {
+                    NavigationLink("Classes") {
+                        ClassesDisplayView(schedule: currentSchedule)
+                    }
                 }
+            } else {
+                Text("No schedule found")
             }
         }
         .onReceive(timer) { _ in

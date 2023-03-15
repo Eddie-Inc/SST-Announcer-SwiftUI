@@ -38,8 +38,7 @@ struct ScheduleView: View {
 
     var body: some View {
         NavigationView {
-            if scheduleExists && !showProvideSchedule,
-                let _ = manager.currentSchedule {
+            if scheduleExists && !showProvideSchedule {
                 ScheduleDisplayView()
                     .id(refresherID)
             } else {
@@ -54,9 +53,9 @@ struct ScheduleView: View {
             }
         }
         .onAppear {
-            managerSink = manager.objectWillChange.sink {
+            managerSink = manager.$currentSchedule.sink { newValue in
                 print("Manager sink changed")
-                self.scheduleExists = manager.currentSchedule != nil
+                self.scheduleExists = newValue != nil
                 showProvideSchedule = !scheduleExists
                 print("Schedule exists: \(scheduleExists)")
             }
