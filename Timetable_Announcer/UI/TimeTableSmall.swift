@@ -27,9 +27,9 @@ struct TimeTableSmall: TimeTableProtocol {
 
     var body: some View {
         ZStack {
-            if manager.currentSchedule != nil {
+            if let currentSchedule = manager.currentSchedule {
                 VStack(alignment: .leading) {
-                    Text("W\(manager.currentSchedule.currentWeek), \(today.weekday.rawValue.firstLetterUppercase). \(indexOfCurrentSubject())")
+                    Text("W\(currentSchedule.currentWeek), \(today.weekday.rawValue.firstLetterUppercase). \(indexOfCurrentSubject())")
                     if indexOfCurrentSubject() < todaySubjects.count {
                         subjectsView
                         otherSubjectsView

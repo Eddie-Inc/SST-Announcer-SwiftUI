@@ -117,7 +117,12 @@ public class ScheduleManager: ObservableObject {
     public func removeSchedule(id: Schedule.ID) {
         schedules.removeAll(where: { $0.id == id })
         if let currentSchedule, currentSchedule.id == id {
-            self.currentSchedule = nil
+            // switch to another schedule, if available.
+            if let nextSchedule = schedules.first {
+                switchSchedule(to: nextSchedule.id)
+            } else {
+                self.currentSchedule = nil
+            }
         }
         let path = getDocumentsDirectory().appendingPathComponent("schedules/\(id.description)")
         do {
@@ -131,7 +136,7 @@ public class ScheduleManager: ObservableObject {
         self.schedules.append(schedule)
         write(schedule, to: "schedules/\(schedule.id.description)")
         // set the current schedule
-        self.currentSchedule = schedule
+        switchSchedule(to: schedule.id)
         objectWillChange.send()
     }
 

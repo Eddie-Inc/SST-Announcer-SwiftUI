@@ -12,14 +12,15 @@ struct ScheduleInformationView: View {
     @ObservedObject var manager: ScheduleManager = .default
     @State var editedSchedule: Schedule
 
-    @Environment(\.presentationMode) var presentationMode
+    @Binding var showInfo: Bool
     @Binding var showProvideSchedule: Bool
 
-    init(showProvideSchedule: Binding<Bool>) {
+    init(showInfo: Binding<Bool>, showProvideSchedule: Binding<Bool>) {
         let manager = ScheduleManager.default
         guard let schedule = manager.currentSchedule else { fatalError("Schedule not found") }
         self._manager = .init(wrappedValue: manager)
         self._editedSchedule = .init(wrappedValue: schedule)
+        self._showInfo = showInfo
         self._showProvideSchedule = showProvideSchedule
     }
 
@@ -72,7 +73,7 @@ struct ScheduleInformationView: View {
 
             Section {
                 NavigationLink("Manage Schedules") {
-                    SwitchScheduleView()
+                    SwitchScheduleView(showInfo: $showInfo, showProvideSchedule: $showProvideSchedule)
                 }
             }
 
@@ -80,13 +81,9 @@ struct ScheduleInformationView: View {
                 Button("Save") {
                     editedSchedule.id = manager.currentSchedule.id
                     manager.overwriteSchedule(schedule: editedSchedule)
-                    presentationMode.wrappedValue.dismiss()
+                    showInfo = false
                 }
                 .disabled(manager.currentSchedule == editedSchedule)
-//                Button("Add new schedule") {
-//                    presentationMode.wrappedValue.dismiss()
-//                    showProvideSchedule = true
-//                }
             }
         }
     }

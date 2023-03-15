@@ -12,8 +12,6 @@ struct SaveScheduleView: View {
     @State var scheduleSuggestion: ScheduleSuggestion
     @Binding var showProvideSuggestion: Bool
 
-    @State var showConfirmAlert: Bool = false
-
     var body: some View {
         List {
             LargeListHeader(image: .init(systemName: "square.and.arrow.down"),
@@ -45,19 +43,7 @@ struct SaveScheduleView: View {
 
             Section {
                 Button("Save") {
-                    let manager = ScheduleManager.default
-                    if let _ = manager.currentSchedule {
-                        showConfirmAlert = true
-                    } else {
-                        save()
-                    }
-                }
-                .alert("This will replace your current schedule. Do you want to proceed?",
-                       isPresented: $showConfirmAlert) {
-                    Button("Proceed") {
-                        save()
-                    }
-                    Button("Cancel", role: .cancel) {}
+                    save()
                 }
             }
         }

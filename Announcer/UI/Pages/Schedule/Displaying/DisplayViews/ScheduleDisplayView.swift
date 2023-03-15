@@ -76,7 +76,7 @@ struct ScheduleDisplayView: View {
         }
         .sheet(isPresented: $showInfo) {
             NavigationView {
-                ScheduleInformationView(showProvideSchedule: $showProvideSchedule)
+                ScheduleInformationView(showInfo: $showInfo, showProvideSchedule: $showProvideSchedule)
                     .navigationBarHidden(true)
             }
         }
