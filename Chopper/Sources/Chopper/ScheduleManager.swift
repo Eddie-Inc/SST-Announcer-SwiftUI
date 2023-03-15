@@ -72,7 +72,8 @@ public class ScheduleManager: ObservableObject {
         write(schedule, to: "schedules/\(schedule.id.description)")
         self.currentSchedule = schedule
 
-        
+        guard let scheduleIndex = schedules.firstIndex(where: { $0.id == schedule.id }) else { return }
+        schedules[scheduleIndex] = schedule
 
         objectWillChange.send()
     }
@@ -83,7 +84,11 @@ public class ScheduleManager: ObservableObject {
         let documents = getDocumentsDirectory()
         let filePath = documents.appendingPathComponent("schedules/\(currentSchedule.id)")
         try? FileManager.default.removeItem(at: filePath)
+
+        guard let scheduleIndex = schedules.firstIndex(where: { $0.id == currentSchedule.id }) else { return }
+        schedules.remove(at: scheduleIndex)
         self.currentSchedule = nil
+
         objectWillChange.send()
     }
 
