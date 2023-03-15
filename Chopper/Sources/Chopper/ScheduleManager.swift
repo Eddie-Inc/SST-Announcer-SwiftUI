@@ -51,14 +51,19 @@ public class ScheduleManager: ObservableObject {
     /// It is a `Schedule!` for ease of use. Use a `guard let` statement whenever this may be nil.
     @Published public var currentSchedule: Schedule!
 
-    /// Writes the ``currentSchedule`` to memory
-    public func saveSchedule() {
-        guard let currentSchedule else { return }
-        write(currentSchedule, to: "schedules/\(currentSchedule.id.description)")
+    /// Writes the schedule with the given ID or ``currentSchedule`` to memory
+    public func saveSchedule(id: Schedule.ID? = nil) {
+        if let id, let scheduleToSave = schedules.first(where: { $0.id == id }) {
+            write(scheduleToSave, to: "schedules/\(scheduleToSave.id.description)")
+        } else {
+            guard let currentSchedule else { return }
+            write(currentSchedule, to: "schedules/\(currentSchedule.id.description)")
+        }
         objectWillChange.send()
     }
 
     /// Writes a provided schedule to memory, replacing ``currentSchedule``.
+    /// It does not delete the file for ``currentSchedule``, so if their IDs are different, the old ``currentSchedule`` will remain.
     public func overwriteSchedule(schedule: Schedule) {
         if !exists(file: "schedules") {
             makeDirectory(name: "schedules")
@@ -66,6 +71,9 @@ public class ScheduleManager: ObservableObject {
 
         write(schedule, to: "schedules/\(schedule.id.description)")
         self.currentSchedule = schedule
+
+        
+
         objectWillChange.send()
     }
 
@@ -95,6 +103,18 @@ public class ScheduleManager: ObservableObject {
         if let currentSchedule, currentSchedule.id == id {
             self.currentSchedule = nil
         }
+        let path = getDocumentsDirectory().appendingPathComponent("schedules/\(id.description)")
+        do {
+            try FileManager.default.removeItem(at: path)
+        } catch {
+            print("Could not remove schedule at path \(path.absoluteString)")
+        }
+    }
+
+    public func addSchedule(schedule: Schedule) {
+        self.schedules.append(schedule)
+        write(schedule, to: "schedules/\(schedule.id.description)")
+        objectWillChange.send()
     }
 
     /// A list of available schedules

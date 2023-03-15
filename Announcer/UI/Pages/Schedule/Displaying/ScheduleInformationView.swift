@@ -67,6 +67,7 @@ struct ScheduleInformationView: View {
 
             Section {
                 Button("Save") {
+                    editedSchedule.id = manager.currentSchedule.id
                     manager.overwriteSchedule(schedule: editedSchedule)
                     presentationMode.wrappedValue.dismiss()
                 }

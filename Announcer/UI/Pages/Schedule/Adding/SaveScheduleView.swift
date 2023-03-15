@@ -61,7 +61,7 @@ struct SaveScheduleView: View {
     func save() {
         let schedule = Schedule(from: scheduleSuggestion)
         let manager = ScheduleManager.default
-        manager.overwriteSchedule(schedule: schedule)
+        manager.addSchedule(schedule: schedule)
         showProvideSuggestion = false
     }
 }

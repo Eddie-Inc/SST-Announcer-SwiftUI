@@ -183,6 +183,11 @@ struct ScheduleDisplayView: View {
                     Text("W\(manager.currentSchedule.currentWeek), \(today.weekday.rawValue.firstLetterUppercase)")
                 }
                 Spacer()
+                NavigationLink(isActive: $showProvideSchedule) {
+                    ProvideScheduleView(showProvideSuggestion: $showProvideSchedule)
+                } label: {
+                    EmptyView()
+                }
                 if indexOfCurrentSubject(day: day) > 3 {
                     Button {
                         withAnimation {
