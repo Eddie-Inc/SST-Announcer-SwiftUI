@@ -30,6 +30,11 @@ struct ScheduleInformationView: View {
             }
 
             Section("Information") {
+                ListTextField("Name", value: .init(get: {
+                    editedSchedule.name ?? "Untitled"
+                }, set: { newValue in
+                    editedSchedule.name = newValue
+                }))
                 DatePicker("Start Date",
                            selection: $editedSchedule.startDate,
                            displayedComponents: .date)
@@ -66,21 +71,22 @@ struct ScheduleInformationView: View {
             }
 
             Section {
+                NavigationLink("Manage Schedules") {
+                    SwitchScheduleView()
+                }
+            }
+
+            Section {
                 Button("Save") {
                     editedSchedule.id = manager.currentSchedule.id
                     manager.overwriteSchedule(schedule: editedSchedule)
                     presentationMode.wrappedValue.dismiss()
                 }
                 .disabled(manager.currentSchedule == editedSchedule)
-                Button("Remove") {
-                    // TODO: Add confirmation
-                    // TODO: Fix the unwrapping bug
-                    manager.removeSchedule(id: manager.currentSchedule.id)
-                }
-                Button("Upload new schedule") {
-                    presentationMode.wrappedValue.dismiss()
-                    showProvideSchedule = true
-                }
+//                Button("Add new schedule") {
+//                    presentationMode.wrappedValue.dismiss()
+//                    showProvideSchedule = true
+//                }
             }
         }
     }

@@ -14,7 +14,6 @@ struct ScheduleDisplayView: View {
     @State var showInfo: Bool = false
     @State var showProvideSchedule: Bool = false
     @State var showQRView: Bool = false
-    @State var showSwitchScheduleView: Bool = false
 
     @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     @State var today: Date = .now
@@ -58,7 +57,7 @@ struct ScheduleDisplayView: View {
         .onReceive(timer) { _ in
             self.today = .now.addingTimeInterval(Double(offsetAmount * 60 * 20))
         }
-        .navigationTitle("Schedule")
+        .navigationTitle(manager.currentSchedule?.name ?? "Schedule")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -76,11 +75,9 @@ struct ScheduleDisplayView: View {
             }
         }
         .sheet(isPresented: $showInfo) {
-            if #available(iOS 16.0, *) {
+            NavigationView {
                 ScheduleInformationView(showProvideSchedule: $showProvideSchedule)
-                    .presentationDetents([.medium, .large])
-            } else {
-                ScheduleInformationView(showProvideSchedule: $showProvideSchedule)
+                    .navigationBarHidden(true)
             }
         }
         .sheet(isPresented: $showQRView) {
@@ -90,9 +87,6 @@ struct ScheduleDisplayView: View {
             } else {
                 ScheduleQRView()
             }
-        }
-        .sheet(isPresented: $showSwitchScheduleView) {
-            SwitchScheduleView()
         }
     }
 
@@ -197,12 +191,6 @@ struct ScheduleDisplayView: View {
                         Image(systemName: "chevron.up")
                             .rotationEffect(.degrees(compactTop ? 0 : 180))
                     }
-                }
-                Button {
-                    // show switch schedules view
-                    showSwitchScheduleView.toggle()
-                } label: {
-                    Image(systemName: "calendar.day.timeline.left")
                 }
             }
         }

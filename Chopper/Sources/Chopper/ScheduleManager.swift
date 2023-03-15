@@ -7,8 +7,15 @@
 
 import SwiftUI
 
+let defaults = UserDefaults.standard
 public class ScheduleManager: ObservableObject {
     public static let `default`: ScheduleManager = .init()
+
+    var currentScheduleID: UUID? {
+        didSet {
+            defaults.set(currentScheduleID?.uuidString, forKey: "currentScheduleID")
+        }
+    }
 
     private init() {
         self.schedules = []
@@ -26,10 +33,13 @@ public class ScheduleManager: ObservableObject {
 
         guard exists(file: "schedules"),
               let contents = try? FileManager.default.contentsOfDirectory(atPath: folderPath.path)
-        else { return false }
+        else {
+            makeDirectory(name: "schedules")
+            return false
+        }
 
+        // read schedules
         var schedules: [Schedule] = []
-
         for content in contents {
             if var schedule = read(Schedule.self, from: "schedules/\(content)") {
                 schedule.id = .init(uuidString: content)!
@@ -37,9 +47,12 @@ public class ScheduleManager: ObservableObject {
             }
         }
 
+        // switch schedules
         self.schedules = schedules
-        if let first = schedules.first {
-            switchSchedule(to: first.id)
+        if let scheduleUUIDString = defaults.string(forKey: "currentScheduleID"),
+           let scheduleUUID = UUID(uuidString: scheduleUUIDString) {
+            currentScheduleID = scheduleUUID
+            switchSchedule(to: scheduleUUID)
         }
 
         return true
@@ -66,10 +79,6 @@ public class ScheduleManager: ObservableObject {
     /// Writes a provided schedule to memory, replacing ``currentSchedule``.
     /// It does not delete the file for ``currentSchedule``, so if their IDs are different, the old ``currentSchedule`` will remain.
     public func overwriteSchedule(schedule: Schedule) {
-        if !exists(file: "schedules") {
-            makeDirectory(name: "schedules")
-        }
-
         write(schedule, to: "schedules/\(schedule.id.description)")
         self.currentSchedule = schedule
 
@@ -98,6 +107,7 @@ public class ScheduleManager: ObservableObject {
     public func switchSchedule(to newID: Schedule.ID) -> Bool {
         if let newSchedule = schedules.first(where: { $0.id == newID }) {
             currentSchedule = newSchedule
+            currentScheduleID = newSchedule.id
             objectWillChange.send()
             return true
         }
@@ -120,6 +130,8 @@ public class ScheduleManager: ObservableObject {
     public func addSchedule(schedule: Schedule) {
         self.schedules.append(schedule)
         write(schedule, to: "schedules/\(schedule.id.description)")
+        // set the current schedule
+        self.currentSchedule = schedule
         objectWillChange.send()
     }
 

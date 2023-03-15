@@ -24,7 +24,7 @@ struct SaveScheduleView: View {
             }
 
             Section {
-                TextField("Name", text: .init(get: {
+                ListTextField("Name:", value: .init(get: {
                     scheduleSuggestion.name ?? "Untitled"
                 }, set: { newValue in
                     scheduleSuggestion.name = newValue
