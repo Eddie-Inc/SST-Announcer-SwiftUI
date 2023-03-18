@@ -59,7 +59,7 @@ func makeDirectory(name: String,
 
 /// Gets the documents directory
 public func getDocumentsDirectory() -> URL {
-    let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.kaitay.Announcer")!
+    let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.kaithebuilder.Announcer")!
     print("Documents live at \(url.description)")
     return url
 }

@@ -35,6 +35,8 @@ struct ProvideScheduleView: View {
                 }
                 .sheet(isPresented: $showCodeScanner) {
                     CodeScannerView(codeTypes: [.qr]) { result in
+                        defer { showCodeScanner = false }
+
                         switch result {
                         case .success(let result):
                             guard let url = URL(string: result.string),
@@ -144,7 +146,6 @@ struct ProvideScheduleView: View {
         // TODO: show confirmation thing
         let manager = ScheduleManager.default
         manager.overwriteSchedule(schedule: schedule)
-        showCodeScanner = false
         showProvideSuggestion = false
     }
 }

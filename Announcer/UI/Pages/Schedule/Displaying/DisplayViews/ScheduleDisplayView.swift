@@ -87,7 +87,7 @@ struct ScheduleDisplayView: View {
         .sheet(isPresented: $showQRView) {
             if #available(iOS 16.0, *) {
                 ScheduleQRView()
-                    .presentationDetents([.medium])
+                    .presentationDetents([.medium, .large])
             } else {
                 ScheduleQRView()
             }

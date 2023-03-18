@@ -27,20 +27,28 @@ extension UIImage {
                 lastColumn != -1 &&
                 firstColumnEnd != -1 &&
                 lastColumnEnd != -1
-        else { throw ChopError.borderNotValid }
+        else {
+            print("Left/right not valid")
+            throw ChopError.borderNotValid
+        }
 
         // thickness
-        guard firstColumnEnd-firstColumn == lastColumn-lastColumnEnd else { throw ChopError.borderNotValid }
+        guard firstColumnEnd-firstColumn == lastColumn-lastColumnEnd else {
+            print("Thickness not valid")
+            throw ChopError.borderNotValid
+        }
         let thickness = firstColumnEnd-firstColumn
 
         // MARK: Top
         // find the top for the left side
+        print("Finding top")
         let top = try measureVertical(top: true,
                                       pixelBuffer: pixelBuffer,
                                       firstColumn: firstColumn,
                                       lastColumn: lastColumn,
                                       width: width,
                                       verticalScanHeight: verticalScanHeight)
+        print("Finding bottom")
 
         // MARK: Bottom
         let bottom = try measureVertical(top: false,
@@ -49,6 +57,7 @@ extension UIImage {
                                          lastColumn: lastColumn,
                                          width: width,
                                          verticalScanHeight: verticalScanHeight)
+        print("Measure finishing")
 
         // MARK: draw top and bottom lines
         for column in firstColumn..<lastColumn {
@@ -121,7 +130,10 @@ extension UIImage {
                 pixelBuffer[offset] = .magenta
             }
         }
-        guard leftBound == rightBound else { throw ChopError.borderNotValid }
+        guard leftBound == rightBound else {
+            print("Left and right bounds do not match. Left: \(leftBound), right: \(rightBound)")
+            throw ChopError.borderNotValid
+        }
         return leftBound
     }
 }

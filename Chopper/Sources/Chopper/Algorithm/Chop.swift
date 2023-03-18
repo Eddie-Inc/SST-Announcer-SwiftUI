@@ -29,24 +29,37 @@ extension UIImage {
         let width = inputCGImage.width
         let height = inputCGImage.height
         guard let (context, pixelBuffer) = getBuffer(cgImage: inputCGImage) else {
+            print("could not get buffer")
             return nil
         }
 
         // get the measurements of the schedule
-        let measurements = try measure(pixelBuffer: pixelBuffer,
+        let measurements: BoundsData
+        do {
+            measurements = try measure(pixelBuffer: pixelBuffer,
                                        height: height,
                                        width: width)
+        } catch {
+            print("Failed to measure")
+            throw error
+        }
+
+        print("measurement success")
 
         // get the width of each "block" of 20 minutes
         let (scheduleLines, blockWidth) = getBlocks(pixelBuffer: pixelBuffer,
                                                     measurements: measurements,
                                                     width: width)
 
+        print("schedule lines, block width success")
+
         // get the height of each day
         let (dayLines, dayHeight) = try getDays(pixelBuffer: pixelBuffer,
                                                 measurements: measurements,
                                                 scheduleLines: scheduleLines,
                                                 width: width)
+
+        print("day lines, day height success")
 
         // get the subjects for each day
         let frameOfSubjects = getSubjectFrames(pixelBuffer: pixelBuffer,
@@ -55,6 +68,8 @@ extension UIImage {
                                                blockWidth: blockWidth,
                                                dayHeight: dayHeight,
                                                width: width)
+
+        print("frames for day success")
 
         let outputCGImage = context.makeImage()!
         let outputImage = UIImage(cgImage: outputCGImage, scale: self.scale, orientation: self.imageOrientation)
