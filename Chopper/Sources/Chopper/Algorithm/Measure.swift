@@ -130,10 +130,11 @@ extension UIImage {
                 pixelBuffer[offset] = .magenta
             }
         }
-        guard leftBound == rightBound else {
+        // tolerance of 1
+        guard leftBound != -1, rightBound != -1, abs(leftBound-rightBound) <= 1 else {
             print("Left and right bounds do not match. Left: \(leftBound), right: \(rightBound)")
             throw ChopError.borderNotValid
         }
-        return leftBound
+        return max(leftBound, rightBound)
     }
 }
