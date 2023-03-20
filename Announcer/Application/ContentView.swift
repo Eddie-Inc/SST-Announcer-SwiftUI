@@ -15,6 +15,9 @@ struct ContentView: View {
 
     @State var proposalSchedule: Schedule?
 
+    @ObservedObject
+    var settings: SettingsManager = .shared
+
     var body: some View {
         TabView(selection: $selection) {
             NavigationView {
@@ -25,11 +28,13 @@ struct ContentView: View {
             }
             .tag(0)
 
-            ScheduleView(proposalSchedule: $proposalSchedule)
-                .tabItem {
-                    Label("Schedule", systemImage: "calendar.day.timeline.left")
-                }
-                .tag(1)
+            if settings.showSchedule {
+                ScheduleView(proposalSchedule: $proposalSchedule)
+                    .tabItem {
+                        Label("Schedule", systemImage: "calendar.day.timeline.left")
+                    }
+                    .tag(1)
+            }
 
             NavigationView {
                 Settings()

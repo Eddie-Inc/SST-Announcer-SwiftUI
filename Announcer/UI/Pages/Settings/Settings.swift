@@ -60,7 +60,6 @@ struct Settings: View {
                 }
 
                 if let last = PostManager.postStorage.elements.last {
-//                if let last = fakeStorage.elements.last {
                     HStack {
                         Text("Earliest post:")
                         Spacer()
@@ -78,9 +77,15 @@ struct Settings: View {
                 }
             }
 
+            Section("Beta Features") {
+                Toggle("Schedule", isOn: $settings.showSchedule)
+            }
+
+            #if DEBUG
             Section {
                 Toggle("Debug Mode", isOn: $settings.debugMode)
             }
+            #endif
         }
     }
 }
