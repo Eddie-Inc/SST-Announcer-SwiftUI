@@ -94,4 +94,21 @@ extension Schedule: Codable {
             self.subjects = try container.decode([Subject].self, forKey: .subjects)
         }
     }
+
+    public static func decode(from zipString: String) -> Schedule? {
+        guard let stringData = zipString.data(using: .utf8),
+              let data = Data(base64Encoded: stringData),
+              let uncompressed = try? (data as NSData).decompressed(using: .lzfse)
+        else {
+            print("Could not get string data, data, or uncompressed")
+            return nil
+        }
+
+        guard let schedule = try? JSONDecoder().decode(Schedule.self, from: uncompressed as Data)
+        else {
+            print("Could not get schedule")
+            return nil
+        }
+        return schedule
+    }
 }

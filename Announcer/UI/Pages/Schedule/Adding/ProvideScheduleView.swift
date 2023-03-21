@@ -39,20 +39,7 @@ struct ProvideScheduleView: View {
 
                         switch result {
                         case .success(let result):
-                            guard let url = URL(string: result.string),
-                                  let scheme = url.scheme,
-                                  scheme.localizedCaseInsensitiveCompare("announcer") == .orderedSame
-                            else { return }
-
-                            var parameters: [String: String] = [:]
-                            URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.forEach {
-                                parameters[$0.name] = $0.value
-                            }
-
-                            guard url.host == "schedule", let source = parameters["source"] else { return }
-
-                            print("Source: \(source)")
-                            decodeString(string: source)
+                            decodeURL(urlString: result.string)
                         case .failure(let failure):
                             print("Failure: \(failure.localizedDescription)")
                         }
@@ -122,30 +109,24 @@ struct ProvideScheduleView: View {
         }
     }
 
-    func decodeString(string: String) {
-        print("String: \(string)")
-        guard let stringData = string.data(using: .utf8),
-              let data = Data(base64Encoded: stringData),
-              let uncompressed = try? (data as NSData).decompressed(using: .lzfse)
-        else {
-            print("Could not get string data, data, or uncompressed")
-            return
+    func decodeURL(urlString: String) {
+        guard let url = URL(string: urlString),
+              let scheme = url.scheme,
+              scheme.localizedCaseInsensitiveCompare("announcer") == .orderedSame
+        else { return }
+
+        var parameters: [String: String] = [:]
+        URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.forEach {
+            parameters[$0.name] = $0.value
         }
 
-        print("Uncompressed data: \(uncompressed.description)")
-        if let result = String(data: uncompressed as Data, encoding: .utf8) {
-            print("Data contents: \(result)")
-        }
+        guard url.host == "schedule", let source = parameters["source"] else { return }
 
-        guard let schedule = try? JSONDecoder().decode(Schedule.self, from: uncompressed as Data)
-        else {
-            print("Could not get schedule")
-            return
-        }
+        guard let schedule = Schedule.decode(from: source) else { return }
 
         // TODO: show confirmation thing
         let manager = ScheduleManager.default
-        manager.overwriteSchedule(schedule: schedule)
+        manager.addSchedule(schedule: schedule)
         showProvideSuggestion = false
     }
 }

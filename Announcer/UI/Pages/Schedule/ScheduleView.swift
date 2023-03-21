@@ -62,11 +62,11 @@ struct ScheduleView: View {
         }
         .alert(item: $proposalSchedule) { schedule in
             Alert(title: Text("Schedule Available"),
-                  message: Text("Would you like to use this schedule?"),
-                  primaryButton: .default(Text("Use new schedule"), action: {
+                  message: Text("Would you like to add this schedule?"),
+                  primaryButton: .default(Text("Add schedule"), action: {
                 manager.addSchedule(schedule: schedule)
             }),
-                  secondaryButton: .cancel(Text("Do not use new schedule")))
+                  secondaryButton: .cancel(Text("Cancel")))
         }
     }
 }
