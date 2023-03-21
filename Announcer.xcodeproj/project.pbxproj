@@ -70,6 +70,7 @@
 		93BC632329B7654100BF4BA3 /* Chopper in Frameworks */ = {isa = PBXBuildFile; productRef = 93BC632229B7654100BF4BA3 /* Chopper */; };
 		93BC632529B7655100BF4BA3 /* Updating in Frameworks */ = {isa = PBXBuildFile; productRef = 93BC632429B7655100BF4BA3 /* Updating */; };
 		93DA5F4B29B0DEE500CBB655 /* PostManager in Frameworks */ = {isa = PBXBuildFile; productRef = 93DA5F4A29B0DEE500CBB655 /* PostManager */; };
+		93DE7A9129CA7255005433E3 /* ScheduleFAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DE7A9029CA7255005433E3 /* ScheduleFAQView.swift */; };
 		93E5302829B8B6CB0026F4BE /* ScheduleQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5302729B8B6CB0026F4BE /* ScheduleQRView.swift */; };
 		93E5303229B8D30F0026F4BE /* CodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5303029B8D30F0026F4BE /* CodeScanner.swift */; };
 		93E5303329B8D30F0026F4BE /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5303129B8D30F0026F4BE /* ScannerViewController.swift */; };
@@ -179,6 +180,7 @@
 		93BC631629B763A500BF4BA3 /* TimeTableMedium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableMedium.swift; sourceTree = "<group>"; };
 		93BC631829B763AB00BF4BA3 /* TimeTableLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableLarge.swift; sourceTree = "<group>"; };
 		93BC632629B775D100BF4BA3 /* Timetable_AnnouncerExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timetable_AnnouncerExtension.entitlements; sourceTree = "<group>"; };
+		93DE7A9029CA7255005433E3 /* ScheduleFAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleFAQView.swift; sourceTree = "<group>"; };
 		93E5302729B8B6CB0026F4BE /* ScheduleQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleQRView.swift; sourceTree = "<group>"; };
 		93E5303029B8D30F0026F4BE /* CodeScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeScanner.swift; sourceTree = "<group>"; };
 		93E5303129B8D30F0026F4BE /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				93767CB929AB8A1B007B2EAD /* ScheduleView.swift */,
+				93DE7A9029CA7255005433E3 /* ScheduleFAQView.swift */,
 				93767CA629AB89A7007B2EAD /* Adding */,
 				93767C9E29AB89A7007B2EAD /* Displaying */,
 			);
@@ -700,6 +703,7 @@
 				931B2C692966C67700BBF397 /* CategoryScrollView.swift in Sources */,
 				9348BE8C29BFE95A00E96571 /* SwitchScheduleView.swift in Sources */,
 				D30F136E29BCD6720054C519 /* message.swift in Sources */,
+				93DE7A9129CA7255005433E3 /* ScheduleFAQView.swift in Sources */,
 				93E5303229B8D30F0026F4BE /* CodeScanner.swift in Sources */,
 				937EBBF7296EAFC700722285 /* ShareSheet.swift in Sources */,
 				93767CB329AB89A7007B2EAD /* ChangeSubjectView.swift in Sources */,

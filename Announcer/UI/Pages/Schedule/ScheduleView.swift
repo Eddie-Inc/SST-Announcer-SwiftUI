@@ -10,40 +10,46 @@ import Chopper
 import Combine
 
 struct ScheduleView: View {
-    @State var scheduleExists: Bool
 
     @State var showProvideSchedule: Bool = false
+    @State private var showProvideScheduleLastValue: Bool = false
     @State var refresherID: Int = 0 // used to refresh the schedule display view
 
     @StateObject var manager: ScheduleManager
 
     @State var managerSink: AnyCancellable?
 
+    @State var showScheduleFAQ: Bool = false
+
     init() {
         let manager = ScheduleManager.default
-        let scheduleExists: Bool
-        if let _ = manager.currentSchedule {
-            scheduleExists = true
-        } else {
-            scheduleExists = false
+        if let _ = manager.currentSchedule {} else {
             self._showProvideSchedule = State(wrappedValue: true)
+            self._showProvideScheduleLastValue = State(wrappedValue: true)
         }
 
-        self._scheduleExists = .init(wrappedValue: scheduleExists)
         self._manager = .init(wrappedValue: manager)
     }
 
     var body: some View {
         NavigationView {
-            if scheduleExists && !showProvideSchedule {
+            if !showProvideSchedule {
                 ScheduleDisplayView()
                     .id(refresherID)
             } else {
                 ProvideScheduleView(showProvideSuggestion: $showProvideSchedule)
             }
         }
-        .onChange(of: showProvideSchedule) { _ in
-            print("Show provide schedule changed")
+        .sheet(isPresented: $showScheduleFAQ) {
+            ScheduleFAQView()
+        }
+        .onChange(of: showProvideSchedule) { newValue in
+            if newValue == false && showProvideScheduleLastValue == true {
+                // schedule provided!
+                showScheduleFAQ = true
+            }
+            showProvideScheduleLastValue = newValue
+
             manager.fetchSchedules()
             if let _ = manager.currentSchedule {
                 refresherID += 1
@@ -51,10 +57,7 @@ struct ScheduleView: View {
         }
         .onAppear {
             managerSink = manager.$currentSchedule.sink { newValue in
-                print("Manager sink changed")
-                self.scheduleExists = newValue != nil
-                showProvideSchedule = !scheduleExists
-                print("Schedule exists: \(scheduleExists)")
+                showProvideSchedule = newValue == nil
             }
         }
     }
