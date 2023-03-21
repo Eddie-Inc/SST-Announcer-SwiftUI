@@ -16,6 +16,7 @@
 		931B2C672966C46900BBF397 /* EditCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931B2C662966C46900BBF397 /* EditCategoriesView.swift */; };
 		931B2C692966C67700BBF397 /* CategoryScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931B2C682966C67700BBF397 /* CategoryScrollView.swift */; };
 		93276E18297A991F00B710AB /* CachePostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93276E17297A991F00B710AB /* CachePostsView.swift */; };
+		93393FB229C974BE0018B1AE /* ScheduleConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93393FB129C974BE0018B1AE /* ScheduleConfirmationView.swift */; };
 		93436ACA2965B4D600AD3148 /* PostPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93436AC92965B4D600AD3148 /* PostPreviewView.swift */; };
 		9348BE8C29BFE95A00E96571 /* SwitchScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9348BE8B29BFE95A00E96571 /* SwitchScheduleView.swift */; };
 		93528DB3296FC23200651404 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93528DB2296FC23200651404 /* Settings.swift */; };
@@ -132,6 +133,7 @@
 		931B2C662966C46900BBF397 /* EditCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoriesView.swift; sourceTree = "<group>"; };
 		931B2C682966C67700BBF397 /* CategoryScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryScrollView.swift; sourceTree = "<group>"; };
 		93276E17297A991F00B710AB /* CachePostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachePostsView.swift; sourceTree = "<group>"; };
+		93393FB129C974BE0018B1AE /* ScheduleConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleConfirmationView.swift; sourceTree = "<group>"; };
 		93436AC92965B4D600AD3148 /* PostPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewView.swift; sourceTree = "<group>"; };
 		9348BE8B29BFE95A00E96571 /* SwitchScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchScheduleView.swift; sourceTree = "<group>"; };
 		93528DB2296FC23200651404 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 			isa = PBXGroup;
 			children = (
 				93767CA929AB89A7007B2EAD /* ProvideScheduleView.swift */,
+				93393FB129C974BE0018B1AE /* ScheduleConfirmationView.swift */,
 				93767CAA29AB89A7007B2EAD /* ScheduleSuggestionView.swift */,
 				93767CAB29AB89A7007B2EAD /* WeekSubjectsView.swift */,
 				93767CA829AB89A7007B2EAD /* SubjectSuggestionEditView.swift */,
@@ -689,6 +692,7 @@
 				930EA43D29645AE1007081C8 /* ContentView.swift in Sources */,
 				93769336296A842900D94EC3 /* SafariView.swift in Sources */,
 				D3B47C2B29BCB9A500C1832D /* AnnouncerPushNotif+Schema.swift in Sources */,
+				93393FB229C974BE0018B1AE /* ScheduleConfirmationView.swift in Sources */,
 				93769339296A8B1900D94EC3 /* AnnouncementDetailView+Resize.swift in Sources */,
 				93767CB429AB89A7007B2EAD /* SubjectSuggestionEditView.swift in Sources */,
 				93767C9A29AB8966007B2EAD /* ScheduleVisualiserView.swift in Sources */,

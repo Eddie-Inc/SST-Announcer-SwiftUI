@@ -16,6 +16,8 @@ struct ProvideScheduleView: View {
 
     @State var showCodeScanner: Bool = false
 
+    @State var scheduleConfirmation: ScheduleConfirmation?
+
     var body: some View {
         List {
             LargeListHeader(image: Image(systemName: "calendar.badge.clock"),
@@ -44,6 +46,9 @@ struct ProvideScheduleView: View {
                             print("Failure: \(failure.localizedDescription)")
                         }
                     }
+                }
+                .sheet(item: $scheduleConfirmation) { confirm in
+                    ScheduleConfirmationView(scheduleConfirmation: confirm, showProvideSuggestion: $showProvideSuggestion)
                 }
 
                 if let image = schedule?.processedSource.image {
@@ -124,10 +129,15 @@ struct ProvideScheduleView: View {
 
         guard let schedule = Schedule.decode(from: source) else { return }
 
-        // TODO: show confirmation thing
-        let manager = ScheduleManager.default
-        manager.addSchedule(schedule: schedule)
-        showProvideSuggestion = false
+        // detect if it is a copy of a schedule they already have
+        if let matchingSchedule = ScheduleManager.default.schedules.first(where: {
+            $0.id == schedule.id || $0.name == schedule.name
+        }) {
+            scheduleConfirmation = .idMatchesAskForConfirmation(schedule, matchingSchedule)
+            return
+        }
+
+        scheduleConfirmation = .askForConfirmation(schedule)
     }
 }
 
