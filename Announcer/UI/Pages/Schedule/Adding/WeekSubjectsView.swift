@@ -38,7 +38,6 @@ struct WeekSubjectsView<Table: ScheduleProvider, Block: TimeBlock>: View where B
                 } label: {
                     viewForSubject(subject: subject)
                 }
-                .disabled(scheduleSuggestion.loadProgress != .loaded)
             }
         }
         .onDelete { indexSet in
@@ -93,23 +92,13 @@ struct WeekSubjectsView<Table: ScheduleProvider, Block: TimeBlock>: View where B
                     HStack {
                         ZStack(alignment: .leading) {
                             if let subClass = subject.displaySubjectClass {
-                                ColorPicker(selection: .init(get: {
-                                    subClass.color
-                                }, set: { newColor in
-                                    guard let index = scheduleSuggestion.subjects.firstIndex(of: subject)
-                                    else { return }
-                                    scheduleSuggestion.subjects[index].displaySubjectClass?.color = newColor
-                                    if let classToUpdate = scheduleSuggestion.subjects[index].displaySubjectClass {
-                                        scheduleSuggestion.updateClass(subClass: classToUpdate)
-                                    }
-                                })) { EmptyView() }
+                                subClass.color
                             } else {
-                                ColorPicker(selection: .constant(.background)) { EmptyView() }
-                                    .disabled(true)
+                                Color.background
                             }
                         }
-                        .frame(width: 25, height: 25)
-                        .offset(x: -5)
+                        .frame(width: 24, height: 24)
+                        .cornerRadius(12)
                         if let subClass = subject.displaySubjectClass {
                             Text(
 "\(subClass.name.description)\(subClass.teacher == nil ? "" : " - \(subClass.teacher ?? "")")"
@@ -152,9 +141,9 @@ struct WeekSubjectsView<Table: ScheduleProvider, Block: TimeBlock>: View where B
                                  subjectClass: .init(name: .some("Untitled"), color: .gray))
             as? Block
         } else if Block.self == SubjectSuggestion.self {
-            // TODO: Make this load
             newSubject = SubjectSuggestion(image: .init(systemName: "questionmark.square")!,
                                            timeRange: newTimeRange,
+                                           name: .unidentified,
                                            day: .init(week: week, day: day))
             as? Block
         }
