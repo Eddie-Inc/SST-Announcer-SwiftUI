@@ -115,7 +115,10 @@ struct ChangeSubjectView<Table: ScheduleProvider, Block: TimeBlock>: View where 
 
         guard let suggestion = suggestion as? SubjectSuggestion,
               let schedule = schedule as? ScheduleSuggestion
-        else { return }
+        else {
+            print("Cannot create new class")
+            return
+        }
 
         // if unidentified, ask if they want to assign this class to all matching subjects
         if suggestion.displayName == .unidentified {

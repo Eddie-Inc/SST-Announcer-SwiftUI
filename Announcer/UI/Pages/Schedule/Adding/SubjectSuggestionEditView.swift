@@ -61,6 +61,9 @@ struct SubjectSuggestionEditView<Table: ScheduleProvider, Block: TimeBlock>: Vie
             Section("Class Information") {
                 classInfo
             }
+            .onDisappear {
+                updateClass()
+            }
 
             Section {
                 subjectActions
@@ -138,24 +141,12 @@ struct SubjectSuggestionEditView<Table: ScheduleProvider, Block: TimeBlock>: Vie
                         supportsOpacity: false)
             ListTextField("Name", value: .init(get: { subClass.name.description },
                                                set: { suggestion.displaySubjectClass?.name = .some($0) }))
-            .onSubmit {
-                DispatchQueue.main.async {
-                    if let subClass = suggestion.displaySubjectClass {
-                        schedule.updateClass(subClass: subClass, sender: suggestion)
-                    }
-                }
-            }
+            .onSubmit { updateClass() }
             ListTextField("Teacher", value: .init(get: { subClass.teacher ?? "" },
                                                   set: { newTeacher in
                 suggestion.displaySubjectClass?.teacher = newTeacher.isEmpty ? nil : newTeacher
             }))
-            .onSubmit {
-                DispatchQueue.main.async {
-                    if let subClass = suggestion.displaySubjectClass {
-                        schedule.updateClass(subClass: subClass, sender: suggestion)
-                    }
-                }
-            }
+            .onSubmit { updateClass() }
             Button("Change Class") {
                 showAssignClassSheet = true
             }
@@ -167,6 +158,14 @@ struct SubjectSuggestionEditView<Table: ScheduleProvider, Block: TimeBlock>: Vie
                     Image(systemName: "exclamationmark.triangle")
                     Text("Assign to Class")
                 }
+            }
+        }
+    }
+
+    func updateClass() {
+        DispatchQueue.main.async {
+            if let subClass = suggestion.displaySubjectClass {
+                schedule.updateClass(subClass: subClass, sender: suggestion)
             }
         }
     }
@@ -216,7 +215,7 @@ extension SubjectSuggestionEditView {
     func isNewTimeValid(timeRange: TimeRange) -> Bool {
         // iterate over all other subjects, and make sure theres no conflicts
         let subjects = schedule.subjects.filter({ sub in
-            sub != suggestion && sub.day == suggestion.day
+            sub.id != suggestion.id && sub.day == suggestion.day
         })
         return !subjects.contains(where: { $0.timeRange.overlaps(timeRange) })
     }

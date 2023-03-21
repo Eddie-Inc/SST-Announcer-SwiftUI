@@ -152,6 +152,7 @@ struct WeekSubjectsView<Table: ScheduleProvider, Block: TimeBlock>: View where B
                                  subjectClass: .init(name: .some("Untitled"), color: .gray))
             as? Block
         } else if Block.self == SubjectSuggestion.self {
+            // TODO: Make this load
             newSubject = SubjectSuggestion(image: .init(systemName: "questionmark.square")!,
                                            timeRange: newTimeRange,
                                            day: .init(week: week, day: day))

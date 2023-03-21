@@ -14,7 +14,7 @@ public extension ScheduleProvider {
 
         subjectClasses[firstIndex] = subClass
         for index in (0..<subjects.count).filter({
-            subjects[$0].displaySubjectClass?.id == subClass.id && subjects[$0].id != sender?.id
+            subjects[$0].displaySubjectClass?.id == subClass.id
         }) {
             subjects[index].displaySubjectClass = subClass
         }
