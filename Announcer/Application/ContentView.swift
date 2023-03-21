@@ -13,7 +13,7 @@ import Chopper
 struct ContentView: View {
     @AppStorage("tabSelection") var selection: Int = 0
 
-    @State var proposalSchedule: Schedule?
+    @State var proposalSchedule: ScheduleConfirmation?
 
     @ObservedObject
     var settings: SettingsManager = .shared
@@ -29,7 +29,7 @@ struct ContentView: View {
             .tag(0)
 
             if settings.showSchedule {
-                ScheduleView(proposalSchedule: $proposalSchedule)
+                ScheduleView()
                     .tabItem {
                         Label("Schedule", systemImage: "calendar.day.timeline.left")
                     }
@@ -59,9 +59,32 @@ struct ContentView: View {
                 parameters[$0.name] = $0.value
             }
 
-            guard url.host == "schedule", let source = parameters["source"] else { return }
-            proposalSchedule = decodeString(string: source)
+            guard url.host == "schedule",
+                  let source = parameters["source"],
+                  let decodedSchedule = decodeString(string: source)
+            else {
+                print("Could not decode schedule")
+                return
+            }
+
+            // detect if it is a copy of a schedule they already have
+            if let matchingSchedule = ScheduleManager.default.schedules.first(where: {
+                $0.id == decodedSchedule.id || $0.name == decodedSchedule.name
+            }) {
+                proposalSchedule = .idMatchesAskForConfirmation(decodedSchedule, matchingSchedule)
+                print("Schedule has dupe")
+            } else {
+                proposalSchedule = .askForConfirmation(decodedSchedule)
+                print("Schedule no dupe")
+            }
             selection = 1
+        }
+        .sheet(item: $proposalSchedule) { proposal in
+            ScheduleConfirmationView(scheduleConfirmation: proposal,
+                                     showProvideSuggestion: .constant(true))
+            .onAppear {
+                print("Proposal appeared!")
+            }
         }
     }
 

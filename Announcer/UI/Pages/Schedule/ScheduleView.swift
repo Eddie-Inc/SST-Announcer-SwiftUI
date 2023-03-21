@@ -19,9 +19,7 @@ struct ScheduleView: View {
 
     @State var managerSink: AnyCancellable?
 
-    @Binding var proposalSchedule: Schedule?
-
-    init(proposalSchedule: Binding<Schedule?>) {
+    init() {
         let manager = ScheduleManager.default
         let scheduleExists: Bool
         if let _ = manager.currentSchedule {
@@ -33,7 +31,6 @@ struct ScheduleView: View {
 
         self._scheduleExists = .init(wrappedValue: scheduleExists)
         self._manager = .init(wrappedValue: manager)
-        self._proposalSchedule = proposalSchedule
     }
 
     var body: some View {
@@ -59,14 +56,6 @@ struct ScheduleView: View {
                 showProvideSchedule = !scheduleExists
                 print("Schedule exists: \(scheduleExists)")
             }
-        }
-        .alert(item: $proposalSchedule) { schedule in
-            Alert(title: Text("Schedule Available"),
-                  message: Text("Would you like to add this schedule?"),
-                  primaryButton: .default(Text("Add schedule"), action: {
-                manager.addSchedule(schedule: schedule)
-            }),
-                  secondaryButton: .cancel(Text("Cancel")))
         }
     }
 }

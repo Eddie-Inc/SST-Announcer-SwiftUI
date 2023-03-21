@@ -24,9 +24,7 @@ extension Schedule: Codable {
         var timeRange: TimeRange
 
         init(from subject: Subject, classes: [SubjectClass]) {
-            // TODO: Use firstIndex instead of firstIndex where
-            // this is a band-aid fix for classes-subject desync. Gotta fix it.
-            self.classID = classes.firstIndex(where: { subject.subjectClass.id == $0.id })!
+            self.classID = classes.firstIndex(of: subject.subjectClass)!
             self.day = subject.day
             self.timeRange = subject.timeRange
         }
