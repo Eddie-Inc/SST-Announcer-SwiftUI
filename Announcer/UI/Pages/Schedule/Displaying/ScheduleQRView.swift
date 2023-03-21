@@ -8,12 +8,58 @@
 import SwiftUI
 import UIKit
 import Chopper
+import PostManager
 
 struct ScheduleQRView: View {
-    @State var link: URL
-    @State var image: UIImage
+    @State var link: URL?
+    @State var image: UIImage?
 
-    init() {
+    var body: some View {
+        NavigationView {
+            if #available(iOS 16.0, *) {
+                content
+                    .scrollDisabled(true)
+            } else {
+                content
+            }
+        }
+        .onAppear {
+            loadQueue.async {
+                loadQR()
+            }
+        }
+    }
+
+    var content: some View {
+        List {
+            if let image, let link {
+                Section {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                }
+
+                Section {
+                    NavigationLink {
+                        ActivityView(content: link)
+                    } label: {
+                        Label("Share URL", systemImage: "square.and.arrow.up")
+                    }
+                }
+            } else {
+                Text("Loading...")
+                Color.gray
+                    .aspectRatio(1, contentMode: .fill)
+                    .padding(10)
+                Label("Copy URL", systemImage: "doc.on.clipboard.fill")
+                    .foregroundColor(.gray)
+                Label("Share URL", systemImage: "square.and.arrow.up")
+                    .foregroundColor(.gray)
+            }
+        }
+    }
+
+    func loadQR() {
         let manager = ScheduleManager.default
         let schedule = manager.currentSchedule
 
@@ -24,7 +70,7 @@ struct ScheduleQRView: View {
         }
         // then, we get the base64 encoded string, as QR can't accept raw data
         let string = "announcer://schedule?source=" + compressed.base64EncodedString()
-        self._link = State(wrappedValue: .init(string: string)!)
+        self.link = .init(string: string)!
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else {
             fatalError("QR Filter not found")
         }
@@ -44,27 +90,7 @@ struct ScheduleQRView: View {
             fatalError("Failed to turn QR image (CIImage) into CGImage")
         }
         // convert that to a UIImage
-        self._image = State(wrappedValue: UIImage(cgImage: cgimg))
-    }
-
-    var body: some View {
-        if #available(iOS 16.0, *) {
-            content
-                .scrollDisabled(true)
-        } else {
-            content
-        }
-    }
-
-    var content: some View {
-        List {
-            Image(uiImage: image)
-                .resizable()
-                .scaledToFit()
-            Button("Copy URL") {
-                UIKit.UIPasteboard.general.string = link.description
-            }
-        }
+        self.image = UIImage(cgImage: cgimg)
     }
 }
 

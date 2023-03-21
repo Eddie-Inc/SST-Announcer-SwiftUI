@@ -168,7 +168,7 @@ struct AnnouncementDetailView: View {
         }
         .sheet(isPresented: $showShareLink) {
             if let safariViewURL {
-                ActivityView(text: safariViewURL.description)
+                ActivityView(content: safariViewURL)
             } else {
                 Text("URL not found")
             }

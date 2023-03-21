@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct ActivityView: UIViewControllerRepresentable {
-    let text: String
+struct ActivityView<Content>: UIViewControllerRepresentable {
+    let content: Content
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
-        return UIActivityViewController(activityItems: [text], applicationActivities: nil)
+        return UIActivityViewController(activityItems: [content], applicationActivities: nil)
     }
 
     func updateUIViewController(_ uiViewController: UIActivityViewController,
