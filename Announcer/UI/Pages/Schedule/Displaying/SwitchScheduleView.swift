@@ -76,6 +76,18 @@ struct SwitchScheduleView: View {
             }),
                   secondaryButton: .cancel(Text("Cancel")))
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationSheet {
+                    List {
+                        ScheduleFAQView()
+                    }
+                } label: {
+                    Image(systemName: "questionmark.circle")
+                        .foregroundColor(.accentColor)
+                }
+            }
+        }
     }
 }
 
