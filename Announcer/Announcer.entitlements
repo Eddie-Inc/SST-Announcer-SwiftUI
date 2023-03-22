@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.kaitay.Announcer</string>
+		<string>group.com.KaiTayAyaanJain.SSTAnnouncer</string>
 	</array>
 </dict>
 </plist>

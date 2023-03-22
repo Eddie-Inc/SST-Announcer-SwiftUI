@@ -7,6 +7,7 @@
 
 import Foundation
 import FeedKit
+import OrderedCollections
 
 /**
  Source URL for the Blog
@@ -158,7 +159,8 @@ public extension PostManager {
     ///
     /// This solution has a time complexity of O(n) as we process each element in the input arrays once, and
     /// is more efficent than an append-sort method as it saves the time and space of sorting the array at the end.
-    static func addPostsToStorage(newItems: [Post]) {
+    @discardableResult
+    static func addPostsToStorage(newItems: [Post]) -> Int {
         let storage = PostManager.postStorage
 
         var combinedArray: [Post] = []
@@ -201,7 +203,10 @@ public extension PostManager {
 
         let keys = combinedArray.map { $0.postTitle }
 
-        PostManager.postStorage = .init(uniqueKeys: keys, values: combinedArray)
+        let new = OrderedDictionary<PostTitle, Post>(uniqueKeys: keys, values: combinedArray)
+        let diff = new.count - PostManager.postStorage.count // the number of new posts
+        PostManager.postStorage = new
+        return diff
     }
 }
 
