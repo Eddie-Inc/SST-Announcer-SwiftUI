@@ -24,10 +24,26 @@ struct ScheduleFAQView: View {
 3. Alternatively, share the URL with them
 """)
         }
+        DisclosureGroup("How do I add a new schedule?") {
+            Text("""
+1. Press the info button in the top right
+2. Click on "Manage Schedules" -> "Add New Schedule"
+""")
+        }
+        DisclosureGroup("Why are there multiple schedules?") {
+            Text("""
+Announcer supports multiple schedules. You can store your friend's \
+schedules, for example. To switch between schedules:
+1. Press the info button in the top right
+2. Click on "Manage Schedules"
+3. Click on the schedule you want to switch to
+To delete a schedule, swipe the schedule towards the left.
+""")
+        }
         DisclosureGroup("How do I see when my classes are?") {
             Text("""
 Click on any subject, or go into the Classes page. It will show the \
-other instances of that subject.
+other instances of that subject, and how long until they happen.
 """)
         }
     }
