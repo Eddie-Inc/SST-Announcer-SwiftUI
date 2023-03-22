@@ -46,6 +46,18 @@ struct ScheduleSuggestionView: View {
                 }
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationSheet {
+                    List {
+                        ScheduleLoadingFAQView()
+                    }
+                } label: {
+                    Image(systemName: "questionmark.circle")
+                        .foregroundColor(.accentColor)
+                }
+            }
+        }
     }
 
     var subjectsAndClasses: some View {

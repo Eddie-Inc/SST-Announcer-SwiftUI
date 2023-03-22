@@ -63,6 +63,16 @@ struct ScheduleDisplayView: View {
         }
         .navigationTitle(manager.currentSchedule?.name ?? "Schedule")
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                NavigationSheet {
+                    List {
+                        ScheduleFAQView()
+                    }
+                } label: {
+                    Image(systemName: "questionmark.circle")
+                        .foregroundColor(.accentColor)
+                }
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     showQRView = true

@@ -47,6 +47,18 @@ struct SaveScheduleView: View {
                 }
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationSheet {
+                    List {
+                        ScheduleLoadingFAQView()
+                    }
+                } label: {
+                    Image(systemName: "questionmark.circle")
+                        .foregroundColor(.accentColor)
+                }
+            }
+        }
     }
 
     func save() {

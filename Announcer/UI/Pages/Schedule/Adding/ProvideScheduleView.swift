@@ -112,6 +112,18 @@ struct ProvideScheduleView: View {
                 }
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationSheet {
+                    List {
+                        ScheduleLoadingFAQView()
+                    }
+                } label: {
+                    Image(systemName: "questionmark.circle")
+                        .foregroundColor(.accentColor)
+                }
+            }
+        }
     }
 
     func decodeURL(urlString: String) {
