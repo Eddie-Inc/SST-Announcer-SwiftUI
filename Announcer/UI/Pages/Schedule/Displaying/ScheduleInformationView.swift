@@ -52,22 +52,17 @@ struct ScheduleInformationView: View {
                             .tag(index)
                     }
                 }
-            }
-
-            Section("Subjects and Classes") {
-                NavigationSheet("Odd Week") {
-                    NavigationView {
-                        List {
+                NavigationLink("Subjects") {
+                    List {
+                        Section("Odd Week") {
                             WeekSubjectsView(schedule: $editedSchedule, week: .odd)
                         }
-                    }
-                }
-                NavigationSheet("Even Week") {
-                    NavigationView {
-                        List {
+                        Section("Even Week") {
                             WeekSubjectsView(schedule: $editedSchedule, week: .even)
                         }
                     }
+                    .navigationTitle("Subjects")
+                    .navigationBarTitleDisplayMode(.inline)
                 }
             }
 

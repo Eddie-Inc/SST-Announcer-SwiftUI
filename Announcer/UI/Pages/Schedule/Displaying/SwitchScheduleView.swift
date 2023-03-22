@@ -88,6 +88,8 @@ struct SwitchScheduleView: View {
                 }
             }
         }
+        .navigationTitle("Manage Schedules")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

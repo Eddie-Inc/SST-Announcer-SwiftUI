@@ -10,7 +10,6 @@ import Chopper
 
 struct ScheduleSuggestionView: View {
     @State var scheduleSuggestion: ScheduleSuggestion
-    @State var selectedWeek: Week?
     @State var showClasses: Bool = false
 
     @Binding var showProvideSuggestion: Bool
@@ -27,24 +26,6 @@ struct ScheduleSuggestionView: View {
 
             subjectsAndClasses
             saveButton
-        }
-        .sheet(item: $selectedWeek) { week in
-            if #available(iOS 16.0, *) {
-                NavigationView {
-                    List {
-                        WeekSubjectsView(schedule: $scheduleSuggestion, week: week)
-                    }
-                    .navigationTitle("Week \(week.rawValue.firstLetterUppercase)")
-                }
-                .presentationDetents([.medium, .large])
-            } else {
-                NavigationView {
-                    List {
-                        WeekSubjectsView(schedule: $scheduleSuggestion, week: week)
-                    }
-                    .navigationTitle("Week \(week.rawValue.firstLetterUppercase)")
-                }
-            }
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -78,18 +59,18 @@ struct ScheduleSuggestionView: View {
                     }
                 }
             }
-            ForEach(Week.allCases) { week in
-                Button {
-                    selectedWeek = week
-                } label: {
-                    HStack {
-                        Text("Week \(week.rawValue.firstLetterUppercase)")
-                        Spacer()
-                        Text("\(scheduleSuggestion.subjects.filter({ $0.day.week == week }).invalidSuggestions)")
-                        Image(systemName: "exclamationmark.triangle")
+
+            NavigationLink("Subjects") {
+                List {
+                    Section("Odd Week") {
+                        WeekSubjectsView(schedule: $scheduleSuggestion, week: .odd)
                     }
-                    .foregroundColor(.primary)
+                    Section("Even Week") {
+                        WeekSubjectsView(schedule: $scheduleSuggestion, week: .even)
+                    }
                 }
+                .navigationTitle("Subjects")
+                .navigationBarTitleDisplayMode(.inline)
             }
         }
     }
