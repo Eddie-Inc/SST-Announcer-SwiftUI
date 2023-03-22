@@ -91,7 +91,23 @@ struct AnnouncementsHomeView: View {
             }
         }
         .onAppear {
-            loadNextPosts(count: settings.loadNumber)
+            // use cache for a while
+            posts = PostManager.getCachePosts(range: 0..<settings.loadNumber)
+
+            // load the posts
+            loadQueue.async {
+                guard !isLoading else { return }
+
+                isLoading = true
+                let range = 0..<settings.loadNumber
+                // override the cached posts
+                self.posts = PostManager.getPosts(range: range)
+
+                // implement some debounce to prevent too many loads
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    isLoading = false
+                }
+            }
         }
     }
 

@@ -33,7 +33,8 @@ public enum PostManager {
         return posts
     }
 
-    private static func getCachePosts(range: Range<Int>) -> [Post] {
+    /// Fetches the cached posts for a given range
+    public static func getCachePosts(range: Range<Int>) -> [Post] {
         Log.info("could not get values. Attempting to use cache.")
         let storage = postStorage
 
