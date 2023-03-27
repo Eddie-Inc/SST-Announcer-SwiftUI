@@ -73,6 +73,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "SST Announcer"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

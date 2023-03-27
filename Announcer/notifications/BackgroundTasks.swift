@@ -94,6 +94,10 @@ struct MyApp: App {
             if diff > 0 {
                 // send local notif
                 let content = UNMutableNotificationContent()
+                for item in fetchedItems {
+                    content.title = item.title
+                // your content code here
+                }
                 content.title = PostManager.Post.title
                 content.subtitle = PostManager.Post.content
                 content.sound = UNNotificationSound.default

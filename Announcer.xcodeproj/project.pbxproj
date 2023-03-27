@@ -580,7 +580,6 @@
 				881544B929691ABF001BAFA4 /* XCRemoteSwiftPackageReference "RichText" */,
 				937EBBF3296EA72000722285 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				93767CBB29AB8ABB007B2EAD /* XCRemoteSwiftPackageReference "UpdatedSwiftUI" */,
-				D3B47C2F29BCC2B500C1832D /* XCRemoteSwiftPackageReference "amplify-swift" */,
 			);
 			productRefGroup = 930EA43829645AE1007081C8 /* Products */;
 			projectDirPath = "";
@@ -1051,14 +1050,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
-			};
-		};
-		D3B47C2F29BCC2B500C1832D /* XCRemoteSwiftPackageReference "amplify-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/aws-amplify/amplify-swift.git";
-			requirement = {
-				branch = main;
-				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
