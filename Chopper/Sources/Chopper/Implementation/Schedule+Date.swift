@@ -39,11 +39,20 @@ public extension ScheduleProvider {
     func daysUntil(day: ScheduleDay) -> Int {
         let currentWeek = currentWeek
         let todayWeek: Week = currentWeek%2 == 0 ? .even : .odd
-        let todayDay = Date().weekday.dayOfWeek ?? .monday // default to monday
+        let todayDay = Date().weekday
+        let todayWeekDay = todayDay.dayOfWeek ?? .monday // default to monday
 
-        let thisDay = ScheduleDay(week: todayWeek, day: todayDay)
+        let thisDay = ScheduleDay(week: todayWeek, day: todayWeekDay)
+        var daysFromDay = thisDay.daysFrom(laterDay: day)
 
-        return thisDay.daysFrom(laterDay: day)
+        // account for weekends
+        switch todayDay {
+        case .saturday: daysFromDay += 2
+        case .sunday: daysFromDay += 1
+        default: break
+        }
+
+        return daysFromDay
     }
 
     /// Returns a ``Date`` representing the next occurence of a given day.
