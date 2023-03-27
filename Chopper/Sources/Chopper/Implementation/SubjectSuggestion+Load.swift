@@ -8,7 +8,7 @@
 import Foundation
 import Vision
 
-let visionQueue = DispatchQueue(label: "com.kaithebuilder.scheduleChopper.vision")
+let visionQueue = DispatchQueue(label: "com.KaiTayAyaanJain.scheduleChopper.vision")
 
 public extension SubjectSuggestion {
     /// Loads the image, populating the ``name`` and ``teacher`` fields.

@@ -94,18 +94,21 @@ struct MyApp: App {
             if diff > 0 {
                 // send local notif
                 let content = UNMutableNotificationContent()
-                content.title = PostManager.Post.title
-                content.subtitle = PostManager.Post.content
-                content.sound = UNNotificationSound.default
-                
-                // show this notification five seconds from now
-                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-                
-                // choose a random identifier
-                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                
-                // add our notification request
-                UNUserNotificationCenter.current().add(request)
+                let latestPost = PostManager.getCachePosts(range: 0..<diff)
+                for post in latestPost {
+                    content.title = post.title
+                    content.subtitle = post.content
+                    content.sound = UNNotificationSound.default
+
+                    // show this notification five seconds from now
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+                    // choose a random identifier
+                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+                    // add our notification request
+                    UNUserNotificationCenter.current().add(request)
+                }
             }
         } catch {
             print("An error occured: \(error)")
