@@ -99,7 +99,7 @@ struct MyApp: App {
                 // your content code here
                 }
                 content.title = PostManager.Post.title
-                content.subtitle = PostManager.Post.content
+                content.subtitle = PostManager.Post.content4
                 content.sound = UNNotificationSound.default
                 
                 // show this notification five seconds from now
