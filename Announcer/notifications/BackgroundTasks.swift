@@ -11,6 +11,37 @@ import BackgroundTasks
 import PostManager
 import UserNotifications
 
+
+class BackgroundTasksStruct: NSObject {
+    
+    
+    
+    let notificationDelegate = NotificationDelegate()
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    static func main() async {
+        //just needed to make this work
+    }
+    
+    @available(iOS 16.0, *)
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+        .onChange(of: phase) { newPhase in
+            //...
+        }
+        .backgroundTask(.appRefresh("myapprefresh")) {
+            await self.scheduleAppRefresh()
+        }
+    }
+    
+    
+    
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        scheduleAppRefresh()
 extension Scene {
     func refreshIfPossible(
         identifier: String,
@@ -54,30 +85,85 @@ extension YourApp {
 
 
         do {
-            // code to run
             let fetchedItems = try PostManager.fetchValues(range: 0..<10)
             let diff = PostManager.addPostsToStorage(newItems: fetchedItems)
             if diff > 0 {
-                // send local notif
                 let content = UNMutableNotificationContent()
-                let latestPost = PostManager.getCachePosts(range: 0..<diff)
-                for post in latestPost {
-                    content.title = post.title
-                    content.subtitle = post.content
-                    content.sound = UNNotificationSound.default
-
-                    // show this notification five seconds from now
-                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-
-                    // choose a random identifier
-                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
-                    // add our notification request
-                    UNUserNotificationCenter.current().add(request)
-                }
+                content.title = "New Posts Available"
+                content.body = "\(diff) new posts are available"
+                content.sound = UNNotificationSound.default
+                
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                
+                UNUserNotificationCenter.current().add(request)
             }
-        } catch {
+        }
+        catch {
             print("An error occured: \(error)")
         }
     }
+    func handle(task: BGAppRefreshTask) {
+        // Handle the app refresh task here
+        task.expirationHandler = {
+            // Handle task expiration if needed
+        }
+        
+        // Create a new instance of the task to start it again after it finishes
+        let newTask = BGAppRefreshTaskRequest(identifier: "com.KaiTayAyaanJain.SSTAnnouncer")
+        newTask.earliestBeginDate = Date(timeIntervalSinceNow: 15 * 60)
+        do {
+            try BGTaskScheduler.shared.submit(newTask)
+        } catch {
+            print("Unable to reschedule app refresh: \(error)")
+        }
+    }
 }
+
+
+
+
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+        
+        func application(_ application: UIApplication,
+                         didFinishLaunchingWithOptions launchOptions:
+                         [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+            
+            // Request authorization for local and remote notifications
+            let center = UNUserNotificationCenter.current()
+            center.delegate = self
+            center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+                if let error = error {
+                    print("Error requesting notification authorization: \(error)")
+                } else {
+                    print("Notification authorization granted: \(granted)")
+                }
+            }
+            application.registerForRemoteNotifications()
+            application.registerForRemoteNotifications()
+            
+            // Schedule app refresh task
+            if #available(iOS 13.0, *) {
+                let request = BGAppRefreshTaskRequest(identifier: "com.KaiTayAyaanJain.SSTAnnouncer")
+                request.earliestBeginDate = Date(timeIntervalSinceNow: 15 * 60) // Schedule the task for 15 minutes from now
+                do {
+                    try BGTaskScheduler.shared.submit(request)
+                    print("App refresh task scheduled successfully")
+                } catch {
+                    print("Unable to schedule app refresh task: \(error)")
+                }
+            }
+            
+            return true
+        }
+        
+        // Handle local notifications when app is in the foreground
+        func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                    didReceive response: UNNotificationResponse,
+                                    withCompletionHandler completionHandler: @escaping () -> Void) {
+            print("Local notification received: \(response.notification.request.content.title)")
+            completionHandler()
+        }
+    }
+    
+
