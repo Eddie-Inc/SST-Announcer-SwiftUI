@@ -1,5 +1,0 @@
-type AnnouncerPushNotif @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  body: String!
-  deviceToken: String!
-}

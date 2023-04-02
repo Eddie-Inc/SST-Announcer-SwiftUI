@@ -48,11 +48,11 @@ struct ContentView: View {
         }
         .onOpenURL { url in
             print("Asked to open URL: \(url.description)")
-
+            
             guard let scheme = url.scheme,
                   scheme.localizedCaseInsensitiveCompare("announcer") == .orderedSame
             else { return }
-
+            
             var parameters: [String: String] = [:]
             URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.forEach {
                 parameters[$0.name] = $0.value
@@ -86,7 +86,7 @@ struct ContentView: View {
             }
         }
     }
-
+    
     func decodeString(string: String) -> Schedule? {
         print("String: \(string)")
         guard let stringData = string.data(using: .utf8),
@@ -96,24 +96,18 @@ struct ContentView: View {
             print("Could not get string data, data, or uncompressed")
             return nil
         }
-
+        
         print("Uncompressed data: \(uncompressed.description)")
         if let result = String(data: uncompressed as Data, encoding: .utf8) {
             print("Data contents: \(result)")
         }
-
+        
         guard let schedule = try? JSONDecoder().decode(Schedule.self, from: uncompressed as Data)
         else {
             print("Could not get schedule")
             return nil
         }
-
+        
         return schedule
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }
