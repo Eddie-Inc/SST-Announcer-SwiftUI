@@ -18,7 +18,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
-//comment
+
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
             UNUserNotificationCenter.current().requestAuthorization(
                 options: authOptions,
@@ -86,6 +86,9 @@ struct YourApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+        }
+        .refreshIfPossible(identifier: "com.kaitayayaanjain.announcer.background") {
+            await scheduleAppRefresh()
         }
     }
 }

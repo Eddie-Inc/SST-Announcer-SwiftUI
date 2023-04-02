@@ -49,7 +49,7 @@ func exists(file: String) -> Bool {
 
 /// Gets the documents directory
 public func getDocumentsDirectory() -> URL {
-    let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.KaiTayAyaanJain.SSTAnnounc")!
+    let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.KaiTayAyaanJain.SSTAnnouncer")!
     print("Documents live at \(url.description)")
     return url
 }

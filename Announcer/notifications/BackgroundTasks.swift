@@ -25,28 +25,10 @@ extension Scene {
     }
 }
 
-@main
-struct MyApp: App {
-
-    @Environment(\.scenePhase) private var phase
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-        .onChange(of: phase) { newPhase in
-            if newPhase == .background {
-                scheduleAppRefresh()
-            }
-        }
-        .refreshIfPossible(identifier: "com.kaitayayaanjain.announcer.background") {
-            scheduleAppRefresh()
-        }
-    }
-
+extension YourApp {
     class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
         // Your implementation of UNUserNotificationCenterDelegate methods here
-        
+
         func requestPermission() {
             UNUserNotificationCenter.current().delegate = self
 
@@ -67,10 +49,10 @@ struct MyApp: App {
     func scheduleAppRefresh() {
         let request = BGAppRefreshTaskRequest(identifier: "com.KaiTayAyaanJain.SSTAnnouncer")
         request.earliestBeginDate = .now.addingTimeInterval(24 * 3600)
-        
+
         try? BGTaskScheduler.shared.submit(request)
-        
-        
+
+
         do {
             // code to run
             let fetchedItems = try PostManager.fetchValues(range: 0..<10)
