@@ -6,58 +6,50 @@
 //
 
 import Foundation
-import UIKit //hehe
 import SwiftUI
 import BackgroundTasks
 import PostManager
 import UserNotifications
 
+extension Scene {
+    func refreshIfPossible(
+        identifier: String,
+        action: @Sendable @escaping () async -> Void
+    ) -> some Scene {
+        if #available(iOS 16.0, *) {
+            return self.backgroundTask(.appRefresh(identifier), action: action)
+        } else {
+            // Fallback on earlier versions
+            return self
+        }
+    }
+}
 
-
-@available(iOS 16.0, *)
 @main
 struct MyApp: App {
-    
-    let notificationDelegate = NotificationDelegate()
-    
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
-    static func main() async {
-            //just needed to make this work
-        }
-    
-    @available(iOS 16.0, *)
+
+    @Environment(\.scenePhase) private var phase
+
     var body: some Scene {
-            WindowGroup {
-                ContentView()
+        WindowGroup {
+            ContentView()
+        }
+        .onChange(of: phase) { newPhase in
+            if newPhase == .background {
+                scheduleAppRefresh()
             }
-            .onChange(of: phase) { newPhase in
-                //...
-            }
-            .backgroundTask(.appRefresh("myapprefresh")) {
-                await scheduleAppRefresh()
-            }
-    }
-    
-    
-    class AppDelegate: NSObject, UIApplicationDelegate {
-        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-            // Your implementation here
-            return true
+        }
+        .refreshIfPossible(identifier: "com.kaitayayaanjain.announcer.background") {
+            scheduleAppRefresh()
         }
     }
-    
-    
-    
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        scheduleAppRefresh()
-    }
+
     class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
         // Your implementation of UNUserNotificationCenterDelegate methods here
         
         func requestPermission() {
             UNUserNotificationCenter.current().delegate = self
-            
+
             UNUserNotificationCenter.current()
                 .requestAuthorization(options: [.alert, .sound]) {
                     (granted, error) in
@@ -71,15 +63,7 @@ struct MyApp: App {
                 }
         }
     }
-    
-    
-    
-    @Environment(\.scenePhase) private var phase
-    
-    
-    
-    
-    
+
     func scheduleAppRefresh() {
         let request = BGAppRefreshTaskRequest(identifier: "com.KaiTayAyaanJain.SSTAnnouncer")
         request.earliestBeginDate = .now.addingTimeInterval(24 * 3600)
@@ -114,5 +98,4 @@ struct MyApp: App {
             print("An error occured: \(error)")
         }
     }
-    
 }
