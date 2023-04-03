@@ -41,7 +41,9 @@ struct ScheduleView: View {
             }
         }
         .sheet(isPresented: $showScheduleFAQ) {
-            ScheduleFAQView()
+            List {
+                ScheduleFAQView()
+            }
         }
         .onChange(of: showProvideSchedule) { newValue in
             if newValue == false && showProvideScheduleLastValue == true {

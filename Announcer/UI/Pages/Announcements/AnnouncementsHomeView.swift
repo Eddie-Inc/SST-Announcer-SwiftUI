@@ -76,7 +76,8 @@ struct AnnouncementsHomeView: View {
                 } label: {
                     ZStack {
                         Image(systemName: "line.3.horizontal.decrease.circle")
-                        if let number = numberOfFilters(pinnedTo: 0..<51), number != 0 {
+                        let number = numberOfFilters(pinnedTo: 0..<51)
+                        if number != 0 {
                             Image(systemName: "\(number).circle.fill")
                                 .scaleEffect(.init(0.5))
                                 .background {
