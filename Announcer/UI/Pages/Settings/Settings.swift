@@ -76,16 +76,6 @@ struct Settings: View {
                     ClearStorageView()
                 }
             }
-
-            Section("Beta Features") {
-                Toggle("Schedule", isOn: $settings.showSchedule)
-            }
-
-            #if DEBUG
-            Section {
-                Toggle("Debug Mode", isOn: $settings.debugMode)
-            }
-            #endif
         }
     }
 }

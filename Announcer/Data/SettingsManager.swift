@@ -23,14 +23,6 @@ class SettingsManager: ObservableObject {
         if let searchPostContent = defaults.object(forKey: "searchPostContent") as? Bool {
             self.searchPostContent = searchPostContent
         }
-
-        if let debugMode = defaults.object(forKey: "debugMode") as? Bool {
-            self.debugMode = debugMode
-        }
-
-        if let showSchedule = defaults.object(forKey: "showSchedule") as? Bool {
-            self.showSchedule = showSchedule
-        }
     }
 
     @Published
@@ -51,20 +43,6 @@ class SettingsManager: ObservableObject {
     var searchPostContent: Bool = false {
         didSet {
             defaults.set(searchPostContent, forKey: "searchPostContent")
-        }
-    }
-
-    @Published
-    var debugMode: Bool = false {
-        didSet {
-            defaults.set(debugMode, forKey: "debugMode")
-        }
-    }
-
-    @Published
-    var showSchedule: Bool = false {
-        didSet {
-            defaults.set(showSchedule, forKey: "showSchedule")
         }
     }
 }
