@@ -35,14 +35,11 @@
 		93AF704629698B1400BF18F8 /* HTMLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704529698B1400BF18F8 /* HTMLString.swift */; };
 		93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */; };
 		93AF704C2969B10B00BF18F8 /* EditReminderDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */; };
-		93BC632529B7655100BF4BA3 /* Updating in Frameworks */ = {isa = PBXBuildFile; productRef = 93BC632429B7655100BF4BA3 /* Updating */; };
 		93DA5F4B29B0DEE500CBB655 /* PostManager in Frameworks */ = {isa = PBXBuildFile; productRef = 93DA5F4A29B0DEE500CBB655 /* PostManager */; };
 		93EF08D929D9AFFF00E8B9E7 /* AnnouncerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF08D829D9AFFF00E8B9E7 /* AnnouncerApp.swift */; };
 		D304851529CB126C008B917C /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = D304851429CB126C008B917C /* Server.swift */; };
 		D35C0D1129C85C9E001C12CB /* BackgroundTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35C0D1029C85C9E001C12CB /* BackgroundTasks.swift */; };
 		D3B47C2729BCB87C00C1832D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 9376933E296AC7C000D94EC3 /* README.md */; };
-		D3E64C8229B62E0600B07572 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5A9296AE65E00BA63A8 /* WidgetKit.framework */; };
-		D3E64C8329B62E0600B07572 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8829F5AB296AE65E00BA63A8 /* SwiftUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,7 +76,6 @@
 		93F5CD37299A2F17002C6FA4 /* PostManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PostManager; sourceTree = "<group>"; };
 		D304851429CB126C008B917C /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		D35C0D1029C85C9E001C12CB /* BackgroundTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTasks.swift; sourceTree = "<group>"; };
-		D3E64C8129B62E0600B07572 /* Timetable_AnnouncerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Timetable_AnnouncerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,16 +88,6 @@
 				93987D7129D1CA09004D67B5 /* Updating in Frameworks */,
 				881544BB29691ABF001BAFA4 /* RichText in Frameworks */,
 				937EBBF5296EA72000722285 /* OrderedCollections in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D3E64C7E29B62E0500B07572 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				93BC632529B7655100BF4BA3 /* Updating in Frameworks */,
-				D3E64C8329B62E0600B07572 /* SwiftUI.framework in Frameworks */,
-				D3E64C8229B62E0600B07572 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +119,6 @@
 			isa = PBXGroup;
 			children = (
 				930EA43729645AE1007081C8 /* Announcer.app */,
-				D3E64C8129B62E0600B07572 /* Timetable_AnnouncerExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -296,26 +281,6 @@
 			productReference = 930EA43729645AE1007081C8 /* Announcer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D3E64C8029B62E0500B07572 /* Timetable_AnnouncerExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D3E64C9429B62E0800B07572 /* Build configuration list for PBXNativeTarget "Timetable_AnnouncerExtension" */;
-			buildPhases = (
-				D3E64C7D29B62E0500B07572 /* Sources */,
-				D3E64C7E29B62E0500B07572 /* Frameworks */,
-				D3E64C7F29B62E0500B07572 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Timetable_AnnouncerExtension;
-			packageProductDependencies = (
-				93BC632429B7655100BF4BA3 /* Updating */,
-			);
-			productName = Timetable_AnnouncerExtension;
-			productReference = D3E64C8129B62E0600B07572 /* Timetable_AnnouncerExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -328,9 +293,6 @@
 				TargetAttributes = {
 					930EA43629645AE1007081C8 = {
 						CreatedOnToolsVersion = 14.1;
-					};
-					D3E64C8029B62E0500B07572 = {
-						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
@@ -354,7 +316,6 @@
 			projectRoot = "";
 			targets = (
 				930EA43629645AE1007081C8 /* Announcer */,
-				D3E64C8029B62E0500B07572 /* Timetable_AnnouncerExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -367,13 +328,6 @@
 				930EA44229645AE2007081C8 /* Preview Assets.xcassets in Resources */,
 				9376933F296AC7C000D94EC3 /* README.md in Resources */,
 				930EA43F29645AE2007081C8 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D3E64C7F29B62E0500B07572 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,13 +388,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D3E64C7D29B62E0500B07572 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -495,7 +442,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -550,7 +497,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -639,68 +586,6 @@
 			};
 			name = Release;
 		};
-		D3E64C9529B62E0800B07572 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = Timetable_AnnouncerExtension.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7K6ZTDFM48;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Timetable_Announcer/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Timetable_Announcer;
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.KaiTayAyaanJain.SSTAnnouncer.TimeTable;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		D3E64C9629B62E0800B07572 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = Timetable_AnnouncerExtension.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7K6ZTDFM48;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Timetable_Announcer/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Timetable_Announcer;
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.KaiTayAyaanJain.SSTAnnouncer.TimeTable;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -718,15 +603,6 @@
 			buildConfigurations = (
 				930EA44629645AE2007081C8 /* Debug */,
 				930EA44729645AE2007081C8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D3E64C9429B62E0800B07572 /* Build configuration list for PBXNativeTarget "Timetable_AnnouncerExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D3E64C9529B62E0800B07572 /* Debug */,
-				D3E64C9629B62E0800B07572 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -785,11 +661,6 @@
 			productName = OrderedCollections;
 		};
 		93987D7029D1CA09004D67B5 /* Updating */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 93767CBB29AB8ABB007B2EAD /* XCRemoteSwiftPackageReference "UpdatedSwiftUI" */;
-			productName = Updating;
-		};
-		93BC632429B7655100BF4BA3 /* Updating */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 93767CBB29AB8ABB007B2EAD /* XCRemoteSwiftPackageReference "UpdatedSwiftUI" */;
 			productName = Updating;

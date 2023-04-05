@@ -32,8 +32,5 @@ struct ContentView: View {
             }
             .tag(1)
         }
-        .onChange(of: selection) { newValue in
-            Log.info("Selection: \(newValue)")
-        }
     }
 }
