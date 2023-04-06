@@ -8,7 +8,7 @@
 import Foundation
 
 private let htmlTagRegex = try? NSRegularExpression(pattern: "<[^>]+>", options: .caseInsensitive)
-private let fontSizeRegex = try? NSRegularExpression(pattern: "font-size: ?[^;]+;", options: .caseInsensitive)
+private let undesirableRegex = try? NSRegularExpression(pattern: "(font-size: [^;]+;|color: #[0-9a-fA-F]{6};|background-color: \\w+;)", options: .caseInsensitive)
 
 extension String {
     func stripHTML() -> String {
@@ -26,14 +26,14 @@ extension String {
 
     func stripHtmlFont() -> String {
         // Use a regular expression to strip out HTML tags
-        guard let fontSizeRegex else { return self }
+        guard let undesirableRegex else { return self }
 
         let range = NSRange(location: 0, length: self.utf16.count)
-        let fontStripped = fontSizeRegex.stringByReplacingMatches(in: self,
-                                                                  range: range,
-                                                                  withTemplate: "")
+        let undesirableStripped = undesirableRegex.stringByReplacingMatches(in: self,
+                                                                            range: range,
+                                                                            withTemplate: "")
 
-        return fontStripped
+        return undesirableStripped
     }
 
     @available(*, deprecated, message: "This causes attribute graph errors")
