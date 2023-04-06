@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit //hehe
 import SwiftUI
 import BackgroundTasks
 import PostManager
@@ -42,27 +43,13 @@ class BackgroundTasksStruct: NSObject {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         scheduleAppRefresh()
-extension Scene {
-    func refreshIfPossible(
-        identifier: String,
-        action: @Sendable @escaping () async -> Void
-    ) -> some Scene {
-        if #available(iOS 16.0, *) {
-            return self.backgroundTask(.appRefresh(identifier), action: action)
-        } else {
-            // Fallback on earlier versions
-            return self
-        }
     }
-}
-
-extension YourApp {
     class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
         // Your implementation of UNUserNotificationCenterDelegate methods here
-
+        
         func requestPermission() {
             UNUserNotificationCenter.current().delegate = self
-
+            
             UNUserNotificationCenter.current()
                 .requestAuthorization(options: [.alert, .sound]) {
                     (granted, error) in
@@ -76,14 +63,21 @@ extension YourApp {
                 }
         }
     }
-
+    
+    
+    
+    @Environment(\.scenePhase) private var phase
+    
+    
+    
+    
+    
     func scheduleAppRefresh() {
         let request = BGAppRefreshTaskRequest(identifier: "com.KaiTayAyaanJain.SSTAnnouncer")
         request.earliestBeginDate = .now.addingTimeInterval(24 * 3600)
-
+        
         try? BGTaskScheduler.shared.submit(request)
-
-
+        
         do {
             let fetchedItems = try PostManager.fetchValues(range: 0..<10)
             let diff = PostManager.addPostsToStorage(newItems: fetchedItems)
