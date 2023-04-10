@@ -113,6 +113,25 @@ struct PostPreviewView: View {
         Button {
             withAnimation {
                 post.pinned.toggle()
+                // move the post to where its meant to be
+                if post.pinned {
+                    guard let currentIndex = posts.firstIndex(of: post),
+                          let postInsertIndex = posts.firstIndex(where: { otherPost in
+                              !otherPost.pinned || otherPost.date.timeIntervalSince1970 < post.date.timeIntervalSince1970
+                          })
+                    else { return }
+                    posts.move(fromOffsets: .init(integer: currentIndex), toOffset: postInsertIndex)
+                } else {
+                    posts.sort { first, second in
+                        if first.pinned == second.pinned {
+                            // if both are pinned or both are unpinned, the later one goes first.
+                            return first.date.timeIntervalSince1970 > second.date.timeIntervalSince1970
+                        } else {
+                            // if the first is pinned, first goes first. Else, second goes first.
+                            return first.pinned
+                        }
+                    }
+                }
             }
         } label: {
             Label(post.pinned ? "Unpin" : "Pin",

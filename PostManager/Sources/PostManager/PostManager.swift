@@ -24,7 +24,7 @@ public enum PostManager {
             let values = try fetchValues(range: effectiveRange.lowerBound..<range.upperBound)
             posts.append(contentsOf: filterOutPinnedPosts(from: values))
             loadQueue.async {
-                addPostsToStorage(newItems: posts)
+                addPostsToStorage(newItems: values)
             }
         } catch {
             posts = getCachePosts(range: range)
