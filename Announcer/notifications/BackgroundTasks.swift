@@ -6,11 +6,10 @@
 //
 
 import Foundation
-import UIKit //hehe
 import SwiftUI
 import BackgroundTasks
 import PostManager
-import UserNotifications
+
 
 
 
@@ -115,6 +114,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         let newTask = BGAppRefreshTaskRequest(identifier: "com.KaiTayAyaanJain.SSTAnnouncer")
         newTask.earliestBeginDate = Date(timeIntervalSinceNow: 15 * 60)
     }
+    
+    
     
     
 }

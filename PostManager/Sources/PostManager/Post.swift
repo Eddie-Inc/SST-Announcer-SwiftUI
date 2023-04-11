@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UserNotifications
 
 /**
  Contains attributes for each post such as date, content and title
@@ -50,9 +51,28 @@ public struct Post: Codable, Equatable, Identifiable {
             var reminderDates = PostManager.reminderDates
             if let reminderDate {
                 reminderDates[postTitle] = reminderDate
+                func reminderNotifications(content_title: String, content_subtitle: String) {
+                    
+                    let currentDate = Date()
+                        
+                    let content = UNMutableNotificationContent()
+                    content.title = content_title
+                    content.subtitle = content_subtitle
+                    content.sound = UNNotificationSound.default
+
+                    // show this notification five seconds from now
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: reminderDate.timeIntervalSince(currentDate), repeats: false)
+
+                    // choose a random identifier
+                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+                    // add our notification request
+                    UNUserNotificationCenter.current().add(request)
+                }
             } else {
                 reminderDates.removeValue(forKey: postTitle)
             }
+            
             PostManager.reminderDates = reminderDates
         }
     }
