@@ -62,6 +62,12 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 
         application.registerForRemoteNotifications()
 
+        
+
+        return true
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // Schedule app refresh task
         if #available(iOS 13.0, *) {
             let request = BGAppRefreshTaskRequest(identifier: "com.KaiTayAyaanJain.SSTAnnouncer")
@@ -69,14 +75,13 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             do {
                 try BGTaskScheduler.shared.submit(request)
                 print("App refresh task scheduled successfully")
+                print("AHHHHHHH")
             } catch {
                 print("Unable to schedule app refresh task: \(error)")
             }
         }
-
-        return true
+        scheduleAppRefresh()
     }
-    
     
     func scheduleAppRefresh() {
         let request = BGAppRefreshTaskRequest(identifier: "com.KaiTayAyaanJain.SSTAnnouncer")
@@ -102,6 +107,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         catch {
             print("An error occured: \(error)")
         }
+        
     }
     
     func handle(task: BGAppRefreshTask) {

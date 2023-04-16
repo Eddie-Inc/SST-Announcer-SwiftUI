@@ -18,11 +18,11 @@ import OrderedCollections
  [http://studentsblog.sst.edu.sg](http://studentsblog.sst.edu.sg)
 
  # Development Blog URL
- [https://testannouncer.blogspot.com](https://testannouncer.blogspot.com)
+ [https://testannouncerpls.blogspot.com](https://testannouncer.blogspot.com)
 
  This constant stores the URL for the blog linked to the RSS feed.
  */
-public let blogURL = "http://studentsblog.sst.edu.sg"
+public let blogURL = "https://testannouncerpls.blogspot.com"
 
 /**
  URL for the blogURL's RSS feed
