@@ -23,6 +23,10 @@ class SettingsManager: ObservableObject {
         if let searchPostContent = defaults.object(forKey: "searchPostContent") as? Bool {
             self.searchPostContent = searchPostContent
         }
+
+        if let enableReminders = defaults.object(forKey: "enableReminders") as? Bool {
+            self.enableReminders = enableReminders
+        }
     }
 
     @Published
@@ -43,6 +47,13 @@ class SettingsManager: ObservableObject {
     var searchPostContent: Bool = false {
         didSet {
             defaults.set(searchPostContent, forKey: "searchPostContent")
+        }
+    }
+
+    @Published
+    var enableReminders: Bool = false {
+        didSet {
+            defaults.set(enableReminders, forKey: "enableReminders")
         }
     }
 }

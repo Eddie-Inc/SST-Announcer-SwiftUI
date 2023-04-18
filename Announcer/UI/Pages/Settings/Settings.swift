@@ -76,6 +76,10 @@ struct Settings: View {
                     ClearStorageView()
                 }
             }
+
+            Section("Beta Features") {
+                Toggle("Post reminders", isOn: $settings.enableReminders)
+            }
         }
     }
 }

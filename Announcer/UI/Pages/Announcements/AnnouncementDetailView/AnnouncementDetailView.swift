@@ -130,11 +130,13 @@ struct AnnouncementDetailView: View {
                         Label("User Categories",
                               systemImage: (post.userCategories?.isEmpty ?? true) ? "tag" : "tag.fill")
                     }
-                    Button {
-                        showEditReminderDateView.toggle()
-                    } label: {
-                        Label("Reminder Date",
-                              systemImage: post.reminderDate == nil ? "calendar.badge.plus" : "calendar.badge.nil")
+                    if SettingsManager.shared.enableReminders {
+                        Button {
+                            showEditReminderDateView.toggle()
+                        } label: {
+                            Label("Reminder Date",
+                                  systemImage: post.reminderDate == nil ? "calendar.badge.plus" : "calendar.badge.nil")
+                        }
                     }
                 } label: {
                     Image(systemName: "slider.horizontal.3")
