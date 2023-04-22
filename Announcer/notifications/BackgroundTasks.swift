@@ -32,7 +32,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         print("Application did launch")
 
-        // Request authorization for local and remote notifications
+        // Request authorization for local notifications
         let center = UNUserNotificationCenter.current()
         center.delegate = self
         center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
@@ -41,9 +41,14 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             } else {
                 print("Notification authorization granted: \(granted)")
                 if granted {
-                    DispatchQueue.main.async {
-                        UIApplication.shared.registerForRemoteNotifications()
-                    }
+                    // Schedule a local notification
+                    let content = UNMutableNotificationContent()
+                    content.title = "Local Notification"
+                    content.body = "This is a local notification"
+                    content.sound = UNNotificationSound.default
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+                    let request = UNNotificationRequest(identifier: "LocalNotification", content: content, trigger: trigger)
+                    center.add(request)
                 } else {
                     DispatchQueue.main.async {
                         guard let window = UIApplication.shared.windows.first(where: \.isKeyWindow),
@@ -60,12 +65,10 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             }
         }
 
-        application.registerForRemoteNotifications()
-
-        
-
         return true
     }
+}
+
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Schedule app refresh task
