@@ -67,7 +67,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 
         return true
     }
-}
 
     
     func applicationDidEnterBackground(_ application: UIApplication) {

@@ -8,7 +8,7 @@
 import Foundation
 
 private let htmlTagRegex = try? NSRegularExpression(pattern: "<[^>]+>", options: .caseInsensitive)
-private let undesirableRegex = try? NSRegularExpression(pattern: "(font-size: [^;]+;|color: #[0-9a-fA-F]{6};|background-color: \\w+;)", options: .caseInsensitive)
+private let undesirableRegex = try? NSRegularExpression(pattern: "(font-size: [^;]+;|color: #[0-9a-fA-F]{6};|background-color: \\w+;?:rgba\\([^)]\\)|[^;];?", options: .caseInsensitive)
 
 extension String {
     func stripHTML() -> String {

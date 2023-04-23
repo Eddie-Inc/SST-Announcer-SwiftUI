@@ -22,7 +22,7 @@ import OrderedCollections
 
  This constant stores the URL for the blog linked to the RSS feed.
  */
-public let blogURL = "https://testannouncerpls.blogspot.com"
+public let blogURL = "http://studentsblog.sst.edu.sg"
 
 /**
  URL for the blogURL's RSS feed
