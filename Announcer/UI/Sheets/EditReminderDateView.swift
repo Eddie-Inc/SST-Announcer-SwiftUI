@@ -26,8 +26,8 @@ struct EditReminderDateView: View {
                         post.reminderDate = newValue
 
                         let content: UNMutableNotificationContent = .init()
-                        content.title = "Reminder for \(post.title)"
-                        content.body = "ITS TIMEEEEEEE"
+                        content.title = "SST Announcer Reminder"
+                        content.body = post.title
 
                         let fireDate = Calendar.current.dateComponents(Set([.year, .month, .day, .hour, .minute]),
                                                                        from: .now.addingTimeInterval(20))
