@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		881544BB29691ABF001BAFA4 /* RichText in Frameworks */ = {isa = PBXBuildFile; productRef = 881544BA29691ABF001BAFA4 /* RichText */; };
+		930B809E29EE81E1003F3506 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B809D29EE81E1003F3506 /* AppDelegate.swift */; };
+		930B80A029EE81E1003F3506 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B809F29EE81E1003F3506 /* ViewController.swift */; };
+		930B80A229EE81E2003F3506 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930B80A129EE81E2003F3506 /* Assets.xcassets */; };
+		930B80A529EE81E2003F3506 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930B80A329EE81E2003F3506 /* Main.storyboard */; };
 		930EA43D29645AE1007081C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930EA43C29645AE1007081C8 /* ContentView.swift */; };
 		930EA43F29645AE2007081C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930EA43E29645AE2007081C8 /* Assets.xcassets */; };
 		930EA44229645AE2007081C8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930EA44129645AE2007081C8 /* Preview Assets.xcassets */; };
@@ -20,7 +24,6 @@
 		93528DB3296FC23200651404 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93528DB2296FC23200651404 /* Settings.swift */; };
 		93528DB6296FC95B00651404 /* ClearStorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93528DB5296FC95B00651404 /* ClearStorageView.swift */; };
 		93528DB8296FDE2600651404 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93528DB7296FDE2600651404 /* SettingsManager.swift */; };
-		935EAB2C29685987005D2F52 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 935EAB2B29685987005D2F52 /* FeedKit */; };
 		935EAB3329686B5B005D2F52 /* TimeAndReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EAB3229686B5B005D2F52 /* TimeAndReminder.swift */; };
 		93769336296A842900D94EC3 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93769335296A842900D94EC3 /* SafariView.swift */; };
 		93769339296A8B1900D94EC3 /* AnnouncementDetailView+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93769338296A8B1900D94EC3 /* AnnouncementDetailView+Resize.swift */; };
@@ -31,7 +34,6 @@
 		937860262964ED5800FEA668 /* EditFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937860252964ED5800FEA668 /* EditFilterView.swift */; };
 		937EBBF5296EA72000722285 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 937EBBF4296EA72000722285 /* OrderedCollections */; };
 		937EBBF7296EAFC700722285 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937EBBF6296EAFC700722285 /* ShareSheet.swift */; };
-		93987D7129D1CA09004D67B5 /* Updating in Frameworks */ = {isa = PBXBuildFile; productRef = 93987D7029D1CA09004D67B5 /* Updating */; };
 		93AF704629698B1400BF18F8 /* HTMLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704529698B1400BF18F8 /* HTMLString.swift */; };
 		93AF704A29699C6300BF18F8 /* PostPreviewPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704929699C6300BF18F8 /* PostPreviewPlaceholderView.swift */; };
 		93AF704C2969B10B00BF18F8 /* EditReminderDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */; };
@@ -45,6 +47,12 @@
 /* Begin PBXFileReference section */
 		8829F5A9296AE65E00BA63A8 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		8829F5AB296AE65E00BA63A8 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		930B809B29EE81E1003F3506 /* SSTAnnouncerMacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSTAnnouncerMacOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		930B809D29EE81E1003F3506 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		930B809F29EE81E1003F3506 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		930B80A129EE81E2003F3506 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		930B80A429EE81E2003F3506 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		930B80A629EE81E2003F3506 /* SSTAnnouncerMacOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SSTAnnouncerMacOS.entitlements; sourceTree = "<group>"; };
 		930EA43729645AE1007081C8 /* Announcer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Announcer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		930EA43C29645AE1007081C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		930EA43E29645AE2007081C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,13 +87,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		930B809829EE81E1003F3506 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		930EA43429645AE1007081C8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				93DA5F4B29B0DEE500CBB655 /* PostManager in Frameworks */,
-				935EAB2C29685987005D2F52 /* FeedKit in Frameworks */,
-				93987D7129D1CA09004D67B5 /* Updating in Frameworks */,
 				881544BB29691ABF001BAFA4 /* RichText in Frameworks */,
 				937EBBF5296EA72000722285 /* OrderedCollections in Frameworks */,
 			);
@@ -103,6 +116,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		930B809C29EE81E1003F3506 /* SSTAnnouncerMacOS */ = {
+			isa = PBXGroup;
+			children = (
+				930B809D29EE81E1003F3506 /* AppDelegate.swift */,
+				930B809F29EE81E1003F3506 /* ViewController.swift */,
+				930B80A129EE81E2003F3506 /* Assets.xcassets */,
+				930B80A329EE81E2003F3506 /* Main.storyboard */,
+				930B80A629EE81E2003F3506 /* SSTAnnouncerMacOS.entitlements */,
+			);
+			path = SSTAnnouncerMacOS;
+			sourceTree = "<group>";
+		};
 		930EA42E29645AE1007081C8 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +135,7 @@
 				93F5CD37299A2F17002C6FA4 /* PostManager */,
 				9376933E296AC7C000D94EC3 /* README.md */,
 				930EA43929645AE1007081C8 /* Announcer */,
+				930B809C29EE81E1003F3506 /* SSTAnnouncerMacOS */,
 				8829F5A8296AE65E00BA63A8 /* Frameworks */,
 				930EA43829645AE1007081C8 /* Products */,
 			);
@@ -119,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				930EA43729645AE1007081C8 /* Announcer.app */,
+				930B809B29EE81E1003F3506 /* SSTAnnouncerMacOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -256,6 +283,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		930B809A29EE81E1003F3506 /* SSTAnnouncerMacOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 930B80A729EE81E2003F3506 /* Build configuration list for PBXNativeTarget "SSTAnnouncerMacOS" */;
+			buildPhases = (
+				930B809729EE81E1003F3506 /* Sources */,
+				930B809829EE81E1003F3506 /* Frameworks */,
+				930B809929EE81E1003F3506 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SSTAnnouncerMacOS;
+			productName = SSTAnnouncerMacOS;
+			productReference = 930B809B29EE81E1003F3506 /* SSTAnnouncerMacOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		930EA43629645AE1007081C8 /* Announcer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 930EA44529645AE2007081C8 /* Build configuration list for PBXNativeTarget "Announcer" */;
@@ -271,11 +315,9 @@
 			);
 			name = Announcer;
 			packageProductDependencies = (
-				935EAB2B29685987005D2F52 /* FeedKit */,
 				881544BA29691ABF001BAFA4 /* RichText */,
 				937EBBF4296EA72000722285 /* OrderedCollections */,
 				93DA5F4A29B0DEE500CBB655 /* PostManager */,
-				93987D7029D1CA09004D67B5 /* Updating */,
 			);
 			productName = Announcer;
 			productReference = 930EA43729645AE1007081C8 /* Announcer.app */;
@@ -288,9 +330,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
+					930B809A29EE81E1003F3506 = {
+						CreatedOnToolsVersion = 14.3;
+					};
 					930EA43629645AE1007081C8 = {
 						CreatedOnToolsVersion = 14.1;
 					};
@@ -306,21 +351,29 @@
 			);
 			mainGroup = 930EA42E29645AE1007081C8;
 			packageReferences = (
-				935EAB2A29685987005D2F52 /* XCRemoteSwiftPackageReference "FeedKit" */,
 				881544B929691ABF001BAFA4 /* XCRemoteSwiftPackageReference "RichText" */,
 				937EBBF3296EA72000722285 /* XCRemoteSwiftPackageReference "swift-collections" */,
-				93767CBB29AB8ABB007B2EAD /* XCRemoteSwiftPackageReference "UpdatedSwiftUI" */,
 			);
 			productRefGroup = 930EA43829645AE1007081C8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				930EA43629645AE1007081C8 /* Announcer */,
+				930B809A29EE81E1003F3506 /* SSTAnnouncerMacOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		930B809929EE81E1003F3506 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				930B80A229EE81E2003F3506 /* Assets.xcassets in Resources */,
+				930B80A529EE81E2003F3506 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		930EA43529645AE1007081C8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -356,6 +409,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		930B809729EE81E1003F3506 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				930B80A029EE81E1003F3506 /* ViewController.swift in Sources */,
+				930B809E29EE81E1003F3506 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		930EA43329645AE1007081C8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -390,7 +452,76 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		930B80A329EE81E2003F3506 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				930B80A429EE81E2003F3506 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		930B80A829EE81E2003F3506 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SSTAnnouncerMacOS/SSTAnnouncerMacOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z88Z98GRZQ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.KaiTayAyaanJain.SSTAnnouncerMacOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		930B80A929EE81E2003F3506 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SSTAnnouncerMacOS/SSTAnnouncerMacOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z88Z98GRZQ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.KaiTayAyaanJain.SSTAnnouncerMacOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		930EA44329645AE2007081C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -541,6 +672,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.KaiTayAyaanJain.SSTAnnouncer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -580,6 +714,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.KaiTayAyaanJain.SSTAnnouncer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -589,6 +726,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		930B80A729EE81E2003F3506 /* Build configuration list for PBXNativeTarget "SSTAnnouncerMacOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				930B80A829EE81E2003F3506 /* Debug */,
+				930B80A929EE81E2003F3506 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		930EA43229645AE1007081C8 /* Build configuration list for PBXProject "Announcer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -618,22 +764,6 @@
 				kind = branch;
 			};
 		};
-		935EAB2A29685987005D2F52 /* XCRemoteSwiftPackageReference "FeedKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nmdias/FeedKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
-		93767CBB29AB8ABB007B2EAD /* XCRemoteSwiftPackageReference "UpdatedSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/KaiTheRedNinja/UpdatedSwiftUI";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		937EBBF3296EA72000722285 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
@@ -650,20 +780,10 @@
 			package = 881544B929691ABF001BAFA4 /* XCRemoteSwiftPackageReference "RichText" */;
 			productName = RichText;
 		};
-		935EAB2B29685987005D2F52 /* FeedKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 935EAB2A29685987005D2F52 /* XCRemoteSwiftPackageReference "FeedKit" */;
-			productName = FeedKit;
-		};
 		937EBBF4296EA72000722285 /* OrderedCollections */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 937EBBF3296EA72000722285 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
-		};
-		93987D7029D1CA09004D67B5 /* Updating */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 93767CBB29AB8ABB007B2EAD /* XCRemoteSwiftPackageReference "UpdatedSwiftUI" */;
-			productName = Updating;
 		};
 		93DA5F4A29B0DEE500CBB655 /* PostManager */ = {
 			isa = XCSwiftPackageProductDependency;
