@@ -9,8 +9,7 @@ import SwiftUI
 import PostManager
 
 struct TimeAndReminder: View {
-    @Binding
-    var post: Post
+    @Binding var post: Post
 
     var body: some View {
         HStack {

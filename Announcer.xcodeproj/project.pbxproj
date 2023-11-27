@@ -39,8 +39,6 @@
 		93AF704C2969B10B00BF18F8 /* EditReminderDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF704B2969B10B00BF18F8 /* EditReminderDateView.swift */; };
 		93DA5F4B29B0DEE500CBB655 /* PostManager in Frameworks */ = {isa = PBXBuildFile; productRef = 93DA5F4A29B0DEE500CBB655 /* PostManager */; };
 		93EF08D929D9AFFF00E8B9E7 /* AnnouncerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF08D829D9AFFF00E8B9E7 /* AnnouncerApp.swift */; };
-		D304851529CB126C008B917C /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = D304851429CB126C008B917C /* Server.swift */; };
-		D35C0D1129C85C9E001C12CB /* BackgroundTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35C0D1029C85C9E001C12CB /* BackgroundTasks.swift */; };
 		D3B47C2729BCB87C00C1832D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 9376933E296AC7C000D94EC3 /* README.md */; };
 /* End PBXBuildFile section */
 
@@ -82,8 +80,6 @@
 		93BC632629B775D100BF4BA3 /* Timetable_AnnouncerExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timetable_AnnouncerExtension.entitlements; sourceTree = "<group>"; };
 		93EF08D829D9AFFF00E8B9E7 /* AnnouncerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncerApp.swift; sourceTree = "<group>"; };
 		93F5CD37299A2F17002C6FA4 /* PostManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PostManager; sourceTree = "<group>"; };
-		D304851429CB126C008B917C /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
-		D35C0D1029C85C9E001C12CB /* BackgroundTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTasks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,7 +149,6 @@
 		930EA43929645AE1007081C8 /* Announcer */ = {
 			isa = PBXGroup;
 			children = (
-				D3B47C2629BCB86000C1832D /* notifications */,
 				935EAB3129685EBD005D2F52 /* Info.plist */,
 				937860222964626D00FEA668 /* Utils */,
 				930EA44C29645CD8007081C8 /* Data */,
@@ -269,15 +264,6 @@
 				93AF704529698B1400BF18F8 /* HTMLString.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		D3B47C2629BCB86000C1832D /* notifications */ = {
-			isa = PBXGroup;
-			children = (
-				D35C0D1029C85C9E001C12CB /* BackgroundTasks.swift */,
-				D304851429CB126C008B917C /* Server.swift */,
-			);
-			path = notifications;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,12 +415,10 @@
 				930EA43D29645AE1007081C8 /* ContentView.swift in Sources */,
 				93769336296A842900D94EC3 /* SafariView.swift in Sources */,
 				93769339296A8B1900D94EC3 /* AnnouncementDetailView+Resize.swift in Sources */,
-				D35C0D1129C85C9E001C12CB /* BackgroundTasks.swift in Sources */,
 				931B2C692966C67700BBF397 /* CategoryScrollView.swift in Sources */,
 				937EBBF7296EAFC700722285 /* ShareSheet.swift in Sources */,
 				93AF704629698B1400BF18F8 /* HTMLString.swift in Sources */,
 				935EAB3329686B5B005D2F52 /* TimeAndReminder.swift in Sources */,
-				D304851529CB126C008B917C /* Server.swift in Sources */,
 				93AF704C2969B10B00BF18F8 /* EditReminderDateView.swift in Sources */,
 				9376933D296A8B9700D94EC3 /* AnnouncementDetailView+Components.swift in Sources */,
 				93436ACA2965B4D600AD3148 /* PostPreviewView.swift in Sources */,

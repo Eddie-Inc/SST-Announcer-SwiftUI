@@ -10,14 +10,11 @@ import PostManager
 
 struct EditCategoriesView: View {
 
-    @Binding
-    var post: Post
+    @Binding var post: Post
 
-    @Binding
-    var posts: [Post]
+    @Binding var posts: [Post]
 
-    @Binding
-    var showEditCategoryView: Bool
+    @Binding var showEditCategoryView: Bool
 
     @State var showCreateNewCategoryAlert: Bool = false
     @State var newCategoryName: String = ""

@@ -10,14 +10,11 @@ import PostManager
 
 struct EditFilterView: View {
 
-    @State
-    var posts: [Post]
+    @State var posts: [Post]
 
-    @State
-    var possibleTags: [String]
+    @State var possibleTags: [String]
 
-    @Binding
-    var filterCategories: [String]
+    @Binding var filterCategories: [String]
 
     init(posts: [Post], filterCategories: Binding<[String]>) {
         self.posts = posts

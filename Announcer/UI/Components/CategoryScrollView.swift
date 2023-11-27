@@ -9,8 +9,7 @@ import SwiftUI
 import PostManager
 
 struct CategoryScrollView: View {
-    @Binding
-    var post: Post
+    @Binding var post: Post
 
     var body: some View {
         if (post.userCategories?.isEmpty ?? true) &&

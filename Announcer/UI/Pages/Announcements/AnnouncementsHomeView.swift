@@ -10,26 +10,19 @@ import PostManager
 
 struct AnnouncementsHomeView: View {
 
-    @State
-    var posts: [Post] = []
+    @State var posts: [Post] = []
 
-    @State
-    var showFilterView: Bool = false
+    @State var showFilterView: Bool = false
 
-    @State
-    var filterCategories: [String] = []
+    @State var filterCategories: [String] = []
 
-    @State
-    var searchString: String = ""
+    @State var searchString: String = ""
 
-    @State
-    var searchScope: String = ""
+    @State var searchScope: String = ""
 
-    @State
-    var isLoading: Bool = false
+    @State var isLoading: Bool = false
 
-    @StateObject
-    var settings: SettingsManager = .shared
+    @StateObject var settings: SettingsManager = .shared
 
     var body: some View {
         if #available(iOS 16.0, *) {

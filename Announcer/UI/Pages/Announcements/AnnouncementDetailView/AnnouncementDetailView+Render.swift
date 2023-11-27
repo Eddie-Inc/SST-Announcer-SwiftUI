@@ -15,7 +15,6 @@ enum TextPresentationMode: String {
 
 extension AnnouncementDetailView {
     var bodyText: some View {
-        // body text
         VStack {
             switch textPresentationMode {
             case .rendered:

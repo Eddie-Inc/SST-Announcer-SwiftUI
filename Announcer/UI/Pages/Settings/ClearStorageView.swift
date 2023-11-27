@@ -9,11 +9,9 @@ import SwiftUI
 import PostManager
 
 struct ClearStorageView: View {
-    @State
-    var excludePinnedPosts: Bool = true
+    @State var excludePinnedPosts: Bool = true
 
-    @Environment(\.presentationMode)
-    var presentationMode
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         List {

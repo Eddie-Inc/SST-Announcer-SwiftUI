@@ -10,11 +10,9 @@ import RichText
 import PostManager
 
 struct PostPreviewView: View {
-    @Binding
-    var post: Post
+    @Binding var post: Post
 
-    @Binding
-    var posts: [Post]
+    @Binding var posts: [Post]
 
     var body: some View {
         if #available(iOS 16.0, *) {

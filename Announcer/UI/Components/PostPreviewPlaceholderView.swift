@@ -11,11 +11,9 @@ import PostManager
 private var textLengths: [Int] = [21, 10, 29]
 
 struct PostPreviewPlaceholderView: View {
-    @State
-    var numberOfCategories: Int = .random(in: 0..<3)
+    @State var numberOfCategories: Int = .random(in: 0..<3)
 
-    @State
-    var numberOfUserCategories: Int = .random(in: 0..<2)
+    @State var numberOfUserCategories: Int = .random(in: 0..<2)
 
     var body: some View {
         VStack(alignment: .leading) {

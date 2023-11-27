@@ -14,39 +14,28 @@ let noZeroAndPoint: CharacterSet = .init(["0", "."])
 
 struct AnnouncementDetailView: View {
 
-    @Binding
-    var post: Post
+    @Binding var post: Post
 
-    @Binding
-    var posts: [Post]
+    @Binding var posts: [Post]
 
-    @State
-    var showEditCategoryView: Bool = false
+    @State var showEditCategoryView: Bool = false
 
-    @State
-    var showEditReminderDateView: Bool = false
+    @State var showEditReminderDateView: Bool = false
 
-    @AppStorage("textPresentationMode")
-    var textPresentationMode: TextPresentationMode = .rendered
+    @AppStorage("textPresentationMode") var textPresentationMode: TextPresentationMode = .rendered
 
-    @AppStorage("fontSize")
-    var fontSize: Double = 17
+    @AppStorage("fontSize") var fontSize: Double = 17
 
     // this is used for both the Safari view loading and share sheet
-    @State
-    var safariViewURL: URL?
+    @State var safariViewURL: URL?
 
-    @State
-    var showShareLink: Bool = false
+    @State var showShareLink: Bool = false
 
-    @State
-    var showSafariView: Bool = false
+    @State var showSafariView: Bool = false
 
-    @State
-    var isLoadingSafariView: Bool = false
+    @State var isLoadingSafariView: Bool = false
 
-    @State
-    var metadatas: OrderedDictionary<URL, LPLinkMetadata> = [:]
+    @State var metadatas: OrderedDictionary<URL, LPLinkMetadata> = [:]
 
     @Environment(\.presentationMode) var presentationMode
 

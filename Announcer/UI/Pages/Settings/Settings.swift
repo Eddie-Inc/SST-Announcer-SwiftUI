@@ -19,8 +19,7 @@ let fakeStorage: OrderedDictionary<PostTitle, Post> =
 
 struct Settings: View {
 
-    @StateObject
-    var settings: SettingsManager = .shared
+    @StateObject var settings: SettingsManager = .shared
 
     var body: some View {
         List {

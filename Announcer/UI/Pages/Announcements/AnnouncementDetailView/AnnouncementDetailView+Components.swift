@@ -9,6 +9,7 @@ import SwiftUI
 import PostManager
 
 extension AnnouncementDetailView {
+    
     @ViewBuilder
     var title: some View {
         VStack {

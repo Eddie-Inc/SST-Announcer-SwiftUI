@@ -9,11 +9,9 @@ import SwiftUI
 import PostManager
 
 struct EditReminderDateView: View {
-    @Binding
-    var post: Post
+    @Binding var post: Post
 
-    @Binding
-    var showEditReminderDateView: Bool
+    @Binding var showEditReminderDateView: Bool
 
     var body: some View {
         List {
