@@ -23,37 +23,37 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         print("Application did launch")
 
         // Request authorization for local notifications
-        let center = UNUserNotificationCenter.current()
-        center.delegate = self
-        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
-            if let error = error {
-                print("Error requesting notification authorization: \(error)")
-            } else {
-                print("Notification authorization granted: \(granted)")
-                if granted {
-                    // Schedule a local notification
-                    let content = UNMutableNotificationContent()
-                    content.title = "Local Notification"
-                    content.body = "This is a local notification"
-                    content.sound = UNNotificationSound.default
-                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-                    let request = UNNotificationRequest(identifier: "LocalNotification", content: content, trigger: trigger)
-                    center.add(request)
-                } else {
-                    DispatchQueue.main.async {
-                        guard let window = UIApplication.shared.windows.first(where: \.isKeyWindow),
-                              let rootViewController = window.rootViewController else {
-                            return
-                        }
-                        let alertController = UIAlertController(title: "Notification Authorization Required",
-                                                                message: "Please enable notification permissions in Settings to receive notifications from this app.",
-                                                                preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        rootViewController.present(alertController, animated: true, completion: nil)
-                    }
-                }
-            }
-        }
+//        let center = UNUserNotificationCenter.current()
+//        center.delegate = self
+//        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+//            if let error = error {
+//                print("Error requesting notification authorization: \(error)")
+//            } else {
+//                print("Notification authorization granted: \(granted)")
+//                if granted {
+//                    // Schedule a local notification
+//                    let content = UNMutableNotificationContent()
+//                    content.title = "Local Notification"
+//                    content.body = "This is a local notification"
+//                    content.sound = UNNotificationSound.default
+//                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//                    let request = UNNotificationRequest(identifier: "LocalNotification", content: content, trigger: trigger)
+//                    center.add(request)
+//                } else {
+//                    DispatchQueue.main.async {
+//                        guard let window = UIApplication.shared.windows.first(where: \.isKeyWindow),
+//                              let rootViewController = window.rootViewController else {
+//                            return
+//                        }
+//                        let alertController = UIAlertController(title: "Notification Authorization Required",
+//                                                                message: "Please enable notification permissions in Settings to receive notifications from this app.",
+//                                                                preferredStyle: .alert)
+//                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                        rootViewController.present(alertController, animated: true, completion: nil)
+//                    }
+//                }
+//            }
+//        }
 
         return true
     }
