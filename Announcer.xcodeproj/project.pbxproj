@@ -115,7 +115,6 @@
 		D34CFFF52BCF939F00751B1E /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		D34CFFF72BCF939F00751B1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D34CFFFF2BCF93A600751B1E /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
-		F3C0A2632BCF921400B448A0 /* AnnouncerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AnnouncerRelease.entitlements; sourceTree = "<group>"; };
 		F3C0A2632BCF921400B448A0 /* AnnouncerEntitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AnnouncerEntitlements.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
